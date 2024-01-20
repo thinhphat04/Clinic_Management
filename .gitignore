@@ -1,2 +1,7 @@
 **/node_modules/
 .vs/
+sever/.vs/
+sever/obj/
+sever/bin/
+# Ignore macOS system files
+.DS_Store
