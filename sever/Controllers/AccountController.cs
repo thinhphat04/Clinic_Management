@@ -24,7 +24,7 @@ namespace PJ_SEM03.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
+        public async Task<ActionResult<UserDto>> Login([FromBody]LoginDto loginDto)
         {
             try
             {
@@ -42,21 +42,20 @@ namespace PJ_SEM03.Controllers
         }
 
 
+
+
         [HttpPost("register")]
-        public async Task<ActionResult<User>> Register(RegisterDto registerDto)
+        public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
         {
-            try
+            var (success, result) = await repo.RegisterUser(registerDto);
+
+            if (success)
             {
-                var result = await repo.Register(registerDto);
-                if(result != null)
-                {
-                    return Ok(result);
-                }
-                return StatusCode(201);                
+                return Ok(new { Success = true, User = result, Message = "Registration successful" });
             }
-            catch (Exception ex)
+            else
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new { Success = false, Errors = result });
             }
         }
     }

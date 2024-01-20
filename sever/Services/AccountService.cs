@@ -52,16 +52,29 @@ namespace PJ_SEM03.Services
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        public async Task<User> Register(RegisterDto registerDto)
+        public async Task<(bool Success, object Result)> RegisterUser(RegisterDto registerDto)
         {
-            var user = new User { UserName = registerDto.Username, Email = registerDto.Email, PhoneNumber = registerDto.phoneNumber };
+            var user = new User { UserName = registerDto.Username, Email = registerDto.Email, PhoneNumber = registerDto.phoneNumber, Role = "Member", user_address= registerDto.Address };
             var result = await _userManager.CreateAsync(user, registerDto.Password);
+
             if (result.Succeeded)
             {
-                await _userManager.AddToRoleAsync(user, "Member");
-                return user;
+                var userDto = new
+                {
+                    user.Id,
+                    user.UserName,
+                    user.Email,
+                    user.PhoneNumber,
+                    user.user_address
+                };
+
+                return (true, userDto);
             }
-            return null;
+            else
+            {
+                var errors = result.Errors.Select(e => e.Description).ToList();
+                return (false, errors);
+            }
         }
     }
 }
