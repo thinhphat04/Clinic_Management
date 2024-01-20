@@ -8,7 +8,7 @@ using System.Text;
 
 namespace PJ_SEM03.Services
 {
-    public class TokenService : ITokenService
+    public class TokenService 
     {
         private readonly UserManager<User> _userManager;
         private readonly IConfiguration _config;
@@ -32,16 +32,10 @@ namespace PJ_SEM03.Services
                 claims.Add(new Claim(ClaimTypes.Role, role));
             }
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWTSettings:TokenKey"]));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
-            var tokenOptions = new JwtSecurityToken(
-                issuer: null,
-                audience: null,
-                claims: claims,
-                expires: DateTime.Now.AddDays(7),
-                signingCredentials: creds
-            );
+            var tokenOptions = new JwtSecurityToken(_config["Jwt:Issuer"], _config["Jwt:Audience"], claims, expires: DateTime.Now.AddMinutes(30), signingCredentials: credentials);
 
             return new JwtSecurityTokenHandler().WriteToken(tokenOptions);
         }

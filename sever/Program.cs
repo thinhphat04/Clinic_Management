@@ -47,7 +47,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 
 //khai báo các service
-builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IUserRepo, UserService>();
 builder.Services.AddScoped<IAccountRepo, AccountService>();
 builder.Services.AddScoped<IProductRepo, ProductService>();

@@ -11,7 +11,7 @@ public class Cart
 
     public int product_quantity { get; set; }
 
-    public int user_id { get; set; }
+    public string user_id { get; set; }
 
     // Navigation properties
     public Product Product { get; set; }

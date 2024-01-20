@@ -16,7 +16,7 @@ namespace PJ_SEM03.Data
                     Email = "member@test.com"
                 };
                 user.Id = "123";
-                await userManager.CreateAsync(user, "Tram.178");
+                await userManager.CreateAsync(user, "Pass12.");
                 await userManager.AddToRoleAsync(user, "Member");
 
                 var user1 = new User
@@ -25,7 +25,7 @@ namespace PJ_SEM03.Data
                     Email = "member@test.com"
                 };
                 user1.Id = "1234";
-                await userManager.CreateAsync(user1, "Tram.178");
+                await userManager.CreateAsync(user1, "Pass12.");
                 await userManager.AddToRoleAsync(user1, "Member");
 
                 var user2 = new User
@@ -34,7 +34,7 @@ namespace PJ_SEM03.Data
                     Email = "member@test.com"
                 };
                 user.Id = "12345";
-                await userManager.CreateAsync(user2, "Tram.178");
+                await userManager.CreateAsync(user2, "Pass12.");
                 await userManager.AddToRoleAsync(user2, "Member");
 
 
@@ -44,7 +44,7 @@ namespace PJ_SEM03.Data
                     Email = "admin@test.com"
                 };
 
-                await userManager.CreateAsync(admin, "Tram.178");
+                await userManager.CreateAsync(admin, "Pass12.");
                 await userManager.AddToRolesAsync(admin, new[] { "Member", "Admin" });
             }
 

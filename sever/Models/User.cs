@@ -9,10 +9,7 @@ public class User : IdentityUser
     
     public string user_email { get; set; }
     
-    public string user_phone { get; set; }
-    
-    public string user_address { get; set; }
-    
+    public string user_phone { get; set; }  
     
     public ICollection<Order> Orders { get; set; }
     public ICollection<Feedback>? Feedbacks { get; set; }

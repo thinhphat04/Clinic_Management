@@ -36,13 +36,13 @@ namespace PJ_SEM03.Controllers
         }
 
         [HttpGet("{userId}")]
-        public async Task<IActionResult> GetCartByUserId(int userId)
+        public async Task<IActionResult> GetCartByUserId(string userId)
         {
             return Ok(await _cartRepo.GetCartByUserId(userId));
         }
 
         [HttpDelete("{userId}/{productId}")]
-        public async Task<IActionResult> DeleteCart(int userId, int productId)
+        public async Task<IActionResult> DeleteCart(string userId, int productId)
         {
             if (await _cartRepo.DeleteCart(userId, productId))
             {

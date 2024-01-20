@@ -1,25 +1,28 @@
 {
   "format": 1,
   "restore": {
-    "/Users/ngothinhphat/Clinic_Management/sever/PJ_SEM03.csproj": {}
+    "D:\\Tram\\HK3\\Eproject\\Clinic_Management\\sever\\PJ_SEM03.csproj": {}
   },
   "projects": {
-    "/Users/ngothinhphat/Clinic_Management/sever/PJ_SEM03.csproj": {
+    "D:\\Tram\\HK3\\Eproject\\Clinic_Management\\sever\\PJ_SEM03.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/ngothinhphat/Clinic_Management/sever/PJ_SEM03.csproj",
+        "projectUniqueName": "D:\\Tram\\HK3\\Eproject\\Clinic_Management\\sever\\PJ_SEM03.csproj",
         "projectName": "PJ_SEM03",
-        "projectPath": "/Users/ngothinhphat/Clinic_Management/sever/PJ_SEM03.csproj",
-        "packagesPath": "/Users/ngothinhphat/.nuget/packages/",
-        "outputPath": "/Users/ngothinhphat/Clinic_Management/sever/obj/",
+        "projectPath": "D:\\Tram\\HK3\\Eproject\\Clinic_Management\\sever\\PJ_SEM03.csproj",
+        "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
+        "outputPath": "D:\\Tram\\HK3\\Eproject\\Clinic_Management\\sever\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/ngothinhphat/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\sdk\\7.0.306\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -96,20 +99,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[7.0.15, 7.0.15]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Host.osx-arm64",
-              "version": "[7.0.15, 7.0.15]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[7.0.15, 7.0.15]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -118,7 +107,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.101/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -9,7 +9,6 @@ namespace PJ_SEM03.Models
         //oder_code vừa chữ vừa số nên để string random code
         
         public string order_code { get; set; }
-        public int user_id { get; set; }
         public string user_id { get; set; }
         
         public DateTime order_datetime { get; set; }
