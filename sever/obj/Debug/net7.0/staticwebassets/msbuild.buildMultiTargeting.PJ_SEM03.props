@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../build/PJ_SEM03.props" />
+</Project>

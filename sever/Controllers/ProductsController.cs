@@ -1,0 +1,77 @@
+﻿using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using PJ_SEM03.Models;
+using PJ_SEM03.Repository;
+using PJ_SEM03.RequestHelpers;
+using PJ_SEM03.Services;
+
+namespace PJ_SEM03.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class ProductsController : ControllerBase
+    {
+        private readonly IProductRepo productRepo;
+        private readonly CloudinaryService _cloudinaryService;
+
+        public ProductsController(IProductRepo productRepo)
+        {
+            this.productRepo = productRepo;
+            this._cloudinaryService = _cloudinaryService;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<PagedList<Product>>> GetAll([FromQuery]PaginationParams paginationParams)
+        {
+            try
+            {
+                return Ok(await productRepo.getAll(paginationParams.PageNumber, paginationParams.PageSize));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
+        [HttpGet("{product_type}")]
+        public async Task<ActionResult> getByType(string product_type)
+        {
+            try
+            {
+                return Ok(await productRepo.getProductByType(product_type));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+        
+        
+        [HttpPost]
+        public async Task<ActionResult<Product>> CreateProduct(Product product)
+        {
+            return await productRepo.createProduct(product);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<Product>> UpdateProduct(int id, Product product)
+        {
+            return await productRepo.updateProduct(id, product);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Product>> DeleteProduct(int id)
+        {
+            return await productRepo.deleteProduct(id);
+        }
+
+        [HttpGet("search/{name}")]
+        public async Task<IActionResult> GetProductsByName(string name)
+        {
+            return Ok(await productRepo.GetProductsByName(name));
+        }
+
+    }
+}

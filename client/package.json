@@ -1,0 +1,38 @@
+{
+  "name": "shoptech",
+  "version": "2.0.0",
+  "description": "New website with new technology - ShopTECH 2.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "i": "cd client && npm i && cd ../server && npm i",
+    "install": "cd client && npm i && cd ../server && npm i",
+    "client": "npm start --prefix client",
+    "server": "npm start --prefix server",
+    "shoptech": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
+    "prettier-shoptech": "lint-staged",
+    "prepare-husky": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hoigreen/project-ecommerce-shop.git"
+  },
+  "author": "HoiGreen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hoigreen/project-ecommerce-shop/issues"
+  },
+  "homepage": "https://github.com/hoigreen/project-ecommerce-shop#readme",
+  "devDependencies": {
+    "husky": "^8.0.3",
+    "lint-staged": "^14.0.1",
+    "plop": "^4.0.0",
+    "prettier": "^3.0.3"
+  },
+  "dependencies": {
+    "concurrently": "^8.2.1"
+  },
+  "lint-staged": {
+    "{client,shoptech-client,server}/**/*.{js,jsx,ts,tsx,json,css}": "prettier --watch --config .prettierrc"
+  }
+}
