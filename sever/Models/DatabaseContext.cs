@@ -60,11 +60,6 @@ public class DatabaseContext : IdentityDbContext<User>
                       .HasForeignKey(f => f.product_id);
 
         });
-        modelBuilder.Entity<Role>()
-         .HasData(
-             new Role { Id = 1, Name = "Member", NormalizedName = "MEMBER" },
-             new Role { Id = 2, Name = "Admin", NormalizedName = "ADMIN" }
-             );
 
         modelBuilder.Entity<Education>().HasData(new Education[]
         {
@@ -79,21 +74,21 @@ public class DatabaseContext : IdentityDbContext<User>
                      cart_id = 1,
                      product_id = 1,
                      product_quantity = 2,
-                     user_id = "123"
+                     user_id = "2"
                  },
                  new Cart
                  {
                      cart_id = 2,
                      product_id = 2,
                      product_quantity = 1,
-                     user_id = "1234"
+                     user_id = "3"
                  },
                  new Cart
                  {
                      cart_id = 3,
                      product_id = 3,
                      product_quantity = 3,
-                     user_id = "12345"
+                     user_id = "4"
                  }
         });
 
@@ -104,7 +99,7 @@ public class DatabaseContext : IdentityDbContext<User>
                      {
                          order_id = 1,
                          order_code = "ORD123",
-                         user_id = "1234",
+                         user_id = "2",
                          order_datetime = DateTime.Now,
                          order_status = "Processing",
                          order_address = "123 Street, City, Country",
@@ -115,7 +110,7 @@ public class DatabaseContext : IdentityDbContext<User>
                      {
                          order_id = 2,
                          order_code = "ORD456",
-                         user_id = "123",
+                         user_id = "3",
                          order_datetime = DateTime.Now,
                          order_status = "Delivered",
                          order_address = "456 Avenue, City, Country",
@@ -124,23 +119,23 @@ public class DatabaseContext : IdentityDbContext<User>
                      }
         });
 
-        modelBuilder.Entity<IdentityRole>().HasData(
-            new IdentityRole { Name = "User", NormalizedName = "USER" },
-            new IdentityRole { Name = "Admin", NormalizedName = "ADMIN" 
-        });
+        //modelBuilder.Entity<IdentityRole>().HasData(
+        //    new IdentityRole { Name = "User", NormalizedName = "USER" },
+        //    new IdentityRole { Name = "Admin", NormalizedName = "ADMIN" 
+        //});
 
         modelBuilder.Entity<Feedback>().HasData(new Feedback[] {
                  new Feedback
                  {
                      feedback_id = 1,
-                     user_id = "1234",
+                     user_id = "2",
                      product_id =1,
                      feedback_description = "Good Service",
                      feedback_rating = 5,
                  },
                   new Feedback
                  {
-                      user_id = "123",
+                     user_id = "3",
                      feedback_id = 2,
                      product_id =3,
                      feedback_description = "Great",
@@ -149,7 +144,7 @@ public class DatabaseContext : IdentityDbContext<User>
                   new Feedback
                  {
                      feedback_id = 3,
-                     user_id="123",
+                     user_id="4",
                      product_id =5,
                      feedback_description = "Good product!",
                      feedback_rating = 5,
@@ -181,7 +176,6 @@ public class DatabaseContext : IdentityDbContext<User>
                  },
                  new Product
                  {
-                     //education 
                      product_id = 3,
                      product_name = "Course 2",
                      product_price = 30,
@@ -213,7 +207,7 @@ public class DatabaseContext : IdentityDbContext<User>
                  },
                  new Product
                  {
-                     //education 
+                    
                      product_id = 6,
                      product_name = "Course 1",
                      product_price = 30,
@@ -223,45 +217,5 @@ public class DatabaseContext : IdentityDbContext<User>
                      product_quantity = 10
                  },
         });
-
-        //  protected override void OnModelCreating(ModelBuilder modelBuilder)
-        // {
-        //     {
-        //         modelBuilder.Entity<Feedback>()
-        //             .HasOne(f => f.Product)
-        //             .WithMany(p => p.Feedbacks)
-        //             .HasForeignKey(f => f.product_id)
-        //             .HasPrincipalKey(p => p.product_id);
-
-        //         modelBuilder.Entity<Feedback>()
-        //             .HasOne(f => f.User)
-        //             .WithMany(u => u.Feedbacks)
-        //             .HasForeignKey(f => f.user_id)
-        //             .HasPrincipalKey(u => u.user_id);
-
-        //         modelBuilder.Entity<Order>()
-        //     base.OnModelCreating(modelBuilder);
-
-        //     }
-        //     base.OnModelCreating(modelBuilder);
-
-        //     modelBuilder.Entity<OrderDetail>()
-        //                     .HasOne(od => od.Product)
-        //                     .WithMany(p => p.OrderDetails)
-        //                     .HasForeignKey(od => od.product_id);
-
-
-        //     });
-
-
-
-
-
-
-
-
-
-
-
     }
 }

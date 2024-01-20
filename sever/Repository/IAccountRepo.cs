@@ -6,7 +6,7 @@ namespace PJ_SEM03.Repository
 {
     public interface IAccountRepo
     {
-        //Task<UserDto> Login(LoginDto loginDto);
+        Task<UserDto> Login(LoginDto loginDto);
         Task<User> Register(RegisterDto registerDto);
     }
 }

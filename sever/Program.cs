@@ -62,6 +62,8 @@ builder.Services.AddControllers().AddJsonOptions(x =>
 var app = builder.Build();
 
 //data seeding
+//data seeding
+//data seeding
 using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<DatabaseContext>();

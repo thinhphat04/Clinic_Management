@@ -23,22 +23,23 @@ namespace PJ_SEM03.Controllers
             this._config = _config;
         }
 
-        //[HttpPost("login")]
-        //public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
-        //{
-        //    try
-        //    {
-        //        var result = await repo.Login(loginDto);
-        //        if(result != null) {
-        //            return Ok(result);
-        //        }
-        //        return Unauthorized();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return BadRequest(ex.Message);
-        //    }
-        //}
+        [HttpPost("login")]
+        public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
+        {
+            try
+            {
+                var result = await repo.Login(loginDto);
+                if (result != null)
+                {
+                    return Ok(result);
+                }
+                return Unauthorized();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
 
         [HttpPost("register")]
