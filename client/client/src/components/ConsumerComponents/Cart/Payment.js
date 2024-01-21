@@ -16,7 +16,7 @@ const Payment = ({ socket }) => {
     document.title = 'ShopTECH | Thanh toán đơn hàng';
     const fetchAPIs = () => {
       fetch(
-        `https://server-shoptech.onrender.com/api/users/${
+        `https://localhost:7096/api/users/${
           JSON.parse(window.localStorage.getItem('auth')).user._id
         }`,
       )
@@ -26,7 +26,7 @@ const Payment = ({ socket }) => {
           setCartUser(data.cart);
         });
 
-      fetch('https://server-shoptech.onrender.com/api/orders')
+      fetch('https://localhost:7096/api/orders')
         .then((res) => res.json())
         .then((data) => {
           setOrders(data);
@@ -130,7 +130,7 @@ const Payment = ({ socket }) => {
 
   const handleClickRemoveAll = () => {
     axios.put(
-      'https://server-shoptech.onrender.com/api/users/remove-all-in-cart/' +
+      'https://localhost:7096/api/users/remove-all-in-cart/' +
         JSON.parse(window.localStorage.getItem('auth')).user._id,
     );
   };

@@ -13,9 +13,10 @@ const Laptop = () => {
   useEffect(() => {
     document.title = 'ShopTECH | Laptop thời thượng';
     const fetchAPIs = () => {
-      fetch('https://server-shoptech.onrender.com/api/products')
+      fetch('https://localhost:7096/api/products')
         .then((res) => res.json())
         .then((data) => {
+          console.log("data:::: ", data);
           setProducts(data);
           setLoading(false);
         });
@@ -23,13 +24,16 @@ const Laptop = () => {
     fetchAPIs();
   }, []);
 
+
+console.log("productsAAAA:: ", products);
+
   useEffect(() => {
     // show danh mục laptop
     products.map((product, index) => {
       const infoProductFeaturedlaptop = document.querySelectorAll(
         '.product-client__item',
       )[index];
-      if (product.enType === 'laptop') {
+      if (product.product_type === 'Medical') {
         infoProductFeaturedlaptop.style.display = 'block';
       }
     });
@@ -41,12 +45,12 @@ const Laptop = () => {
 
   const handleChangeBanner = () => {
     const arrayBanner = [
-      'https://server-shoptech.onrender.com/public/product-img/laptop-img/event-banner.gif',
-      'https://server-shoptech.onrender.com/public/product-img/laptop-img/event-banner.png',
-      'https://server-shoptech.onrender.com/public/product-img/laptop-img/event-banner2.png',
-      'https://server-shoptech.onrender.com/public/product-img/laptop-img/event-banner3.png',
-      'https://server-shoptech.onrender.com/public/product-img/laptop-img/event-banner4.png',
-      'https://server-shoptech.onrender.com/public/product-img/laptop-img/event-banner5.png',
+      'https://data-service.pharmacity.io/pmc-upload-media/production/pmc-ecm-core/collection-images/1703735550_GIASOCCUOITUAN_1376X333_1.jpg',
+      'https://data-service.pharmacity.io/pmc-upload-media/production/pmc-ecm-core/collection-images/1703735550_GIASOCCUOITUAN_1376X333_1.jpg',
+      'https://www.pharmacity.vn/images/store/promotion-pmc-app-banner.png',
+      'https://data-service.pharmacity.io/pmc-ecm-webapp-config-api/production/banner/913x280%20(x1.5)%20(5)-1704957977893.png',
+      'https://data-service.pharmacity.io/pmc-ecm-webapp-config-api/production/banner/913x280%20(x1.5)%20copy%202-1703904593788.png',
+      'https://data-service.pharmacity.io/pmc-ecm-webapp-config-api/production/banner/Banner%202H%20-%20913x280px%20(1)-1702891520379.png',
     ];
     var index = 0;
     setInterval(function () {
@@ -60,9 +64,9 @@ const Laptop = () => {
   };
 
   const arrayPromote = [
-    'https://server-shoptech.onrender.com/public/product-img/laptop-img/event-list-item3.png',
-    'https://server-shoptech.onrender.com/public/product-img/laptop-img/event-list-item4.png',
-    'https://server-shoptech.onrender.com/public/product-img/laptop-img/event-list-item5.png',
+    'https://www.pharmacity.vn/images/store/promotion-pmc-app-banner.png',
+    'https://cdn.nhathuoclongchau.com.vn/unsafe/828x0/filters:quality(90)/https://cms-prod.s3-sgn09.fptcloud.com/Banner_Destop_3_8cbf98bf7e.jpg',
+    'https://cdn.nhathuoclongchau.com.vn/unsafe/828x0/filters:quality(90)/https://cms-prod.s3-sgn09.fptcloud.com/1610x492_banner_desktop_dcd882dd4c.png',
   ];
   var indexPromote = 0;
   const handleNextPromote = () => {
@@ -108,12 +112,15 @@ const Laptop = () => {
   const handleFilterChange = (minPrice, maxPrice) => {
     const filteredProducts = products.filter(
       (product) =>
-        Number(product.price) >= minPrice &&
-        Number(product.price) <= maxPrice &&
+        Number(product.product_price) >= minPrice &&
+        Number(product.product_price) <= maxPrice &&
         product.enType === 'laptop',
     );
     setProducts(filteredProducts);
   };
+
+
+
 
   return (
     <>
@@ -131,7 +138,7 @@ const Laptop = () => {
           <SideBanner />
           <div className="product-client__event">
             <img
-              src="https://server-shoptech.onrender.com/public/product-img/laptop-img/event-banner.gif"
+              src="https://data-service.pharmacity.io/pmc-upload-media/production/pmc-ecm-core/collection-images/1703735550_GIASOCCUOITUAN_1376X333_1.jpg"
               alt=""
               className="product-client__event-primary"
             ></img>
@@ -139,11 +146,11 @@ const Laptop = () => {
             <div className="product-client__event-list">
               <div className="product-client__event-col-left">
                 <img
-                  src="https://server-shoptech.onrender.com/public/product-img/laptop-img/event-list-item.png"
+                  src="https://cdn.nhathuoclongchau.com.vn/unsafe/828x0/filters:quality(90)/https://cms-prod.s3-sgn09.fptcloud.com/web_pc_1610x492_00b3003e3e.jpg"
                   className="product-client__event-col-left-item"
                 ></img>
                 <img
-                  src="https://server-shoptech.onrender.com/public/product-img/laptop-img/event-list-item2.png"
+                  src="https://cdn.nhathuoclongchau.com.vn/unsafe/828x0/filters:quality(90)/https://cms-prod.s3-sgn09.fptcloud.com/Banner_Web_PC_1610x492_38657748b1.png"
                   className="product-client__event-col-left-item"
                 ></img>
               </div>
@@ -156,7 +163,7 @@ const Laptop = () => {
                   <i className="fa fa-arrow-left"></i>
                 </button>
                 <img
-                  src="https://server-shoptech.onrender.com/public/product-img/laptop-img/event-list-item3.png"
+                  src="https://cdn.nhathuoclongchau.com.vn/unsafe/828x0/filters:quality(90)/https://cms-prod.s3-sgn09.fptcloud.com/PC_1610x492_1b8c8077fa.jpg"
                   className="product-client__event-col-right-item"
                 ></img>
                 <button
@@ -167,11 +174,11 @@ const Laptop = () => {
                 </button>
               </div>
             </div>
-            <img
+            {/* <img
               className="product-client__event-gif"
               src="https://server-shoptech.onrender.com/public/product-img/laptop-img/event-item-gif.gif"
               alt="ảnh gif"
-            ></img>
+            ></img> */}
           </div>
 
           <label className="product-client__title-brand">
@@ -240,16 +247,16 @@ const Laptop = () => {
                     e.preventDefault();
                     handleLoadingPage(1);
                     window.setTimeout(() => {
-                      window.location.href = `/product/${product.enType}/${product.name}`;
+                      window.location.href = `/product/${product.product_type}/${product.product_name}`;
                     }, 1000);
                   }}
                 >
                   <img
-                    src={product.imageLink}
+                    src={product.product_img}
                     className="product-client__item-img"
                   ></img>
                   <label className="product-client__item-label">
-                    {product.name}
+                    {product.product_name}
                   </label>
                   <img
                     className="product-client__item-hot-icon"
@@ -260,10 +267,10 @@ const Laptop = () => {
                     src="https://server-shoptech.onrender.com/public/product-img/laptop-img/icon-18-month.png"
                   ></img>
                   <label className="product-client__item-price">
-                    {Number(product.price).toLocaleString()} ₫
+                    {Number(product.product_price).toLocaleString()} ₫
                   </label>
                   <span className="product-client__item-percent">
-                    {(Number(product.price) * 1.065).toLocaleString()}đ
+                    {(Number(product.product_price) * 1.065).toLocaleString()}đ
                   </span>
                   <label className="product-client__item-vote">
                     <span className="product-client__item-star-icon">
@@ -272,7 +279,7 @@ const Laptop = () => {
                     ({product.voter || 0} đánh giá)
                   </label>
                   <div className="product-client__item-tag">
-                    Giảm {product.percent}%
+                    Giảm {product.product_quantity}%
                   </div>
                 </li>
               ))

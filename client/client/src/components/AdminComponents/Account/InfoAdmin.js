@@ -58,7 +58,7 @@ const InfoAdmin = () => {
         );
         axios
           .post(
-            'https://server-shoptech.onrender.com/api/admins/upload-image',
+            'https://localhost:7096/api/admins/upload-image',
             formData,
           )
           .then((response) => {

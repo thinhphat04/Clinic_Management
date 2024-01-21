@@ -24,7 +24,7 @@ const InfoProduct = () => {
   useEffect(() => {
     const fetchAPIs = () => {
       document.title = 'ShopTECH | Thông tin sản phẩm';
-      fetch('https://server-shoptech.onrender.com/api/products/' + id)
+      fetch('https://localhost:7096/api/products/' + id)
         .then((res) => res.json())
         .then((data) => {
           setProduct(data);
@@ -92,7 +92,7 @@ const InfoProduct = () => {
 
           axios
             .post(
-              'https://server-shoptech.onrender.com/api/products/upload-image',
+              'https://localhost:7096/api/products/upload-image',
               formData,
             )
             .then((response) => {
@@ -123,7 +123,7 @@ const InfoProduct = () => {
             .put(
               `${process.env.REACT_APP_API}/api/products/update/image-link=${id}`,
               {
-                imageLink: product.imageLink,
+                imageLink: product.product_img,
               },
             )
             .then((res) => {
@@ -190,7 +190,7 @@ const InfoProduct = () => {
 
           axios
             .post(
-              'https://server-shoptech.onrender.com/api/products/upload-image-primary',
+              'https://localhost:7096/api/products/upload-image-primary',
               formData,
             )
             .then((response) => {
@@ -282,7 +282,7 @@ const InfoProduct = () => {
 
         axios
           .post(
-            'https://server-shoptech.onrender.com/api/products/upload-image-list',
+            'https://localhost:7096/api/products/upload-image-list',
             formData,
           )
           .then((response) => {
@@ -435,8 +435,8 @@ const InfoProduct = () => {
                 <img
                   className="info-admin-product__image-primary-img"
                   src={
-                    product.imageLink ||
-                    'https://server-shoptech.onrender.com/public/img-product-empty.png'
+                    product.product_img ||
+                    'https://localhost:7096/public/img-product-empty.png'
                   }
                 ></img>
                 <input
@@ -469,7 +469,7 @@ const InfoProduct = () => {
                     className="info-admin-product__image-banner-img"
                     src={
                       product.imagePrimary ||
-                      'https://server-shoptech.onrender.com/public/img-product-empty.png'
+                      'https://localhost:7096/public/img-product-empty.png'
                     }
                   ></img>
                   <input
@@ -526,7 +526,7 @@ const InfoProduct = () => {
                   >
                     <img
                       className="info-admin-product__image-item-img--existed img-new"
-                      src="https://server-shoptech.onrender.com/public/img-product-empty.png"
+                      src="https://localhost:7096/public/img-product-empty.png"
                     />
                   </div>
 
@@ -569,7 +569,7 @@ const InfoProduct = () => {
                 <input
                   style={{ fontWeight: 'bold' }}
                   className="info-admin-product__input"
-                  defaultValue={product.name}
+                  defaultValue={product.product_name}
                 />
 
                 <label className="info-admin-product__label">
@@ -613,7 +613,7 @@ const InfoProduct = () => {
                 <input
                   type="number"
                   className="info-admin-product__input"
-                  defaultValue={product.price}
+                  defaultValue={product.product_price}
                   style={{ fontWeight: 'bold', color: 'red' }}
                 />
 

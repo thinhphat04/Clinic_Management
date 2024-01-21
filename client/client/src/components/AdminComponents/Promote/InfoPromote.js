@@ -16,7 +16,7 @@ const InfoPromote = () => {
   useEffect(() => {
     document.title = 'ShopTECH | Thông tin khuyến mãi';
     const fetchAPI = () => {
-      fetch('https://server-shoptech.onrender.com/api/promotes/' + id)
+      fetch('https://localhost:7096/api/promotes/' + id)
         .then((res) => res.json())
         .then((data) => {
           setPromote(data);
@@ -64,7 +64,7 @@ const InfoPromote = () => {
 
           axios
             .post(
-              'https://server-shoptech.onrender.com/api/promotes/upload-image',
+              'https://localhost:7096/api/promotes/upload-image',
               formData,
             )
             .then((response) => {

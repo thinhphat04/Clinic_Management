@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import './styles/homepage-style.css';
-import { Nav, Footer, SideBanner, NavMobile } from '../Common';
-import HotPromote from './HotPromote';
-import HomeList from './HomeList';
-import { handleLoadingPage } from '../../Common';
+import React, { useState, useEffect } from "react";
+import "./styles/homepage-style.css";
+import { Nav, Footer, SideBanner, NavMobile } from "../Common";
+import HotPromote from "./HotPromote";
+import HomeList from "./HomeList";
+import { handleLoadingPage } from "../../Common";
+import axios from "axios";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -12,111 +13,127 @@ const Home = () => {
   const [promotes, setPromotes] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchAPIs = () => {
-      fetch('https://server-shoptech.onrender.com/api/products')
-        .then((res) => res.json())
-        .then((data) => {
-          setProducts(data);
-          setLoading(false);
-        });
+  // useEffect(() => {
+  //   const fetchAPIs = () => {
+  //     fetch('https://localhost:7096/api/Products')
+  //       .then((res) => res.json())
+  //       .then((data) => {
+  //         setProducts(data);
+  //         setLoading(false);
+  //       });
 
-      fetch('https://server-shoptech.onrender.com/api/promotes')
-        .then((res) => res.json())
-        .then((data) => {
-          setPromotes(data);
-          setLoading(false);
-        });
+  //     fetch('https://localhost:7096/api/promotes')
+  //       .then((res) => res.json())
+  //       .then((data) => {
+  //         setPromotes(data);
+  //         setLoading(false);
+  //       });
+  //   };
+  //   fetchAPIs();
+  //   handleLoadCountdown();
+  // }, []);
+
+  useEffect(() => {
+    const fetchAPIs = async () => {
+      try {
+        const productsResponse = await axios.get(
+          "https://localhost:7096/api/Products"
+        );
+        setProducts(productsResponse.data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        // Xử lý lỗi tại đây, ví dụ thông báo cho người dùng
+      } finally {
+        // setLoading(false);
+      }
     };
     fetchAPIs();
-    handleLoadCountdown();
+    // handleLoadCountdown();
   }, []);
-
+  console.log("loading:; ", loading);
+  console.log("products:; ", products);
   useEffect(() => {
     // show thông tin sản phẩm hot deal
     products.map((product, index) => {
       const infoProductHotDeal = document.querySelectorAll(
-        '.home__flash-sale-item',
+        ".home__flash-sale-item"
       )[index];
       if (product.hotDeal === true) {
-        infoProductHotDeal.style.display = 'inline-block';
+        infoProductHotDeal.style.display = "inline-block";
       }
     });
 
     // show thông tin điện thoại nổi bật
     products.map((product, index) => {
       const infoProductFeaturedSmartphone = document.querySelectorAll(
-        '.product__sell-item--smartphone',
+        ".product__sell-item--smartphone"
       )[index];
-      if (product.type === 'Điện thoại' && product.featured === true) {
-        infoProductFeaturedSmartphone.style.display = 'block';
+      if (product.product_type === "Medical" && product.featured === true) {
+        infoProductFeaturedSmartphone.style.display = "block";
       }
     });
 
     // show thông tin laptop nổi bật
     products.map((product, index) => {
       const infoProductFeaturedLaptop = document.querySelectorAll(
-        '.product__sell-item--laptop',
+        ".product__sell-item--laptop"
       )[index];
-      if (product.type === 'Máy tính xách tay' && product.featured === true) {
-        infoProductFeaturedLaptop.style.display = 'block';
+      if (product.product_type === "Education" && product.featured === true) {
+        infoProductFeaturedLaptop.style.display = "block";
       }
     });
 
     //  show thông tin tablet nổi bật
     products.map((product, index) => {
       const infoProductFeaturedTablet = document.querySelectorAll(
-        '.product__sell-item--tablet',
+        ".product__sell-item--tablet"
       )[index];
-      if (product.type === 'Máy tính bảng' && product.featured === true) {
-        infoProductFeaturedTablet.style.display = 'block';
+      if (product.product_type === "Scientific" && product.featured === true) {
+        infoProductFeaturedTablet.style.display = "block";
       }
     });
 
     //  show thông tin phụ kiện nổi bật
-    products.map((product, index) => {
-      const infoProductFeaturedAccessories = document.querySelectorAll(
-        '.product__sell-item--accessories',
-      )[index];
-      if (product.type === 'Phụ kiện' && product.featured === true) {
-        infoProductFeaturedAccessories.style.display = 'block';
-      }
-    });
+    // products.map((product, index) => {
+    //   const infoProductFeaturedAccessories = document.querySelectorAll(
+    //     '.product__sell-item--accessories',
+    //   )[index];
+    //   if (product.type === 'Phụ kiện' && product.featured === true) {
+    //     infoProductFeaturedAccessories.style.display = 'block';
+    //   }
+    // });
     handleLoadBanner();
     handleSetWidthBanner();
   }, [products]);
 
-  const handleLoadCountdown = () => {
-    var countDownDate = new Date(`7 ${timeEnd}, 2023 00:00:00`).getTime();
-    const countdown = setInterval(() => {
-      var now = new Date().getTime();
-      var timeleft = countDownDate - now;
+  // const handleLoadCountdown = () => {
+  //   var countDownDate = new Date(`7 ${timeEnd}, 2023 00:00:00`).getTime();
+  //   const countdown = setInterval(() => {
+  //     var now = new Date().getTime();
+  //     var timeleft = countDownDate - now;
 
-      var daysLeft = Math.floor(timeleft / (1000 * 60 * 60 * 24));
-      var hoursLeft = Math.floor(
-        (timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
-      );
-      var minutesLeft = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
-      var secondsLeft = Math.floor((timeleft % (1000 * 60)) / 1000);
+  //     var daysLeft = Math.floor(timeleft / (1000 * 60 * 60 * 24));
+  //     var hoursLeft = Math.floor(
+  //       (timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+  //     );
+  //     var minutesLeft = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
+  //     var secondsLeft = Math.floor((timeleft % (1000 * 60)) / 1000);
 
-      document.querySelector(
-        '.home__flash-sale-countdown-day',
-      ).innerHTML = `<span>${daysLeft} ngày</span>`;
-      document.querySelector(
-        '.home__flash-sale-countdown-hour',
-      ).innerHTML = `<span>${hoursLeft}</span>`;
-      document.querySelector(
-        '.home__flash-sale-countdown-minute',
-      ).innerHTML = `<span>${minutesLeft}</span>`;
-      document.querySelector(
-        '.home__flash-sale-countdown-second',
-      ).innerHTML = `<span>${secondsLeft}</span>`;
+  //     document.querySelector(".home__flash-sale-countdown-day").innerHTML =
+  //       `<span>${daysLeft} ngày</span>`;
+  //     document.querySelector(".home__flash-sale-countdown-hour").innerHTML =
+  //       `<span>${hoursLeft}</span>`;
+  //     document.querySelector(".home__flash-sale-countdown-minute").innerHTML =
+  //       `<span>${minutesLeft}</span>`;
+  //     document.querySelector(".home__flash-sale-countdown-second").innerHTML =
+  //       `<span>${secondsLeft}</span>`;
 
-      if (timeleft < 0) {
-        clearInterval(countdown);
-      }
-    }, 1000);
-  };
+  //     if (timeleft < 0) {
+  //       clearInterval(countdown);
+  //     }
+  //   }, 1000);
+  // };
 
   const handleFormatStarProduct = (starOfProduct) => {
     if (starOfProduct < 1) {
@@ -136,16 +153,16 @@ const Home = () => {
 
   var indexBanner = 0;
   const handleSetWidthBanner = () => {
-    const bannerGroup = document.querySelector('.home-promote__group');
-    const bannerList = document.querySelectorAll('.home-promote__item');
+    const bannerGroup = document.querySelector(".home-promote__group");
+    const bannerList = document.querySelectorAll(".home-promote__item");
     if (bannerList.length > 0) {
       bannerGroup.style.width = `${Number(bannerList.length) * 600}px`;
     }
   };
 
   const handleLoadBanner = () => {
-    const bannerGroup = document.querySelector('.home-promote__group');
-    const bannerList = document.querySelectorAll('.home-promote__item');
+    const bannerGroup = document.querySelector(".home-promote__group");
+    const bannerList = document.querySelectorAll(".home-promote__item");
     setInterval(() => {
       indexBanner += 1;
       bannerGroup.style.transform = `translateX(-${(indexBanner - 1) * 600}px)`;
@@ -154,7 +171,7 @@ const Home = () => {
         indexBanner > bannerList.length - 1 ||
         indexBanner === bannerList.length
       ) {
-        bannerGroup.style.transform = 'translateX(0)';
+        bannerGroup.style.transform = "translateX(0)";
         indexBanner = 0;
       } else {
         bannerGroup.style.transform = `translateX(-${indexBanner * 600}px)`;
@@ -163,12 +180,12 @@ const Home = () => {
   };
 
   const handleTransitionNextBanner = () => {
-    const bannerGroup = document.querySelector('.home-promote__group');
-    const bannerList = document.querySelectorAll('.home-promote__item');
+    const bannerGroup = document.querySelector(".home-promote__group");
+    const bannerList = document.querySelectorAll(".home-promote__item");
     indexBanner += 1;
 
     if (indexBanner >= bannerList.length - 1) {
-      bannerGroup.style.transform = 'translateX(0)';
+      bannerGroup.style.transform = "translateX(0)";
       indexBanner = 0;
       return;
     }
@@ -176,8 +193,8 @@ const Home = () => {
   };
 
   const handleTransitionPrevBanner = () => {
-    const bannerGroup = document.querySelector('.home-promote__group');
-    const bannerList = document.querySelectorAll('.home-promote__item');
+    const bannerGroup = document.querySelector(".home-promote__group");
+    const bannerList = document.querySelectorAll(".home-promote__item");
     indexBanner -= 1;
 
     if (indexBanner < 1) {
@@ -193,8 +210,8 @@ const Home = () => {
   var indexSlide = 0;
   const handleTransitionSlideDown = () => {
     if (indexSlide < 0) indexSlide = 0;
-    const slideGroup = document.querySelector('.home-flash-sale__group');
-    const slideList = document.querySelectorAll('.home__flash-sale-item');
+    const slideGroup = document.querySelector(".home-flash-sale__group");
+    const slideList = document.querySelectorAll(".home__flash-sale-item");
     indexSlide += 1;
     if (indexSlide > (slideList.length - (slideList.length % 10)) / 10) {
       indexSlide = (slideList.length - (slideList.length % 10)) / 10;
@@ -206,7 +223,7 @@ const Home = () => {
 
   const handleTransitionSlideUp = () => {
     if (indexSlide < 0) indexSlide = 0;
-    const slideGroup = document.querySelector('.home-flash-sale__group');
+    const slideGroup = document.querySelector(".home-flash-sale__group");
     indexSlide -= 1;
     if (indexSlide < 0) return;
     else {
@@ -241,23 +258,69 @@ const Home = () => {
               {loading ? (
                 <p>Đang kết nối đến server...</p>
               ) : (
-                promotes.map((promote, index) => (
+
+                <div>
                   <img
-                    src={promote.imageLink}
+                    src="https://cdn.nhathuoclongchau.com.vn/unsafe/1440x0/filters:quality(90)/https://cms-prod.s3-sgn09.fptcloud.com/1196x352_aed681f792.jpg"
                     className="home-promote__item"
-                    alt=""
-                    key={index}
-                  ></img>
-                ))
+                    alt="Promotion Image 1"
+                  />
+
+                  <img
+                    src="https://data-service.pharmacity.io/pmc-ecm-webapp-config-api/production/banner/tuivai_913x280x1.5-1703672872315.jpg"
+                    className="home-promote__item"
+                    alt="Promotion Image 2"
+                  />
+                  <img
+                    src="https://cdn.nhathuoclongchau.com.vn/unsafe/1440x0/filters:quality(90)/https://cms-prod.s3-sgn09.fptcloud.com/1196x352_aed681f792.jpg"
+                    className="home-promote__item"
+                    alt="Promotion Image 3"
+                  />
+                  <img
+                    src="https://cdn.nhathuoclongchau.com.vn/unsafe/828x0/filters:quality(90)/https://cms-prod.s3-sgn09.fptcloud.com/web_pc_1610x492_00b3003e3e.jpg"
+                    className="home-promote__item"
+                    alt="Promotion Image 4"
+                  />
+                  <img
+                    src="https://data-service.pharmacity.io/pmc-ecm-webapp-config-api/production/banner/tuivai_913x280x1.5-1703672872315.jpg"
+                    className="home-promote__item"
+                    alt="Promotion Image 5"
+                  />
+                  <img
+                    src="https://data-service.pharmacity.io/pmc-upload-media/production/pmc-ecm-core/collection-images/1703735550_GIASOCCUOITUAN_1376X333_1.jpg"
+                    className="home-promote__item"
+                    alt="Promotion Image 6"
+                  />
+                  <img
+                    src="https://data-service.pharmacity.io/pmc-ecm-webapp-config-api/production/banner/TET_913x280%20(x1.5)%20opt2%20(2)-1704944470001.jpg"
+                    className="home-promote__item"
+                    alt="Promotion Image 7"
+                  />
+                  <img
+                    src="https://data-service.pharmacity.io/pmc-ecm-webapp-config-api/production/banner/tuivai_913x280x1.5-1703672872315.jpg"
+                    className="home-promote__item"
+                    alt="Promotion Image 8"
+                  /> 
+                  <img
+                    src="https://data-service.pharmacity.io/pmc-upload-media/production/pmc-ecm-core/collection-images/1703735550_GIASOCCUOITUAN_1376X333_1.jpg"
+                    className="home-promote__item"
+                    alt="Promotion Image 9"
+                  />
+                  <img
+                    src="https://data-service.pharmacity.io/pmc-ecm-webapp-config-api/production/banner/tuivai_913x280x1.5-1703672872315.jpg"
+                    className="home-promote__item"
+                    alt="Promotion Image 10"
+                  />
+                </div>
               )}
             </div>
           </ul>
 
           <HomeList />
 
-          <div id="home__flash-sale">
+          {/* <div id="home__flash-sale">
             <div className="home__flash-sale-label">
-            Extremely  Promotion <span>HOT</span> - 🔥🔥🔥
+              Extremely Promotion <span>HOT</span> - 🔥🔥🔥
             </div>
             <div className="home__flash-sale-banner"></div>
             <div className="home__flash-sale-container">
@@ -265,11 +328,9 @@ const Home = () => {
                 <div className="home__flash-sale-background"></div>
                 <div className="home__flash-sale-header-col">
                   <div className="home__flash-sale-title">
-                  Golden hour for DEAL hunting
+                    Golden hour for DEAL hunting
                   </div>
-                  <div className="home__flash-sale-countdown">
-                  Ends in:
-                  </div>
+                  <div className="home__flash-sale-countdown">Ends in:</div>
                   <div className="home__flash-sale-countdown-day"></div>
                   <span className="home__flash-sale-countdown-sepetate">:</span>
                   <div className="home__flash-sale-countdown-hour"></div>
@@ -279,9 +340,7 @@ const Home = () => {
                   <div className="home__flash-sale-countdown-second"></div>
                 </div>
                 <div className="home__flash-sale-header-col">
-                  <div className="home__flash-sale-time">
-                  Promotion time
-                  </div>
+                  <div className="home__flash-sale-time">Promotion time</div>
                   <div className="home__flash-sale-time-valid">
                     {timeStart}/01/2024 - {timeEnd}/02/2024
                   </div>
@@ -299,48 +358,52 @@ const Home = () => {
                   {loading ? (
                     <p>Đang kết nối đến server ... </p>
                   ) : (
-                    products.map((product, index) => (
-                      <li
-                        className="home__flash-sale-item"
-                        key={index}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          handleLoadingPage(1);
-                          window.setTimeout(() => {
-                            window.location.href = `/product/${product.enType}/${product.name}`;
-                          }, 1000);
-                        }}
-                      >
-                        <img
-                          src={product.imageLink}
-                          className="home__flash-sale-item-img"
-                        ></img>
-                        <img
-                          className="product-client__item-hot-icon"
-                          src="https://server-shoptech.onrender.com/public/product-img/smartphone-img/icon-hot.gif"
-                        ></img>
-                        <label className="home__flash-sale-item-label">
-                          {product.name}
-                        </label>
-                        <label className="home__flash-sale-item-price">
-                          {Number(product.price).toLocaleString()} ₫
-                        </label>
-                        <span className="home__flash-sale-item-percent">
-                          {(Number(product.price) * 1.065).toLocaleString()}đ
-                        </span>
-                        <label className="home__flash-sale-item-sold">
-                          Đã bán
-                          <span className="home__flash-sale-item-number">
-                            {Math.floor(
-                              Number((Math.random() % 100) * (99 - 1)),
-                            )}
-                          </span>
-                        </label>
-                        <div className="home__flash-sale-item-tag">
-                          Giảm {product.percent}%
-                        </div>
-                      </li>
-                    ))
+                    // products.map((product, index) => (
+                    //   <li
+                    //     className="home__flash-sale-item"
+                    //     key={index}
+                    //     onClick={(e) => {
+                    //       e.preventDefault();
+                    //       handleLoadingPage(1);
+                    //       window.setTimeout(() => {
+                    //         window.location.href = `/product/${product.product_type}/${product.product_name}`;
+                    //       }, 1000);
+                    //     }}
+                    //   >
+                    //     <img
+                    //       src={product.product_img}
+                    //       className="home__flash-sale-item-img"
+                    //     ></img>
+                    //     <img
+                    //       className="product-client__item-hot-icon"
+                    //       src="https://server-shoptech.onrender.com/public/product-img/smartphone-img/icon-hot.gif"
+                    //     ></img>
+                    //     <label className="home__flash-sale-item-label">
+                    //       {product.product_name}
+                    //     </label>
+                    //     <label className="home__flash-sale-item-price">
+                    //       {Number(product.product_price).toLocaleString()} ₫
+                    //     </label>
+                    //     <span className="home__flash-sale-item-percent">
+                    //       {(
+                    //         Number(product.product_price) * 1.065
+                    //       ).toLocaleString()}
+                    //       đ
+                    //     </span>
+                    //     <label className="home__flash-sale-item-sold">
+                    //       Đã bán
+                    //       <span className="home__flash-sale-item-number">
+                    //         {Math.floor(
+                    //           Number((Math.random() % 100) * (99 - 1))
+                    //         )}
+                    //       </span>
+                    //     </label>
+                    //     <div className="home__flash-sale-item-tag">
+                    //       Giảm {product.product_quantity}%
+                    //     </div>
+                    //   </li>
+                    // ))
+                    <p>AAAAAAAAAAAAAAAAAA</p>
                   )}
                 </div>
               </ul>
@@ -351,7 +414,7 @@ const Home = () => {
                 <i className="home__flash-sale-btn-icon fa-solid fa-chevron-down"></i>
               </button>
             </div>
-          </div>
+          </div> */}
 
           <div id="home__featured">
             <div className="home__featured-label">FEATURED PRODUCTS</div>
@@ -370,10 +433,18 @@ const Home = () => {
               MEIDCAL
             </div>
             <div className="home__featured-brand-list">
-              <button className="home__product-brand-item">Pharmacist gives free consultation</button>
-              <button className="home__product-brand-item">Good cheap medicine</button>
-              <button className="home__product-brand-item">100% genuine medicine</button>
-              <button className="home__product-brand-item">Enough correct medicine</button>
+              <button className="home__product-brand-item">
+                Pharmacist gives free consultation
+              </button>
+              <button className="home__product-brand-item">
+                Good cheap medicine
+              </button>
+              <button className="home__product-brand-item">
+                100% genuine medicine
+              </button>
+              <button className="home__product-brand-item">
+                Enough correct medicine
+              </button>
             </div>
             <ul className="home__featured-list">
               {loading ? (
@@ -386,13 +457,13 @@ const Home = () => {
                     onClick={(e) => {
                       e.preventDefault();
                       handleLoadingPage(1);
-                      window.setTimeout(() => {
-                        window.location.href = `/product/${product.enType}/${product.name}`;
-                      }, 1000);
+                      // window.setTimeout(() => {
+                      //   window.location.href = `/product/${product.product_type}/${product.product_name}`;
+                      // }, 1000);
                     }}
                   >
                     <img
-                      src={product.imageLink}
+                      src={product.product_img}
                       className="home__flash-sale-item-img"
                     ></img>
                     <img
@@ -400,13 +471,14 @@ const Home = () => {
                       src="https://server-shoptech.onrender.com/public/product-img/smartphone-img/icon-hot.gif"
                     ></img>
                     <label className="product__sell-item-label">
-                      {product.name}
+                      {product.product_name}
                     </label>
                     <label className="product__sell-item-price">
-                      {Number(product.price).toLocaleString()} ₫
+                      {Number(product.product_price).toLocaleString()} ₫
                     </label>
                     <span className="product__sell-item-percent">
-                      {(Number(product.price) * 1.065).toLocaleString()}đ
+                      {(Number(product.product_price) * 1.065).toLocaleString()}
+                      đ
                     </span>
                     <label className="product__sell-item-sold">
                       Đánh giá:
@@ -415,10 +487,10 @@ const Home = () => {
                       </span>
                     </label>
                     <div className="home__flash-sale-item-tag">
-                      Giảm {product.percent}%
+                      Giảm {product.product_quantity}%
                     </div>
                   </li>
-                ))
+                ))             
               )}
             </ul>
 
@@ -434,7 +506,7 @@ const Home = () => {
                 handleLoadingPage(1, `/product/tablet`);
               }}
             >
-              CSIENTIFIC
+              SCIENTIFIC
             </div>
             <div className="home__featured-brand-list">
               <button className="home__product-brand-item">Apple</button>
@@ -457,12 +529,12 @@ const Home = () => {
                       e.preventDefault();
                       handleLoadingPage(1);
                       window.setTimeout(() => {
-                        window.location.href = `/product/${product.enType}/${product.name}`;
+                        window.location.href = `/product/${product.product_type}/${product.product_name}`;
                       }, 1000);
                     }}
                   >
                     <img
-                      src={product.imageLink}
+                      src={product.product_img}
                       className="home__flash-sale-item-img"
                     ></img>
                     <img
@@ -470,13 +542,14 @@ const Home = () => {
                       src="https://server-shoptech.onrender.com/public/product-img/smartphone-img/icon-hot.gif"
                     ></img>
                     <label className="product__sell-item-label">
-                      {product.name}
+                      {product.product_name}
                     </label>
                     <label className="product__sell-item-price">
-                      {Number(product.price).toLocaleString()} ₫
+                      {Number(product.product_price).toLocaleString()} ₫
                     </label>
                     <span className="product__sell-item-percent">
-                      {(Number(product.price) * 1.065).toLocaleString()}đ
+                      {(Number(product.product_price) * 1.065).toLocaleString()}
+                      đ
                     </span>
                     <label className="product__sell-item-sold">
                       Đánh giá:
@@ -485,7 +558,7 @@ const Home = () => {
                       </span>
                     </label>
                     <div className="home__flash-sale-item-tag">
-                      Giảm {product.percent}%
+                      Giảm {product.product_quantity}%
                     </div>
                   </li>
                 ))
@@ -529,12 +602,12 @@ const Home = () => {
                       e.preventDefault();
                       handleLoadingPage(1);
                       window.setTimeout(() => {
-                        window.location.href = `/product/${product.enType}/${product.name}`;
+                        window.location.href = `/product/${product.product_type}/${product.product_name}`;
                       }, 1000);
                     }}
                   >
                     <img
-                      src={product.imageLink}
+                      src={product.product_img}
                       className="home__flash-sale-item-img"
                     ></img>
                     <img
@@ -542,13 +615,14 @@ const Home = () => {
                       src="https://server-shoptech.onrender.com/public/product-img/smartphone-img/icon-hot.gif"
                     ></img>
                     <label className="product__sell-item-label">
-                      {product.name}
+                      {product.product_name}
                     </label>
                     <label className="product__sell-item-price">
-                      {Number(product.price).toLocaleString()} ₫
+                      {Number(product.product_price).toLocaleString()} ₫
                     </label>
                     <span className="product__sell-item-percent">
-                      {(Number(product.price) * 1.065).toLocaleString()}đ
+                      {(Number(product.product_price) * 1.065).toLocaleString()}
+                      đ
                     </span>
                     <label className="product__sell-item-sold">
                       Đánh giá:
@@ -557,7 +631,7 @@ const Home = () => {
                       </span>
                     </label>
                     <div className="home__flash-sale-item-tag">
-                      Giảm {product.percent}%
+                      Giảm {product.product_quantity}%
                     </div>
                   </li>
                 ))
@@ -598,12 +672,12 @@ const Home = () => {
                       e.preventDefault();
                       handleLoadingPage(1);
                       window.setTimeout(() => {
-                        window.location.href = `/product/${product.enType}/${product.name}`;
+                        window.location.href = `/product/${product.product_type}/${product.product_name}`;
                       }, 1000);
                     }}
                   >
                     <img
-                      src={product.imageLink}
+                      src={product.product_img}
                       className="home__flash-sale-item-img"
                     ></img>
                     <img
@@ -611,13 +685,14 @@ const Home = () => {
                       src="https://server-shoptech.onrender.com/public/product-img/smartphone-img/icon-hot.gif"
                     ></img>
                     <label className="product__sell-item-label">
-                      {product.name}
+                      {product.product_name}
                     </label>
                     <label className="product__sell-item-price">
-                      {Number(product.price).toLocaleString()} ₫
+                      {Number(product.product_price).toLocaleString()} ₫
                     </label>
                     <span className="product__sell-item-percent">
-                      {(Number(product.price) * 1.065).toLocaleString()}đ
+                      {(Number(product.product_price) * 1.065).toLocaleString()}
+                      đ
                     </span>
                     <label className="product__sell-item-sold">
                       Đánh giá:
@@ -626,19 +701,20 @@ const Home = () => {
                       </span>
                     </label>
                     <div className="home__flash-sale-item-tag">
-                      Giảm {product.percent}%
+                      Giảm {product.product_quantity}%
                     </div>
                   </li>
                 ))
               )}
-            </ul>
+            </ul>  
           </div>
         </div>
       </div>
       <Footer />
       <p className="app-copyright">
-      ©️ Copyright belongs to Clinic Online - 2023 <br />
-      Address: 391 Nam Ky Khoi Nghia, Vo Thi Sau ward. District 3, Ho Chi Minh City.
+        ©️ Copyright belongs to Clinic Online - 2023 <br />
+        Address: 391 Nam Ky Khoi Nghia, Vo Thi Sau ward. District 3, Ho Chi Minh
+        City.
       </p>
     </>
   );

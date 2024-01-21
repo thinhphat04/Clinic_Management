@@ -15,7 +15,7 @@ const ResultSearch = () => {
 
   useEffect(() => {
     const fetchAPIs = () => {
-      fetch('https://server-shoptech.onrender.com/api/products')
+      fetch('https://localhost:7096/api/products')
         .then((res) => res.json())
         .then((data) => {
           setProducts(data);
@@ -45,7 +45,7 @@ const ResultSearch = () => {
     const listArray = [];
     products.map((product, index) => {
       if (
-        String(product.name).toLowerCase().includes(keySearch.toLowerCase())
+        String(product.product_name).toLowerCase().includes(keySearch.toLowerCase())
       ) {
         listArray.push(product);
         listProducts.innerHTML = `
@@ -99,7 +99,7 @@ const ResultSearch = () => {
     const listArray = [];
     products.map((product, index) => {
       if (
-        String(product.name).toLowerCase().includes(keySearch.toLowerCase()) &&
+        String(product.product_name).toLowerCase().includes(keySearch.toLowerCase()) &&
         product.enType === productType
       ) {
         listArray.push(product);

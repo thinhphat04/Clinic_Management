@@ -15,7 +15,7 @@ const CartConfirm = () => {
     document.title = 'ShopTECH | Xác nhận đơn hàng';
     const fetchAPIs = () => {
       fetch(
-        `https://server-shoptech.onrender.com/api/users/${
+        `https://localhost:7096/api/users/${
           JSON.parse(window.localStorage.getItem('auth')).user._id
         }`,
       )
@@ -158,7 +158,7 @@ const CartConfirm = () => {
                     <li className="cart-confirm__item-product" key={i}>
                       <img
                         className="cart-confirm__item-product-img"
-                        src={product.imageLink}
+                        src={product.product_img}
                       ></img>
                       <div className="cart-confirm__item-product-info">
                         <label className="cart-confirm__item-product-info-label">
@@ -169,9 +169,9 @@ const CartConfirm = () => {
                         </p>
                         <p className="cart-confirm__item-product-info-price">
                           {product.quantity} x{' '}
-                          {Number(product.price).toLocaleString()} đ ={' '}
+                          {Number(product.product_price).toLocaleString()} đ ={' '}
                           {Number(
-                            product.quantity * product.price,
+                            product.quantity * product.product_price,
                           ).toLocaleString()}{' '}
                           đ
                         </p>
@@ -205,7 +205,7 @@ const CartConfirm = () => {
                       <span className="detail-price__item-price">
                         - {Number(product.percent)}% ={' '}
                         {Number(
-                          (product.percent / 100) * product.price,
+                          (product.percent / 100) * product.product_price,
                         ).toLocaleString()}{' '}
                         đ
                       </span>

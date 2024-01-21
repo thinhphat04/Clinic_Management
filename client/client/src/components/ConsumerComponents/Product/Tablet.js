@@ -13,7 +13,7 @@ const Tablet = () => {
   useEffect(() => {
     document.title = 'ShopTECH | Máy tính bảng - nhìn là mê';
     const fetchAPIs = () => {
-      fetch('https://server-shoptech.onrender.com/api/products')
+      fetch('https://localhost:7096/api/products')
         .then((res) => res.json())
         .then((data) => {
           setProducts(data);
@@ -29,7 +29,7 @@ const Tablet = () => {
       const infoProductFeaturedTablet = document.querySelectorAll(
         '.product-client__item',
       )[index];
-      if (product.enType === 'tablet') {
+      if (product.product_type === 'Scientific') {
         infoProductFeaturedTablet.style.display = 'block';
       }
     });
@@ -41,11 +41,11 @@ const Tablet = () => {
 
   const handleChangeBanner = () => {
     const arrayBanner = [
-      'https://server-shoptech.onrender.com/public/product-img/tablet-img/event-banner.png',
-      'https://server-shoptech.onrender.com/public/product-img/tablet-img/event-banner2.png',
-      'https://server-shoptech.onrender.com/public/product-img/tablet-img/event-banner3.png',
-      'https://server-shoptech.onrender.com/public/product-img/tablet-img/event-banner4.png',
-      'https://server-shoptech.onrender.com/public/product-img/tablet-img/event-banner5.png',
+      'https://data-service.pharmacity.io/pmc-ecm-webapp-config-api/production/banner/913x280%20(x1.5)%20copy%202-1703904593788.png',
+      'https://data-service.pharmacity.io/pmc-upload-media/production/pmc-ecm-asm/posts/banner-tool-suc-khoe-web-1.webp',
+      'https://data-service.pharmacity.io/pmc-ecm-webapp-config-api/production/banner/Banner%202H%20-%20913x280px%20(1)-1702891520379.png',
+      'https://data-service.pharmacity.io/pmc-ecm-webapp-config-api/production/banner/Banner%202H%20-%20913x280px%20(1)-1702891520379.png',
+      'https://data-service.pharmacity.io/pmc-ecm-webapp-config-api/production/banner/913x280%20(x1.5)%20(5)-1704957977893.png',
     ];
     var index = 0;
     setInterval(function () {
@@ -59,9 +59,9 @@ const Tablet = () => {
   };
 
   const arrayPromote = [
-    'https://server-shoptech.onrender.com/public/product-img/tablet-img/event-list-item3.png',
-    'https://server-shoptech.onrender.com/public/product-img/tablet-img/event-list-item4.png',
-    'https://server-shoptech.onrender.com/public/product-img/tablet-img/event-list-item5.png',
+    'https://data-service.pharmacity.io/pmc-ecm-webapp-config-api/production/banner/913x280%20(x1.5)%20copy%202-1703904593788.png',
+    'https://data-service.pharmacity.io/pmc-ecm-webapp-config-api/production/banner/913x280%20(x1.5)%20(5)-1704957977893.png',
+    'https://data-service.pharmacity.io/pmc-ecm-webapp-config-api/production/banner/Banner%202H%20-%20913x280px%20(1)-1702891520379.png',
   ];
   var indexPromote = 0;
   const handleNextPromote = () => {
@@ -107,8 +107,8 @@ const Tablet = () => {
   const handleFilterChange = (minPrice, maxPrice) => {
     const filteredProducts = products.filter(
       (product) =>
-        Number(product.price) >= minPrice &&
-        Number(product.price) <= maxPrice &&
+        Number(product.product_price) >= minPrice &&
+        Number(product.product_price) <= maxPrice &&
         product.enType === 'tablet',
     );
     setProducts(filteredProducts);
@@ -126,7 +126,7 @@ const Tablet = () => {
           <SideBanner />
           <div className="product-client__event">
             <img
-              src="https://server-shoptech.onrender.com/public/product-img/tablet-img/event-banner.png"
+              src="https://cdn.nhathuoclongchau.com.vn/unsafe/1440x0/filters:quality(90)/https://cms-prod.s3-sgn09.fptcloud.com/1196x352_aed681f792.jpg"
               alt=""
               className="product-client__event-primary"
             ></img>
@@ -134,11 +134,11 @@ const Tablet = () => {
             <div className="product-client__event-list">
               <div className="product-client__event-col-left">
                 <img
-                  src="https://server-shoptech.onrender.com/public/product-img/tablet-img/event-list-item.png"
+                  src="https://cdn.nhathuoclongchau.com.vn/unsafe/1440x0/filters:quality(90)/https://cms-prod.s3-sgn09.fptcloud.com/1920x565_071fe682e5.png"
                   className="product-client__event-col-left-item"
                 ></img>
                 <img
-                  src="https://server-shoptech.onrender.com/public/product-img/tablet-img/event-list-item2.png"
+                  src="https://cdn.nhathuoclongchau.com.vn/unsafe/828x0/filters:quality(90)/https://cms-prod.s3-sgn09.fptcloud.com/web_pc_1610x492_00b3003e3e.jpg"
                   className="product-client__event-col-left-item"
                 ></img>
               </div>
@@ -151,7 +151,7 @@ const Tablet = () => {
                   <i className="fa fa-arrow-left"></i>
                 </button>
                 <img
-                  src="https://server-shoptech.onrender.com/public/product-img/tablet-img/event-list-item3.png"
+                  src="https://cdn.nhathuoclongchau.com.vn/unsafe/1440x0/filters:quality(90)/https://cms-prod.s3-sgn09.fptcloud.com/1196x352_aed681f792.jpg"
                   className="product-client__event-col-right-item"
                 ></img>
                 <button
@@ -162,11 +162,11 @@ const Tablet = () => {
                 </button>
               </div>
             </div>
-            <img
+            {/* <img
               className="product-client__event-gif"
               src="https://server-shoptech.onrender.com/public/product-img/tablet-img/event-item-gif.gif"
               alt="ảnh gif"
-            ></img>
+            ></img> */}
           </div>
 
           <label className="product-client__title-brand">
@@ -224,16 +224,16 @@ const Tablet = () => {
                     e.preventDefault();
                     handleLoadingPage(1);
                     window.setTimeout(() => {
-                      window.location.href = `/product/${product.enType}/${product.name}`;
+                      window.location.href = `/product/${product.product_type}/${product.product_name}`;
                     }, 1000);
                   }}
                 >
                   <img
-                    src={product.imageLink}
+                    src={product.product_img}
                     className="product-client__item-img"
                   ></img>
                   <label className="product-client__item-label">
-                    {product.name}
+                    {product.product_name}
                   </label>
                   <img
                     className="product-client__item-hot-icon"
@@ -244,10 +244,10 @@ const Tablet = () => {
                     src="https://server-shoptech.onrender.com/public/product-img/tablet-img/icon-18-month.png"
                   ></img>
                   <label className="product-client__item-price">
-                    {Number(product.price).toLocaleString()} ₫
+                    {Number(product.product_price).toLocaleString()} ₫
                   </label>
                   <span className="product-client__item-percent">
-                    {(Number(product.price) * 1.065).toLocaleString()}đ
+                    {(Number(product.product_price) * 1.065).toLocaleString()}đ
                   </span>
                   <label className="product-client__item-vote">
                     <span className="product-client__item-star-icon">
@@ -256,7 +256,7 @@ const Tablet = () => {
                     ({product.voter || 0} đánh giá)
                   </label>
                   <div className="product-client__item-tag">
-                    Giảm {product.percent}%
+                    Giảm {product.product_quantity}%
                   </div>
                 </li>
               ))

@@ -6,7 +6,7 @@ const PageNotFound = () => {
       <div className="container">
         <div className="page-error__container">
           <img
-            src="https://server-shoptech.onrender.com/public/img-404-error.gif"
+            src="https://localhost:7096/public/img-404-error.gif"
             className="page-error__img"
           />
           <h1 className="page-error__title">

@@ -21,9 +21,10 @@ const InfoProductClient = () => {
 
   useEffect(() => {
     document.title = 'ShopTECH | ' + name;
+    console.log("name:: ", name);
     const fetchAPIs = () => {
       fetch(
-        'https://server-shoptech.onrender.com/api/products/get-by-name/' + name,
+        'https://localhost:7096/api/Products/' + name,
       )
         .then((res) => res.json())
         .then((data) => {
@@ -45,16 +46,24 @@ const InfoProductClient = () => {
           setLoading(false);
         });
 
-      fetch('https://server-shoptech.onrender.com/api/comments')
+      // fetch('https://server-shoptech.onrender.com/api/comments')
+      //   .then((res) => res.json())
+      //   .then((data) => {
+      //     setComments(data);
+      //     setLoading(false);
+      //   });
+
+        fetch('https://localhost:7096/api/Feedback')
         .then((res) => res.json())
         .then((data) => {
           setComments(data);
           setLoading(false);
         });
 
-      fetch('https://server-shoptech.onrender.com/api/products/')
+      fetch('https://localhost:7096/api/Products')
         .then((res) => res.json())
         .then((data) => {
+          console.log("data:: ", data);
           setProducts(data);
           setLoading(false);
         });
@@ -73,7 +82,7 @@ const InfoProductClient = () => {
         '.info-product__detail-promote-item-index',
       );
       products.map((product, i) => {
-        if (name === product.name) {
+        if (name === product.product_name) {
           if (
             String(promote.apply)
               .toLowerCase()
@@ -232,7 +241,7 @@ const InfoProductClient = () => {
   };
 
   const arrayImage = [];
-  arrayImage.push(product.imagePrimary, product.imageLink);
+  arrayImage.push(product.imagePrimary, product.product_img);
   imageList.map((imageItem, i) => {
     arrayImage.push(imageItem);
   });
@@ -291,7 +300,7 @@ const InfoProductClient = () => {
           'https://server-shoptech.onrender.com/api/users/add-product-to-cart-user/' +
             JSON.parse(window.localStorage.getItem('auth')).user._id,
           {
-            imageLink: product.imageLink,
+            imageLink: product.product_img,
             productName: name,
             option: optionEdit,
             color: colorEdit,
@@ -331,7 +340,7 @@ const InfoProductClient = () => {
           'https://server-shoptech.onrender.com/api/users/add-product-to-cart-user/' +
             JSON.parse(window.localStorage.getItem('auth')).user._id,
           {
-            imageLink: product.imageLink,
+            imageLink: product.product_img,
             productName: name,
             option: optionEdit,
             color: colorEdit,
@@ -404,7 +413,7 @@ const InfoProductClient = () => {
                 <ul className="info-product__image-list">
                   <li
                     style={{
-                      backgroundImage: `url(${product.imageLink})`,
+                      backgroundImage: `url(${product.product_img})`,
                       backgroundPosition: 'center center',
                       backgroundColor: 'transparent',
                       backgroundRepeat: 'no-repeat',
@@ -412,7 +421,7 @@ const InfoProductClient = () => {
                     }}
                     className="info-product__image-item info-product__image-item--active"
                     onClick={(e) => {
-                      changeImage(product.imageLink);
+                      changeImage(product.product_img);
                     }}
                   ></li>
 
@@ -489,11 +498,11 @@ const InfoProductClient = () => {
                 </label>
                 <div className="info-product__detail-price">
                   <label className="info-product__detail-current-price">
-                    {Number(product.price || 0).toLocaleString()} đ
+                    {Number(product.product_price || 0).toLocaleString()} đ
                   </label>
                   <label className="info-product__detail-old-price">
                     {(
-                      (Number(product.price || 0) * (100 + product.percent)) /
+                      (Number(product.product_price || 0) * (100 + product.percent)) /
                       100
                     ).toLocaleString()}{' '}
                     đ
@@ -550,7 +559,7 @@ const InfoProductClient = () => {
                           {c}
                         </div>
                         <div className="info-product__detail-option-item-price">
-                          {Number(product.price).toLocaleString()} đ
+                          {Number(product.product_price).toLocaleString()} đ
                         </div>
                       </div>
                     ))
@@ -627,21 +636,21 @@ const InfoProductClient = () => {
                       key={index}
                       onClick={(e) => {
                         e.preventDefault();
-                        window.location.href = `/product/${product.enType}/${product.name}`;
+                        window.location.href = `/product/${product.product_type}/${product.product_name}`;
                       }}
                     >
                       <img
-                        src={product.imageLink}
+                        src={product.product_img}
                         className="product__sell-item-img"
                       ></img>
                       <label className="product__sell-item-label">
-                        {product.name}
+                        {product.product_name}
                       </label>
                       <label className="product__sell-item-price">
-                        {Number(product.price).toLocaleString()} ₫
+                        {Number(product.product_price).toLocaleString()} ₫
                       </label>
                       <span className="product__sell-item-percent">
-                        {(Number(product.price) * 1.065).toLocaleString()}đ
+                        {(Number(product.product_price) * 1.065).toLocaleString()}đ
                       </span>
                       <label className="product__sell-item-sold">
                         Đánh giá:

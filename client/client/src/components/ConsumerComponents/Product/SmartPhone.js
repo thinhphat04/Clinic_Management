@@ -13,7 +13,7 @@ const SmartPhone = () => {
   useEffect(() => {
     document.title = 'ShopTECH | Điện thoại - Sale ngập tràn';
     const fetchAPIs = () => {
-      fetch('https://server-shoptech.onrender.com/api/products')
+      fetch('https://localhost:7096/api/products')
         .then((res) => res.json())
         .then((data) => {
           setProducts(data);
@@ -29,7 +29,7 @@ const SmartPhone = () => {
       const infoProductFeaturedSmartphone = document.querySelectorAll(
         '.product-client__item',
       )[index];
-      if (product.type === 'Điện thoại') {
+      if (product.product_type === 'Education') {
         infoProductFeaturedSmartphone.style.display = 'block';
       }
     });
@@ -41,10 +41,10 @@ const SmartPhone = () => {
 
   const handleChangeBanner = () => {
     const arrayBanner = [
-      'https://server-shoptech.onrender.com/public/product-img/smartphone-img/event-banner.png',
-      'https://server-shoptech.onrender.com/public/product-img/smartphone-img/event-banner2.png',
-      'https://server-shoptech.onrender.com/public/product-img/smartphone-img/event-banner3.png',
-      'https://server-shoptech.onrender.com/public/product-img/smartphone-img/event-banner4.png',
+      'https://data-service.pharmacity.io/pmc-upload-media/production/pmc-ecm-core/collection-images/1703735550_GIASOCCUOITUAN_1376X333_1.jpg',
+      'https://data-service.pharmacity.io/pmc-upload-media/production/pmc-ecm-core/collection-images/1703735550_GIASOCCUOITUAN_1376X333_1.jpg',
+      'https://data-service.pharmacity.io/pmc-upload-media/production/pmc-ecm-core/collection-images/1703735550_GIASOCCUOITUAN_1376X333_1.jpg',
+      'https://data-service.pharmacity.io/pmc-upload-media/production/pmc-ecm-core/collection-images/1703735550_GIASOCCUOITUAN_1376X333_1.jpg',
     ];
     var index = 0;
     setInterval(function () {
@@ -58,9 +58,9 @@ const SmartPhone = () => {
   };
 
   const arrayPromote = [
-    'https://server-shoptech.onrender.com/public/product-img/smartphone-img/event-list-item4.png',
-    'https://server-shoptech.onrender.com/public/product-img/smartphone-img/event-list-item3.png',
-    'https://server-shoptech.onrender.com/public/product-img/smartphone-img/event-list-item5.png',
+    'https://data-service.pharmacity.io/pmc-upload-media/production/pmc-ecm-core/collection-images/1703991118_1376x333_6.png',
+    'https://data-service.pharmacity.io/pmc-ecm-webapp-config-api/production/banner/TET_913x280%20(x1.5)%20opt2%20(2)-1704944470001.jpg',
+    'https://data-service.pharmacity.io/pmc-ecm-webapp-config-api/production/banner/392x134px-1691463642426.png',
   ];
   var indexPromote = 0;
   const handleNextPromote = () => {
@@ -106,8 +106,8 @@ const SmartPhone = () => {
   const handleFilterChange = (minPrice, maxPrice) => {
     const filteredProducts = products.filter(
       (product) =>
-        Number(product.price) >= minPrice &&
-        Number(product.price) <= maxPrice &&
+        Number(product.product_price) >= minPrice &&
+        Number(product.product_price) <= maxPrice &&
         product.enType === 'smartphone',
     );
     setProducts(filteredProducts);
@@ -131,7 +131,7 @@ const SmartPhone = () => {
           <SideBanner />
           <div className="product-client__event">
             <img
-              src="https://server-shoptech.onrender.com/public/product-img/smartphone-img/event-banner.png"
+              src="hhttps://data-service.pharmacity.io/pmc-upload-media/production/pmc-ecm-core/collection-images/1703991118_1376x333_6.png"
               alt=""
               className="product-client__event-primary"
             ></img>
@@ -139,11 +139,11 @@ const SmartPhone = () => {
             <div className="product-client__event-list">
               <div className="product-client__event-col-left">
                 <img
-                  src="https://server-shoptech.onrender.com/public/product-img/smartphone-img/event-list-item.png"
+                  src="https://data-service.pharmacity.io/pmc-upload-media/production/pmc-ecm-core/collection-images/1703735550_GIASOCCUOITUAN_1376X333_1.jpg"
                   className="product-client__event-col-left-item"
                 ></img>
                 <img
-                  src="https://server-shoptech.onrender.com/public/product-img/smartphone-img/event-list-item2.png"
+                  src="https://data-service.pharmacity.io/pmc-ecm-webapp-config-api/production/banner/tuivai_913x280x1.5-1703672872315.jpg"
                   className="product-client__event-col-left-item"
                 ></img>
               </div>
@@ -156,7 +156,7 @@ const SmartPhone = () => {
                   <i className="fa fa-arrow-left"></i>
                 </button>
                 <img
-                  src="https://server-shoptech.onrender.com/public/product-img/smartphone-img/event-list-item3.png"
+                  src="https://data-service.pharmacity.io/pmc-ecm-webapp-config-api/production/banner/TET_913x280%20(x1.5)%20opt2%20(2)-1704944470001.jpg"
                   className="product-client__event-col-right-item"
                 ></img>
                 <button
@@ -167,11 +167,11 @@ const SmartPhone = () => {
                 </button>
               </div>
             </div>
-            <img
+            {/* <img
               className="product-client__event-gif"
               src="https://server-shoptech.onrender.com/public/product-img/smartphone-img/event-item-gif.gif"
               alt="ảnh gif"
-            ></img>
+            ></img> */}
           </div>
 
           <label className="product-client__title-brand">
@@ -229,16 +229,16 @@ const SmartPhone = () => {
                   e.preventDefault();
                   handleLoadingPage(1);
                   window.setTimeout(() => {
-                    window.location.href = `/product/${product.enType}/${product.name}`;
+                    window.location.href = `/product/${product.product_type}/${product.product_name}`;
                   }, 1000);
                 }}
               >
                 <img
-                  src={product.imageLink}
+                  src={product.product_img}
                   className="product-client__item-img"
                 ></img>
                 <label className="product-client__item-label">
-                  {product.name}
+                  {product.product_name}
                 </label>
                 <img
                   className="product-client__item-hot-icon"
@@ -249,10 +249,10 @@ const SmartPhone = () => {
                   src="https://server-shoptech.onrender.com/public/product-img/smartphone-img/icon-18-month.png"
                 ></img>
                 <label className="product-client__item-price">
-                  {Number(product.price).toLocaleString()} ₫
+                  {Number(product.product_price).toLocaleString()} ₫
                 </label>
                 <span className="product-client__item-percent">
-                  {(Number(product.price) * 1.065).toLocaleString()}đ
+                  {(Number(product.product_price) * 1.065).toLocaleString()}đ
                 </span>
                 <label className="product-client__item-vote">
                   <span className="product-client__item-star-icon">
@@ -261,7 +261,7 @@ const SmartPhone = () => {
                   ({product.voter || 0} đánh giá)
                 </label>
                 <div className="product-client__item-tag">
-                  Giảm {product.percent}%
+                  Giảm {product.product_quantity}%
                 </div>
               </li>
             ))}

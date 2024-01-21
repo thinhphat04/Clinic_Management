@@ -29,7 +29,7 @@ const VoteProductInOrder = ({ socket }) => {
     document.title = 'ShopTECH | Đánh giá sản phẩm';
     const fetchAPIs = () => {
       fetch(
-        `https://server-shoptech.onrender.com/api/users/${
+        `https://localhost:7096/api/users/${
           JSON.parse(window.localStorage.getItem('auth')).user._id
         }`,
       )
@@ -38,14 +38,14 @@ const VoteProductInOrder = ({ socket }) => {
           setUser(data);
         });
 
-      fetch('https://server-shoptech.onrender.com/api/orders/' + orderID)
+      fetch('https://localhost:7096/api/orders/' + orderID)
         .then((res) => res.json())
         .then((data) => {
           setOrder(data);
           setListProduct(data.lists);
         });
 
-      fetch('https://server-shoptech.onrender.com/api/products')
+      fetch('https://localhost:7096/api/products')
         .then((res) => res.json())
         .then((data) => {
           setProducts(data);
@@ -125,7 +125,7 @@ const VoteProductInOrder = ({ socket }) => {
     try {
       axios
         .put(
-          `https://server-shoptech.onrender.com/api/products/update-vote/${productId}`,
+          `https://localhost:7096/api/products/update-vote/${productId}`,
           { star: (Number(starCurrent) * voter + numberStar) / (voter + 1) },
         )
         .then(() => {

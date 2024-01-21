@@ -23,28 +23,28 @@ const Dashboard = () => {
   useEffect(() => {
     document.title = 'ShopTECH | Thống kê';
     const fetchAPIs = () => {
-      fetch(`https://server-shoptech.onrender.com/api/products`)
+      fetch(`https://localhost:7096/api/products`)
         .then((res) => res.json())
         .then((data) => {
           setCountProduct(data.length);
           processDataProduct(data);
         });
-      fetch(`https://server-shoptech.onrender.com/api/admins`)
+      fetch(`https://localhost:7096/api/admins`)
         .then((res) => res.json())
         .then((data) => {
           setCountAdmin(data.length);
         });
-      fetch(`https://server-shoptech.onrender.com/api/users`)
+      fetch(`https://localhost:7096/api/users`)
         .then((res) => res.json())
         .then((data) => {
           setCountUser(data.length);
         });
-      fetch(`https://server-shoptech.onrender.com/api/promotes`)
+      fetch(`https://localhost:7096/api/promotes`)
         .then((res) => res.json())
         .then((data) => {
           setCountPromotes(data.length);
         });
-      fetch(`https://server-shoptech.onrender.com/api/orders`)
+      fetch(`https://localhost:7096/api/orders`)
         .then((res) => res.json())
         .then((data) => {
           processDataOrder(data);

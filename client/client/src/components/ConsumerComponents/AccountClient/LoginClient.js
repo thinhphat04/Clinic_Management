@@ -19,7 +19,7 @@ const LoginClient = () => {
   }, [auth]);
 
   useEffect(() => {
-    document.title = 'ShopTECH | Đăng nhập';
+    document.title = 'ShopTECH | Login';
   }, []);
 
   const showErrorToast = () => {

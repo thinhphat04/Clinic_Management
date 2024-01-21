@@ -54,7 +54,7 @@ const RegisterClient = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        `${process.env.REACT_APP_API}/api/users/register`,
+        `https://localhost:7096/api/Account/register`,
         {
           avatarUrl: ``,
           username: String(usernameRegister),

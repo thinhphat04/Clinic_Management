@@ -19,7 +19,7 @@ const CartInfo = () => {
     document.title = 'ShopTECH | Thông tin đặt hàng';
     const fetchAPIs = () => {
       fetch(
-        `https://server-shoptech.onrender.com/api/users/${
+        `https://localhost:7096/api/users/${
           JSON.parse(window.localStorage.getItem('auth')).user._id
         }`,
       )

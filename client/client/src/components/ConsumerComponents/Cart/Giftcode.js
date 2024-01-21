@@ -14,7 +14,7 @@ const Giftcode = () => {
     document.title = 'ShopTECH | Mã khuyến mãi';
     const fetchAPIs = () => {
       fetch(
-        `https://server-shoptech.onrender.com/api/users/${
+        `https://localhost:7096/api/users/${
           JSON.parse(window.localStorage.getItem('auth')).user._id
         }`,
       )
@@ -23,7 +23,7 @@ const Giftcode = () => {
           setCartUser(data.cart);
         });
 
-      fetch('https://server-shoptech.onrender.com/api/giftcodes')
+      fetch('https://localhost:7096/api/giftcodes')
         .then((res) => res.json())
         .then((data) => {
           setGiftcodes(data);

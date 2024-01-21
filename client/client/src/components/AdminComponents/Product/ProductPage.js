@@ -15,9 +15,10 @@ const ProductPage = () => {
   useEffect(() => {
     document.title = 'ShopTECH | Dữ liệu sản phẩm';
     const fetchAPI = () => {
-      fetch('https://server-shoptech.onrender.com/api/products')
+      fetch('https://localhost:7096/api/Products')
         .then((res) => res.json())
         .then((data) => {
+          console.log("data:: ", data);
           setProducts(data);
           setCountProduct(data.length);
           setLoading(false);
@@ -73,7 +74,7 @@ const ProductPage = () => {
                   </label>
                   <div className="product__item-avatar">
                     <img
-                      src={product.imageLink}
+                      src={product.product_img}
                       className="product__item-img"
                     ></img>
                   </div>
@@ -87,7 +88,7 @@ const ProductPage = () => {
                     }}
                     className="admin__item-admin-name"
                   >
-                    {product.name}
+                    {product.product_name}
                   </label>
 
                   <div className="admin__item-info">
@@ -117,7 +118,7 @@ const ProductPage = () => {
                         }}
                         className="admin__item-info-content"
                       >
-                        {Number(product.price).toLocaleString() || 'Trống!'} VNĐ{' '}
+                        {Number(product.product_price).toLocaleString() || 'Trống!'} VNĐ{' '}
                       </p>
                     </div>
                     <div className="admin__item-eidt">

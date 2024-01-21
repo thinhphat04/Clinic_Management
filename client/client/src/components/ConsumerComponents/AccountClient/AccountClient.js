@@ -20,7 +20,7 @@ const AccountClient = () => {
     if (window.localStorage.getItem('auth')) {
       const fetchAPIs = () => {
         fetch(
-          `https://server-shoptech.onrender.com/api/users/${
+          `https://localhost:7096/api/users/${
             JSON.parse(window.localStorage.getItem('auth')).user._id
           }`,
         )
@@ -29,7 +29,7 @@ const AccountClient = () => {
             setUser(data);
           });
 
-        fetch('https://server-shoptech.onrender.com/api/orders')
+        fetch('https://localhost:7096/api/orders')
           .then((res) => res.json())
           .then((data) => {
             setOrders(data);

@@ -13,7 +13,7 @@ const Accessories = () => {
   useEffect(() => {
     document.title = "ShopTECH | Phụ kiện đỉnh 'chóp'";
     const fetchAPIs = () => {
-      fetch('https://server-shoptech.onrender.com/api/products')
+      fetch('https://localhost:7096/api/products')
         .then((res) => res.json())
         .then((data) => {
           setProducts(data);
@@ -29,7 +29,7 @@ const Accessories = () => {
       const infoProductFeaturedAccessories = document.querySelectorAll(
         '.product-client__item',
       )[index];
-      if (product.enType === 'accessories') {
+      if (product.product_type === 'Medical' || product.product_type === 'Education' || product.product_type ==='Scientific') {
         infoProductFeaturedAccessories.style.display = 'block';
       }
     });
@@ -107,8 +107,8 @@ const Accessories = () => {
   const handleFilterChange = (minPrice, maxPrice) => {
     const filteredProducts = products.filter(
       (product) =>
-        Number(product.price) >= minPrice &&
-        Number(product.price) <= maxPrice &&
+        Number(product.product_price) >= minPrice &&
+        Number(product.product_price) <= maxPrice &&
         product.enType === 'accessories',
     );
     setProducts(filteredProducts);
@@ -164,7 +164,7 @@ const Accessories = () => {
             </div>
             <img
               className="product-client__event-gif"
-              src="https://server-shoptech.onrender.com/public/product-img/accessories-img/event-item-gif.gif"
+              src="https://localhost:7096/public/product-img/accessories-img/event-item-gif.gif"
               alt="ảnh gif"
             ></img>
           </div>
@@ -334,16 +334,16 @@ const Accessories = () => {
                     e.preventDefault();
                     handleLoadingPage(1);
                     window.setTimeout(() => {
-                      window.location.href = `/product/${product.enType}/${product.name}`;
+                      window.location.href = `/product/${product.product_type}/${product.product_name}`;
                     }, 1000);
                   }}
                 >
                   <img
-                    src={product.imageLink}
+                    src={product.product_img}
                     className="product-client__item-img"
                   ></img>
                   <label className="product-client__item-label">
-                    {product.name}
+                    {product.product_name}
                   </label>
                   <img
                     className="product-client__item-hot-icon"
@@ -354,10 +354,10 @@ const Accessories = () => {
                     src="https://server-shoptech.onrender.com/public/product-img/accessories-img/icon-18-month.png"
                   ></img>
                   <label className="product-client__item-price">
-                    {Number(product.price).toLocaleString()} ₫
+                    {Number(product.product_price).toLocaleString()} ₫
                   </label>
                   <span className="product-client__item-percent">
-                    {(Number(product.price) * 1.065).toLocaleString()}đ
+                    {(Number(product.product_price) * 1.065).toLocaleString()}đ
                   </span>
                   <label className="product-client__item-vote">
                     <span className="product-client__item-star-icon">

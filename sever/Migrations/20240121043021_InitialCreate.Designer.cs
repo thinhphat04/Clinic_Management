@@ -12,8 +12,8 @@ using PJ_SEM03.Models;
 namespace PJ_SEM03.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240120085657_update")]
-    partial class update
+    [Migration("20240121043021_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -183,29 +183,6 @@ namespace PJ_SEM03.Migrations
                     b.HasIndex("user_id");
 
                     b.ToTable("Carts");
-
-                    b.HasData(
-                        new
-                        {
-                            cart_id = 1,
-                            product_id = 1,
-                            product_quantity = 2,
-                            user_id = "2"
-                        },
-                        new
-                        {
-                            cart_id = 2,
-                            product_id = 2,
-                            product_quantity = 1,
-                            user_id = "3"
-                        },
-                        new
-                        {
-                            cart_id = 3,
-                            product_id = 3,
-                            product_quantity = 3,
-                            user_id = "4"
-                        });
                 });
 
             modelBuilder.Entity("PJ_SEM03.Models.Education", b =>
@@ -283,32 +260,6 @@ namespace PJ_SEM03.Migrations
                     b.HasIndex("user_id");
 
                     b.ToTable("Feedbacks");
-
-                    b.HasData(
-                        new
-                        {
-                            feedback_id = 1,
-                            feedback_description = "Good Service",
-                            feedback_rating = 5,
-                            product_id = 1,
-                            user_id = "2"
-                        },
-                        new
-                        {
-                            feedback_id = 2,
-                            feedback_description = "Great",
-                            feedback_rating = 5,
-                            product_id = 3,
-                            user_id = "3"
-                        },
-                        new
-                        {
-                            feedback_id = 3,
-                            feedback_description = "Good product!",
-                            feedback_rating = 5,
-                            product_id = 5,
-                            user_id = "4"
-                        });
                 });
 
             modelBuilder.Entity("PJ_SEM03.Models.Medical", b =>
@@ -379,30 +330,6 @@ namespace PJ_SEM03.Migrations
                     b.HasIndex("user_id");
 
                     b.ToTable("Orders");
-
-                    b.HasData(
-                        new
-                        {
-                            order_id = 1,
-                            order_address = "123 Street, City, Country",
-                            order_code = "ORD123",
-                            order_datetime = new DateTime(2024, 1, 20, 15, 56, 57, 134, DateTimeKind.Local).AddTicks(2601),
-                            order_phone = "1234567890",
-                            order_status = "Processing",
-                            order_total = 100,
-                            user_id = "2"
-                        },
-                        new
-                        {
-                            order_id = 2,
-                            order_address = "456 Avenue, City, Country",
-                            order_code = "ORD456",
-                            order_datetime = new DateTime(2024, 1, 20, 15, 56, 57, 134, DateTimeKind.Local).AddTicks(2647),
-                            order_phone = "0987654321",
-                            order_status = "Delivered",
-                            order_total = 200,
-                            user_id = "3"
-                        });
                 });
 
             modelBuilder.Entity("PJ_SEM03.Models.OrderDetail", b =>

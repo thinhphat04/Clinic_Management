@@ -24,7 +24,7 @@ const AdminSidebar = () => {
 
   useEffect(() => {
     const fetchAPIs = () => {
-      fetch('https://server-shoptech.onrender.com/api/admins')
+      fetch('https://localhost:7096/api/admins')
         .then((res) => res.json())
         .then((data) => {
           setAdmins(data);

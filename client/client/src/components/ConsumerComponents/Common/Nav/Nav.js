@@ -13,7 +13,7 @@ const Nav = () => {
     const fetchAPI = () => {
       if (localStorage.auth)
         fetch(
-          'https://server-shoptech.onrender.com/api/users/' +
+          'https://localhost:7096/api/users/' +
             JSON.parse(window.localStorage.getItem('auth')).user._id,
         )
           .then((res) => res.json())

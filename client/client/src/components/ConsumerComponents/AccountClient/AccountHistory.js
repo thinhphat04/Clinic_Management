@@ -16,7 +16,7 @@ const AccountHistory = () => {
   useEffect(() => {
     document.title = 'ShopTECH | Lịch sử mua hàng';
     const fetchAPIs = () => {
-      fetch('https://server-shoptech.onrender.com/api/orders')
+      fetch('https://localhost:7096/api/orders')
         .then((res) => res.json())
         .then((data) => {
           setOrders(data);

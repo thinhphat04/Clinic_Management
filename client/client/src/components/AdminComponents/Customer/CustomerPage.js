@@ -13,7 +13,7 @@ const CustomerPage = () => {
   useEffect(() => {
     document.title = 'ShopTECH | Khách hàng';
     const fetchAPI = () => {
-      fetch('https://server-shoptech.onrender.com/api/users')
+      fetch('https://localhost:7096/api/users')
         .then((res) => res.json())
         .then((data) => {
           setUsers(data);

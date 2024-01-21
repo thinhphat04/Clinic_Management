@@ -38,8 +38,8 @@ namespace PJ_SEM03.Migrations
                 columns: new[] { "order_id", "order_address", "order_code", "order_datetime", "order_phone", "order_status", "order_total", "user_id" },
                 values: new object[,]
                 {
-                    { 1, "123 Street, City, Country", "ORD123", new DateTime(2024, 1, 20, 15, 56, 57, 134, DateTimeKind.Local).AddTicks(2601), "1234567890", "Processing", 100, "2" },
-                    { 2, "456 Avenue, City, Country", "ORD456", new DateTime(2024, 1, 20, 15, 56, 57, 134, DateTimeKind.Local).AddTicks(2647), "0987654321", "Delivered", 200, "3" }
+                    { 1, "123 Street, City, Country", "ORD123", new DateTime(2024, 1, 21, 11, 34, 14, 820, DateTimeKind.Local).AddTicks(524), "1234567890", "Processing", 100, "2" },
+                    { 2, "456 Avenue, City, Country", "ORD456", new DateTime(2024, 1, 21, 11, 34, 14, 820, DateTimeKind.Local).AddTicks(537), "0987654321", "Delivered", 200, "3" }
                 });
         }
 

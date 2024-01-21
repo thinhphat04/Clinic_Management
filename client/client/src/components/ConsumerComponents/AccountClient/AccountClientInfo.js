@@ -12,7 +12,7 @@ const AccountClientInfo = () => {
     document.title = 'ShopTECH | Thông tin cá nhân';
     const fetchAPIs = () => {
       fetch(
-        `https://server-shoptech.onrender.com/api/users/${
+        `https://localhost:7096/api/users/${
           JSON.parse(window.localStorage.getItem('auth')).user._id
         }`,
       )
@@ -59,7 +59,7 @@ const AccountClientInfo = () => {
 
           axios
             .post(
-              'https://server-shoptech.onrender.com/api/users/upload-image',
+              'https://localhost:7096/api/users/upload-image',
               formData,
             )
             .then((response) => {
@@ -140,7 +140,7 @@ const AccountClientInfo = () => {
                     className="account__box-info-avatar"
                     src={
                       user.avatarUrl ||
-                      'https://server-shoptech.onrender.com/public/img-avatar-empty.png'
+                      'https://localhost:7096/public/img-avatar-empty.png'
                     }
                   ></img>
                   <input

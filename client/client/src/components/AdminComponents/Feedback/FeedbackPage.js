@@ -8,7 +8,7 @@ const FeedbackPage = () => {
 
   const fetchAPIs = () => {
     document.title = 'ShopTECH | Phản hồi khách hàng';
-    fetch('https://server-shoptech.onrender.com/api/feedbacks')
+    fetch('https://localhost:7096/api/feedbacks')
       .then((res) => res.json())
       .then((data) => {
         setFeedbacks(data);
@@ -22,7 +22,7 @@ const FeedbackPage = () => {
 
   const handleFillterByType = (type) => {
     var feedbackByType = [];
-    fetch('https://server-shoptech.onrender.com/api/feedbacks')
+    fetch('https://localhost:7096/api/feedbacks')
       .then((res) => res.json())
       .then((data) => {
         data.map((feedback) => {

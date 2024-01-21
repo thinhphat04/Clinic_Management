@@ -18,7 +18,7 @@ const Cart = () => {
     const fetchAPIs = () => {
       if (window.localStorage.auth)
         fetch(
-          `https://server-shoptech.onrender.com/api/users/${
+          `https://localhost:7096/api/users/${
             JSON.parse(window.localStorage.getItem('auth')).user._id
           }`,
         )
@@ -65,7 +65,7 @@ const Cart = () => {
   const handleClickAddQuantity = (productName) => {
     axios
       .put(
-        'https://server-shoptech.onrender.com/api/users/increase-quantity-product-in-cart/' +
+        'https://localhost:7096/api/users/increase-quantity-product-in-cart/' +
           JSON.parse(window.localStorage.getItem('auth')).user._id,
         { productName },
       )
@@ -85,7 +85,7 @@ const Cart = () => {
       if (p.productName === productName && Number(p.quantity) > 1) {
         axios
           .put(
-            'https://server-shoptech.onrender.com/api/users/decrease-quantity-product-in-cart/' +
+            'https://localhost:7096/api/users/decrease-quantity-product-in-cart/' +
               JSON.parse(window.localStorage.getItem('auth')).user._id,
             { productName },
           )
@@ -108,7 +108,7 @@ const Cart = () => {
   const handleClickRemoveProduct = (productName) => {
     axios
       .put(
-        'https://server-shoptech.onrender.com/api/users/remove-product-in-cart/' +
+        'https://localhost:7096/api/users/remove-product-in-cart/' +
           JSON.parse(window.localStorage.getItem('auth')).user._id,
         { productName },
       )
@@ -129,7 +129,7 @@ const Cart = () => {
     ) {
       axios
         .put(
-          'https://server-shoptech.onrender.com/api/users/remove-all-in-cart/' +
+          'https://localhost:7096/api/users/remove-all-in-cart/' +
             JSON.parse(window.localStorage.getItem('auth')).user._id,
         )
         .then(() => {
@@ -192,7 +192,7 @@ const Cart = () => {
                       className="cart__item-img"
                       src={
                         p.imageLink ||
-                        'https://server-shoptech.onrender.com/public/products/img-product-empty.png'
+                        'https://localhost:7096/public/products/img-product-empty.png'
                       }
                     ></img>
                     <div className="cart__item-info">
