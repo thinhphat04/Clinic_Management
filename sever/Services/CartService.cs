@@ -46,12 +46,12 @@ namespace PJ_SEM03.Services
             return false;
         }
 
-        public async Task<IEnumerable<Cart>> GetCartByUserId(int userId)
+        public async Task<IEnumerable<Cart>> GetCartByUserId(string userId)
         {
             return await db.Carts.Include(c => c.Product).Where(c => c.user_id == userId).ToListAsync();
         }
 
-        public async Task<bool> DeleteCart(int userId, int productId)
+        public async Task<bool> DeleteCart(string userId, int productId)
         {
             var cartItem = await db.Carts.FirstOrDefaultAsync(c => c.product_id == productId && c.user_id == userId);
             if (cartItem != null)
@@ -61,5 +61,6 @@ namespace PJ_SEM03.Services
             }
             return false;
         }
+
     }
 }

@@ -27,21 +27,12 @@ namespace PJ_SEM03.Services
         {
             return await _dbContext.Users.SingleOrDefaultAsync(u => u.Id == user_id);
         }
-    }
-    public async Task<bool> UpdateUser(User user)
-    {
-        var userToUpdate = await db.Users.FindAsync(user.user_id);
-        if (userToUpdate == null)
+
+        public Task<bool> UpdateUser(User user)
         {
-            return false;
+            throw new NotImplementedException();
         }
-        userToUpdate.user_name = user.user_name;
-        userToUpdate.user_email = user.user_email;
-        userToUpdate.user_phone = user.user_phone;
-        userToUpdate.user_address = user.user_address;
-        userToUpdate.user_password = user.user_password;
-        await db.SaveChangesAsync();
-        return true;
     }
+
 }
-}
+

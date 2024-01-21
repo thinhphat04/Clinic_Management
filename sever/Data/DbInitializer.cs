@@ -7,48 +7,46 @@ namespace PJ_SEM03.Data
     {
         public static async Task Initialize(DatabaseContext context, UserManager<User> userManager)
         {
-
             if (!userManager.Users.Any())
             {
-                var user = new User
-                {
-                    UserName = "member",
-                    Email = "member@test.com"
+                var users = new List<User>()
+                    {
+                     new User
+                    {
+                        Id = "1",
+                        UserName = "admin",
+                        Email = "admin@test.com",
+                        Role = "Admin"
+                    },
+                    new User
+                    {
+                        Id ="2",
+                        UserName = "phuc",
+                        Email = "phuc@test.com",
+                        Role = "Member"
+                    },
+                    new User
+                    {
+                        Id ="3",
+                        UserName = "loc",
+                        Email = "loc@test.com",
+                        Role = "Member"
+                    },
+                    new User
+                    {
+                        Id ="4",
+                        UserName = "tho",
+                        Email = "tho@test.com",
+                        Role = "Member"
+                    },
+                   
                 };
-                user.Id = "123";
-                await userManager.CreateAsync(user, "Tram.178");
-                await userManager.AddToRoleAsync(user, "Member");
-
-                var user1 = new User
+                foreach (var user in users)
                 {
-                    UserName = "member1",
-                    Email = "member@test.com"
-                };
-                user1.Id = "1234";
-                await userManager.CreateAsync(user1, "Tram.178");
-                await userManager.AddToRoleAsync(user1, "Member");
-
-                var user2 = new User
-                {
-                    UserName = "member2",
-                    Email = "member@test.com"
-                };
-                user.Id = "12345";
-                await userManager.CreateAsync(user2, "Tram.178");
-                await userManager.AddToRoleAsync(user2, "Member");
-
-
-                var admin = new User
-                {
-                    UserName = "admin",
-                    Email = "admin@test.com"
-                };
-
-                await userManager.CreateAsync(admin, "Tram.178");
-                await userManager.AddToRolesAsync(admin, new[] { "Member", "Admin" });
+                    var result = await userManager.CreateAsync(user, "Pa$$w0rd");
+                }
+                context.SaveChanges();
             }
-
-            context.SaveChanges();
         }
     }
 }

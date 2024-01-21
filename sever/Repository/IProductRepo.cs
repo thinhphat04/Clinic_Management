@@ -7,8 +7,6 @@ namespace PJ_SEM03.Repository
 {
     public interface IProductRepo
     {
-       Task<ActionResult<IEnumerable<Product>>> getAll();
-       Task<ActionResult<IEnumerable<Product>>> getProductByType(string product_type);
        Task<ActionResult<Product>> createProduct(Product product);
        Task<ActionResult<Product>> updateProduct(int id, Product product);
        Task<ActionResult<Product>> deleteProduct(int id);

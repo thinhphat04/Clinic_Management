@@ -6,6 +6,6 @@ public interface ICartRepo
 {
     Task<bool> AddCart(Cart cart);
     Task<bool> UpdateCartQuantity(Cart cart);
-    Task<IEnumerable<Cart>> GetCartByUserId(int userId);
-    Task<bool> DeleteCart(int userId, int productId);
+    Task<IEnumerable<Cart>> GetCartByUserId(string userId);
+    Task<bool> DeleteCart(string userId, int productId);
 }

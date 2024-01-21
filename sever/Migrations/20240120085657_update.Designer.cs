@@ -12,13 +12,8 @@ using PJ_SEM03.Models;
 namespace PJ_SEM03.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-<<<<<<<< HEAD:Migrations/20240116171715_initial.Designer.cs
-    [Migration("20240116171715_initial")]
-    partial class initial
-========
-    [Migration("20240119154949_Init")]
-    partial class Init
->>>>>>>> tram:Migrations/20240119154949_Init.Designer.cs
+    [Migration("20240120085657_update")]
+    partial class update
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30,32 +25,6 @@ namespace PJ_SEM03.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-<<<<<<<< HEAD:Migrations/20240116171715_initial.Designer.cs
-            modelBuilder.Entity("PJ_SEM03.Models.Cart", b =>
-                {
-                    b.Property<int>("cart_id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("cart_id"));
-
-                    b.Property<int>("product_id")
-                        .HasColumnType("int");
-
-                    b.Property<int>("product_quantity")
-                        .HasColumnType("int");
-
-                    b.Property<int>("user_id")
-                        .HasColumnType("int");
-
-                    b.HasKey("cart_id");
-
-                    b.HasIndex("product_id");
-
-                    b.HasIndex("user_id");
-
-                    b.ToTable("Carts");
-========
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -81,20 +50,6 @@ namespace PJ_SEM03.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "8c54886f-38fa-40b9-898f-820e11f1dd2d",
-                            Name = "User",
-                            NormalizedName = "USER"
-                        },
-                        new
-                        {
-                            Id = "c8cfc926-83c4-40ec-ac53-3059085974b3",
-                            Name = "Admin",
-                            NormalizedName = "ADMIN"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -201,7 +156,56 @@ namespace PJ_SEM03.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
->>>>>>>> tram:Migrations/20240119154949_Init.Designer.cs
+                });
+
+            modelBuilder.Entity("PJ_SEM03.Models.Cart", b =>
+                {
+                    b.Property<int>("cart_id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("cart_id"));
+
+                    b.Property<int>("product_id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("product_quantity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("user_id")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("cart_id");
+
+                    b.HasIndex("product_id");
+
+                    b.HasIndex("user_id");
+
+                    b.ToTable("Carts");
+
+                    b.HasData(
+                        new
+                        {
+                            cart_id = 1,
+                            product_id = 1,
+                            product_quantity = 2,
+                            user_id = "2"
+                        },
+                        new
+                        {
+                            cart_id = 2,
+                            product_id = 2,
+                            product_quantity = 1,
+                            user_id = "3"
+                        },
+                        new
+                        {
+                            cart_id = 3,
+                            product_id = 3,
+                            product_quantity = 3,
+                            user_id = "4"
+                        });
                 });
 
             modelBuilder.Entity("PJ_SEM03.Models.Education", b =>
@@ -269,13 +273,8 @@ namespace PJ_SEM03.Migrations
                     b.Property<int>("product_id")
                         .HasColumnType("int");
 
-<<<<<<<< HEAD:Migrations/20240116171715_initial.Designer.cs
-                    b.Property<int>("user_id")
-                        .HasColumnType("int");
-========
                     b.Property<string>("user_id")
                         .HasColumnType("nvarchar(450)");
->>>>>>>> tram:Migrations/20240119154949_Init.Designer.cs
 
                     b.HasKey("feedback_id");
 
@@ -284,8 +283,6 @@ namespace PJ_SEM03.Migrations
                     b.HasIndex("user_id");
 
                     b.ToTable("Feedbacks");
-<<<<<<<< HEAD:Migrations/20240116171715_initial.Designer.cs
-========
 
                     b.HasData(
                         new
@@ -293,23 +290,25 @@ namespace PJ_SEM03.Migrations
                             feedback_id = 1,
                             feedback_description = "Good Service",
                             feedback_rating = 5,
-                            product_id = 1
+                            product_id = 1,
+                            user_id = "2"
                         },
                         new
                         {
                             feedback_id = 2,
                             feedback_description = "Great",
                             feedback_rating = 5,
-                            product_id = 3
+                            product_id = 3,
+                            user_id = "3"
                         },
                         new
                         {
                             feedback_id = 3,
                             feedback_description = "Good product!",
                             feedback_rating = 5,
-                            product_id = 5
+                            product_id = 5,
+                            user_id = "4"
                         });
->>>>>>>> tram:Migrations/20240119154949_Init.Designer.cs
                 });
 
             modelBuilder.Entity("PJ_SEM03.Models.Medical", b =>
@@ -380,7 +379,6 @@ namespace PJ_SEM03.Migrations
                     b.HasIndex("user_id");
 
                     b.ToTable("Orders");
-<<<<<<<< HEAD:Migrations/20240116171715_initial.Designer.cs
 
                     b.HasData(
                         new
@@ -388,25 +386,23 @@ namespace PJ_SEM03.Migrations
                             order_id = 1,
                             order_address = "123 Street, City, Country",
                             order_code = "ORD123",
-                            order_datetime = new DateTime(2024, 1, 17, 0, 17, 15, 54, DateTimeKind.Local).AddTicks(5860),
+                            order_datetime = new DateTime(2024, 1, 20, 15, 56, 57, 134, DateTimeKind.Local).AddTicks(2601),
                             order_phone = "1234567890",
                             order_status = "Processing",
                             order_total = 100,
-                            user_id = 1
+                            user_id = "2"
                         },
                         new
                         {
                             order_id = 2,
                             order_address = "456 Avenue, City, Country",
                             order_code = "ORD456",
-                            order_datetime = new DateTime(2024, 1, 17, 0, 17, 15, 54, DateTimeKind.Local).AddTicks(5910),
+                            order_datetime = new DateTime(2024, 1, 20, 15, 56, 57, 134, DateTimeKind.Local).AddTicks(2647),
                             order_phone = "0987654321",
                             order_status = "Delivered",
                             order_total = 200,
-                            user_id = 2
+                            user_id = "3"
                         });
-========
->>>>>>>> tram:Migrations/20240119154949_Init.Designer.cs
                 });
 
             modelBuilder.Entity("PJ_SEM03.Models.OrderDetail", b =>
@@ -535,42 +531,6 @@ namespace PJ_SEM03.Migrations
                         });
                 });
 
-            modelBuilder.Entity("PJ_SEM03.Models.Role", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NormalizedName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Role");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Member",
-                            NormalizedName = "MEMBER"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Admin",
-                            NormalizedName = "ADMIN"
-                        });
-                });
-
             modelBuilder.Entity("PJ_SEM03.Models.Scientific", b =>
                 {
                     b.Property<int>("sci_id")
@@ -604,23 +564,8 @@ namespace PJ_SEM03.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-<<<<<<<< HEAD:Migrations/20240116171715_initial.Designer.cs
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("user_id"));
-
-                    b.Property<string>("user_address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("user_email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("user_name")
-                        .IsRequired()
-========
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
->>>>>>>> tram:Migrations/20240119154949_Init.Designer.cs
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
@@ -647,47 +592,19 @@ namespace PJ_SEM03.Migrations
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
 
-<<<<<<<< HEAD:Migrations/20240116171715_initial.Designer.cs
-                    b.Property<string>("user_phone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("user_role")
-                        .IsRequired()
-========
                     b.Property<string>("PhoneNumber")
->>>>>>>> tram:Migrations/20240119154949_Init.Designer.cs
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
-<<<<<<<< HEAD:Migrations/20240116171715_initial.Designer.cs
-                    b.HasData(
-                        new
-                        {
-                            user_id = 1,
-                            user_address = "HCM",
-                            user_email = "admin@gmail.com",
-                            user_name = "admin",
-                            user_password = "123",
-                            user_phone = "123456789",
-                            user_role = "Admin"
-                        },
-                        new
-                        {
-                            user_id = 2,
-                            user_address = "HCM",
-                            user_email = "user123@gmail.com",
-                            user_name = "user",
-                            user_password = "123",
-                            user_phone = "123456789",
-                            user_role = "User"
-                        });
-========
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
@@ -762,24 +679,6 @@ namespace PJ_SEM03.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("PJ_SEM03.Models.Feedback", b =>
-                {
-                    b.HasOne("PJ_SEM03.Models.Product", "Product")
-                        .WithMany("Feedbacks")
-                        .HasForeignKey("product_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PJ_SEM03.Models.User", "User")
-                        .WithMany("Feedbacks")
-                        .HasForeignKey("user_id");
-
-                    b.Navigation("Product");
-
-                    b.Navigation("User");
->>>>>>>> tram:Migrations/20240119154949_Init.Designer.cs
-                });
-
             modelBuilder.Entity("PJ_SEM03.Models.Cart", b =>
                 {
                     b.HasOne("PJ_SEM03.Models.Product", "Product")
@@ -809,9 +708,7 @@ namespace PJ_SEM03.Migrations
 
                     b.HasOne("PJ_SEM03.Models.User", "User")
                         .WithMany("Feedbacks")
-                        .HasForeignKey("user_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("user_id");
 
                     b.Navigation("Product");
 
@@ -862,11 +759,8 @@ namespace PJ_SEM03.Migrations
 
             modelBuilder.Entity("PJ_SEM03.Models.User", b =>
                 {
-<<<<<<<< HEAD:Migrations/20240116171715_initial.Designer.cs
                     b.Navigation("Carts");
 
-========
->>>>>>>> tram:Migrations/20240119154949_Init.Designer.cs
                     b.Navigation("Feedbacks");
 
                     b.Navigation("Orders");

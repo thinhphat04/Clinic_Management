@@ -8,7 +8,6 @@ public class Feedback
     [Key]
     public int feedback_id { get; set; }
 
-
     public string? user_id { get; set; }
 
     [ForeignKey("user_id")]
