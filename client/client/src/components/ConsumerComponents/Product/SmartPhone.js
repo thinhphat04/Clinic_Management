@@ -11,7 +11,7 @@ const SmartPhone = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    document.title = 'ShopTECH | Điện thoại - Sale ngập tràn';
+    document.title = 'Clinic Online | Điện thoại - Sale ngập tràn';
     const fetchAPIs = () => {
       fetch('https://localhost:7096/api/products')
         .then((res) => res.json())
@@ -169,7 +169,7 @@ const SmartPhone = () => {
             </div>
             {/* <img
               className="product-client__event-gif"
-              src="https://server-shoptech.onrender.com/public/product-img/smartphone-img/event-item-gif.gif"
+              src="https://server-Clinic Online.onrender.com/public/product-img/smartphone-img/event-item-gif.gif"
               alt="ảnh gif"
             ></img> */}
           </div>
@@ -181,35 +181,35 @@ const SmartPhone = () => {
             <div className="product-client__brand">
               <img
                 className="product-client__brand-item"
-                src="https://server-shoptech.onrender.com/public/product-img/smartphone-img/logo-iphone.png"
+                src="https://server-Clinic Online.onrender.com/public/product-img/smartphone-img/logo-iphone.png"
               ></img>
               <img
                 className="product-client__brand-item"
-                src="https://server-shoptech.onrender.com/public/product-img/smartphone-img/logo-samsung.png"
+                src="https://server-Clinic Online.onrender.com/public/product-img/smartphone-img/logo-samsung.png"
               ></img>
               <img
                 className="product-client__brand-item"
-                src="https://server-shoptech.onrender.com/public/product-img/smartphone-img/logo-xiaomi.png"
+                src="https://server-Clinic Online.onrender.com/public/product-img/smartphone-img/logo-xiaomi.png"
               ></img>
               <img
                 className="product-client__brand-item"
-                src="https://server-shoptech.onrender.com/public/product-img/smartphone-img/logo-oppo.png"
+                src="https://server-Clinic Online.onrender.com/public/product-img/smartphone-img/logo-oppo.png"
               ></img>
               <img
                 className="product-client__brand-item"
-                src="https://server-shoptech.onrender.com/public/product-img/smartphone-img/logo-realme.png"
+                src="https://server-Clinic Online.onrender.com/public/product-img/smartphone-img/logo-realme.png"
               ></img>
               <img
                 className="product-client__brand-item"
-                src="https://server-shoptech.onrender.com/public/product-img/smartphone-img/logo-nokia.png"
+                src="https://server-Clinic Online.onrender.com/public/product-img/smartphone-img/logo-nokia.png"
               ></img>
               <img
                 className="product-client__brand-item"
-                src="https://server-shoptech.onrender.com/public/product-img/smartphone-img/logo-masstel.png"
+                src="https://server-Clinic Online.onrender.com/public/product-img/smartphone-img/logo-masstel.png"
               ></img>
               <img
                 className="product-client__brand-item"
-                src="https://server-shoptech.onrender.com/public/product-img/smartphone-img/logo-vivo.png"
+                src="https://server-Clinic Online.onrender.com/public/product-img/smartphone-img/logo-vivo.png"
               ></img>
             </div>
           </div>
@@ -242,11 +242,11 @@ const SmartPhone = () => {
                 </label>
                 <img
                   className="product-client__item-hot-icon"
-                  src="https://server-shoptech.onrender.com/public/product-img/smartphone-img/icon-hot.gif"
+                  src="https://server-Clinic Online.onrender.com/public/product-img/smartphone-img/icon-hot.gif"
                 ></img>
                 <img
                   className="product-client__item-icon"
-                  src="https://server-shoptech.onrender.com/public/product-img/smartphone-img/icon-18-month.png"
+                  src="https://server-Clinic Online.onrender.com/public/product-img/smartphone-img/icon-18-month.png"
                 ></img>
                 <label className="product-client__item-price">
                   {Number(product.product_price).toLocaleString()} ₫

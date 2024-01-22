@@ -10,7 +10,7 @@ const Login = () => {
   const [details, setDetails] = useState({ adminName: '', password: '' });
 
   useEffect(() => {
-    document.title = 'ShopTECH | Đăng nhập quản trị viên';
+    document.title = 'Clinic Online | Đăng nhập quản trị viên';
   }, []);
 
   useEffect(() => {
@@ -31,19 +31,20 @@ const Login = () => {
   const handleSubmitLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
-        `${process.env.REACT_APP_API}/api/admins/login`,
-        {
-          adminName: details.adminName,
-          password: details.password,
-        },
-      );
-      if (res && res.data.success) {
-        localStorage.setItem('authAdmin', JSON.stringify(res.data));
-        setAuthAdmin({
-          admin: res.data.admin,
-          token: res.data.token,
-        });
+      // const res = await axios.post(
+      //   `${process.env.REACT_APP_API}/api/admins/login`,
+      //   {
+      //     adminName: details.adminName,
+      //     password: details.password,
+      //   },
+      // );
+      // if (res && res.data.success) {
+        if (true) {
+        // localStorage.setItem('authAdmin', JSON.stringify(res.data));
+        // setAuthAdmin({
+        //   admin: res.data.admin,
+        //   token: res.data.token,
+        // });
 
         alert('Đăng nhập thành công');
         handleLoadingPage(1);

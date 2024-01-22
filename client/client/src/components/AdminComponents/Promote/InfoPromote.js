@@ -14,7 +14,7 @@ const InfoPromote = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    document.title = 'ShopTECH | Thông tin khuyến mãi';
+    document.title = 'Clinic Online | Thông tin khuyến mãi';
     const fetchAPI = () => {
       fetch('https://localhost:7096/api/promotes/' + id)
         .then((res) => res.json())

@@ -13,13 +13,13 @@ const ContactPage = () => {
   const form = useRef();
 
   useEffect(() => {
-    document.title = 'ShopTECH | Liên hệ';
+    document.title = 'Clinic Online | Liên hệ';
   }, []);
 
   const showSuccessMessage = () => {
     Toast({
       title: 'Gửi góp ý thành công',
-      message: 'Cám ơn bạn với góp ý dành cho ShopTECH!',
+      message: 'Cám ơn bạn với góp ý dành cho Clinic Online!',
       type: 'success',
       duration: 5000,
     });

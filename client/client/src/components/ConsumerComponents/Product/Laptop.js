@@ -11,7 +11,7 @@ const Laptop = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    document.title = 'ShopTECH | Laptop thời thượng';
+    document.title = 'Clinic Online | Laptop thời thượng';
     const fetchAPIs = () => {
       fetch('https://localhost:7096/api/products')
         .then((res) => res.json())
@@ -176,7 +176,7 @@ console.log("productsAAAA:: ", products);
             </div>
             {/* <img
               className="product-client__event-gif"
-              src="https://server-shoptech.onrender.com/public/product-img/laptop-img/event-item-gif.gif"
+              src="https://server-Clinic Online.onrender.com/public/product-img/laptop-img/event-item-gif.gif"
               alt="ảnh gif"
             ></img> */}
           </div>
@@ -188,43 +188,43 @@ console.log("productsAAAA:: ", products);
             <div className="product-client__brand">
               <img
                 className="product-client__brand-item"
-                src="https://server-shoptech.onrender.com/public/product-img/laptop-img/logo-macbook.png"
+                src="https://server-Clinic Online.onrender.com/public/product-img/laptop-img/logo-macbook.png"
               ></img>
               <img
                 className="product-client__brand-item"
-                src="https://server-shoptech.onrender.com/public/product-img/laptop-img/logo-dell.png"
+                src="https://server-Clinic Online.onrender.com/public/product-img/laptop-img/logo-dell.png"
               ></img>
               <img
                 className="product-client__brand-item"
-                src="https://server-shoptech.onrender.com/public/product-img/laptop-img/logo-asus.png"
+                src="https://server-Clinic Online.onrender.com/public/product-img/laptop-img/logo-asus.png"
               ></img>
               <img
                 className="product-client__brand-item"
-                src="https://server-shoptech.onrender.com/public/product-img/laptop-img/logo-acer.png"
+                src="https://server-Clinic Online.onrender.com/public/product-img/laptop-img/logo-acer.png"
               ></img>
               <img
                 className="product-client__brand-item"
-                src="https://server-shoptech.onrender.com/public/product-img/laptop-img/logo-lenovo.png"
+                src="https://server-Clinic Online.onrender.com/public/product-img/laptop-img/logo-lenovo.png"
               ></img>
               <img
                 className="product-client__brand-item"
-                src="https://server-shoptech.onrender.com/public/product-img/laptop-img/logo-gigabyte.png"
+                src="https://server-Clinic Online.onrender.com/public/product-img/laptop-img/logo-gigabyte.png"
               ></img>
               <img
                 className="product-client__brand-item"
-                src="https://server-shoptech.onrender.com/public/product-img/laptop-img/logo-msi.png"
+                src="https://server-Clinic Online.onrender.com/public/product-img/laptop-img/logo-msi.png"
               ></img>
               <img
                 className="product-client__brand-item"
-                src="https://server-shoptech.onrender.com/public/product-img/laptop-img/logo-hp.png"
+                src="https://server-Clinic Online.onrender.com/public/product-img/laptop-img/logo-hp.png"
               ></img>
               <img
                 className="product-client__brand-item"
-                src="https://server-shoptech.onrender.com/public/product-img/laptop-img/logo-microsoft.png"
+                src="https://server-Clinic Online.onrender.com/public/product-img/laptop-img/logo-microsoft.png"
               ></img>
               <img
                 className="product-client__brand-item"
-                src="https://server-shoptech.onrender.com/public/product-img/laptop-img/logo-masstel.png"
+                src="https://server-Clinic Online.onrender.com/public/product-img/laptop-img/logo-masstel.png"
               ></img>
             </div>
           </div>
@@ -260,11 +260,11 @@ console.log("productsAAAA:: ", products);
                   </label>
                   <img
                     className="product-client__item-hot-icon"
-                    src="https://server-shoptech.onrender.com/public/product-img/laptop-img/icon-hot.gif"
+                    src="https://server-Clinic Online.onrender.com/public/product-img/laptop-img/icon-hot.gif"
                   ></img>
                   <img
                     className="product-client__item-icon"
-                    src="https://server-shoptech.onrender.com/public/product-img/laptop-img/icon-18-month.png"
+                    src="https://server-Clinic Online.onrender.com/public/product-img/laptop-img/icon-18-month.png"
                   ></img>
                   <label className="product-client__item-price">
                     {Number(product.product_price).toLocaleString()} ₫

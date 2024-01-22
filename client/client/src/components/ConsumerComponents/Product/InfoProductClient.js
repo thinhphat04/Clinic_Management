@@ -20,12 +20,12 @@ const InfoProductClient = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    document.title = 'ShopTECH | ' + name;
+    document.title = 'Clinic Online | ' + name;
     console.log("name:: ", name);
     const fetchAPIs = () => {
       fetch(
         'https://localhost:7096/api/Products/' + name,
-      )
+      )  
         .then((res) => res.json())
         .then((data) => {
           if (!data) {
@@ -40,14 +40,14 @@ const InfoProductClient = () => {
           setColor(data.color);
         });
 
-      fetch('https://server-shoptech.onrender.com/api/promotes')
-        .then((res) => res.json())
-        .then((data) => {
-          setPromotes(data);
-          setLoading(false);
-        });
+      // fetch('https://server-Clinic Online.onrender.com/api/promotes')
+      //   .then((res) => res.json())
+      //   .then((data) => {
+      //     setPromotes(data);
+      //     setLoading(false);
+      //   });
 
-      // fetch('https://server-shoptech.onrender.com/api/comments')
+      // fetch('https://server-Clinic Online.onrender.com/api/comments')
       //   .then((res) => res.json())
       //   .then((data) => {
       //     setComments(data);
@@ -247,7 +247,10 @@ const InfoProductClient = () => {
     arrayImage.push(imageItem);
   });
 
-  let indexImageInArray = 0;
+  
+  
+  
+  let indexImageInArray = 0; 
   const handleNextImage = () => {
     if (indexImageInArray >= arrayImage.length - 1) indexImageInArray = -1;
     indexImageInArray++;
@@ -279,7 +282,7 @@ const InfoProductClient = () => {
   };
   const showErrorNotLoginMessage = () => {
     Toast({
-      title: 'Bạn chưa đăng nhập vào ShopTECH',
+      title: 'Bạn chưa đăng nhập vào Clinic Online',
       message: 'Vui lòng đăng nhập để sử dụng tính năng này!',
       type: 'error',
       duration: 4000,
@@ -298,7 +301,7 @@ const InfoProductClient = () => {
 
       axios
         .put(
-          'https://server-shoptech.onrender.com/api/users/add-product-to-cart-user/' +
+          'https://server-Clinic Online.onrender.com/api/users/add-product-to-cart-user/' +
             JSON.parse(window.localStorage.getItem('auth')).user._id,
           {
             imageLink: product.product_img,
@@ -338,7 +341,7 @@ const InfoProductClient = () => {
 
       axios
         .put(
-          'https://server-shoptech.onrender.com/api/users/add-product-to-cart-user/' +
+          'https://server-Clinic Online.onrender.com/api/users/add-product-to-cart-user/' +
             JSON.parse(window.localStorage.getItem('auth')).user._id,
           {
             imageLink: product.product_img,
@@ -457,7 +460,7 @@ const InfoProductClient = () => {
                       Bảo hành chính hãng{' '}
                       <span style={{ fontWeight: 'bold' }}>12 tháng </span> tại
                       trung tâm bảo hành ủy quyền của hệ thống cửa hàng của
-                      ShopTech
+                      Clinic Online
                       <button className="info-product__policy-item-btn">
                         (Xem chi tiết)
                       </button>

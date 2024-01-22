@@ -26,7 +26,7 @@ const VoteProductInOrder = ({ socket }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    document.title = 'ShopTECH | Đánh giá sản phẩm';
+    document.title = 'Clinic Online | Đánh giá sản phẩm';
     const fetchAPIs = () => {
       fetch(
         `https://localhost:7096/api/users/${
@@ -182,7 +182,7 @@ const VoteProductInOrder = ({ socket }) => {
               Bạn thấy thế nào về sản phẩm này?
             </label>
             <p className="vote-product__describe">
-              Hãy đánh giá và để lại nhận xét dành cho ShopTECH nhé
+              Hãy đánh giá và để lại nhận xét dành cho Clinic Online nhé
             </p>
 
             <ul className="vote-product__start-group">

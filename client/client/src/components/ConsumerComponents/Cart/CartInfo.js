@@ -16,7 +16,7 @@ const CartInfo = () => {
   const [countTotalPrice, setCountTotalPrice] = useState();
 
   useEffect(() => {
-    document.title = 'ShopTECH | Thông tin đặt hàng';
+    document.title = 'Clinic Online | Thông tin đặt hàng';
     const fetchAPIs = () => {
       fetch(
         `https://localhost:7096/api/users/${

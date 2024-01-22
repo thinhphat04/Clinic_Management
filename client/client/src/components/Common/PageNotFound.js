@@ -18,7 +18,7 @@ const PageNotFound = () => {
               window.location.href = '/home';
             }}
           >
-            Trở lại trang chủ ShopTECH
+            Trở lại trang chủ Clinic Online
           </button>
         </div>
       </div>

@@ -14,7 +14,7 @@ const AccountOrderDetail = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    document.title = 'ShopTECH | Chi tiết đơn hàng';
+    document.title = 'Clinic Online | Chi tiết đơn hàng';
     const fetchAPIs = () => {
       fetch('https://localhost:7096/api/orders/' + orderID)
         .then((res) => res.json())

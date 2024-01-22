@@ -21,7 +21,7 @@ const Dashboard = () => {
   const [countPromotes, setCountPromotes] = useState(0);
 
   useEffect(() => {
-    document.title = 'ShopTECH | Thống kê';
+    document.title = 'Clinic Online | Thống kê';
     const fetchAPIs = () => {
       fetch(`https://localhost:7096/api/products`)
         .then((res) => res.json())
@@ -181,7 +181,7 @@ const Dashboard = () => {
         </div>
 
         <div className="admin__group">
-          <label className="dash__group-title">Thống kê ShopTECH</label>
+          <label className="dash__group-title">Thống kê Clinic Online</label>
           <div className="dash__chart-list">
             <div className="dash__chart-item dash__chart-item--pie">
               <PieChart chartData={chartDataProduct} />

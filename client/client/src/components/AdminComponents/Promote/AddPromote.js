@@ -14,7 +14,7 @@ const AddPromote = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    document.title = 'ShopTECH | Thêm chương trình khuyến mãi';
+    document.title = 'Clinic Online | Thêm chương trình khuyến mãi';
   }, []);
 
   const handleAddPromote = async (e) => {

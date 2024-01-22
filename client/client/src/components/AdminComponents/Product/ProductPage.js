@@ -13,7 +13,7 @@ const ProductPage = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    document.title = 'ShopTECH | Dữ liệu sản phẩm';
+    document.title = 'Clinic Online | Dữ liệu sản phẩm';
     const fetchAPI = () => {
       fetch('https://localhost:7096/api/Products')
         .then((res) => res.json())

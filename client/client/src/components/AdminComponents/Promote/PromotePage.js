@@ -14,7 +14,7 @@ const PromotePage = () => {
 
   useEffect(() => {
     const fetchAPI = () => {
-      document.title = 'ShopTECH | Chương trình khuyến mãi';
+      document.title = 'Clinic Online | Chương trình khuyến mãi';
       fetch('https://localhost:7096/api/promotes')
         .then((res) => res.json())
         .then((data) => {
