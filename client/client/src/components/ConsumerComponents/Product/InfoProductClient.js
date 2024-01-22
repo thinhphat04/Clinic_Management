@@ -33,6 +33,7 @@ const InfoProductClient = () => {
             handleLoadingPage(999);
             return;
           }
+          console.log("dataINFO:  ", data);
           setProduct(data);
           setImageList(data.imageList);
           setOption(data.option);
@@ -314,7 +315,7 @@ const InfoProductClient = () => {
           showSuccessMessage();
           handleLoadingPage(1);
           window.setTimeout(() => {
-            window.location.href = window.location.href;
+            window.location.href = window.location.href; 
           }, 1000);
         })
         .catch((error) => {

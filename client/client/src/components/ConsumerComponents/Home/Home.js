@@ -51,25 +51,25 @@ const Home = () => {
     fetchAPIs();
     // handleLoadCountdown();
   }, []);
-  console.log("loading:; ", loading);
+  console.log("loading:; ", loading);   
   console.log("products:; ", products);
   useEffect(() => {
     // show thông tin sản phẩm hot deal
-    products.map((product, index) => {
-      const infoProductHotDeal = document.querySelectorAll(
-        ".home__flash-sale-item"
-      )[index];
-      if (product.hotDeal === true) {
-        infoProductHotDeal.style.display = "inline-block";
-      }
-    });
+    // products.map((product, index) => {
+    //   const infoProductHotDeal = document.querySelectorAll(
+    //     ".home__flash-sale-item"
+    //   )[index];
+    //   if (product.hotDeal === true) {
+    //     infoProductHotDeal.style.display = "inline-block";
+    //   }
+    // });
 
     // show thông tin điện thoại nổi bật
     products.map((product, index) => {
       const infoProductFeaturedSmartphone = document.querySelectorAll(
         ".product__sell-item--smartphone"
       )[index];
-      if (product.product_type === "Medical" && product.featured === true) {
+      if (product.product_type === "Medical") {
         infoProductFeaturedSmartphone.style.display = "block";
       }
     });
@@ -79,7 +79,7 @@ const Home = () => {
       const infoProductFeaturedLaptop = document.querySelectorAll(
         ".product__sell-item--laptop"
       )[index];
-      if (product.product_type === "Education" && product.featured === true) {
+      if (product.product_type === "Education") {
         infoProductFeaturedLaptop.style.display = "block";
       }
     });
@@ -89,20 +89,20 @@ const Home = () => {
       const infoProductFeaturedTablet = document.querySelectorAll(
         ".product__sell-item--tablet"
       )[index];
-      if (product.product_type === "Scientific" && product.featured === true) {
+      if (product.product_type === "Scientific") {
         infoProductFeaturedTablet.style.display = "block";
       }
     });
 
     //  show thông tin phụ kiện nổi bật
-    // products.map((product, index) => {
-    //   const infoProductFeaturedAccessories = document.querySelectorAll(
-    //     '.product__sell-item--accessories',
-    //   )[index];
-    //   if (product.type === 'Phụ kiện' && product.featured === true) {
-    //     infoProductFeaturedAccessories.style.display = 'block';
-    //   }
-    // });
+    products.map((product, index) => {
+      const infoProductFeaturedAccessories = document.querySelectorAll(
+        '.product__sell-item--accessories',
+      )[index];
+      if (product.product_type === 'Scientific' ||product.product_type === "Education" || product.product_type === "Medical" ) {
+        infoProductFeaturedAccessories.style.display = 'block';
+      }
+    });
     handleLoadBanner();
     handleSetWidthBanner();
   }, [products]);
@@ -490,7 +490,9 @@ const Home = () => {
                       Giảm {product.product_quantity}%
                     </div>
                   </li>
-                ))             
+                 
+                ))            
+               
               )}
             </ul>
 
@@ -650,7 +652,7 @@ const Home = () => {
                 handleLoadingPage(1, `/product/accessories`);
               }}
             >
-              PHỤ KIỆN CÔNG NGHỆ
+              ALL PRODUCTS
             </div>
             <div className="home__featured-brand-list">
               <button className="home__product-brand-item">Tai nghe</button>
