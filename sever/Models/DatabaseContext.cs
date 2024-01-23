@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using PJ_SEM03.Models;
 using System.Data;
@@ -6,7 +7,7 @@ using System.Reflection.Emit;
 
 namespace PJ_SEM03.Models;
 
-public class DatabaseContext : DbContext
+public class DatabaseContext : IdentityDbContext<User>
 {
     public DatabaseContext(DbContextOptions options) : base(options)
     {
@@ -75,24 +76,59 @@ public class DatabaseContext : DbContext
 
         });
 
+        modelBuilder.Entity<User>(entity =>
+        {
+            entity.HasIndex(u => u.UserName).IsUnique();
+            entity.HasIndex(u => u.Email).IsUnique();
+        });
+
+
+
+
+        PasswordHasher<User> passwordHasher = new PasswordHasher<User>();
+
         modelBuilder.Entity<User>().HasData(new User[]
         {
             new User
             {
                 Id = "1",
                 UserName = "admin",
-                 Email = "admin@test.com",
-                Role = "Admin"
+                Email = "admin@test.com",
+                user_fullName = "admin",
+                Role = "Admin",
+                PasswordHash = passwordHasher.HashPassword(new User(), "Admin*123")
             },
-             new User
+
+            new User
             {
                 Id = "2",
-                UserName = "admin",
-                 Email = "admin@test.com",
-                Role = "Admin"
-            }
+                UserName = "phat",
+                Email = "phat@test.com",
+                user_fullName = "Ngo Thinh Phat",
+                Role = "Member",
+                PasswordHash = passwordHasher.HashPassword(new User(), "Phat*123")
+            },
 
-        }); 
+            new User
+            {
+                Id = "3",
+                UserName = "khai",
+                Email = "khai@test.com",
+                user_fullName = "Bui Tuan Khai",
+                Role = "Member",
+                PasswordHash = passwordHasher.HashPassword(new User(), "Khai*123")
+            },
+
+            new User
+            {
+                Id = "4",
+                UserName = "tram",
+                Email = "tram@test.com",
+                user_fullName = "Tran Bao Huyen Tram",
+                Role = "Member",
+                PasswordHash = passwordHasher.HashPassword(new User(), "Tram*123")
+            },
+        });
 
         // modelBuilder.Entity<Education>().HasData(new Education[]
         // {
@@ -114,14 +150,14 @@ public class DatabaseContext : DbContext
                      cart_id = 2,
                      product_id = 2,
                      product_quantity = 1,
-                     user_id = "1"
+                     user_id = "2"
                  },
                  new Cart
                  {
                      cart_id = 3,
                      product_id = 3,
                      product_quantity = 3,
-                     user_id = "1"
+                     user_id = "3"
                  }
         });
 
@@ -132,7 +168,7 @@ public class DatabaseContext : DbContext
                      {
                          order_id = 1,
                          order_code = "ORD123",
-                         user_id = "2",
+                         user_id = "1",
                          order_datetime = DateTime.Now,
                          order_status = "Processing",
                          order_address = "123 Street, City, Country",
@@ -161,7 +197,7 @@ public class DatabaseContext : DbContext
                  new Feedback
                  {
                      feedback_id = 1,
-                     user_id = "2",
+                     user_id = "1",
                      product_id =1,
                      feedback_description = "Good Service",
                      feedback_rating = 5,
@@ -177,7 +213,7 @@ public class DatabaseContext : DbContext
                   new Feedback
                  {
                      feedback_id = 3,
-                     user_id="2",
+                     user_id="3",   
                      product_id =5,
                      feedback_description = "Good product!",
                      feedback_rating = 5,

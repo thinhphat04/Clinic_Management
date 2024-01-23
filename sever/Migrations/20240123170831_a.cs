@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace PJ_SEM03.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class a : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -32,6 +32,7 @@ namespace PJ_SEM03.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    user_fullName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     user_address = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Role = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -55,38 +56,6 @@ namespace PJ_SEM03.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Education",
-                columns: table => new
-                {
-                    edu_id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    edu_teacher = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    edu_description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    edu_subject = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    product_type = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Education", x => x.edu_id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Medical",
-                columns: table => new
-                {
-                    med_id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    med_uses = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    med_sex = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    med_brand = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    product_type = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Medical", x => x.med_id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
                 {
@@ -102,21 +71,6 @@ namespace PJ_SEM03.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Products", x => x.product_id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Scientific",
-                columns: table => new
-                {
-                    sci_id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    sci_uses = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    sci_brand = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    product_type = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Scientific", x => x.sci_id);
                 });
 
             migrationBuilder.CreateTable(
@@ -254,15 +208,14 @@ namespace PJ_SEM03.Migrations
                 name: "Carts",
                 columns: table => new
                 {
-                    cart_id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
                     product_id = table.Column<int>(type: "int", nullable: false),
-                    product_quantity = table.Column<int>(type: "int", nullable: false),
-                    user_id = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    user_id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    cart_id = table.Column<int>(type: "int", nullable: false),
+                    product_quantity = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Carts", x => x.cart_id);
+                    table.PrimaryKey("PK_Carts", x => new { x.product_id, x.user_id });
                     table.ForeignKey(
                         name: "FK_Carts_AspNetUsers_user_id",
                         column: x => x.user_id,
@@ -271,6 +224,27 @@ namespace PJ_SEM03.Migrations
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Carts_Products_product_id",
+                        column: x => x.product_id,
+                        principalTable: "Products",
+                        principalColumn: "product_id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Educations",
+                columns: table => new
+                {
+                    product_id = table.Column<int>(type: "int", nullable: false),
+                    edu_id = table.Column<int>(type: "int", nullable: false),
+                    edu_teacher = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    edu_description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    edu_subject = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Educations", x => x.product_id);
+                    table.ForeignKey(
+                        name: "FK_Educations_Products_product_id",
                         column: x => x.product_id,
                         principalTable: "Products",
                         principalColumn: "product_id",
@@ -298,6 +272,47 @@ namespace PJ_SEM03.Migrations
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Feedbacks_Products_product_id",
+                        column: x => x.product_id,
+                        principalTable: "Products",
+                        principalColumn: "product_id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Medicals",
+                columns: table => new
+                {
+                    product_id = table.Column<int>(type: "int", nullable: false),
+                    med_id = table.Column<int>(type: "int", nullable: false),
+                    med_uses = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    med_sex = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    med_brand = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Medicals", x => x.product_id);
+                    table.ForeignKey(
+                        name: "FK_Medicals_Products_product_id",
+                        column: x => x.product_id,
+                        principalTable: "Products",
+                        principalColumn: "product_id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Scientifics",
+                columns: table => new
+                {
+                    product_id = table.Column<int>(type: "int", nullable: false),
+                    sci_id = table.Column<int>(type: "int", nullable: false),
+                    sci_uses = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    sci_brand = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Scientifics", x => x.product_id);
+                    table.ForeignKey(
+                        name: "FK_Scientifics_Products_product_id",
                         column: x => x.product_id,
                         principalTable: "Products",
                         principalColumn: "product_id",
@@ -333,12 +348,14 @@ namespace PJ_SEM03.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Education",
-                columns: new[] { "edu_id", "edu_description", "edu_subject", "edu_teacher", "product_type" },
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Role", "SecurityStamp", "TwoFactorEnabled", "UserName", "user_address", "user_fullName" },
                 values: new object[,]
                 {
-                    { 1, "Description1", "Learn MEDICAL Vocabulary in English\n", "Adam", "Education" },
-                    { 2, "Description2", "Learn English Grammar: How to use SO & SO THAT\n", "Adam", "Education" }
+                    { "1", 0, "42de1014-52dd-41e6-85c0-1e1fb6a489ab", "admin@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEGeV1QZ0CiXJjseUDccetY/fGr9dUQPYzZD5rtiHciy1G1+yloQVvZyTGu3jD1kUUw==", null, false, "Admin", "4837653d-295c-42e5-b8bf-e5b24d8cc907", false, "admin", null, "admin" },
+                    { "2", 0, "71524cd7-97fa-4d7d-a10d-da46b6895517", "phat@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEI7JSfbFfM5lJEaMHH7NdfRjfx9inw9KLMNsFkzMrt7WhdIxafn3e4FoFLeanygm2Q==", null, false, "Member", "36089883-11f5-43b6-858d-251cfcf75af7", false, "phat", null, "Ngo Thinh Phat" },
+                    { "3", 0, "0fd4d14b-2436-4b18-8c4e-f048ea8a5959", "khai@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEJAbYDa+LTmFQZsVbjFI6Q36qz31jqy8Le1hVorZK9+UjEzZAsFbrhxcQy/AvTjwhg==", null, false, "Member", "1f6b0699-a473-4070-b8ed-97a0fdd4b4d6", false, "khai", null, "Bui Tuan Khai" },
+                    { "4", 0, "d2f91f33-5ec3-4fdd-b847-92e1fa05c49b", "tram@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEM0uXgSyPO0y7jtof3XryWKmU1wXRfuMBCYnNiKoOtGNyNebGEiM8nXYM3zlPiGc2w==", null, false, "Member", "ac07fb18-a134-43aa-8a74-d383a35b0a8e", false, "tram", null, "Tran Bao Huyen Tram" }
                 });
 
             migrationBuilder.InsertData(
@@ -352,6 +369,35 @@ namespace PJ_SEM03.Migrations
                     { 4, "What is Costar Evening Primrose Oil? Uses and correct usage\nCostar Evening Primrose Oil is a health care product extracted from evening primrose essential oil. Supports anti-oxidation and reduces symptoms of hot flashes in postmenopausal and premenopausal women. This article will introduce more information about the ingredients, uses, usage and intended users of Costar pills", "https://www.bresser.de/out/pictures/generated/product/1/380_340_75/8851000_1.jpg", "Acetylcystein", 90, 10, "Medical" },
                     { 5, "The Bresser Science ETD-201 is a high-quality stereo microscope with transmitted and incident light. It is ideally suited for use in schools and universities as well as for the training of apprentices and in the field of electronics. The 360° rotatable binocular head allows comfortable viewing for both left and right-handed users. The magnification range of 20x to 80x can be extended with the included Barlow lens to 40x to 160x. The LED lighting is continuously dimmable and can be operated with batteries or the included power supply. The microscope is equipped with a 2x and 4x objective and a pair of 10x wide field eyepieces. The interpupillary distance and diopter adjustment are individually adjustable. The microscope is supplied with a dust cover and 5 prepared slides.", "https://www.bresser.de/out/pictures/generated/product/1/380_340_75/8851000_1.jpg", "Adapter (LEN)", 100, 10, "Scientific" },
                     { 6, "Description1", "https://www.bresser.de/out/pictures/generated/product/1/380_340_75/8851000_1.jpg", "Course 1", 30, 10, "Education" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Carts",
+                columns: new[] { "product_id", "user_id", "cart_id", "product_quantity" },
+                values: new object[,]
+                {
+                    { 1, "1", 1, 2 },
+                    { 2, "2", 2, 1 },
+                    { 3, "3", 3, 3 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Feedbacks",
+                columns: new[] { "feedback_id", "feedback_description", "feedback_rating", "product_id", "user_id" },
+                values: new object[,]
+                {
+                    { 1, "Good Service", 5, 1, "1" },
+                    { 2, "Great", 5, 3, "2" },
+                    { 3, "Good product!", 5, 5, "3" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Orders",
+                columns: new[] { "order_id", "order_address", "order_code", "order_datetime", "order_phone", "order_status", "order_total", "user_id" },
+                values: new object[,]
+                {
+                    { 1, "123 Street, City, Country", "ORD123", new DateTime(2024, 1, 24, 0, 8, 30, 968, DateTimeKind.Local).AddTicks(413), "1234567890", "Processing", 100, "1" },
+                    { 2, "456 Avenue, City, Country", "ORD456", new DateTime(2024, 1, 24, 0, 8, 30, 968, DateTimeKind.Local).AddTicks(446), "0987654321", "Delivered", 200, "2" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -387,16 +433,25 @@ namespace PJ_SEM03.Migrations
                 column: "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_Email",
+                table: "AspNetUsers",
+                column: "Email",
+                unique: true,
+                filter: "[Email] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_UserName",
+                table: "AspNetUsers",
+                column: "UserName",
+                unique: true,
+                filter: "[UserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Carts_product_id",
-                table: "Carts",
-                column: "product_id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Carts_user_id",
@@ -451,19 +506,19 @@ namespace PJ_SEM03.Migrations
                 name: "Carts");
 
             migrationBuilder.DropTable(
-                name: "Education");
+                name: "Educations");
 
             migrationBuilder.DropTable(
                 name: "Feedbacks");
 
             migrationBuilder.DropTable(
-                name: "Medical");
+                name: "Medicals");
 
             migrationBuilder.DropTable(
                 name: "OrderDetails");
 
             migrationBuilder.DropTable(
-                name: "Scientific");
+                name: "Scientifics");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

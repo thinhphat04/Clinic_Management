@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using PJ_SEM03.DTO;
 using PJ_SEM03.Models;
@@ -25,7 +26,7 @@ namespace PJ_SEM03.Services
 
         public async Task<UserDto> Login(LoginDto loginDto)
         {
-            var user = await _userManager.FindByEmailAsync(loginDto.Email);
+            var user = await _context.Users.SingleOrDefaultAsync(x => x.UserName == loginDto.userName);
             if (user == null || !await _userManager.CheckPasswordAsync(user, loginDto.Password))
             {
                 return null;

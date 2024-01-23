@@ -12037,19 +12037,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ADMIN\\.nuget\\packages\\": {}
+    "C:\\Users\\PC\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\SEM03_APTECH\\Clinic_Management\\sever\\PJ_SEM03.csproj",
+      "projectUniqueName": "D:\\Tram\\.NET\\Project\\Clinic_Management\\sever\\PJ_SEM03.csproj",
       "projectName": "PJ_SEM03",
-      "projectPath": "D:\\SEM03_APTECH\\Clinic_Management\\sever\\PJ_SEM03.csproj",
-      "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-      "outputPath": "D:\\SEM03_APTECH\\Clinic_Management\\sever\\obj\\",
+      "projectPath": "D:\\Tram\\.NET\\Project\\Clinic_Management\\sever\\PJ_SEM03.csproj",
+      "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
+      "outputPath": "D:\\Tram\\.NET\\Project\\Clinic_Management\\sever\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -12141,7 +12141,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }
