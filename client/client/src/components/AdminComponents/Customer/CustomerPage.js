@@ -11,11 +11,12 @@ const CustomerPage = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    document.title = 'ShopTECH | Khách hàng';
+    document.title = 'Clinic Online | Khách hàng';
     const fetchAPI = () => {
-      fetch('https://localhost:7096/api/users')
+      fetch('https://localhost:7096/api/User')
         .then((res) => res.json())
         .then((data) => {
+          console.log("dataUser:: ", data);
           setUsers(data);
           setLoading(false);
           setCountCustomers(data.length);
@@ -82,7 +83,7 @@ const CustomerPage = () => {
                         {index + 1}
                       </td>
                       <td style={{ color: 'red', fontWeight: 700 }}>
-                        {user.username}
+                        {user.userName}
                       </td>
                       <td
                         style={{
@@ -92,7 +93,7 @@ const CustomerPage = () => {
                           color: 'white',
                         }}
                       >
-                        {user.fullname}
+                        {user.normalizedUserName}
                       </td>
                       <td style={{ textAlign: 'left' }}>
                         {user.email || 'None'}

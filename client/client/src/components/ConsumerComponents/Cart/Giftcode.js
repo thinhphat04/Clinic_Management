@@ -11,7 +11,7 @@ const Giftcode = () => {
   const [percentReduce, setPercentReduce] = useState();
 
   useEffect(() => {
-    document.title = 'ShopTECH | Mã khuyến mãi';
+    document.title = 'Clinic Online | Mã khuyến mãi';
     const fetchAPIs = () => {
       fetch(
         `https://localhost:7096/api/users/${

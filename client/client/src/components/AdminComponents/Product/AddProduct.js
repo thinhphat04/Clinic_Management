@@ -16,7 +16,7 @@ const AddProduct = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    document.title = 'ShopTECH | Thêm sản phẩm';
+    document.title = 'Clinic Online | Thêm sản phẩm';
   }, []);
 
   const handleAddOption = () => {

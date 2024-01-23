@@ -9,7 +9,7 @@ const AccountClientInfo = () => {
   const [imageFile, setImageFile] = useState(null);
 
   useEffect(() => {
-    document.title = 'ShopTECH | Thông tin cá nhân';
+    document.title = 'Clinic Online | Thông tin cá nhân';
     const fetchAPIs = () => {
       fetch(
         `https://localhost:7096/api/users/${

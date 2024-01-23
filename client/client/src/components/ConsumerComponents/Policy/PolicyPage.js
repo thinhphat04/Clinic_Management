@@ -4,7 +4,7 @@ import './policy.css';
 
 const PolicyPage = () => {
   useEffect(() => {
-    document.title = 'ShopTECH | Chính sách và điều kiện';
+    document.title = 'Clinic Online | Chính sách và điều kiện';
   }, []);
 
   return (
@@ -20,7 +20,7 @@ const PolicyPage = () => {
               Return policy when purchasing at Clinic Online
               </p>
               <p className="policy__content">
-              In order to bring convenience and satisfaction to customers, ShopTech
+              In order to bring convenience and satisfaction to customers, Clinic Online
                  Have appropriate policies when customers need to exchange/return
                  product. We hope the products customers have chosen are
                  Most satisfactory product. Product exchange/return is subject to terms
@@ -50,7 +50,7 @@ const PolicyPage = () => {
                     The product is only considered a technical defect when confirmed by
                        Technical Center or Product Warranty Center
                        Products. When you have problems with a product ordered at
-                       ShopTECH, please perform the following steps:
+                       Clinic Online, please perform the following steps:
                     </p>
                     <ul type="disc" className="policy__list-disc">
                       <li>
@@ -80,7 +80,7 @@ const PolicyPage = () => {
                       <li>
                         <p>
                           {' '}
-                          If you cannot contact the product's technical/warranty center, please contact ShopTech immediately, HOTLINE: 1800 6063
+                          If you cannot contact the product's technical/warranty center, please contact Clinic Online immediately, HOTLINE: 1800 6063
                         </p>
                       </li>
                     </ul>
@@ -100,7 +100,7 @@ const PolicyPage = () => {
                       </strong>
                     </p>
                     <p className="policy__content">
-                    ShopTECH encourages customers to check status
+                    Clinic Online encourages customers to check status
                        External condition of containers and products before processing
                        audit to ensure that goods are delivered in the correct category,
                        Quantity, color according to order and party status
@@ -113,12 +113,12 @@ const PolicyPage = () => {
                     In case the customer has paid, received the goods and
                        Later, it is discovered that the goods are broken, have incorrect content or otherwise
                        Out of stock, please take a photo of the product and send it to your mailbox
-                       info@shoptech.vn for our support with the next steps
+                       info@Clinic Online.vn for our support with the next steps
                        according to exchange/return or send the missing product to you
                        guest.
                     </p>
                     <p className="policy__content">
-                    After 48 hours from when you receive the goods, ShopTech has the right
+                    After 48 hours from when you receive the goods, Clinic Online has the right
                        refuse to support complaints according to the above content.
                     </p>
                   </li>
@@ -221,7 +221,7 @@ const PolicyPage = () => {
                        For goods in the store system, it takes 3-7 days.
                     </p>
                     <p className="policy__content">
-                    For customers ordering at ShopTech's website, time
+                    For customers ordering at Clinic Online's website, time
                        Return time is 3-7 days from the date you receive it
                        product.
                     </p>
@@ -319,7 +319,7 @@ const PolicyPage = () => {
                   Mode of transportation & delivery of goods
                   </label>
                   <p className="policy__content">
-                  When purchasing at ShopTech, you can choose one
+                  When purchasing at Clinic Online, you can choose one
                      in the following forms of transportation and delivery:
                   </p>
                   <ul type="disc" className="policy__list-disc">
@@ -393,7 +393,7 @@ const PolicyPage = () => {
                       <p className="policy__content">
                         <strong>Note:</strong>
                         Before delivering the goods to the shipping intermediary,
-                         ShopTech can seal and weigh goods; Therefore,
+                         Clinic Online can seal and weigh goods; Therefore,
                          Please and responsibly check the seal
                          and carefully inspect the goods before receiving them.
                       </p>

@@ -12,7 +12,7 @@ const CartConfirm = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    document.title = 'ShopTECH | Xác nhận đơn hàng';
+    document.title = 'Clinic Online | Xác nhận đơn hàng';
     const fetchAPIs = () => {
       fetch(
         `https://localhost:7096/api/users/${

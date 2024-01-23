@@ -23,8 +23,8 @@ const InfoProduct = () => {
 
   useEffect(() => {
     const fetchAPIs = () => {
-      document.title = 'ShopTECH | Thông tin sản phẩm';
-      fetch('https://localhost:7096/api/products/' + id)
+      document.title = 'Clinic Online | Thông tin sản phẩm';
+      fetch('https://localhost:7096/api/products/' + id)  
         .then((res) => res.json())
         .then((data) => {
           setProduct(data);

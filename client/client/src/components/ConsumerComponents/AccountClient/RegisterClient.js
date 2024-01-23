@@ -18,7 +18,7 @@ const RegisterClient = () => {
     if (window.localStorage.getItem('auth')) {
       window.location.href = '/account';
     }
-    document.title = 'ShopTECH | Đăng ký';
+    document.title = 'Clinic Online | Đăng ký';
     Validator({
       form: '#form-1',
       error: '.form-message',

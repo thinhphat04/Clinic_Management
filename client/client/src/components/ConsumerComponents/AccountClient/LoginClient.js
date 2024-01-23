@@ -19,7 +19,7 @@ const LoginClient = () => {
   }, [auth]);
 
   useEffect(() => {
-    document.title = 'ShopTECH | Login';
+    document.title = 'Clinic Online | Login';
   }, []);
 
   const showErrorToast = () => {
@@ -35,7 +35,7 @@ const LoginClient = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        `${process.env.REACT_APP_API}/api/users/login`,
+        `https://localhost:7096/api/Account/login`,
         {
           username: details.username,
           password: details.password,

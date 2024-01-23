@@ -13,7 +13,7 @@ const OrderLookup = () => {
   const [countTotalPrice, setCountTotalPrice] = useState();
 
   useEffect(() => {
-    document.title = 'ShopTECH | LOOK UP ORDERS';
+    document.title = 'Clinic Online | LOOK UP ORDERS';
 
     // show thông tin tổng tiền giỏ hàng
     let countTotalPriceOld = 0;

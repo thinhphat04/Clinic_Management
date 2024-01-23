@@ -13,7 +13,7 @@ const Payment = ({ socket }) => {
   const [timeOrder, setTimeOrder] = useState('');
 
   useEffect(() => {
-    document.title = 'ShopTECH | Thanh toán đơn hàng';
+    document.title = 'Clinic Online | Thanh toán đơn hàng';
     const fetchAPIs = () => {
       fetch(
         `https://localhost:7096/api/users/${
@@ -120,7 +120,7 @@ const Payment = ({ socket }) => {
                 </div>
                 <label class='payment-done__label'>Thanh toán đơn hàng thành công</label>
                 <p class='payment-done__describe'>Vui lòng đợi từ một chút để hệ thống xác nhận đơn hàng của bạn</p>
-                <p class='payment-done__thanks'>Cám ơn bạn đã mua hàng và sử dụng dịch vụ của ShopTECH</p>
+                <p class='payment-done__thanks'>Cám ơn bạn đã mua hàng và sử dụng dịch vụ của Clinic Online</p>
                 <p class="payment-done__redirect"> Tự động chuyển hướng tới trang chủ sau <span class='payment-done__redirect-second'>${countSeconds} giây</span> ... </p>
             </div>
         `;

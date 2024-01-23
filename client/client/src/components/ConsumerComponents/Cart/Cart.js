@@ -14,7 +14,7 @@ const Cart = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    document.title = 'ShopTECH | Giỏ hàng';
+    document.title = 'Clinic Online | Giỏ hàng';
     const fetchAPIs = () => {
       if (window.localStorage.auth)
         fetch(

@@ -11,7 +11,7 @@ const Accessories = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    document.title = "ShopTECH | Phụ kiện đỉnh 'chóp'";
+    document.title = "Clinic Online | Phụ kiện đỉnh 'chóp'";
     const fetchAPIs = () => {
       fetch('https://localhost:7096/api/products')
         .then((res) => res.json())
@@ -41,11 +41,11 @@ const Accessories = () => {
 
   const handleChangeBanner = () => {
     const arrayBanner = [
-      'https://server-shoptech.onrender.com/public/product-img/accessories-img/event-banner.png',
-      'https://server-shoptech.onrender.com/public/product-img/accessories-img/event-banner2.png',
-      'https://server-shoptech.onrender.com/public/product-img/accessories-img/event-banner3.png',
-      'https://server-shoptech.onrender.com/public/product-img/accessories-img/event-banner4.png',
-      'https://server-shoptech.onrender.com/public/product-img/accessories-img/event-banner5.png',
+      'https://server-Clinic Online.onrender.com/public/product-img/accessories-img/event-banner.png',
+      'https://server-Clinic Online.onrender.com/public/product-img/accessories-img/event-banner2.png',
+      'https://server-Clinic Online.onrender.com/public/product-img/accessories-img/event-banner3.png',
+      'https://server-Clinic Online.onrender.com/public/product-img/accessories-img/event-banner4.png',
+      'https://server-Clinic Online.onrender.com/public/product-img/accessories-img/event-banner5.png',
     ];
     var index = 0;
     setInterval(function () {
@@ -59,9 +59,9 @@ const Accessories = () => {
   };
 
   const arrayPromote = [
-    'https://server-shoptech.onrender.com/public/product-img/accessories-img/event-list-item3.png',
-    'https://server-shoptech.onrender.com/public/product-img/accessories-img/event-list-item4.png',
-    'https://server-shoptech.onrender.com/public/product-img/accessories-img/event-list-item5.png',
+    'https://server-Clinic Online.onrender.com/public/product-img/accessories-img/event-list-item3.png',
+    'https://server-Clinic Online.onrender.com/public/product-img/accessories-img/event-list-item4.png',
+    'https://server-Clinic Online.onrender.com/public/product-img/accessories-img/event-list-item5.png',
   ];
   var indexPromote = 0;
   const handleNextPromote = () => {
@@ -126,7 +126,7 @@ const Accessories = () => {
           <SideBanner />
           <div className="product-client__event">
             <img
-              src="https://server-shoptech.onrender.com/public/product-img/accessories-img/event-banner.png"
+              src="https://server-Clinic Online.onrender.com/public/product-img/accessories-img/event-banner.png"
               alt=""
               className="product-client__event-primary"
             ></img>
@@ -134,11 +134,11 @@ const Accessories = () => {
             <div className="product-client__event-list">
               <div className="product-client__event-col-left">
                 <img
-                  src="https://server-shoptech.onrender.com/public/product-img/accessories-img/event-list-item.png"
+                  src="https://server-Clinic Online.onrender.com/public/product-img/accessories-img/event-list-item.png"
                   className="product-client__event-col-left-item"
                 ></img>
                 <img
-                  src="https://server-shoptech.onrender.com/public/product-img/accessories-img/event-list-item2.png"
+                  src="https://server-Clinic Online.onrender.com/public/product-img/accessories-img/event-list-item2.png"
                   className="product-client__event-col-left-item"
                 ></img>
               </div>
@@ -151,7 +151,7 @@ const Accessories = () => {
                   <i className="fa fa-arrow-left"></i>
                 </button>
                 <img
-                  src="https://server-shoptech.onrender.com/public/product-img/accessories-img/event-list-item3.png"
+                  src="https://server-Clinic Online.onrender.com/public/product-img/accessories-img/event-list-item3.png"
                   className="product-client__event-col-right-item"
                 ></img>
                 <button
@@ -270,47 +270,47 @@ const Accessories = () => {
             <div className="product-client__brand">
               <img
                 className="product-client__brand-item"
-                src="https://server-shoptech.onrender.com/public/product-img/accessories-img/logo-apple.png"
+                src="https://server-Clinic Online.onrender.com/public/product-img/accessories-img/logo-apple.png"
               ></img>
               <img
                 className="product-client__brand-item"
-                src="https://server-shoptech.onrender.com/public/product-img/accessories-img/logo-samsung.png"
+                src="https://server-Clinic Online.onrender.com/public/product-img/accessories-img/logo-samsung.png"
               ></img>
               <img
                 className="product-client__brand-item"
-                src="https://server-shoptech.onrender.com/public/product-img/accessories-img/logo-xiaomi.png"
+                src="https://server-Clinic Online.onrender.com/public/product-img/accessories-img/logo-xiaomi.png"
               ></img>
               <img
                 className="product-client__brand-item"
-                src="https://server-shoptech.onrender.com/public/product-img/accessories-img/logo-oppo.png"
+                src="https://server-Clinic Online.onrender.com/public/product-img/accessories-img/logo-oppo.png"
               ></img>
               <img
                 className="product-client__brand-item"
-                src="https://server-shoptech.onrender.com/public/product-img/accessories-img/logo-harman.png"
+                src="https://server-Clinic Online.onrender.com/public/product-img/accessories-img/logo-harman.png"
               ></img>
               <img
                 className="product-client__brand-item"
-                src="https://server-shoptech.onrender.com/public/product-img/accessories-img/logo-sony.png"
+                src="https://server-Clinic Online.onrender.com/public/product-img/accessories-img/logo-sony.png"
               ></img>
               <img
                 className="product-client__brand-item"
-                src="https://server-shoptech.onrender.com/public/product-img/accessories-img/logo-anker.png"
+                src="https://server-Clinic Online.onrender.com/public/product-img/accessories-img/logo-anker.png"
               ></img>
               <img
                 className="product-client__brand-item"
-                src="https://server-shoptech.onrender.com/public/product-img/accessories-img/logo-jbl.png"
+                src="https://server-Clinic Online.onrender.com/public/product-img/accessories-img/logo-jbl.png"
               ></img>
               <img
                 className="product-client__brand-item"
-                src="https://server-shoptech.onrender.com/public/product-img/accessories-img/logo-dareu.png"
+                src="https://server-Clinic Online.onrender.com/public/product-img/accessories-img/logo-dareu.png"
               ></img>
               <img
                 className="product-client__brand-item"
-                src="https://server-shoptech.onrender.com/public/product-img/accessories-img/logo-mophie.png"
+                src="https://server-Clinic Online.onrender.com/public/product-img/accessories-img/logo-mophie.png"
               ></img>
               <img
                 className="product-client__brand-item"
-                src="https://server-shoptech.onrender.com/public/product-img/accessories-img/logo-razer.png"
+                src="https://server-Clinic Online.onrender.com/public/product-img/accessories-img/logo-razer.png"
               ></img>
             </div>
           </div>
@@ -347,11 +347,11 @@ const Accessories = () => {
                   </label>
                   <img
                     className="product-client__item-hot-icon"
-                    src="https://server-shoptech.onrender.com/public/product-img/accessories-img/icon-hot.gif"
+                    src="https://server-Clinic Online.onrender.com/public/product-img/accessories-img/icon-hot.gif"
                   ></img>
                   <img
                     className="product-client__item-icon"
-                    src="https://server-shoptech.onrender.com/public/product-img/accessories-img/icon-18-month.png"
+                    src="https://server-Clinic Online.onrender.com/public/product-img/accessories-img/icon-18-month.png"
                   ></img>
                   <label className="product-client__item-price">
                     {Number(product.product_price).toLocaleString()} ₫

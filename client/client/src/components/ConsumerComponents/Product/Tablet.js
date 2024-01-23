@@ -11,7 +11,7 @@ const Tablet = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    document.title = 'ShopTECH | Máy tính bảng - nhìn là mê';
+    document.title = 'Clinic Online | Máy tính bảng - nhìn là mê';
     const fetchAPIs = () => {
       fetch('https://localhost:7096/api/products')
         .then((res) => res.json())
@@ -164,7 +164,7 @@ const Tablet = () => {
             </div>
             {/* <img
               className="product-client__event-gif"
-              src="https://server-shoptech.onrender.com/public/product-img/tablet-img/event-item-gif.gif"
+              src="https://server-Clinic Online.onrender.com/public/product-img/tablet-img/event-item-gif.gif"
               alt="ảnh gif"
             ></img> */}
           </div>
@@ -176,31 +176,31 @@ const Tablet = () => {
             <div className="product-client__brand">
               <img
                 className="product-client__brand-item"
-                src="https://server-shoptech.onrender.com/public/product-img/tablet-img/logo-ipad.png"
+                src="https://server-Clinic Online.onrender.com/public/product-img/tablet-img/logo-ipad.png"
               ></img>
               <img
                 className="product-client__brand-item"
-                src="https://server-shoptech.onrender.com/public/product-img/tablet-img/logo-samsung.png"
+                src="https://server-Clinic Online.onrender.com/public/product-img/tablet-img/logo-samsung.png"
               ></img>
               <img
                 className="product-client__brand-item"
-                src="https://server-shoptech.onrender.com/public/product-img/tablet-img/logo-xiaomi.png"
+                src="https://server-Clinic Online.onrender.com/public/product-img/tablet-img/logo-xiaomi.png"
               ></img>
               <img
                 className="product-client__brand-item"
-                src="https://server-shoptech.onrender.com/public/product-img/tablet-img/logo-oppo.png"
+                src="https://server-Clinic Online.onrender.com/public/product-img/tablet-img/logo-oppo.png"
               ></img>
               <img
                 className="product-client__brand-item"
-                src="https://server-shoptech.onrender.com/public/product-img/tablet-img/logo-vivo.png"
+                src="https://server-Clinic Online.onrender.com/public/product-img/tablet-img/logo-vivo.png"
               ></img>
               <img
                 className="product-client__brand-item"
-                src="https://server-shoptech.onrender.com/public/product-img/tablet-img/logo-realme.png"
+                src="https://server-Clinic Online.onrender.com/public/product-img/tablet-img/logo-realme.png"
               ></img>
               <img
                 className="product-client__brand-item"
-                src="https://server-shoptech.onrender.com/public/product-img/tablet-img/logo-nokia.png"
+                src="https://server-Clinic Online.onrender.com/public/product-img/tablet-img/logo-nokia.png"
               ></img>
             </div>
           </div>
@@ -237,11 +237,11 @@ const Tablet = () => {
                   </label>
                   <img
                     className="product-client__item-hot-icon"
-                    src="https://server-shoptech.onrender.com/public/product-img/tablet-img/icon-hot.gif"
+                    src="https://server-Clinic Online.onrender.com/public/product-img/tablet-img/icon-hot.gif"
                   ></img>
                   <img
                     className="product-client__item-icon"
-                    src="https://server-shoptech.onrender.com/public/product-img/tablet-img/icon-18-month.png"
+                    src="https://server-Clinic Online.onrender.com/public/product-img/tablet-img/icon-18-month.png"
                   ></img>
                   <label className="product-client__item-price">
                     {Number(product.product_price).toLocaleString()} ₫

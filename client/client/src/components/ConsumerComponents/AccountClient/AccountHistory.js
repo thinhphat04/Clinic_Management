@@ -14,7 +14,7 @@ const AccountHistory = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    document.title = 'ShopTECH | Lịch sử mua hàng';
+    document.title = 'Clinic Online | Lịch sử mua hàng';
     const fetchAPIs = () => {
       fetch('https://localhost:7096/api/orders')
         .then((res) => res.json())

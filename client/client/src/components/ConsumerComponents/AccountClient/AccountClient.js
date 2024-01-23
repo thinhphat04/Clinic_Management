@@ -16,7 +16,7 @@ const AccountClient = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    document.title = 'ShopTECH | Tài khoản';
+    document.title = 'Clinic Online | Tài khoản';
     if (window.localStorage.getItem('auth')) {
       const fetchAPIs = () => {
         fetch(

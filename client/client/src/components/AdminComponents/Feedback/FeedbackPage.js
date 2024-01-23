@@ -7,7 +7,7 @@ const FeedbackPage = () => {
   const [feedbacks, setFeedbacks] = useState([]);
 
   const fetchAPIs = () => {
-    document.title = 'ShopTECH | Phản hồi khách hàng';
+    document.title = 'Clinic Online | Phản hồi khách hàng';
     fetch('https://localhost:7096/api/feedbacks')
       .then((res) => res.json())
       .then((data) => {
