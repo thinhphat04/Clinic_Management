@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using PJ_SEM03.Models;
 using System.Data;
@@ -7,7 +6,7 @@ using System.Reflection.Emit;
 
 namespace PJ_SEM03.Models;
 
-public class DatabaseContext : IdentityDbContext<User>
+public class DatabaseContext : DbContext
 {
     public DatabaseContext(DbContextOptions options) : base(options)
     {
@@ -21,6 +20,7 @@ public class DatabaseContext : IdentityDbContext<User>
     public DbSet<Product> Products { get; set; }
     public DbSet<Feedback> Feedbacks { get; set; }
     public DbSet<Cart> Carts { get; set; }
+    public DbSet<User> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -29,6 +29,18 @@ public class DatabaseContext : IdentityDbContext<User>
              .HasOne(o => o.User)
              .WithMany(u => u.Orders)
              .HasForeignKey(o => o.user_id);
+        
+        // modelBuilder.Entity<Product>()
+        //     .ToTable("Products");
+        //
+        // modelBuilder.Entity<Education>()
+        //     .ToTable("Educations");
+        //
+        // modelBuilder.Entity<Medical>()
+        //     .ToTable("Medicals");
+        //
+        // modelBuilder.Entity<Scientific>()
+        //     .ToTable("Scientifics");
 
         modelBuilder.Entity<OrderDetail>()
                              .HasOne(od => od.Order)
@@ -61,11 +73,30 @@ public class DatabaseContext : IdentityDbContext<User>
 
         });
 
-        modelBuilder.Entity<Education>().HasData(new Education[]
+        modelBuilder.Entity<User>().HasData(new User[]
         {
-            new Education { edu_id = 1,  edu_teacher = "Adam", edu_description = "Description1", edu_subject = "Learn MEDICAL Vocabulary in English\n", product_type = "Education" },
-            new Education { edu_id = 2, edu_teacher = "Adam", edu_description = "Description2", edu_subject = "Learn English Grammar: How to use SO & SO THAT\n", product_type = "Education" }
-        });
+            new User
+            {
+                Id = "1",
+                UserName = "admin",
+                 Email = "admin@test.com",
+                Role = "Admin"
+            },
+             new User
+            {
+                Id = "2",
+                UserName = "admin",
+                 Email = "admin@test.com",
+                Role = "Admin"
+            }
+
+        }); 
+
+        // modelBuilder.Entity<Education>().HasData(new Education[]
+        // {
+        //     new Education { edu_id = 1,  edu_teacher = "Adam", edu_description = "Description1", edu_subject = "Learn MEDICAL Vocabulary in English\n", product_type = "Education" },
+        //     new Education { edu_id = 2, edu_teacher = "Adam", edu_description = "Description2", edu_subject = "Learn English Grammar: How to use SO & SO THAT\n", product_type = "Education" }
+        // });
 
         modelBuilder.Entity<Cart>().HasData(new Cart[]
         {
@@ -74,21 +105,21 @@ public class DatabaseContext : IdentityDbContext<User>
                      cart_id = 1,
                      product_id = 1,
                      product_quantity = 2,
-                     user_id = "2"
+                     user_id = "1"
                  },
                  new Cart
                  {
                      cart_id = 2,
                      product_id = 2,
                      product_quantity = 1,
-                     user_id = "3"
+                     user_id = "1"
                  },
                  new Cart
                  {
                      cart_id = 3,
                      product_id = 3,
                      product_quantity = 3,
-                     user_id = "4"
+                     user_id = "1"
                  }
         });
 
@@ -110,7 +141,7 @@ public class DatabaseContext : IdentityDbContext<User>
                      {
                          order_id = 2,
                          order_code = "ORD456",
-                         user_id = "3",
+                         user_id = "2",
                          order_datetime = DateTime.Now,
                          order_status = "Delivered",
                          order_address = "456 Avenue, City, Country",
@@ -135,7 +166,7 @@ public class DatabaseContext : IdentityDbContext<User>
                  },
                   new Feedback
                  {
-                     user_id = "3",
+                     user_id = "2",
                      feedback_id = 2,
                      product_id =3,
                      feedback_description = "Great",
@@ -144,7 +175,7 @@ public class DatabaseContext : IdentityDbContext<User>
                   new Feedback
                  {
                      feedback_id = 3,
-                     user_id="4",
+                     user_id="2",
                      product_id =5,
                      feedback_description = "Good product!",
                      feedback_rating = 5,
