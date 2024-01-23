@@ -30,17 +30,21 @@ public class DatabaseContext : DbContext
              .WithMany(u => u.Orders)
              .HasForeignKey(o => o.user_id);
         
-        // modelBuilder.Entity<Product>()
-        //     .ToTable("Products");
-        //
-        // modelBuilder.Entity<Education>()
-        //     .ToTable("Educations");
-        //
-        // modelBuilder.Entity<Medical>()
-        //     .ToTable("Medicals");
-        //
-        // modelBuilder.Entity<Scientific>()
-        //     .ToTable("Scientifics");
+        //nối bảng edu medical scientific với product
+        modelBuilder.Entity<Product>()
+            .ToTable("Products");
+        
+        modelBuilder.Entity<Education>()
+            .ToTable("Educations");
+        
+        modelBuilder.Entity<Medical>()
+            .ToTable("Medicals");
+        
+        modelBuilder.Entity<Scientific>()
+            .ToTable("Scientifics");
+
+
+        
 
         modelBuilder.Entity<OrderDetail>()
                              .HasOne(od => od.Order)
@@ -52,15 +56,13 @@ public class DatabaseContext : DbContext
                      .WithMany(p => p.OrderDetails)
                      .HasForeignKey(od => od.product_id);
 
-        modelBuilder.Entity<Cart>()
-                     .HasOne(c => c.User)
-                     .WithMany(u => u.Carts)
-                     .HasForeignKey(c => c.user_id);
-
-        modelBuilder.Entity<Cart>()
-                     .HasOne(c => c.Product)
-                     .WithMany()
-                     .HasForeignKey(c => c.product_id);
+        modelBuilder.Entity<Cart>(c =>
+        {
+            c.HasKey(c => new { c.product_id, c.user_id });
+            c.HasOne(c => c.Product).WithMany(p => p.Carts).HasForeignKey(c => c.product_id);
+            c.HasOne(c => c.User).WithMany(u => u.Carts).HasForeignKey(c => c.user_id);
+        });
+        
         modelBuilder.Entity<Feedback>(f =>
         {
             f.HasOne(f => f.User)

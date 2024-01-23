@@ -2,9 +2,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PJ_SEM03.Models;
 
-public class Education
+public class Education :  Product
 {
-  [Key]
     public int edu_id { get; set; }
     // public string edu_video { get; set; }
     

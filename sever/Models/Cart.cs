@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PJ_SEM03.Models;
 
-public class Cart
+public class Cart 
 {
     [Key]
     public int cart_id { get; set; }
@@ -14,6 +14,7 @@ public class Cart
     public string user_id { get; set; }
 
     // Navigation properties
-    public Product Product { get; set; }
-    public User User { get; set; }
+    public Product? Product { get; set; }
+    
+    public User? User { get; set; }
 }

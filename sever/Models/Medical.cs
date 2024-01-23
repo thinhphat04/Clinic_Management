@@ -2,9 +2,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PJ_SEM03.Models;
 
-public class Medical
+public class Medical :  Product
 {
-    [Key]
     public int med_id { get; set; }
     
     public string med_uses { get; set; }
