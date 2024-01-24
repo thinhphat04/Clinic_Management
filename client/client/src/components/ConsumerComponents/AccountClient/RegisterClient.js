@@ -19,35 +19,35 @@ const RegisterClient = () => {
       window.location.href = '/account';
     }
     document.title = 'Clinic Online | Đăng ký';
-    Validator({
-      form: '#form-1',
-      error: '.form-message',
-      rules: [
-        Validator.isRequired('#username'),
-        Validator.isMinLength('#username', 5),
+    // Validator({
+    //   form: '#form-1',
+    //   error: '.form-message',
+    //   rules: [
+    //     Validator.isRequired('#username'),
+    //     Validator.isMinLength('#username', 5),
 
-        Validator.isRequired('#password'),
-        Validator.isMinLength('#password', 6),
+    //     // Validator.isRequired('#password'),
+    //     // Validator.isMinLength('#password', 6),
 
-        Validator.isRequired('#password_confirmation'),
-        Validator.isConfirmed('#password_confirmation', () => {
-          return document.getElementById('password').value;
-        }),
+    //     // Validator.isRequired('#password_confirmation'),
+    //     // Validator.isConfirmed('#password_confirmation', () => {
+    //     //   return document.getElementById('password').value;
+    //     // }),
 
-        Validator.isRequired('#fullname'),
-        Validator.isMinLength('#fullname', 5),
+    //     Validator.isRequired('#fullname'),
+    //     Validator.isMinLength('#fullname', 5),
 
-        Validator.isRequired('#email'),
-        Validator.isEmail('#email'),
+    //     Validator.isRequired('#email'),
+    //     Validator.isEmail('#email'),
 
-        Validator.isRequired('#phone'),
-        Validator.isMinLength('#phone', 10),
-        Validator.isMaxLength('#phone', 10),
+    //     Validator.isRequired('#phone'),
+    //     Validator.isMinLength('#phone', 10),
+    //     Validator.isMaxLength('#phone', 10),
 
-        Validator.isRequired('#address'),
-        Validator.isMinLength('#address', 5),
-      ],
-    });
+    //     Validator.isRequired('#address'),
+    //     Validator.isMinLength('#address', 5),
+    //   ],
+    // });
   }, []);
 
   const handleSubmit = async (e) => {
@@ -56,14 +56,12 @@ const RegisterClient = () => {
       const res = await axios.post(
         `https://localhost:7096/api/Account/register`,
         {
-          avatarUrl: ``,
           username: String(usernameRegister),
           password: passwordRegister,
-          fullname: fullnameRegister,
+          confirmPassword: passwordRegister,
           email: emailRegister,
-          phone: phoneRegister,
+          phoneNumber: phoneRegister,
           address: addressRegister,
-          cart: [],
         },
       );
       if (res && res.data.success) {
@@ -156,7 +154,7 @@ const RegisterClient = () => {
                     <span className="form-message"></span>
                   </div>
 
-                  <div className="form-group">
+                  {/* <div className="form-group">
                     <label htmlFor="fullname" className="form-label">
                       Full name
                     </label>
@@ -170,7 +168,7 @@ const RegisterClient = () => {
                       className="form-control"
                     ></input>
                     <span className="form-message"></span>
-                  </div>
+                  </div> */}
 
                   <div
                     className="form-group form-group-2-col"

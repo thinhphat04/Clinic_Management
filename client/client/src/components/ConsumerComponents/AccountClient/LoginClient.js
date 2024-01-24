@@ -37,15 +37,16 @@ const LoginClient = () => {
       const res = await axios.post(
         `https://localhost:7096/api/Account/login`,
         {
-          username: details.username,
+          userName: details.username,
           password: details.password,
         },
       );
-      if (res && res.data.success) {
+      console.log("ress:  ", res.data);
+      if (res && res.data) {
         localStorage.setItem('auth', JSON.stringify(res.data));
         setAuth({
           ...auth,
-          username: res.data.user.username,
+          // userName: res.data.user.username,
           token: res.data.token,
         });
         console.log(res.data);
