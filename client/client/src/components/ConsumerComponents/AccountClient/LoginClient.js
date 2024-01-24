@@ -42,12 +42,17 @@ const LoginClient = () => {
         },
       );
       if (res && res.data.success) {
-        localStorage.setItem('auth', JSON.stringify(res.data));
-        setAuth({
-          ...auth,
-          username: res.data.user.username,
-          token: res.data.token,
-        });
+       // Set the JWT token with "Bearer" prefix in localStorage
+       const tokenWithBearer = `Bearer ${res.data.token}`;
+       localStorage.setItem('auth', JSON.stringify(tokenWithBearer));
+ 
+
+      // Set other authentication details in your state or context
+      setAuth({
+        ...auth,
+        username: res.data.user.username,
+        token: res.data.token,
+      });
         console.log(res.data);
         alert('Đăng nhập thành công');
         handleLoadingPage(1);
