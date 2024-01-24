@@ -62,5 +62,9 @@ namespace PJ_SEM03.Services
             return false;
         }
 
+        // public async Task<Cart> GetCartByUserIdAndProductId(string userId, int productId)
+        // {
+        //     return await db.Carts.FirstOrDefaultAsync(c => c.user_id == userId && c.product_id == productId);
+        // }
     }
 }

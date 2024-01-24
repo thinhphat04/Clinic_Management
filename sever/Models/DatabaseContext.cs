@@ -64,6 +64,7 @@ public class DatabaseContext : IdentityDbContext<User>
             c.HasOne(c => c.User).WithMany(u => u.Carts).HasForeignKey(c => c.user_id);
         });
         
+        
         modelBuilder.Entity<Feedback>(f =>
         {
             f.HasOne(f => f.User)
@@ -140,21 +141,21 @@ public class DatabaseContext : IdentityDbContext<User>
         {
                  new Cart
                  {
-                     cart_id = 1,
+                     // cart_id = 1,
                      product_id = 1,
                      product_quantity = 2,
                      user_id = "1"
                  },
                  new Cart
                  {
-                     cart_id = 2,
+                     // cart_id = 2,
                      product_id = 2,
                      product_quantity = 1,
                      user_id = "2"
                  },
                  new Cart
                  {
-                     cart_id = 3,
+                     // cart_id = 3,
                      product_id = 3,
                      product_quantity = 3,
                      user_id = "3"

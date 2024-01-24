@@ -8,4 +8,5 @@ public interface ICartRepo
     Task<bool> UpdateCartQuantity(Cart cart);
     Task<IEnumerable<Cart>> GetCartByUserId(string userId);
     Task<bool> DeleteCart(string userId, int productId);
+    // Task<Cart> GetCartByUserIdAndProductId(string cartUserId, int cartProductId);
 }

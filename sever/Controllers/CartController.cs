@@ -18,11 +18,19 @@ namespace PJ_SEM03.Controllers
         [HttpPost]
         public async Task<IActionResult> AddCart(Cart cart)
         {
-            if (await _cartRepo.AddCart(cart))
+            try
             {
-                return Ok();
+                var result = await _cartRepo.AddCart(cart);
+                if (result)
+                {
+                    return Ok("Add Cart Success");
+                }
+                return BadRequest("Add Cart Failed");
             }
-            return BadRequest();
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPut]
@@ -46,7 +54,7 @@ namespace PJ_SEM03.Controllers
         {
             if (await _cartRepo.DeleteCart(userId, productId))
             {
-                return Ok();
+                return Ok("Delete Cart Success");
             }
             return BadRequest();
         }

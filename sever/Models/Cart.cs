@@ -4,8 +4,8 @@ namespace PJ_SEM03.Models;
 
 public class Cart 
 {
-    [Key]
-    public int cart_id { get; set; }
+    // [Key]
+    // public int cart_id { get; set; }
 
     public int product_id { get; set; }
 
