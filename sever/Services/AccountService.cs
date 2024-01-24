@@ -33,6 +33,8 @@ namespace PJ_SEM03.Services
             }
             return new UserDto
             {
+                Id = user.Id,
+                Role = user.Role,
                 Email = user.Email,
                 Token = await GenerateToken(user)
             };
