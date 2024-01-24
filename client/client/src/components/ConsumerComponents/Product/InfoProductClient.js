@@ -24,7 +24,7 @@ const InfoProductClient = () => {
     console.log("name:: ", name);
     const fetchAPIs = () => {
       fetch(
-        'https://localhost:7096/api/Products/' + name,
+        'https://localhost:7096/api/Products/search/' + name,
       )  
         .then((res) => res.json())
         .then((data) => {
@@ -34,10 +34,10 @@ const InfoProductClient = () => {
             return;
           }
           console.log("dataINFO:  ", data);
-          setProduct(data);
-          setImageList(data.imageList);
-          setOption(data.option);
-          setColor(data.color);
+          setProduct(data[0]);
+          // setImageList(data.imageList);
+          // setOption(data.option);
+          // setColor(data.color);
         });
 
       // fetch('https://server-Clinic Online.onrender.com/api/promotes')
@@ -61,10 +61,11 @@ const InfoProductClient = () => {
           setLoading(false);
         });
 
-      fetch('https://localhost:7096/api/Products')
+      fetch('https://localhost:7096/api/Products/' + product.product_type)
         .then((res) => res.json())
         .then((data) => {
-          console.log("data:: ", data);
+          console.log("dataABCD:: ", data);
+          console.log("ABCDproducttype:: ", product.product_type);
           setProducts(data);
           setLoading(false);
         });
@@ -106,6 +107,7 @@ const InfoProductClient = () => {
         infoProductSimilar.style.display = 'block';
       }
     });
+
 
     // show thông tin đánh giá sản phẩm
     comments.map((comment, index) => {
@@ -368,6 +370,14 @@ const InfoProductClient = () => {
     }
   };
 
+
+
+
+
+console.log("productINFO:: ", product.product_type);  
+
+// var product = product[0]
+
   return (
     <>
       <Nav />
@@ -506,7 +516,7 @@ const InfoProductClient = () => {
                   </label>
                   <label className="info-product__detail-old-price">
                     {(
-                      (Number(product.product_price || 0) * (100 + product.percent)) /
+                      (Number(product.product_price || 0) * (100 + product.product_quantity)) /
                       100
                     ).toLocaleString()}{' '}
                     đ
@@ -520,7 +530,7 @@ const InfoProductClient = () => {
                   Trả góp 0%
                 </label>
                 <div className="info-product__detail-option">
-                  <label className="info-product__detail-label">
+                  {/* <label className="info-product__detail-label">
                     Chọn phiên bản:
                   </label>
                   {loading ? (
@@ -542,9 +552,13 @@ const InfoProductClient = () => {
                         </div>
                       </div>
                     ))
-                  )}
+                  )} */}
+                    <p className="info-product__policy-item-content" style={{ marginRight: '10px' }}>
+                      {product.product_description}
+                    </p>
+
                 </div>
-                <div className="info-product__detail-option">
+                {/* <div className="info-product__detail-option">
                   <label className="info-product__detail-label">
                     Chọn màu sắc:
                   </label>
@@ -568,7 +582,7 @@ const InfoProductClient = () => {
                       </div>
                     ))
                   )}
-                </div>
+                </div> */}
                 <div className="info-product__detail-promote">
                   <label className="info-product__detail-promote-label">
                     <i className="info-product__detail-promote-label-icon fa fa-gift"></i>
