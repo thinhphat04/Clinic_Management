@@ -22,6 +22,8 @@ namespace PJ_SEM03.DTO
         [RegularExpression(@"^\d{10}$", ErrorMessage = "Phone number must be a 10-digit number.")]
         public string phoneNumber { get; set; }
 
+        public string fullname { get; set; }
+
         public string Address { get; set; }
     }
 
