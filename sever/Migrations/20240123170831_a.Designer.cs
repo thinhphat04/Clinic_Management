@@ -12,8 +12,8 @@ using PJ_SEM03.Models;
 namespace PJ_SEM03.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240121043414_update")]
-    partial class update
+    [Migration("20240123170831_a")]
+    partial class a
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -160,25 +160,19 @@ namespace PJ_SEM03.Migrations
 
             modelBuilder.Entity("PJ_SEM03.Models.Cart", b =>
                 {
-                    b.Property<int>("cart_id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("product_id")
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("cart_id"));
+                    b.Property<string>("user_id")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("product_id")
+                    b.Property<int>("cart_id")
                         .HasColumnType("int");
 
                     b.Property<int>("product_quantity")
                         .HasColumnType("int");
 
-                    b.Property<string>("user_id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("cart_id");
-
-                    b.HasIndex("product_id");
+                    b.HasKey("product_id", "user_id");
 
                     b.HasIndex("user_id");
 
@@ -187,71 +181,24 @@ namespace PJ_SEM03.Migrations
                     b.HasData(
                         new
                         {
-                            cart_id = 1,
                             product_id = 1,
-                            product_quantity = 2,
-                            user_id = "2"
+                            user_id = "1",
+                            cart_id = 1,
+                            product_quantity = 2
                         },
                         new
                         {
-                            cart_id = 2,
                             product_id = 2,
-                            product_quantity = 1,
-                            user_id = "3"
+                            user_id = "2",
+                            cart_id = 2,
+                            product_quantity = 1
                         },
                         new
                         {
-                            cart_id = 3,
                             product_id = 3,
-                            product_quantity = 3,
-                            user_id = "4"
-                        });
-                });
-
-            modelBuilder.Entity("PJ_SEM03.Models.Education", b =>
-                {
-                    b.Property<int>("edu_id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("edu_id"));
-
-                    b.Property<string>("edu_description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("edu_subject")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("edu_teacher")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("product_type")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("edu_id");
-
-                    b.ToTable("Education");
-
-                    b.HasData(
-                        new
-                        {
-                            edu_id = 1,
-                            edu_description = "Description1",
-                            edu_subject = "Learn MEDICAL Vocabulary in English\n",
-                            edu_teacher = "Adam",
-                            product_type = "Education"
-                        },
-                        new
-                        {
-                            edu_id = 2,
-                            edu_description = "Description2",
-                            edu_subject = "Learn English Grammar: How to use SO & SO THAT\n",
-                            edu_teacher = "Adam",
-                            product_type = "Education"
+                            user_id = "3",
+                            cart_id = 3,
+                            product_quantity = 3
                         });
                 });
 
@@ -291,7 +238,7 @@ namespace PJ_SEM03.Migrations
                             feedback_description = "Good Service",
                             feedback_rating = 5,
                             product_id = 1,
-                            user_id = "2"
+                            user_id = "1"
                         },
                         new
                         {
@@ -299,7 +246,7 @@ namespace PJ_SEM03.Migrations
                             feedback_description = "Great",
                             feedback_rating = 5,
                             product_id = 3,
-                            user_id = "3"
+                            user_id = "2"
                         },
                         new
                         {
@@ -307,37 +254,8 @@ namespace PJ_SEM03.Migrations
                             feedback_description = "Good product!",
                             feedback_rating = 5,
                             product_id = 5,
-                            user_id = "4"
+                            user_id = "3"
                         });
-                });
-
-            modelBuilder.Entity("PJ_SEM03.Models.Medical", b =>
-                {
-                    b.Property<int>("med_id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("med_id"));
-
-                    b.Property<string>("med_brand")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("med_sex")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("med_uses")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("product_type")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("med_id");
-
-                    b.ToTable("Medical");
                 });
 
             modelBuilder.Entity("PJ_SEM03.Models.Order", b =>
@@ -386,22 +304,22 @@ namespace PJ_SEM03.Migrations
                             order_id = 1,
                             order_address = "123 Street, City, Country",
                             order_code = "ORD123",
-                            order_datetime = new DateTime(2024, 1, 21, 11, 34, 14, 820, DateTimeKind.Local).AddTicks(524),
+                            order_datetime = new DateTime(2024, 1, 24, 0, 8, 30, 968, DateTimeKind.Local).AddTicks(413),
                             order_phone = "1234567890",
                             order_status = "Processing",
                             order_total = 100,
-                            user_id = "2"
+                            user_id = "1"
                         },
                         new
                         {
                             order_id = 2,
                             order_address = "456 Avenue, City, Country",
                             order_code = "ORD456",
-                            order_datetime = new DateTime(2024, 1, 21, 11, 34, 14, 820, DateTimeKind.Local).AddTicks(537),
+                            order_datetime = new DateTime(2024, 1, 24, 0, 8, 30, 968, DateTimeKind.Local).AddTicks(446),
                             order_phone = "0987654321",
                             order_status = "Delivered",
                             order_total = 200,
-                            user_id = "3"
+                            user_id = "2"
                         });
                 });
 
@@ -466,7 +384,9 @@ namespace PJ_SEM03.Migrations
 
                     b.HasKey("product_id");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
+
+                    b.UseTptMappingStrategy();
 
                     b.HasData(
                         new
@@ -531,31 +451,6 @@ namespace PJ_SEM03.Migrations
                         });
                 });
 
-            modelBuilder.Entity("PJ_SEM03.Models.Scientific", b =>
-                {
-                    b.Property<int>("sci_id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("sci_id"));
-
-                    b.Property<string>("product_type")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("sci_brand")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("sci_uses")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("sci_id");
-
-                    b.ToTable("Scientific");
-                });
-
             modelBuilder.Entity("PJ_SEM03.Models.User", b =>
                 {
                     b.Property<string>("Id")
@@ -615,7 +510,14 @@ namespace PJ_SEM03.Migrations
                     b.Property<string>("user_address")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("user_fullName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique()
+                        .HasFilter("[Email] IS NOT NULL");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -625,7 +527,139 @@ namespace PJ_SEM03.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
+                    b.HasIndex("UserName")
+                        .IsUnique()
+                        .HasFilter("[UserName] IS NOT NULL");
+
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "42de1014-52dd-41e6-85c0-1e1fb6a489ab",
+                            Email = "admin@test.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            PasswordHash = "AQAAAAIAAYagAAAAEGeV1QZ0CiXJjseUDccetY/fGr9dUQPYzZD5rtiHciy1G1+yloQVvZyTGu3jD1kUUw==",
+                            PhoneNumberConfirmed = false,
+                            Role = "Admin",
+                            SecurityStamp = "4837653d-295c-42e5-b8bf-e5b24d8cc907",
+                            TwoFactorEnabled = false,
+                            UserName = "admin",
+                            user_fullName = "admin"
+                        },
+                        new
+                        {
+                            Id = "2",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "71524cd7-97fa-4d7d-a10d-da46b6895517",
+                            Email = "phat@test.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            PasswordHash = "AQAAAAIAAYagAAAAEI7JSfbFfM5lJEaMHH7NdfRjfx9inw9KLMNsFkzMrt7WhdIxafn3e4FoFLeanygm2Q==",
+                            PhoneNumberConfirmed = false,
+                            Role = "Member",
+                            SecurityStamp = "36089883-11f5-43b6-858d-251cfcf75af7",
+                            TwoFactorEnabled = false,
+                            UserName = "phat",
+                            user_fullName = "Ngo Thinh Phat"
+                        },
+                        new
+                        {
+                            Id = "3",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "0fd4d14b-2436-4b18-8c4e-f048ea8a5959",
+                            Email = "khai@test.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            PasswordHash = "AQAAAAIAAYagAAAAEJAbYDa+LTmFQZsVbjFI6Q36qz31jqy8Le1hVorZK9+UjEzZAsFbrhxcQy/AvTjwhg==",
+                            PhoneNumberConfirmed = false,
+                            Role = "Member",
+                            SecurityStamp = "1f6b0699-a473-4070-b8ed-97a0fdd4b4d6",
+                            TwoFactorEnabled = false,
+                            UserName = "khai",
+                            user_fullName = "Bui Tuan Khai"
+                        },
+                        new
+                        {
+                            Id = "4",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "d2f91f33-5ec3-4fdd-b847-92e1fa05c49b",
+                            Email = "tram@test.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            PasswordHash = "AQAAAAIAAYagAAAAEM0uXgSyPO0y7jtof3XryWKmU1wXRfuMBCYnNiKoOtGNyNebGEiM8nXYM3zlPiGc2w==",
+                            PhoneNumberConfirmed = false,
+                            Role = "Member",
+                            SecurityStamp = "ac07fb18-a134-43aa-8a74-d383a35b0a8e",
+                            TwoFactorEnabled = false,
+                            UserName = "tram",
+                            user_fullName = "Tran Bao Huyen Tram"
+                        });
+                });
+
+            modelBuilder.Entity("PJ_SEM03.Models.Education", b =>
+                {
+                    b.HasBaseType("PJ_SEM03.Models.Product");
+
+                    b.Property<string>("edu_description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("edu_id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("edu_subject")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("edu_teacher")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.ToTable("Educations", (string)null);
+                });
+
+            modelBuilder.Entity("PJ_SEM03.Models.Medical", b =>
+                {
+                    b.HasBaseType("PJ_SEM03.Models.Product");
+
+                    b.Property<string>("med_brand")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("med_id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("med_sex")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("med_uses")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.ToTable("Medicals", (string)null);
+                });
+
+            modelBuilder.Entity("PJ_SEM03.Models.Scientific", b =>
+                {
+                    b.HasBaseType("PJ_SEM03.Models.Product");
+
+                    b.Property<string>("sci_brand")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("sci_id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("sci_uses")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.ToTable("Scientifics", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -682,7 +716,7 @@ namespace PJ_SEM03.Migrations
             modelBuilder.Entity("PJ_SEM03.Models.Cart", b =>
                 {
                     b.HasOne("PJ_SEM03.Models.Product", "Product")
-                        .WithMany()
+                        .WithMany("Carts")
                         .HasForeignKey("product_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -745,6 +779,33 @@ namespace PJ_SEM03.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("PJ_SEM03.Models.Education", b =>
+                {
+                    b.HasOne("PJ_SEM03.Models.Product", null)
+                        .WithOne()
+                        .HasForeignKey("PJ_SEM03.Models.Education", "product_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("PJ_SEM03.Models.Medical", b =>
+                {
+                    b.HasOne("PJ_SEM03.Models.Product", null)
+                        .WithOne()
+                        .HasForeignKey("PJ_SEM03.Models.Medical", "product_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("PJ_SEM03.Models.Scientific", b =>
+                {
+                    b.HasOne("PJ_SEM03.Models.Product", null)
+                        .WithOne()
+                        .HasForeignKey("PJ_SEM03.Models.Scientific", "product_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("PJ_SEM03.Models.Order", b =>
                 {
                     b.Navigation("OrderDetails");
@@ -752,6 +813,8 @@ namespace PJ_SEM03.Migrations
 
             modelBuilder.Entity("PJ_SEM03.Models.Product", b =>
                 {
+                    b.Navigation("Carts");
+
                     b.Navigation("Feedbacks");
 
                     b.Navigation("OrderDetails");

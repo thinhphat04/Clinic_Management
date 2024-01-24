@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PJ_SEM03")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fafdbee46961f3ac345f8795793be57a72628125")]
 [assembly: System.Reflection.AssemblyProductAttribute("PJ_SEM03")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PJ_SEM03")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

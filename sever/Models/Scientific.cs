@@ -2,9 +2,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PJ_SEM03.Models;
 
-public class Scientific
+public class Scientific : Product
 {
-    [Key]
     public int sci_id { get; set; }
     public string sci_uses { get; set; }
     

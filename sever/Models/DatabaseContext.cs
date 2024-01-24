@@ -21,6 +21,7 @@ public class DatabaseContext : IdentityDbContext<User>
     public DbSet<Product> Products { get; set; }
     public DbSet<Feedback> Feedbacks { get; set; }
     public DbSet<Cart> Carts { get; set; }
+    public DbSet<User> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -29,6 +30,22 @@ public class DatabaseContext : IdentityDbContext<User>
              .HasOne(o => o.User)
              .WithMany(u => u.Orders)
              .HasForeignKey(o => o.user_id);
+        
+        //nối bảng edu medical scientific với product
+        modelBuilder.Entity<Product>()
+            .ToTable("Products");
+        
+        modelBuilder.Entity<Education>()
+            .ToTable("Educations");
+        
+        modelBuilder.Entity<Medical>()
+            .ToTable("Medicals");
+        
+        modelBuilder.Entity<Scientific>()
+            .ToTable("Scientifics");
+
+
+        
 
         modelBuilder.Entity<OrderDetail>()
                              .HasOne(od => od.Order)
@@ -40,15 +57,13 @@ public class DatabaseContext : IdentityDbContext<User>
                      .WithMany(p => p.OrderDetails)
                      .HasForeignKey(od => od.product_id);
 
-        modelBuilder.Entity<Cart>()
-                     .HasOne(c => c.User)
-                     .WithMany(u => u.Carts)
-                     .HasForeignKey(c => c.user_id);
-
-        modelBuilder.Entity<Cart>()
-                     .HasOne(c => c.Product)
-                     .WithMany()
-                     .HasForeignKey(c => c.product_id);
+        modelBuilder.Entity<Cart>(c =>
+        {
+            c.HasKey(c => new { c.product_id, c.user_id });
+            c.HasOne(c => c.Product).WithMany(p => p.Carts).HasForeignKey(c => c.product_id);
+            c.HasOne(c => c.User).WithMany(u => u.Carts).HasForeignKey(c => c.user_id);
+        });
+        
         modelBuilder.Entity<Feedback>(f =>
         {
             f.HasOne(f => f.User)
@@ -61,11 +76,65 @@ public class DatabaseContext : IdentityDbContext<User>
 
         });
 
-        modelBuilder.Entity<Education>().HasData(new Education[]
+        modelBuilder.Entity<User>(entity =>
         {
-            new Education { edu_id = 1,  edu_teacher = "Adam", edu_description = "Description1", edu_subject = "Learn MEDICAL Vocabulary in English\n", product_type = "Education" },
-            new Education { edu_id = 2, edu_teacher = "Adam", edu_description = "Description2", edu_subject = "Learn English Grammar: How to use SO & SO THAT\n", product_type = "Education" }
+            entity.HasIndex(u => u.UserName).IsUnique();
+            entity.HasIndex(u => u.Email).IsUnique();
         });
+
+
+
+
+        PasswordHasher<User> passwordHasher = new PasswordHasher<User>();
+
+        modelBuilder.Entity<User>().HasData(new User[]
+        {
+            new User
+            {
+                Id = "1",
+                UserName = "admin",
+                Email = "admin@test.com",
+                user_fullName = "admin",
+                Role = "Admin",
+                PasswordHash = passwordHasher.HashPassword(new User(), "Admin*123")
+            },
+
+            new User
+            {
+                Id = "2",
+                UserName = "phat",
+                Email = "phat@test.com",
+                user_fullName = "Ngo Thinh Phat",
+                Role = "Member",
+                PasswordHash = passwordHasher.HashPassword(new User(), "Phat*123")
+            },
+
+            new User
+            {
+                Id = "3",
+                UserName = "khai",
+                Email = "khai@test.com",
+                user_fullName = "Bui Tuan Khai",
+                Role = "Member",
+                PasswordHash = passwordHasher.HashPassword(new User(), "Khai*123")
+            },
+
+            new User
+            {
+                Id = "4",
+                UserName = "tram",
+                Email = "tram@test.com",
+                user_fullName = "Tran Bao Huyen Tram",
+                Role = "Member",
+                PasswordHash = passwordHasher.HashPassword(new User(), "Tram*123")
+            },
+        });
+
+        // modelBuilder.Entity<Education>().HasData(new Education[]
+        // {
+        //     new Education { edu_id = 1,  edu_teacher = "Adam", edu_description = "Description1", edu_subject = "Learn MEDICAL Vocabulary in English\n", product_type = "Education" },
+        //     new Education { edu_id = 2, edu_teacher = "Adam", edu_description = "Description2", edu_subject = "Learn English Grammar: How to use SO & SO THAT\n", product_type = "Education" }
+        // });
 
         modelBuilder.Entity<Cart>().HasData(new Cart[]
         {
@@ -74,21 +143,21 @@ public class DatabaseContext : IdentityDbContext<User>
                      cart_id = 1,
                      product_id = 1,
                      product_quantity = 2,
-                     user_id = "2"
+                     user_id = "1"
                  },
                  new Cart
                  {
                      cart_id = 2,
                      product_id = 2,
                      product_quantity = 1,
-                     user_id = "3"
+                     user_id = "2"
                  },
                  new Cart
                  {
                      cart_id = 3,
                      product_id = 3,
                      product_quantity = 3,
-                     user_id = "4"
+                     user_id = "3"
                  }
         });
 
@@ -99,7 +168,7 @@ public class DatabaseContext : IdentityDbContext<User>
                      {
                          order_id = 1,
                          order_code = "ORD123",
-                         user_id = "2",
+                         user_id = "1",
                          order_datetime = DateTime.Now,
                          order_status = "Processing",
                          order_address = "123 Street, City, Country",
@@ -110,7 +179,7 @@ public class DatabaseContext : IdentityDbContext<User>
                      {
                          order_id = 2,
                          order_code = "ORD456",
-                         user_id = "3",
+                         user_id = "2",
                          order_datetime = DateTime.Now,
                          order_status = "Delivered",
                          order_address = "456 Avenue, City, Country",
@@ -128,14 +197,14 @@ public class DatabaseContext : IdentityDbContext<User>
                  new Feedback
                  {
                      feedback_id = 1,
-                     user_id = "2",
+                     user_id = "1",
                      product_id =1,
                      feedback_description = "Good Service",
                      feedback_rating = 5,
                  },
                   new Feedback
                  {
-                     user_id = "3",
+                     user_id = "2",
                      feedback_id = 2,
                      product_id =3,
                      feedback_description = "Great",
@@ -144,7 +213,7 @@ public class DatabaseContext : IdentityDbContext<User>
                   new Feedback
                  {
                      feedback_id = 3,
-                     user_id="4",
+                     user_id="3",   
                      product_id =5,
                      feedback_description = "Good product!",
                      feedback_rating = 5,
