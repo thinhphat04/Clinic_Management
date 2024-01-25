@@ -34,16 +34,25 @@ namespace PJ_SEM03.Services
 
         public async Task<bool> UpdateCartQuantity(Cart cart)
         {
-            var oldCart =
-                await db.Carts.SingleOrDefaultAsync(c => c.user_id == cart.user_id && c.product_id == cart.product_id);
-            if (oldCart != null)
+            try
             {
-                oldCart.product_quantity = cart.product_quantity;
-                await db.SaveChangesAsync();
-                return true;
+                var existingCart = await db.Carts.SingleOrDefaultAsync(c => c.user_id == cart.user_id && c.product_id == cart.product_id);
+
+                if (existingCart != null)
+                {
+                    existingCart.product_quantity = cart.product_quantity;
+                    await db.SaveChangesAsync();
+                    return true;
+                }
+
+                return false;
             }
-            
-            return false;
+            catch (Exception ex)
+            {
+                // Log the exception for debugging purposes
+                // You can log ex.Message or other relevant information
+                return false;
+            }
         }
 
         public async Task<IEnumerable<Cart>> GetCartByUserId(string userId)

@@ -18,11 +18,19 @@ namespace PJ_SEM03.Controllers
         [HttpPost]
         public async Task<IActionResult> AddCart(Cart cart)
         {
-            if (await _cartRepo.AddCart(cart))
+            try
             {
-                return Ok();
+                if (await _cartRepo.AddCart(cart))
+                {
+                    return CreatedAtAction(nameof(GetCartByUserId), new { userId = cart.user_id }, "Add OK");
+                }
+                return BadRequest("Unable to add cart");
             }
-            return BadRequest();
+            catch (Exception ex)
+            {
+                // Log the exception for debugging purposes
+                return StatusCode(500, "Internal Server Error");
+            }
         }
 
         [HttpPut]

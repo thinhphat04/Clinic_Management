@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using PJ_SEM03.Models;
 using PJ_SEM03.Repository;
+using PJ_SEM03.RequestHelpers;
+using PJ_SEM03.Services;
 
 namespace PJ_SEM03.Controllers
 {
@@ -16,6 +18,21 @@ namespace PJ_SEM03.Controllers
             this._orderRepo = orderRepo;
         }
         //
+
+
+        [HttpGet]
+        public async Task<ActionResult<PagedList<Order>>> GetAll([FromQuery] PaginationParams paginationParams)
+        {
+            try
+            {
+                return Ok(await _orderRepo.getAll(paginationParams.PageNumber, paginationParams.PageSize));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
         [HttpPost]
         public async Task<IActionResult> PostOrder(Order order)
         {
