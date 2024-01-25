@@ -10,7 +10,8 @@ namespace PJ_SEM03.Models
         
         public string order_code { get; set; }
         public string user_id { get; set; }
-        
+        public int CartId { get; set; }
+
         public DateTime order_datetime { get; set; }
         
         public string order_status { get; set; }

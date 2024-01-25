@@ -157,46 +157,108 @@ namespace PJ_SEM03.Migrations
 
             modelBuilder.Entity("PJ_SEM03.Models.Cart", b =>
                 {
-                    b.Property<int>("product_id")
+                    b.Property<int>("CartId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("user_id")
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CartId"));
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("cart_id")
-                        .HasColumnType("int");
+                    b.HasKey("CartId");
 
-                    b.Property<int>("product_quantity")
-                        .HasColumnType("int");
-
-                    b.HasKey("product_id", "user_id");
-
-                    b.HasIndex("user_id");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Carts");
 
                     b.HasData(
                         new
                         {
-                            product_id = 1,
-                            user_id = "1",
-                            cart_id = 1,
-                            product_quantity = 2
+                            CartId = 1,
+                            UserId = "1"
                         },
                         new
                         {
-                            product_id = 2,
-                            user_id = "2",
-                            cart_id = 2,
-                            product_quantity = 1
-                        },
-                        new
-                        {
-                            product_id = 3,
-                            user_id = "3",
-                            cart_id = 3,
-                            product_quantity = 3
+                            CartId = 2,
+                            UserId = "2"
                         });
+                });
+
+            modelBuilder.Entity("PJ_SEM03.Models.CartItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CartId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CartId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("CartItems");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CartId = 1,
+                            ProductId = 1,
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CartId = 1,
+                            ProductId = 2,
+                            Quantity = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CartId = 2,
+                            ProductId = 2,
+                            Quantity = 1
+                        });
+                });
+
+            modelBuilder.Entity("PJ_SEM03.Models.CartItems", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CartId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CartId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("Items");
                 });
 
             modelBuilder.Entity("PJ_SEM03.Models.Feedback", b =>
@@ -242,7 +304,7 @@ namespace PJ_SEM03.Migrations
                             feedback_id = 2,
                             feedback_description = "Great",
                             feedback_rating = 5,
-                            product_id = 3,
+                            product_id = 2,
                             user_id = "2"
                         },
                         new
@@ -250,8 +312,8 @@ namespace PJ_SEM03.Migrations
                             feedback_id = 3,
                             feedback_description = "Good product!",
                             feedback_rating = 5,
-                            product_id = 5,
-                            user_id = "3"
+                            product_id = 2,
+                            user_id = "1"
                         });
                 });
 
@@ -262,6 +324,9 @@ namespace PJ_SEM03.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("order_id"));
+
+                    b.Property<int>("CartId")
+                        .HasColumnType("int");
 
                     b.Property<string>("order_address")
                         .IsRequired()
@@ -299,23 +364,25 @@ namespace PJ_SEM03.Migrations
                         new
                         {
                             order_id = 1,
+                            CartId = 1,
                             order_address = "123 Street, City, Country",
                             order_code = "ORD123",
-                            order_datetime = new DateTime(2024, 1, 24, 20, 10, 27, 257, DateTimeKind.Local).AddTicks(6709),
+                            order_datetime = new DateTime(2024, 1, 25, 15, 39, 19, 182, DateTimeKind.Local).AddTicks(6690),
                             order_phone = "1234567890",
                             order_status = "Processing",
-                            order_total = 100,
+                            order_total = 290,
                             user_id = "1"
                         },
                         new
                         {
                             order_id = 2,
+                            CartId = 0,
                             order_address = "456 Avenue, City, Country",
                             order_code = "ORD456",
-                            order_datetime = new DateTime(2024, 1, 24, 20, 10, 27, 257, DateTimeKind.Local).AddTicks(6751),
+                            order_datetime = new DateTime(2024, 1, 25, 15, 39, 19, 182, DateTimeKind.Local).AddTicks(6722),
                             order_phone = "0987654321",
                             order_status = "Delivered",
-                            order_total = 200,
+                            order_total = 100,
                             user_id = "2"
                         });
                 });
@@ -535,14 +602,14 @@ namespace PJ_SEM03.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "acea77a1-0f71-4451-9c6c-90de8be18995",
+                            ConcurrencyStamp = "8c0d03fd-a7db-4351-8faa-a97d363973bf",
                             Email = "admin@test.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEFdI5elpksgz3jowMp06DenwIiljhKdLmKk+LbCsGaKFXaW8jXh/mziX2A+TPfVxsg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELOE7Aw8ggUghKl+2lYebfHHvdrDH/7zDtneMXi2P9VGR6XI6uaaco5r5vWGiwvNJA==",
                             PhoneNumberConfirmed = false,
                             Role = "Admin",
-                            SecurityStamp = "0b421199-4bbf-4a76-bc2f-f6f3589ff2f0",
+                            SecurityStamp = "0d4902ee-f46c-44b0-818f-b254c1fb8b96",
                             TwoFactorEnabled = false,
                             UserName = "admin",
                             user_fullName = "admin"
@@ -551,14 +618,14 @@ namespace PJ_SEM03.Migrations
                         {
                             Id = "2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "34699d28-bc7b-4884-ade2-9feb47bd4102",
+                            ConcurrencyStamp = "8386a334-498b-40ff-975e-6ee541556023",
                             Email = "phat@test.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEGtwkzb5gYDi/Oh8eCX8cLGDid4zOhg+2xrrwgjRFvvAEZYWnD6zFcwgWrMgihWPrA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDU5vl3j/6Kyi6vp325tV7wJ6dTh+QiRPIrTGsNgVQpUuslSqgJibqCAC9Xru/31UA==",
                             PhoneNumberConfirmed = false,
                             Role = "Member",
-                            SecurityStamp = "e0fe7ab0-d6ec-4617-a38c-f953a41dcc80",
+                            SecurityStamp = "b514c836-ead0-430d-bb0d-7f2fe907f062",
                             TwoFactorEnabled = false,
                             UserName = "phat",
                             user_fullName = "Ngo Thinh Phat"
@@ -567,14 +634,14 @@ namespace PJ_SEM03.Migrations
                         {
                             Id = "3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "25692992-d092-4d17-8ab3-5105b73cd02d",
+                            ConcurrencyStamp = "3e7fdfb8-6ca9-45c3-8a4b-08c8f7f1f19f",
                             Email = "khai@test.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEBzdyk6iBV55t6EvcjbmOP+3l9Wtgi7aaIWOcMIb8bXKrgj+VjcEZ6OV6oJqaXkkuQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEIW2RGGnRTxDOuffIE6RYihM4+z5BNTE+k/ENRY+PilXBbouR3LloES7LNnQUR3LSA==",
                             PhoneNumberConfirmed = false,
                             Role = "Member",
-                            SecurityStamp = "88265ba7-fb24-4b19-875e-6297cb0ec075",
+                            SecurityStamp = "a4ca0e3c-9ca6-41ec-850f-9d72ef286bb2",
                             TwoFactorEnabled = false,
                             UserName = "khai",
                             user_fullName = "Bui Tuan Khai"
@@ -583,14 +650,14 @@ namespace PJ_SEM03.Migrations
                         {
                             Id = "4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5bcca64b-8869-4c3c-aebf-bc1f9c43395c",
+                            ConcurrencyStamp = "07e560ce-c0d5-4749-be4b-d8c58fcf29e9",
                             Email = "tram@test.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEFXy9utupzxxOKqeUPYJwf6ERMwXAKajOYYnxttTfmzp7FVFOp1Z1m4a5WgodbxikQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAECphPAqeLlV9CALh9HmWrtFNd+HuWPf2nujtWFID1HqEaqEAxol9teBuMT4909lN9w==",
                             PhoneNumberConfirmed = false,
                             Role = "Member",
-                            SecurityStamp = "005bee1b-0bc1-41f9-a8f1-844ce069eede",
+                            SecurityStamp = "6e1f3ae0-2a3a-4b75-9a64-0326dc142fc3",
                             TwoFactorEnabled = false,
                             UserName = "tram",
                             user_fullName = "Tran Bao Huyen Tram"
@@ -712,21 +779,51 @@ namespace PJ_SEM03.Migrations
 
             modelBuilder.Entity("PJ_SEM03.Models.Cart", b =>
                 {
-                    b.HasOne("PJ_SEM03.Models.Product", "Product")
-                        .WithMany("Carts")
-                        .HasForeignKey("product_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("PJ_SEM03.Models.User", "User")
                         .WithMany("Carts")
-                        .HasForeignKey("user_id")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Product");
-
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("PJ_SEM03.Models.CartItem", b =>
+                {
+                    b.HasOne("PJ_SEM03.Models.Cart", "Cart")
+                        .WithMany("Items")
+                        .HasForeignKey("CartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PJ_SEM03.Models.Product", "Product")
+                        .WithMany("CartItems")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cart");
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("PJ_SEM03.Models.CartItems", b =>
+                {
+                    b.HasOne("PJ_SEM03.Models.Cart", "Cart")
+                        .WithMany()
+                        .HasForeignKey("CartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PJ_SEM03.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cart");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("PJ_SEM03.Models.Feedback", b =>
@@ -803,6 +900,11 @@ namespace PJ_SEM03.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("PJ_SEM03.Models.Cart", b =>
+                {
+                    b.Navigation("Items");
+                });
+
             modelBuilder.Entity("PJ_SEM03.Models.Order", b =>
                 {
                     b.Navigation("OrderDetails");
@@ -810,7 +912,7 @@ namespace PJ_SEM03.Migrations
 
             modelBuilder.Entity("PJ_SEM03.Models.Product", b =>
                 {
-                    b.Navigation("Carts");
+                    b.Navigation("CartItems");
 
                     b.Navigation("Feedbacks");
 
