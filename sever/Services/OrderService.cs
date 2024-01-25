@@ -8,7 +8,7 @@ using PJ_SEM03.RequestHelpers;
 
 namespace PJ_SEM03.Services
 {
-    public class OrderService 
+    public class OrderService : IOrderRepo
     {
         private readonly DatabaseContext db;
 
@@ -19,38 +19,38 @@ namespace PJ_SEM03.Services
 
 
        
-        //public async Task<Order> addOrder(Order order)
-        //{
-        //    using(var transaction = db.Database.BeginTransaction())
-        //    {
-        //        try
-        //        {
-        //            var listCart = await db.Carts.Where(c => c.user_id == order.user_id).ToListAsync();
-        //            order.OrderDetails = new List<OrderDetail>();
-        //            foreach (var cart in listCart)
-        //            {
-        //                OrderDetail details = new OrderDetail();
-        //                details.product_id = cart.product_id;
-        //                details.order_quantity = cart.product_quantity;
-        //                order.OrderDetails.Add(details);
-        //            }
-        //            db.Orders.Add(order);
+        public async Task<Order> addOrder(Order order)
+        {
+            using(var transaction = db.Database.BeginTransaction())
+            {
+                try
+                {
+                    var listCart = await db.Carts.Where(c => c.user_id == order.user_id).ToListAsync();
+                    order.OrderDetails = new List<OrderDetail>();
+                    foreach (var cart in listCart)
+                    {
+                        OrderDetail details = new OrderDetail();
+                        details.product_id = cart.product_id;
+                        details.order_quantity = cart.product_quantity;
+                        order.OrderDetails.Add(details);
+                    }
+                    db.Orders.Add(order);
 
-        //            foreach (var cart in listCart)
-        //            {
-        //                db.Carts.Remove(cart);
-        //            }
-        //            await db.SaveChangesAsync();
-        //            transaction.Commit();
-        //            return order;
-        //        }
-        //        catch (Exception)
-        //        {
-        //            transaction.Rollback();
-        //            return null;
-        //        }
-        //    }
-        //}
+                    foreach (var cart in listCart)
+                    {
+                        db.Carts.Remove(cart);
+                    }
+                    await db.SaveChangesAsync();
+                    transaction.Commit();
+                    return order;
+                }
+                catch (Exception)
+                {
+                    transaction.Rollback();
+                    return null;
+                }
+            }
+        }
 
         public async Task<ActionResult<Order>> updateOrderStatus(int id, string status)
         {
@@ -76,6 +76,12 @@ namespace PJ_SEM03.Services
             var query = db.Orders.AsQueryable();
             var orders = await PagedList<Order>.ToPagedList(query, pageNumber, pageSize);
             return orders;
+        }
+        
+        
+    public async Task<Order> OrderDetails(int orderId)
+        {
+            return await db.Orders.Include(od => od.OrderDetails).ThenInclude(od => od.Product).SingleOrDefaultAsync(c => c.order_id == orderId);
         }
     }
 }

@@ -61,14 +61,27 @@ namespace PJ_SEM03.Services
             return await db.Carts.Include(c => c.Product).Where(c => c.user_id == userId).ToListAsync();
         }
 
+        // public async Task<bool> DeleteCart(string userId, int productId)
+        // {
+        //     var cartItem = await db.Carts.FirstOrDefaultAsync(c => c.product_id == productId && c.user_id == userId);
+        //     if (cartItem != null)
+        //     {
+        //         db.Carts.Remove(cartItem);
+        //         return await db.SaveChangesAsync() > 0;
+        //     }
+        //     return false;
+        // }
+        
         public async Task<bool> DeleteCart(string userId, int productId)
         {
-            var cartItem = await db.Carts.FirstOrDefaultAsync(c => c.product_id == productId && c.user_id == userId);
-            if (cartItem != null)
+            var cart = await db.Carts.SingleOrDefaultAsync(c => c.user_id == userId && c.product_id == productId);
+            if (cart != null)
             {
-                db.Carts.Remove(cartItem);
-                return await db.SaveChangesAsync() > 0;
+                db.Carts.Remove(cart);
+                await db.SaveChangesAsync();
+                return true;
             }
+
             return false;
         }
 

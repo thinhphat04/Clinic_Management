@@ -20,6 +20,7 @@ namespace PJ_SEM03.Controllers
         //
 
 
+      
         [HttpGet]
         public async Task<ActionResult<PagedList<Order>>> GetAll([FromQuery] PaginationParams paginationParams)
         {
@@ -70,6 +71,27 @@ namespace PJ_SEM03.Controllers
                 return NotFound();
             }
             return Ok(order);
+        }
+
+        [HttpGet("details/{orderId}")]
+        public async Task<IActionResult> GetOrder(int orderId)
+        {
+            try
+            {
+                var order = await _orderRepo.OrderDetails(orderId);
+                if (order != null)
+                {
+                    return Ok(order);
+                }
+                else
+                {
+                    return BadRequest("Order Details Not Found");
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

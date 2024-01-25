@@ -43,20 +43,18 @@ public class DatabaseContext : IdentityDbContext<User>
         
         modelBuilder.Entity<Scientific>()
             .ToTable("Scientifics");
-
-
         
+        // modelBuilder.Entity<OrderDetail>()
+        //                      .HasOne(od => od.Order)
+        //                      .WithMany(o => o.OrderDetails)
+        //                      .HasForeignKey(od => od.order_id);
+        //
+        // modelBuilder.Entity<OrderDetail>()
+        //              .HasOne(od => od.Product)
+        //              .WithMany(p => p.OrderDetails)
+        //              .HasForeignKey(od => od.product_id);
 
-        modelBuilder.Entity<OrderDetail>()
-                             .HasOne(od => od.Order)
-                             .WithMany(o => o.OrderDetails)
-                             .HasForeignKey(od => od.order_id);
-
-        modelBuilder.Entity<OrderDetail>()
-                     .HasOne(od => od.Product)
-                     .WithMany(p => p.OrderDetails)
-                     .HasForeignKey(od => od.product_id);
-
+        //cart
         modelBuilder.Entity<Cart>(c =>
         {
             c.HasKey(c => new { c.product_id, c.user_id });
@@ -64,7 +62,7 @@ public class DatabaseContext : IdentityDbContext<User>
             c.HasOne(c => c.User).WithMany(u => u.Carts).HasForeignKey(c => c.user_id);
         });
         
-        
+        //feedback
         modelBuilder.Entity<Feedback>(f =>
         {
             f.HasOne(f => f.User)
@@ -76,13 +74,36 @@ public class DatabaseContext : IdentityDbContext<User>
                       .HasForeignKey(f => f.product_id);
 
         });
-
+        //user
         modelBuilder.Entity<User>(entity =>
         {
             entity.HasIndex(u => u.UserName).IsUnique();
             entity.HasIndex(u => u.Email).IsUnique();
+        }); 
+        //order
+        modelBuilder.Entity<Order>(o =>
+        {
+            o.HasOne(o => o.User).WithMany(u => u.Orders).HasForeignKey(o => o.user_id);
+            o.HasData(new Order[]
+            {
+                new Order{order_id=1,order_code = "ORD001", user_id="1", order_address="HCM", order_phone="123", order_datetime=DateTime.Now, order_status="Processing", order_total=100},
+                new Order{order_id=2, order_code = "ORD001", user_id="2", order_address="Ca Mau", order_phone="124", order_datetime=DateTime.Now, order_status="Delivered", order_total=200}
+            });
         });
-
+        //orderdetail
+        modelBuilder.Entity<OrderDetail>(od =>
+        {
+            od.HasKey(od => new { od.product_id, od.order_id });
+            od.HasOne(od => od.Product).WithMany(p => p.OrderDetails).HasForeignKey(od => od.product_id);
+            od.HasOne(od => od.Order).WithMany(o => o.OrderDetails).HasForeignKey(od => od.order_id);
+            od.HasData(new OrderDetail[]
+            {
+                new OrderDetail {order_id=1, product_id=1, order_quantity=2, order_price=45},
+                new OrderDetail {order_id=1, product_id=3, order_quantity=3, order_price=30},
+                new OrderDetail {order_id=2, product_id=2, order_quantity=4, order_price=100},
+                new OrderDetail {order_id=2, product_id=4, order_quantity=1, order_price=90}
+            });
+        });
 
 
 
@@ -162,32 +183,32 @@ public class DatabaseContext : IdentityDbContext<User>
                  }
         });
 
-        modelBuilder.Entity<Order>().HasData(
-            new Order[]
-            {
-                new Order
-                     {
-                         order_id = 1,
-                         order_code = "ORD123",
-                         user_id = "1",
-                         order_datetime = DateTime.Now,
-                         order_status = "Processing",
-                         order_address = "123 Street, City, Country",
-                         order_phone = "1234567890",
-                         order_total = 100
-                     },
-                new Order
-                     {
-                         order_id = 2,
-                         order_code = "ORD456",
-                         user_id = "2",
-                         order_datetime = DateTime.Now,
-                         order_status = "Delivered",
-                         order_address = "456 Avenue, City, Country",
-                         order_phone = "0987654321",
-                         order_total = 200
-                     }
-        });
+        // modelBuilder.Entity<Order>().HasData(
+        //     new Order[]
+        //     {
+        //         new Order
+        //              {
+        //                  order_id = 1,
+        //                  order_code = "ORD123",
+        //                  user_id = "1",
+        //                  order_datetime = DateTime.Now,
+        //                  order_status = "Processing",
+        //                  order_address = "123 Street, City, Country",
+        //                  order_phone = "1234567890",
+        //                  order_total = 100
+        //              },
+        //         new Order
+        //              {
+        //                  order_id = 2,
+        //                  order_code = "ORD456",
+        //                  user_id = "2",
+        //                  order_datetime = DateTime.Now,
+        //                  order_status = "Delivered",
+        //                  order_address = "456 Avenue, City, Country",
+        //                  order_phone = "0987654321",
+        //                  order_total = 200
+        //              }
+        // });
 
         //modelBuilder.Entity<IdentityRole>().HasData(
         //    new IdentityRole { Name = "User", NormalizedName = "USER" },
@@ -221,31 +242,31 @@ public class DatabaseContext : IdentityDbContext<User>
                  },
              });
         
-        modelBuilder.Entity<OrderDetail>().HasData(new OrderDetail[]
-        {
-            new OrderDetail
-            {
-                
-                order_id = 1,
-                product_id = 1,
-                order_quantity = 2,
-                order_price = 45
-            },
-            new OrderDetail
-            {
-                order_id = 1,
-                product_id = 2,
-                order_quantity = 1,
-                order_price = 10
-            },
-            new OrderDetail
-            {
-                order_id = 2,
-                product_id = 3,
-                order_quantity = 3,
-                order_price = 3,           
-            }
-            });
+        // modelBuilder.Entity<OrderDetail>().HasData(new OrderDetail[]
+        // {
+        //     new OrderDetail
+        //     {
+        //         
+        //         order_id = 1,
+        //         product_id = 1,
+        //         order_quantity = 2,
+        //         order_price = 45
+        //     },
+        //     new OrderDetail
+        //     {
+        //         order_id = 1,
+        //         product_id = 2,
+        //         order_quantity = 1,
+        //         order_price = 10
+        //     },
+        //     new OrderDetail
+        //     {
+        //         order_id = 2,
+        //         product_id = 3,
+        //         order_quantity = 3,
+        //         order_price = 3,           
+        //     }
+        //     });
             
         modelBuilder.Entity<Product>().HasData(new Product[]
             {
