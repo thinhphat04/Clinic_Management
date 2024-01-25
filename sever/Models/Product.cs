@@ -18,10 +18,10 @@ public class Product
     public int product_quantity { get; set; } 
     
     public int product_price { get; set; }
-    
-    
-    public ICollection<Cart>? Carts { get; set; }
-    
+
+
+    public ICollection<CartItem>? CartItems { get; set; }
+
     public ICollection<OrderDetail>? OrderDetails { get; set; }
 
     public ICollection<Feedback> Feedbacks { get; set; }
