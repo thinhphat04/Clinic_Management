@@ -32,15 +32,16 @@ namespace PJ_SEM03.Services
             return await UpdateCartQuantity(oldCart);
         }
 
-        public async Task<bool> UpdateCartQuantity(Cart cart)
+        public async Task<bool> UpdateCartQuantity(Cart newCart)
         {
             try
             {
-                var existingCart = await db.Carts.SingleOrDefaultAsync(c => c.user_id == cart.user_id && c.product_id == cart.product_id);
+                var existingCart = await db.Carts.SingleOrDefaultAsync(c => c.user_id == newCart.user_id && c.product_id == newCart.product_id);
 
                 if (existingCart != null)
                 {
-                    existingCart.product_quantity = cart.product_quantity;
+                    existingCart.product_quantity = newCart.product_quantity;
+                    db.Carts.Update(existingCart);
                     await db.SaveChangesAsync();
                     return true;
                 }

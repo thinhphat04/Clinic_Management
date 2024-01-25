@@ -220,10 +220,12 @@ public class DatabaseContext : IdentityDbContext<User>
                      feedback_rating = 5,
                  },
              });
+        
         modelBuilder.Entity<OrderDetail>().HasData(new OrderDetail[]
         {
             new OrderDetail
             {
+                order_detail_id = -1,
                 order_id = 1,
                 product_id = 1,
                 order_quantity = 2,
@@ -231,6 +233,7 @@ public class DatabaseContext : IdentityDbContext<User>
             },
             new OrderDetail
             {
+                order_detail_id = -2,
                 order_id = 1,
                 product_id = 2,
                 order_quantity = 1,
@@ -238,13 +241,14 @@ public class DatabaseContext : IdentityDbContext<User>
             },
             new OrderDetail
             {
+                order_detail_id = -3,
                 order_id = 2,
                 product_id = 3,
                 order_quantity = 3,
-                order_price = 30
+                order_price = 3,
             }
         });
-        
+            
         modelBuilder.Entity<Product>().HasData(new Product[]
             {
                 new Product
