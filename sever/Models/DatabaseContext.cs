@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using PJ_SEM03.Models;
 using System.Data;
 using System.Reflection.Emit;
-using static PJ_SEM03.Models.CartItems;
+
 
 namespace PJ_SEM03.Models;
 
@@ -23,7 +23,7 @@ public class DatabaseContext : IdentityDbContext<User>
     public DbSet<Feedback> Feedbacks { get; set; }
     public DbSet<Cart> Carts { get; set; }
     public DbSet<User> Users { get; set; }
-    public DbSet<CartItems> Items { get; set; }
+    public DbSet<CartItem> Items { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
