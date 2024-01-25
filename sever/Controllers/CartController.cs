@@ -18,19 +18,11 @@ namespace PJ_SEM03.Controllers
         [HttpPost]
         public async Task<IActionResult> AddCart(Cart cart)
         {
-            try
+            if (await _cartRepo.AddCart(cart))
             {
-                var result = await _cartRepo.AddCart(cart);
-                if (result)
-                {
-                    return Ok("Add Cart Success");
-                }
-                return BadRequest("Add Cart Failed");
+                return Ok();
             }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return BadRequest();
         }
 
         [HttpPut]
