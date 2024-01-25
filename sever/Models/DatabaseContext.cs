@@ -244,7 +244,31 @@ public class DatabaseContext : IdentityDbContext<User>
                      feedback_rating = 5,
                  },
              });
-
+        modelBuilder.Entity<OrderDetail>().HasData(new OrderDetail[]
+        {
+            new OrderDetail
+            {
+                order_id = 1,
+                product_id = 1,
+                order_quantity = 2,
+                order_price = 45
+            },
+            new OrderDetail
+            {
+                order_id = 1,
+                product_id = 2,
+                order_quantity = 1,
+                order_price = 10
+            },
+            new OrderDetail
+            {
+                order_id = 2,
+                product_id = 3,
+                order_quantity = 3,
+                order_price = 30
+            }
+        });
+        
         modelBuilder.Entity<Product>().HasData(new Product[]
             {
                 new Product
