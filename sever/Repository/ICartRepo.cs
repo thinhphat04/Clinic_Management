@@ -5,13 +5,8 @@ namespace PJ_SEM03.Repository;
 
 public interface ICartRepo
 {
-    //Task<bool> AddCart(Cart cart);
-    //Task<bool> UpdateCartQuantity(Cart cart);
-    //Task<bool> DeleteCart(string userId, int productId);
+    Task<bool> AddCart(Cart cart);
+    Task<bool> UpdateCartQuantity(Cart cart);
+    Task<bool> DeleteCart(string userId, int productId);
     Task<IEnumerable<Cart>> GetCartByUserId(string userId);
-    Task<Cart?> RetrieveCart(string userId);
-
-    Cart? CreateCart(string user_id);
-
-    CartDto MapCartToDto(Cart? cart);
 }

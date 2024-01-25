@@ -5,7 +5,6 @@ using PJ_SEM03.Models;
 using System.Data;
 using System.Reflection.Emit;
 
-
 namespace PJ_SEM03.Models;
 
 public class DatabaseContext : IdentityDbContext<User>
@@ -23,17 +22,10 @@ public class DatabaseContext : IdentityDbContext<User>
     public DbSet<Feedback> Feedbacks { get; set; }
     public DbSet<Cart> Carts { get; set; }
     public DbSet<User> Users { get; set; }
-    public DbSet<CartItem> Items { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-
-        modelBuilder.Entity<CartItem>()
-            .HasOne(ci => ci.Cart)
-            .WithMany(c => c.Items)
-            .HasForeignKey(ci => ci.CartId);
-
         modelBuilder.Entity<Order>()
              .HasOne(o => o.User)
              .WithMany(u => u.Orders)
@@ -67,12 +59,11 @@ public class DatabaseContext : IdentityDbContext<User>
 
         modelBuilder.Entity<Cart>(c =>
         {
-            //c.HasKey(c => new { c.product_id, c.user_id });
-            //c.HasOne(c => c.Product).WithMany(p => p.Carts).HasForeignKey(c => c.product_id);
-            //c.HasOne(c => c.User).WithMany(u => u.Carts).HasForeignKey(c => c.user_id);
+            c.HasKey(c => new { c.product_id, c.user_id });
+            c.HasOne(c => c.Product).WithMany(p => p.Carts).HasForeignKey(c => c.product_id);
+            c.HasOne(c => c.User).WithMany(u => u.Carts).HasForeignKey(c => c.user_id);
         });
         
-       
         
         modelBuilder.Entity<Feedback>(f =>
         {
@@ -148,41 +139,27 @@ public class DatabaseContext : IdentityDbContext<User>
 
         modelBuilder.Entity<Cart>().HasData(new Cart[]
         {
-            new Cart
-            {
-                CartId = 1,
-                 UserId = "1",
-            },
-            new Cart
-            {   
-                CartId = 2,
-                UserId = "2",
-            }
-        });
-
-        modelBuilder.Entity<CartItem>().HasData(new CartItem[] 
-        {
-            new CartItem
-            {
-                Id = 1,
-                Quantity = 1,
-                ProductId = 1,
-                CartId = 1,
-            }, 
-            new CartItem
-            {
-                Id = 2,
-                Quantity = 2,
-                ProductId = 2,
-                CartId = 1,
-            },
-             new CartItem
-            {
-                Id = 3,
-                Quantity = 1,
-                ProductId = 2,
-                CartId = 2,
-            }
+                 new Cart
+                 {
+                     // cart_id = 1,
+                     product_id = 1,
+                     product_quantity = 2,
+                     user_id = "1"
+                 },
+                 new Cart
+                 {
+                     // cart_id = 2,
+                     product_id = 2,
+                     product_quantity = 1,
+                     user_id = "2"
+                 },
+                 new Cart
+                 {
+                     // cart_id = 3,
+                     product_id = 3,
+                     product_quantity = 3,
+                     user_id = "3"
+                 }
         });
 
         modelBuilder.Entity<Order>().HasData(
@@ -193,12 +170,11 @@ public class DatabaseContext : IdentityDbContext<User>
                          order_id = 1,
                          order_code = "ORD123",
                          user_id = "1",
-                         CartId=1,
                          order_datetime = DateTime.Now,
                          order_status = "Processing",
                          order_address = "123 Street, City, Country",
                          order_phone = "1234567890",
-                         order_total = 290,
+                         order_total = 100
                      },
                 new Order
                      {
@@ -209,7 +185,7 @@ public class DatabaseContext : IdentityDbContext<User>
                          order_status = "Delivered",
                          order_address = "456 Avenue, City, Country",
                          order_phone = "0987654321",
-                         order_total = 100
+                         order_total = 200
                      }
         });
 
@@ -231,15 +207,15 @@ public class DatabaseContext : IdentityDbContext<User>
                  {
                      user_id = "2",
                      feedback_id = 2,
-                     product_id =2,
+                     product_id =3,
                      feedback_description = "Great",
                      feedback_rating = 5,
                  },
                   new Feedback
                  {
                      feedback_id = 3,
-                     user_id="1",   
-                     product_id =2,
+                     user_id="3",   
+                     product_id =5,
                      feedback_description = "Good product!",
                      feedback_rating = 5,
                  },
@@ -249,7 +225,7 @@ public class DatabaseContext : IdentityDbContext<User>
         {
             new OrderDetail
             {
-                order_detail_id = -1,
+                
                 order_id = 1,
                 product_id = 1,
                 order_quantity = 2,
@@ -257,7 +233,6 @@ public class DatabaseContext : IdentityDbContext<User>
             },
             new OrderDetail
             {
-                order_detail_id = -2,
                 order_id = 1,
                 product_id = 2,
                 order_quantity = 1,
@@ -265,13 +240,12 @@ public class DatabaseContext : IdentityDbContext<User>
             },
             new OrderDetail
             {
-                order_detail_id = -3,
                 order_id = 2,
                 product_id = 3,
                 order_quantity = 3,
-                order_price = 3,
+                order_price = 3,           
             }
-        });
+            });
             
         modelBuilder.Entity<Product>().HasData(new Product[]
             {
