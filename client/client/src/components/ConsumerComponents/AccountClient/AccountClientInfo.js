@@ -13,10 +13,10 @@ const AccountClientInfo = () => {
     const fetchAPIs = () => {
       fetch(
         `https://localhost:7096/api/users/${
-          JSON.parse(window.localStorage.getItem('auth')).user._id
+          JSON.parse(window.localStorage.getItem('auth')).id
         }`,
       )
-        .then((res) => res.json())
+        // .then((res) => res.json())
         .then((data) => {
           setUser(data);
         });

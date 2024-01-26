@@ -457,9 +457,9 @@ const Home = () => {
                     onClick={(e) => {
                       e.preventDefault();
                       handleLoadingPage(1);
-                      // window.setTimeout(() => {
-                      //   window.location.href = `/product/${product.product_type}/${product.product_name}`;
-                      // }, 1000);
+                      window.setTimeout(() => {
+                        window.location.href = `/product/${product.product_type}/${product.product_name}`;
+                      }, 1000);
                     }}
                   >
                     <img

@@ -19,14 +19,14 @@ const Cart = () => {
       if (window.localStorage.auth)
         fetch(
           `https://localhost:7096/api/users/${
-            JSON.parse(window.localStorage.getItem('auth')).user._id
+            JSON.parse(window.localStorage.getItem('auth')).id
           }`,
         )
-          .then((res) => res.json())
+          // .then((res) => res.json())
           .then((data) => {
             setUser(data);
             setLoading(false);
-            setCartUser(data.cart);
+            // setCartUser(data.cart);
           });
       else {
         document.querySelector('.cart__label--empty').innerText =

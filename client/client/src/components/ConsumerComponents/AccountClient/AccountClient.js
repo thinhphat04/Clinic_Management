@@ -17,23 +17,24 @@ const AccountClient = () => {
 
   useEffect(() => {
     document.title = 'Clinic Online | Tài khoản';
+    console.log("loginnn:: ", JSON.parse(window.localStorage.getItem('auth')).id);
     if (window.localStorage.getItem('auth')) {
       const fetchAPIs = () => {
         fetch(
           `https://localhost:7096/api/users/${
-            JSON.parse(window.localStorage.getItem('auth')).user._id
+            JSON.parse(window.localStorage.getItem('auth')).id
           }`,
         )
-          .then((res) => res.json())
+          // .then((res) => res.json())
           .then((data) => {
             setUser(data);
           });
 
-        fetch('https://localhost:7096/api/orders')
-          .then((res) => res.json())
-          .then((data) => {
-            setOrders(data);
-          });
+        // fetch('https://localhost:7096/api/orders')
+        //   .then((res) => res.json())
+        //   .then((data) => {
+        //     setOrders(data);
+        //   });
       };
       fetchAPIs();
     } else {

@@ -381,7 +381,7 @@ const InfoProductClient = () => {
                 <div
                   className="info-product__image-primary"
                   style={{
-                    backgroundImage: `url(${product.imagePrimary})`,
+                    backgroundImage: `url(${product.product_img})`,
                     backgroundPosition: "center center",
                     backgroundColor: "transparent",
                     backgroundRepeat: "no-repeat",
@@ -419,7 +419,7 @@ const InfoProductClient = () => {
                     }}
                   ></li>
 
-                  {loading ? (
+                  {/* {loading ? (
                     <p>Đang kết nối đến server ... </p>
                   ) : (
                     imageList.map((image, i) => (
@@ -438,7 +438,7 @@ const InfoProductClient = () => {
                         }}
                       ></li>
                     ))
-                  )}
+                  )} */}
                 </ul>
                 <div className="info-product__policy">
                   <label className="info-product__policy-header">
@@ -511,29 +511,6 @@ const InfoProductClient = () => {
                   Trả góp 0%
                 </label>
                 <div className="info-product__detail-option">
-                  {/* <label className="info-product__detail-label">
-                    Chọn phiên bản:
-                  </label>
-                  {loading ? (
-                    <p>Đang kết nối đến server ... </p>
-                  ) : (
-                    option.map((o, i) => (
-                      <div
-                        key={i}
-                        className="info-product__detail-option-item"
-                        onClick={() => {
-                          handleSelectOption(o.data, o.price);
-                        }}
-                      >
-                        <div className="info-product__detail-option-item-content">
-                          {o.data}
-                        </div>
-                        <div className="info-product__detail-option-item-price">
-                          {Number(o.price).toLocaleString()} đ
-                        </div>
-                      </div>
-                    ))
-                  )} */}
                   <p
                     className="info-product__policy-item-content"
                     style={{ marginRight: "10px" }}
@@ -541,31 +518,6 @@ const InfoProductClient = () => {
                     {product.product_description}
                   </p>
                 </div>
-                {/* <div className="info-product__detail-option">
-                  <label className="info-product__detail-label">
-                    Chọn màu sắc:
-                  </label>
-                  {loading ? (
-                    <p>Đang kết nối đến server ... </p>
-                  ) : (
-                    color.map((c, i) => (
-                      <div
-                        key={i}
-                        className="info-product__detail-option-item"
-                        onClick={() => {
-                          handleSelectColor(c);
-                        }}
-                      >
-                        <div className="info-product__detail-option-item-content">
-                          {c}
-                        </div>
-                        <div className="info-product__detail-option-item-price">
-                          {Number(product.product_price).toLocaleString()} đ
-                        </div>
-                      </div>
-                    ))
-                  )}
-                </div> */}
                 <div className="info-product__detail-promote">
                   <label className="info-product__detail-promote-label">
                     <i className="info-product__detail-promote-label-icon fa fa-gift"></i>
