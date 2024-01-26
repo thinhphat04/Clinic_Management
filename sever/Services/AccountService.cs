@@ -57,7 +57,7 @@ namespace PJ_SEM03.Services
 
         public async Task<(bool Success, object Result)> RegisterUser(RegisterDto registerDto)
         {
-            var user = new User { UserName = registerDto.Username, Email = registerDto.Email, PhoneNumber = registerDto.phoneNumber, Role = "Member", user_address= registerDto.Address };
+            var user = new User { UserName = registerDto.Username, Email = registerDto.Email, PhoneNumber = registerDto.phoneNumber, Role = "Member", user_address= registerDto.Address, user_fullName = registerDto.fullname };
             var result = await _userManager.CreateAsync(user, registerDto.Password);
 
             if (result.Succeeded)
@@ -68,7 +68,8 @@ namespace PJ_SEM03.Services
                     user.UserName,
                     user.Email,
                     user.PhoneNumber,
-                    user.user_address
+                    user.user_address,
+                    user.user_fullName
                 };
 
                 return (true, userDto);

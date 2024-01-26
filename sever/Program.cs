@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using PJ_SEM03.Data;
 using PJ_SEM03.Models;
 using PJ_SEM03.Repository;
 using PJ_SEM03.Services;
@@ -58,7 +57,7 @@ builder.Services.AddCors(options =>
 builder.Services.AddScoped<IUserRepo, UserService>();
 builder.Services.AddScoped<IAccountRepo, AccountService>();
 builder.Services.AddScoped<IProductRepo, ProductService>();
-builder.Services.AddScoped<IOrderRepo, OrderService>();
+//builder.Services.AddScoped<IOrderRepo, OrderService>();
 builder.Services.AddScoped<ICartRepo, CartService>();
 builder.Services.AddScoped<CloudinaryService>();
 builder.Services.AddScoped<IFeedbackRepo, FeedbackService>();
@@ -72,21 +71,21 @@ var app = builder.Build();
 //data seeding
 //data seeding
 //data seeding
-using (var scope = app.Services.CreateScope())
-{
-    var context = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
-    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
-    var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
-    try
-    {
-        await context.Database.MigrateAsync();
-        await DbInitializer.Initialize(context, userManager);
-    }
-    catch (Exception ex)
-    {
-        logger.LogError(ex, "Problem migrating data");
-    }
-}
+//using (var scope = app.Services.CreateScope())
+//{
+//    var context = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
+//    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
+//    var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+//    try
+//    {
+//        await context.Database.MigrateAsync();
+//        await DbInitializer.Initialize(context, userManager);
+//    }
+//    catch (Exception ex)
+//    {
+//        logger.LogError(ex, "Problem migrating data");
+//    }
+//}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

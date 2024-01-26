@@ -46,5 +46,34 @@ namespace PJ_SEM03.Controllers
             }
         }
 
+        [HttpPost("createFeedback")]
+        public async Task<IActionResult> CreateFeedback(string userId, int productId, [FromBody] Feedback feedback)
+        {
+            try
+            {
+                bool hasPurchased = await repo.CheckUserPurchase(userId, productId);
+                if (hasPurchased)
+                {
+                    var result = await repo.CreateFeedback(userId, productId, feedback);
+                    if (result)
+                    {
+                        return Ok("Feedback created successfully.");
+                    }
+                    else
+                    {
+                        return BadRequest("Failed to create feedback.");
+                    }
+                }
+                else
+                {
+                    return Forbid("User has not purchased the product.");
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Error: {ex.Message}");
+            }
+        }
+
     }
 }

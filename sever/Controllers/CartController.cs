@@ -20,7 +20,7 @@ namespace PJ_SEM03.Controllers
         {
             if (await _cartRepo.AddCart(cart))
             {
-                return Ok();
+                return Ok("Add Cart Success");
             }
             return BadRequest();
         }
@@ -30,7 +30,7 @@ namespace PJ_SEM03.Controllers
         {
             if (await _cartRepo.UpdateCartQuantity(cart))
             {
-                return Ok();
+                return Ok("Update Cart Success");
             }
             return BadRequest();
         }
@@ -46,7 +46,7 @@ namespace PJ_SEM03.Controllers
         {
             if (await _cartRepo.DeleteCart(userId, productId))
             {
-                return Ok();
+                return Ok("Delete Cart Success");
             }
             return BadRequest();
         }

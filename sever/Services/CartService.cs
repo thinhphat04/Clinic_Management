@@ -32,18 +32,28 @@ namespace PJ_SEM03.Services
             return await UpdateCartQuantity(oldCart);
         }
 
-        public async Task<bool> UpdateCartQuantity(Cart cart)
+        public async Task<bool> UpdateCartQuantity(Cart newCart)
         {
-            var oldCart =
-                await db.Carts.SingleOrDefaultAsync(c => c.user_id == cart.user_id && c.product_id == cart.product_id);
-            if (oldCart != null)
+            try
             {
-                oldCart.product_quantity = cart.product_quantity;
-                await db.SaveChangesAsync();
-                return true;
+                var existingCart = await db.Carts.SingleOrDefaultAsync(c => c.user_id == newCart.user_id && c.product_id == newCart.product_id);
+
+                if (existingCart != null)
+                {
+                    existingCart.product_quantity = newCart.product_quantity;
+                    db.Carts.Update(existingCart);
+                    await db.SaveChangesAsync();
+                    return true;
+                }
+
+                return false;
             }
-            
-            return false;
+            catch (Exception ex)
+            {
+                // Log the exception for debugging purposes
+                // You can log ex.Message or other relevant information
+                return false;
+            }
         }
 
         public async Task<IEnumerable<Cart>> GetCartByUserId(string userId)
@@ -51,16 +61,33 @@ namespace PJ_SEM03.Services
             return await db.Carts.Include(c => c.Product).Where(c => c.user_id == userId).ToListAsync();
         }
 
+        // public async Task<bool> DeleteCart(string userId, int productId)
+        // {
+        //     var cartItem = await db.Carts.FirstOrDefaultAsync(c => c.product_id == productId && c.user_id == userId);
+        //     if (cartItem != null)
+        //     {
+        //         db.Carts.Remove(cartItem);
+        //         return await db.SaveChangesAsync() > 0;
+        //     }
+        //     return false;
+        // }
+        
         public async Task<bool> DeleteCart(string userId, int productId)
         {
-            var cartItem = await db.Carts.FirstOrDefaultAsync(c => c.product_id == productId && c.user_id == userId);
-            if (cartItem != null)
+            var cart = await db.Carts.SingleOrDefaultAsync(c => c.user_id == userId && c.product_id == productId);
+            if (cart != null)
             {
-                db.Carts.Remove(cartItem);
-                return await db.SaveChangesAsync() > 0;
+                db.Carts.Remove(cart);
+                await db.SaveChangesAsync();
+                return true;
             }
+
             return false;
         }
 
+        // public async Task<Cart> GetCartByUserIdAndProductId(string userId, int productId)
+        // {
+        //     return await db.Carts.FirstOrDefaultAsync(c => c.user_id == userId && c.product_id == productId);
+        // }
     }
 }

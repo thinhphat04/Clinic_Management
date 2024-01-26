@@ -4,6 +4,7 @@ using PJ_SEM03.Repository;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using PJ_SEM03.RequestHelpers;
 
 namespace PJ_SEM03.Services
 {
@@ -69,6 +70,18 @@ namespace PJ_SEM03.Services
         {
             return await db.Orders.FirstOrDefaultAsync(o => o.order_phone == phone && o.order_code == code);
         }
-      
+
+        public async Task<PagedList<Order>> getAll(int pageNumber, int pageSize)
+        {
+            var query = db.Orders.AsQueryable();
+            var orders = await PagedList<Order>.ToPagedList(query, pageNumber, pageSize);
+            return orders;
+        }
+        
+        
+    public async Task<Order> OrderDetails(int orderId)
+        {
+            return await db.Orders.Include(od => od.OrderDetails).ThenInclude(od => od.Product).SingleOrDefaultAsync(c => c.order_id == orderId);
+        }
     }
 }

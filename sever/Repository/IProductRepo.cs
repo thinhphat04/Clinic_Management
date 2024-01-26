@@ -15,5 +15,7 @@ namespace PJ_SEM03.Repository
        Task<PagedList<Product>> getAll(int pageNumber, int pageSize);
        Task<IEnumerable<Product>> getProductByType(string product_type);
        Task<Product> getProductById(int product_id);
+       //image upload
+         // Task<ActionResult<ImageUploadResult>> UploadImage(IFormFile file);
     }
 }

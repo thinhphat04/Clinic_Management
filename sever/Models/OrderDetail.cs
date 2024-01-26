@@ -4,9 +4,9 @@ namespace PJ_SEM03.Models;
 
 public class OrderDetail
 {
-    [Key]
-    public int order_detail_id { get; set; }
-    
+    // [Key]
+    // public int order_detail_id { get; set; }
+    //
     public int order_id { get; set; }
     
     public int product_id { get; set; }

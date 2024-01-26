@@ -11,6 +11,8 @@ namespace PJ_SEM03.Models
         public string order_code { get; set; }
         public string user_id { get; set; }
         
+        // public int CartId { get; set; }
+
         public DateTime order_datetime { get; set; }
         
         public string order_status { get; set; }
@@ -25,14 +27,14 @@ namespace PJ_SEM03.Models
         
         public ICollection<OrderDetail>? OrderDetails { get; set; }
         
-        public void GenerateOrderCode()
-        {
-            var length = 5;
-            var random = new Random();
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            order_code = new string(Enumerable.Repeat(chars, length)
-                .Select(s => s[random.Next(s.Length)]).ToArray());
-        }
+        // public void GenerateOrderCode()
+        // {
+        //     var length = 5;
+        //     var random = new Random();
+        //     const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        //     order_code = new string(Enumerable.Repeat(chars, length)
+        //         .Select(s => s[random.Next(s.Length)]).ToArray());
+        // }
         
     }
 }
