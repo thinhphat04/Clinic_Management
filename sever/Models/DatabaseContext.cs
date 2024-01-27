@@ -21,7 +21,7 @@ public class DatabaseContext : IdentityDbContext<User>
     public DbSet<Product> Products { get; set; }
     public DbSet<Feedback> Feedbacks { get; set; }
     public DbSet<Cart> Carts { get; set; }
-    public DbSet<User> Users { get; set; }
+    //public DbSet<User> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
