@@ -4,6 +4,9 @@ namespace PJ_SEM03.Repository
 {
     public interface IGiftcode
     {
-        Task<IEnumerable<GiftCode>> GetGiftCodes();
+        Task<GiftCode> GetGiftCodeById(int id);
+        
+        Task<IEnumerable<GiftCode>> GetAllGiftCodes();
+
     }
 }
