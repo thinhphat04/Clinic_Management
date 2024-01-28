@@ -12,5 +12,5 @@ public interface IUserRepo
     Task<bool> UpdateUser(User user);
     Task<PagedList<User>> getAll(int pageNumber, int pageSize);
     Task<User> getUserById(string user_id);
-   
+    Task<PagedList<User>> getUserByRole(string user_Role, int pageNumber, int pageSize);
 }
