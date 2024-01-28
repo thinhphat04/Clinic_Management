@@ -18,7 +18,11 @@ public class Product
     public int product_quantity { get; set; } 
     
     public int product_price { get; set; }
-
+    
+    public int product_percent { get; set; }
+    
+    [Range(1,5)]
+    public int product_star { get; set; }
 
     public ICollection<Cart>? Carts { get; set; }
 
