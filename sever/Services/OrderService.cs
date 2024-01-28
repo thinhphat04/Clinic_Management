@@ -83,5 +83,11 @@ namespace PJ_SEM03.Services
         {
             return await db.Orders.Include(od => od.OrderDetails).ThenInclude(od => od.Product).SingleOrDefaultAsync(c => c.order_id == orderId);
         }
-    }
+    
+    
+    public async Task<List<Order>> GetOrdersByUserId(string userId)
+        {
+            return await db.Orders.Where(o => o.user_id == userId).ToListAsync();
+        }
+}
 }

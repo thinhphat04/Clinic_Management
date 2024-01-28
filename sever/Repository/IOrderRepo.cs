@@ -14,5 +14,7 @@ namespace PJ_SEM03.Repository
         
         Task<Order> OrderDetails(int orderId);
 
+        Task<List<Order>> GetOrdersByUserId(string userId);
+
     }
 }
