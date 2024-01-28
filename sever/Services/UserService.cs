@@ -44,7 +44,6 @@ namespace PJ_SEM03.Services
                 query.user_fullName = user.Fullname;
                 query.user_address = user.Address;
                 query.PhoneNumber = user.PhoneNumber;
-                query.user_fullName = user.Fullname;
 
                 _dbContext.Users.Update(query);
                 _dbContext.SaveChanges();
