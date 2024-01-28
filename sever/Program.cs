@@ -68,24 +68,6 @@ builder.Services.AddControllers().AddJsonOptions(x =>
 
 var app = builder.Build();
 
-//data seeding
-//data seeding
-//data seeding
-//using (var scope = app.Services.CreateScope())
-//{
-//    var context = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
-//    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
-//    var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
-//    try
-//    {
-//        await context.Database.MigrateAsync();
-//        await DbInitializer.Initialize(context, userManager);
-//    }
-//    catch (Exception ex)
-//    {
-//        logger.LogError(ex, "Problem migrating data");
-//    }
-//}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
