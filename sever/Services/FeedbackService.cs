@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using PJ_SEM03.DTO;
 using PJ_SEM03.Models;
 using PJ_SEM03.Repository;
 using PJ_SEM03.RequestHelpers;
@@ -65,13 +66,20 @@ namespace PJ_SEM03.Services
             return feedbacks;
         }
 
-        public async Task<PagedList<Feedback>> getFeedbackByProductId(int product_id, int pageNumber, int pageSize)
+        public async Task<PagedList<FeedbackDto>> getFeedbackByProductId(int product_id, int pageNumber, int pageSize)
         {
-            var query = _dbContext.Feedbacks.Where((x => x.product_id == product_id)).AsQueryable();
-            var feedbacks = await PagedList<Feedback>.ToPagedList(query, pageNumber, pageSize);
+            var query = _dbContext.Feedbacks.Where((x => x.product_id == product_id)).Include(x => x.User).AsQueryable();
+            var feedbacks = await PagedList<FeedbackDto>.ToPagedList(query.Select(x => new FeedbackDto
+            {
+                FeedbackId = x.feedback_id,
+                ProductId = x.product_id,
+                UserId = x.user_id,
+                UserName = x.User.UserName, // Assuming UserName is a property in the User entity
+                                            // Include other properties you want in FeedbackDto
+            }), pageNumber, pageSize);
             return feedbacks;
         }
 
-     
+  
     }
 }
