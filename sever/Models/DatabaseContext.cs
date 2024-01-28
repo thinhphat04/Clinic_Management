@@ -72,7 +72,13 @@ public class DatabaseContext : IdentityDbContext<User>
                       .HasForeignKey(f => f.product_id);
 
         });
-        
+        //giftcode
+        modelBuilder.Entity<Product>()
+            .HasOne(p => p.GiftCode)
+            .WithMany()
+            .HasForeignKey(p => p.GiftCodeId)
+            .IsRequired(false);
+        //product
         modelBuilder.Entity<Product>()
             .HasMany(p => p.Feedbacks)
             .WithOne(f => f.Product)
