@@ -16,7 +16,7 @@ const CustomerPage = () => {
       fetch('https://localhost:7096/api/User')
         .then((res) => res.json())
         .then((data) => {
-          console.log("dataUser:: ", data);
+         
           setUsers(data);
           setLoading(false);
           setCountCustomers(data.length);
@@ -25,6 +25,8 @@ const CustomerPage = () => {
     fetchAPI();
     handleLoadOptionSelected(1);
   }, []);
+
+  // console.log("dataUserAAA:: ", users);
 
   return (
     <div className="customer__container">
@@ -93,16 +95,16 @@ const CustomerPage = () => {
                           color: 'white',
                         }}
                       >
-                        {user.normalizedUserName}
+                        {user.user_fullName}
                       </td>
                       <td style={{ textAlign: 'left' }}>
                         {user.email || 'None'}
                       </td>
                       <td style={{ backgroundColor: '#fff2c1' }}>
-                        {user.phone || 'None'}
+                        {user.phoneNumber || 'None'}
                       </td>
                       <td style={{ textAlign: 'left' }}>
-                        {user.address || 'None'}
+                        {user.user_address || 'None'}
                       </td>
                       <td>
                         <div className="table__edit-btn">

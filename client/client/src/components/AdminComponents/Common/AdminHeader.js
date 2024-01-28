@@ -13,17 +13,19 @@ const AdminHeader = () => {
   useEffect(() => {
     const fetchAPI = () => {
       fetch(
-        `https://localhost:7096/api/User/${
+        `https://localhost:7096/api/User/user/${
           JSON.parse(window.localStorage.getItem('authAdmin')).id
         }`,
       )
-        // .then((res) => res.json())
+        .then((res) => res.json())
         .then((data) => {
           setAdmin(data);
         });
     };
     fetchAPI();
   }, []);
+
+  // console.log("adminnnn:: ", admin);
 
   const handleNevigateInfo = () => {
     handleLoadingPage(1);
@@ -47,16 +49,16 @@ const AdminHeader = () => {
     <React.Fragment>
       <div className="admin__header">
         <div className="admin__header-title">
-          Trang quản trị hệ thống ShopTECH
+          Trang quản trị hệ thống Clinic Online
         </div>
         <div className="admin__header-admin">
           <div className="admin__header-info">
             Xin chào,
-            <span className="admin__header-name">{admin.fullname}</span>
+            <span className="admin__header-name">{admin.user_fullName}</span>
             --
           </div>
 
-          <img src={admin.avatarUrl} className="admin__header-avatar"></img>
+          <img src="https://i.pinimg.com/564x/40/98/2a/40982a8167f0a53dedce3731178f2ef5.jpg" className="admin__header-avatar"></img>
 
           <div className="admin__header-option">
             <div

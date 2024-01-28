@@ -13,8 +13,8 @@ const InfoAdmin = () => {
     document.title = 'ShopTECH | Quản trị viên';
     const fetchAPI = () => {
       fetch(
-        `${process.env.REACT_APP_API}/api/admins/${
-          JSON.parse(window.localStorage.getItem('authAdmin')).admin._id
+        `https://localhost:7096/api/User/user/${
+          JSON.parse(window.localStorage.getItem('authAdmin')).id
         }`,
       )
         .then((res) => res.json())
@@ -174,13 +174,13 @@ const InfoAdmin = () => {
                   style={{ fontWeight: 'bold' }}
                   readOnly
                   className="info-page__input info-page__input--readonly"
-                  value={String(admin._id).toUpperCase()}
+                  value={String(admin.id).toUpperCase()}
                 />
 
                 <label className="info-page__label">Họ và tên đầy đủ</label>
                 <input
                   className="info-page__input"
-                  defaultValue={admin.fullname}
+                  defaultValue={admin.user_fullName}
                 />
 
                 <label className="info-page__label">Email</label>
@@ -194,13 +194,13 @@ const InfoAdmin = () => {
                   className="info-page__input"
                   minLength="10"
                   maxLength="10"
-                  defaultValue={admin.phone}
+                  defaultValue={admin.phoneNumber}
                 />
 
                 <label className="info-page__label">Địa chỉ</label>
                 <input
                   className="info-page__input"
-                  defaultValue={admin.address}
+                  defaultValue={admin.user_address}
                 />
               </div>
             </div>

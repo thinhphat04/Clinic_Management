@@ -195,7 +195,7 @@ const Cart = () => {
                     <img
                       className="cart__item-img"
                       src={
-                        p.product_img ||
+                        p.product.product_img ||
                         'https://localhost:7096/public/products/img-product-empty.png'
                       }
                     ></img>

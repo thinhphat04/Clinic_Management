@@ -15,9 +15,10 @@ const ResultSearch = () => {
 
   useEffect(() => {
     const fetchAPIs = () => {
-      fetch('https://localhost:7096/api/products')
+      fetch('https://localhost:7096/api/Products/search/' + keySearch)
         .then((res) => res.json())
         .then((data) => {
+          console.log("SearchDataa:: ", data);
           setProducts(data);
           setLoading(false);
         });
@@ -43,6 +44,8 @@ const ResultSearch = () => {
   const handleSearch = () => {
     const listProducts = document.querySelector('.search-list__container');
     const listArray = [];
+
+    console.log("productHandle:: ",products );
     products.map((product, index) => {
       if (
         String(product.product_name).toLowerCase().includes(keySearch.toLowerCase())
@@ -63,18 +66,18 @@ const ResultSearch = () => {
                     margin: 0 5px 12px;'
                     >
 
-                    <img src=${p.imageLink} class='home__flash-sale-item-img' />
-                    <label class='product__sell-item-label'>${p.name}</label>
+                    <img src=${p.product_img} class='home__flash-sale-item-img' />
+                    <label class='product__sell-item-label'>${p.product_name}</label>
                     <label class='product__sell-item-price'>${Number(
-                      p.price,
+                      p.product_price,
                     ).toLocaleString()} ₫</label>
                     <span class='product__sell-item-percent'>${(
-                      Number(p.price) * 1.065
+                      Number(p.product_price) * 1.065
                     ).toLocaleString()}đ</span>
                     <label class='product__sell-item-sold'>
                         Đánh giá: 
                         <span class='product__sell-item-star-icon'>${handleFormatStarProduct(
-                          p.star,
+                          p.product_star,
                         )}</span>
                     </label>
                 </li>
@@ -100,7 +103,7 @@ const ResultSearch = () => {
     products.map((product, index) => {
       if (
         String(product.product_name).toLowerCase().includes(keySearch.toLowerCase()) &&
-        product.enType === productType
+        product.product_type === productType
       ) {
         listArray.push(product);
         listProducts.innerHTML = `
@@ -117,18 +120,18 @@ const ResultSearch = () => {
                     style='display:block;
                     margin: 10px 5px 12px;'>
 
-                    <img src=${p.imageLink} class='home__flash-sale-item-img' />
-                    <label class='product__sell-item-label'>${p.name}</label>
+                    <img src=${p.product_img} class='home__flash-sale-item-img' />
+                    <label class='product__sell-item-label'>${p.product_name}</label>
                     <label class='product__sell-item-price'>${Number(
-                      p.price,
+                      p.product_price,
                     ).toLocaleString()} ₫</label>
                     <span class='product__sell-item-percent'>${(
-                      Number(p.price) * 1.065
+                      Number(p.product_price) * 1.065
                     ).toLocaleString()}đ</span>
                     <label class='product__sell-item-sold'>
                         Đánh giá: 
                         <span class='product__sell-item-star-icon'>${handleFormatStarProduct(
-                          p.star,
+                          p.product_star,
                         )}</span>
                     </label>
                 </li>
@@ -195,7 +198,7 @@ const ResultSearch = () => {
             <div className="search-header">
               <label className="search-header__label">
                 Kết quả tìm kiếm cho từ khóa:
-                <span className="search-header__label-key">"{keySearch}"</span>
+                <span className="search-header__label-key">"{keySearch}"</span> 
               </label>
               <p className="search-header__count">
                 Đã tìm thấy{' '}
@@ -219,42 +222,42 @@ const ResultSearch = () => {
                   }, 1000);
                 }}
               >
-                Tất cả
+                All
               </button>
               <button
                 className="search-control__btn"
                 onClick={(e) => {
                   handleLoadingPage(1);
                   setTimeout(() => {
-                    handleClickSearchByType('smartphone');
+                    handleClickSearchByType('Medical');
                   }, 1000);
                 }}
               >
-                Điện thoại
+                Medical
               </button>
               <button
                 className="search-control__btn"
                 onClick={(e) => {
                   handleLoadingPage(1);
                   setTimeout(() => {
-                    handleClickSearchByType('tablet');
+                    handleClickSearchByType('Scientific');
                   }, 1000);
                 }}
               >
-                Máy tính bảng
+                Scientific
               </button>
               <button
                 className="search-control__btn"
                 onClick={(e) => {
                   handleLoadingPage(1);
                   setTimeout(() => {
-                    handleClickSearchByType('laptop');
+                    handleClickSearchByType('Education');
                   }, 1000);
                 }}
               >
-                Máy tính xách tay
+                Education
               </button>
-              <button
+              {/* <button
                 className="search-control__btn"
                 onClick={(e) => {
                   handleLoadingPage(1);
@@ -264,7 +267,7 @@ const ResultSearch = () => {
                 }}
               >
                 Phụ kiện
-              </button>
+              </button> */}
             </div>
 
             <ul className="search-list__container">

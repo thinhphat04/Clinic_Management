@@ -19,24 +19,25 @@ const CartInfo = () => {
     document.title = 'Clinic Online | Thông tin đặt hàng';
     const fetchAPIs = () => {
       fetch(
-        `https://localhost:7096/api/users/${
-          JSON.parse(window.localStorage.getItem('auth')).user._id
+        `https://localhost:7096/api/Cart/${
+          JSON.parse(window.localStorage.getItem('auth')).id
         }`,
       )
         .then((res) => res.json())
         .then((data) => {
-          setUser(data);
-          setCartUser(data.cart);
+          setUser(JSON.parse(window.localStorage.getItem('auth')));
+          setCartUser(data);
         });
     };
     fetchAPIs();
   }, []);
+  console.log("user:: ", cartUser);
 
   useEffect(() => {
     // show thông tin tổng tiền giỏ hàng
     let countPriceAll = 0;
     cartUser.map((cartItem, index) => {
-      if (cartItem) countPriceAll += Number(cartItem.price) * cartItem.quantity;
+      if (cartItem) countPriceAll += Number(cartItem.product.product_price) * cartItem.product_quantity;
     });
     setCountTotalPrice(countPriceAll);
   });
@@ -47,7 +48,7 @@ const CartInfo = () => {
     );
     const inputElement = document.querySelectorAll('.cart-info__input');
     if (checkboxDefaultInfo.checked) {
-      inputElement[0].value = `${user.fullname}`;
+      inputElement[0].value = `${user.username}`;
       inputElement[1].value = `${user.email}`;
       inputElement[2].value = `${user.phone}`;
       setFullNameEdit(user.fullname);
@@ -298,7 +299,7 @@ const CartInfo = () => {
 
           <li className="block-process__item">
             <i className="block-process__item-icon fa fa-tag"></i>
-            <label className="block-process__item-label">Promotional code</label>
+            <label className="block-process__item-label">Gift code</label>
           </li>
           <i className="block-process__item-arrow">-</i>
 
@@ -329,7 +330,7 @@ const CartInfo = () => {
             <button
               className="cart__control-btn cart__control-btn--payment"
               onClick={(e) => {
-                handleNextStep();
+               handleNextStep();
               }}
             >
               Next step

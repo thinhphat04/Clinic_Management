@@ -53,7 +53,7 @@ const InfoProductClient = () => {
       fetch("https://localhost:7096/api/Products/" + product.product_type)
         .then((res) => res.json())
         .then((data) => {
-          // console.log("dataABCD:: ", data);
+           console.log("dataABCD:: ", data);
           // console.log("ABCDproducttype:: ", product.product_type);
           setProducts(data);
           setLoading(false);
@@ -287,31 +287,20 @@ const InfoProductClient = () => {
       }
       console.log("KHAIproduct:: ", product.product_id);
       console.log("KHAIusser:: ",JSON.parse(window.localStorage.getItem("auth")).id );
-      console.log("KHAIproductquantity:: ",1);
+      console.log("KHAIproductquantity:: ", 1);
 
-      axios
-        .post(
+      axios.post(
           "https://localhost:7096/api/Cart",          
-            // JSON.parse(window.localStorage.getItem("auth")).id,
           {
-            // imageLink: product.product_img,
-            // productName: name,
-            // option: optionEdit,
-            // color: colorEdit,
-            // price: priceEdit,
-            // percent: product.percent,
-            // quantity: 1,
-            // voted: false,
-            user_id: JSON.parse(window.localStorage.getItem("auth")).id,
-            product_id: product.product_id,
+            user_id : String(JSON.parse(window.localStorage.getItem("auth"))?.id),
+            product_id: String(product.product_id),
             product_quantity: 1
-
           }
         )
         .then((response) => {
-          console.log("response::: ", response);
+          console.log("response::: ", response);   
           showSuccessMessage();
-           handleLoadingPage(1);
+          handleLoadingPage(1);
           window.setTimeout(() => {
             window.location.href ='/cart';
           }, 1000);
@@ -378,11 +367,11 @@ const InfoProductClient = () => {
             <div className="info-product__header">
               <label className="info-product__header-name">{name}</label>
               <p className="info-product__header-star">
-                {handleFormatStarProduct(product.star)}
+                {handleFormatStarProduct(product.product_star)}
               </p>
-              <p className="info-product__header-voters">
+              {/* <p className="info-product__header-voters">
                 ({product.voter} người bình chọn)
-              </p>
+              </p> */}
             </div>
 
             <div className="info-product__box">
@@ -505,14 +494,12 @@ const InfoProductClient = () => {
                   </label>
                   <label className="info-product__detail-old-price">
                     {(
-                      (Number(product.product_price || 0) *
-                        (100 + product.product_quantity)) /
-                      100
+                      (Number(product.product_price || 0) *100) / product.product_percent
                     ).toLocaleString()}{" "}
                     đ
                   </label>
                   <label className="info-product__detail-percent">
-                    -{product.percent || 0}%
+                    -{product.product_percent || 0}%
                   </label>
                 </div>
                 <label className="info-product__detail-installment">

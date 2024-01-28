@@ -15,7 +15,7 @@ const InfoCustomer = () => {
   useEffect(() => {
     const fetchAPI = () => {
       document.title = 'Clinic Online | Thông tin khách hàng';
-      fetch(`${process.env.REACT_APP_API}/api/users/${userID}`)
+      fetch(`https://localhost:7096/api/User/user/${userID}`)
         .then((res) => res.json())
         .then((data) => {
           setUser(data);
@@ -99,19 +99,19 @@ const InfoCustomer = () => {
                 <label className="info-page__label">Họ và tên khách hàng</label>
                 <input
                   className="info-page__input"
-                  defaultValue={user.fullname}
+                  defaultValue={user.user_fullName}
                 />
 
                 <label className="info-page__label">Email</label>
                 <input className="info-page__input" defaultValue={user.email} />
 
                 <label className="info-page__label">Phone number</label>
-                <input className="info-page__input" defaultValue={user.phone} />
+                <input className="info-page__input" defaultValue={user.phoneNumber} />
 
                 <label className="info-page__label">Địa chỉ</label>
                 <input
                   className="info-page__input"
-                  defaultValue={user.address}
+                  defaultValue={user.user_address}
                 />
               </div>
             </div>
