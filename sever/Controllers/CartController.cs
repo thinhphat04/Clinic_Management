@@ -22,7 +22,8 @@ namespace PJ_SEM03.Controllers
             {
                 return Ok("success");
             }
-            return BadRequest();
+
+            return BadRequest("The quantity in the cart cannot exceed the available product quantity");
         }
 
         [HttpPut]

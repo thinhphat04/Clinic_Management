@@ -40,24 +40,28 @@ namespace PJ_SEM03.Services
             {
                 Id = user.Id,
                 Role = user.Role,
+                Fullname = user.user_fullName,
+                Address = user.user_address,
+                PhoneNumber = user.PhoneNumber,
                 Email = user.Email,
                 Username = user.UserName,
-                Token = await GenerateToken(user)
+                Token = GenerateToken(user)
             };
         }
 
         [NonAction]
-        private async Task<string> GenerateToken(User user)
+        private string GenerateToken(User user)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-            var claims = new List<Claim>
+            var claims = new[]
             {
-                new Claim(ClaimTypes.Email, user.Email),
-                new Claim(ClaimTypes.Name, user.UserName),
-                new Claim(ClaimTypes.Role, user.Role)
+                new Claim("Name", user.UserName),
+                new Claim("Email", user.Email),
+                new Claim(ClaimTypes.Role, user.Role),
             };
-            var token = new JwtSecurityToken(_config["Jwt:Issuer"], _config["Jwt:Audience"], claims, expires: DateTime.Now.AddMinutes(30), signingCredentials: credentials);
+
+            var token = new JwtSecurityToken(_config["Jwt:Issuer"], _config["Jwt:Audience"], claims, expires: DateTime.Now.AddHours(3), signingCredentials: credentials);
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 

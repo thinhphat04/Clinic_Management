@@ -109,11 +109,12 @@ namespace PJ_SEM03.Controllers
         //public async Task<IActionResult> ResetPassword(ResetPassword resetPassword)
         //{
         //    var user = await _userManager.FindByEmailAsync(resetPassword.Email);
-        //    if(user != null)
+        //    if (user != null)
         //    {
         //        var resetPassResult = await _userManager.ResetPasswordAsync(user, resetPassword.Token, resetPassword.Password);
-        //        if(!resetPassResult.Succeeded) {
-        //            foreach(var error in resetPassResult.Errors)
+        //        if (!resetPassResult.Succeeded)
+        //        {
+        //            foreach (var error in resetPassResult.Errors)
         //            {
         //                ModelState.AddModelError(error.Code, error.Description);
         //            }
@@ -123,5 +124,6 @@ namespace PJ_SEM03.Controllers
         //    }
         //    return BadRequest("Can not send email, please try again");
         //}
+
     }
 }

@@ -8,11 +8,13 @@ namespace PJ_SEM03.Repository
     {
         
         Task<Order> addOrder(Order order);
-        Task<ActionResult<Order>> updateOrderStatus(int id, string status);
+        // Task<ActionResult<Order>> updateOrderStatus(int id, string order_status);
         Task<PagedList<Order>> getAll(int pageNumber, int pageSize);
         Task<Order> GetOrderByPhoneAndCode(string phone, string code);
         
         Task<Order> OrderDetails(int orderId);
+
+        Task<List<Order>> GetOrdersByUserId(string userId);
 
     }
 }

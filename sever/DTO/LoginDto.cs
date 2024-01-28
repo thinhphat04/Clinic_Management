@@ -5,7 +5,6 @@ namespace PJ_SEM03.DTO
 {
     public class LoginDto
     {
-
         public string userName { get; set; }
 
         [Required]

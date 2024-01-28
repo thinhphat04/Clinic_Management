@@ -23,10 +23,12 @@ public class Product
     
     [Range(1,5)]
     public int product_star { get; set; }
+    public int? GiftCodeId { get; set; }  
+    public GiftCode GiftCode { get; set; }  
 
     public ICollection<Cart>? Carts { get; set; }
 
     public ICollection<OrderDetail>? OrderDetails { get; set; }
 
-    public ICollection<Feedback> Feedbacks { get; set; }
+    public ICollection<Feedback>? Feedbacks { get; set; }
 }

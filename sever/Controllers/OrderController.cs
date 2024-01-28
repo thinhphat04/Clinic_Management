@@ -17,10 +17,7 @@ namespace PJ_SEM03.Controllers
         {
             this._orderRepo = orderRepo;
         }
-        //
-
-
-      
+       
         [HttpGet]
         public async Task<ActionResult<PagedList<Order>>> GetAll([FromQuery] PaginationParams paginationParams)
         {
@@ -39,11 +36,13 @@ namespace PJ_SEM03.Controllers
         {
             try
             {
+                // Generate a random order code
+                order.GenerateOrderCode();
+
                 var newOrders = await _orderRepo.addOrder(order);
                 if (newOrders != null)
                 {
                     return Ok(newOrders);
-                    
                 }
                 else
                 {
@@ -56,11 +55,11 @@ namespace PJ_SEM03.Controllers
             }
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult<Order>> UpdateOrderStatus(int id, string status)
-        {
-            return await _orderRepo.updateOrderStatus(id, status);
-        }
+        // [HttpPut("{id}")]
+        // public async Task<ActionResult<Order>> UpdateOrderStatus(int id, string status)
+        // {
+        //     return await _orderRepo.updateOrderStatus(id, status);
+        // }
         
         [HttpGet("search/{phone}/{code}")]
         public async Task<IActionResult> GetOrderByPhoneAndCode(string phone, string code)
@@ -93,6 +92,29 @@ namespace PJ_SEM03.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpGet("user/{userId}")]
+        public async Task<IActionResult> GetOrdersByUserId(string userId)
+        {
+            try
+            {
+                var orders = await _orderRepo.GetOrdersByUserId(userId);
+                if (orders != null)
+                {
+                    return Ok(orders);
+                }
+                else
+                {
+                    return BadRequest("Order Details Not Found");
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
     }
 }
 
