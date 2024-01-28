@@ -5,14 +5,22 @@ import { handleLoadingPage } from '../../Common';
 import axios from 'axios';
 
 const AddProduct = () => {
-  const [name, setName] = useState('');
-  const [type, setType] = useState();
-  const [enType, setEnType] = useState('');
-  const [brand, setBrand] = useState('');
-  const [price, setPrice] = useState(0);
-  const [option, setOption] = useState([]);
-  const [color, setColor] = useState([]);
-  const [status, setStatus] = useState('');
+  // const [name, setName] = useState('');
+   const [type, setType] = useState();
+  // const [enType, setEnType] = useState('');
+  // const [brand, setBrand] = useState('');
+  // const [price, setPrice] = useState(0);
+  // const [option, setOption] = useState([]);
+  // const [color, setColor] = useState([]);
+  // const [status, setStatus] = useState('');
+  const [product_name, setName] = useState('');
+  const [product_type, setEnType] = useState('');
+  const [product_description, setDes] = useState('');
+  const [product_price, setPrice] = useState(0);
+  const [product_percent, setPercent] = useState(0);
+  const [product_quantity,setQuantity ] =useState(0);
+  const [product_img, setImg] = useState('');
+  const [product_star, setStar] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -69,7 +77,7 @@ const AddProduct = () => {
             ).toLocaleString()} đ</p>
         </div>
         `;
-    setOption([...option, objItem]);
+    // setOption([...option, objItem]);
   };
 
   const randomPercent = (min, max) => {
@@ -80,27 +88,29 @@ const AddProduct = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        `${process.env.REACT_APP_API}/api/products/create`,
+        `https://localhost:7096/api/Products`,
         {
-          imagePrimary: '',
-          imageLink: ``,
-          imageList: [],
-          name,
-          type,
-          enType,
-          brand,
-          price,
-          option,
-          color,
-          status,
-          star: 0,
-          voter: 0,
-          hotDeal: false,
-          featured: true,
-          percent: randomPercent(3, 7),
+          product_name,
+          product_type,
+          product_description, 
+          product_price,
+          product_quantity,
+          product_percent,
+          product_img,
+          product_star,
+          feedbacks: [
+            {
+                "user_id": "1",  
+                "feedback_description": "Good product!",
+                "feedback_rating": 5
+            }
+          ]
         },
       );
-      if (res && res.data.success) {
+
+
+      console.log("resssProduct:: ", res);
+      if (res && res.data !== null) {
         alert('Thêm sản phẩm thành công');
         handleLoadingPage(1);
         window.setTimeout(() => {
@@ -114,6 +124,7 @@ const AddProduct = () => {
       window.alert(error);
     }
   };
+  console.log("aaaa", product_name);
 
   return (
     <div className="add-product__container">
@@ -132,6 +143,22 @@ const AddProduct = () => {
                 }}
               />
 
+            <label className="add__label">Description</label>
+              <input
+                className="add__input"
+                onChange={(e) => {
+                  setDes(e.target.value);
+                }}
+              />
+
+              <label className="add__label">Hình ảnh</label>
+              <input
+                className="add__input"
+                onChange={(e) => {
+                  setImg(e.target.value);
+                }}
+              />
+
               <label className="add__label">Loại sản phẩm</label>
               <select
                 style={{ fontWeight: '500' }}
@@ -139,46 +166,46 @@ const AddProduct = () => {
                 onChange={(e) => {
                   setType(e.target.value);
                   switch (e.target.value.toLowerCase()) {
-                    case 'điện thoại':
-                      setEnType('smartphone');
+                    case 'Medical':
+                      setEnType('Medical');
                       break;
-                    case 'máy tính bảng':
-                      setEnType('tablet');
+                    case 'Education':
+                      setEnType('Education');
                       break;
-                    case 'máy tính xách tay':
-                      setEnType('laptop');
+                    case 'Scientific':
+                      setEnType('Scientific');
                       break;
-                    case 'phụ kiện':
-                      setEnType('accessories');
-                      break;
+                    // case 'phụ kiện':
+                    //   setEnType('accessories');
+                    //   break;
                   }
                 }}
                 value={type}
               >
                 <option value="">Chọn loại sản phẩm ...</option>
-                <option value="Điện thoại">Điện thoại di động</option>
-                <option value="Máy tính xách tay">Máy tính xách tay</option>
-                <option value="Máy tính bảng">Máy tính bảng</option>
-                <option value="Phụ kiện">Phụ kiện công nghệ</option>
+                <option value="Education">Education</option>
+                <option value="Medical">Medical</option>
+                <option value="Scientific">Scientific</option>
+                {/* <option value="Phụ kiện">Phụ kiện công nghệ</option> */}
               </select>
 
-              <label className="add__label">Thương hiệu</label>
+              {/* <label className="add__label">Thương hiệu</label>
               <input
                 className="add__input"
                 onChange={(e) => {
                   setBrand(e.target.value);
                 }}
-              />
-
+              /> */}
+{/* 
               <label className="add__label">Tùy chọn sản phẩm</label>
               <div className="add__option">
                 <ul className="add__option-list"></ul>
                 <button className="add__option-btn" onClick={handleAddOption}>
                   +
                 </button>
-              </div>
+              </div> */}
 
-              <label className="add__label">Màu sắc</label>
+              {/* <label className="add__label">Màu sắc</label>
               <input
                 type="text"
                 className="add__input"
@@ -187,7 +214,7 @@ const AddProduct = () => {
                   setColor(arrayColor);
                 }}
                 placeholder="(Mỗi màu sắc được ngăn cách bằng dấu phẩy). Vd: Đỏ, Vàng, ..."
-              />
+              /> */}
 
               <label className="add__label">Giá sản phẩm</label>
               <input
@@ -198,7 +225,32 @@ const AddProduct = () => {
                 }}
               />
 
-              <label className="add__label">Trạng thái sản phẩm</label>
+              <label className="add__label">Quantity</label>
+              <input
+                type="number"
+                className="add__input"
+                onChange={(e) => {
+                  setQuantity(e.target.value);
+                }}
+              />
+              <label className="add__label">Star</label>
+              <input
+                type="number"
+                className="add__input"
+                onChange={(e) => {
+                  setStar(e.target.value);
+                }}
+              />
+              <label className="add__label">Percent</label>
+              <input
+                type="number"
+                className="add__input"
+                onChange={(e) => {
+                  setPercent(e.target.value);
+                }}
+              />
+
+              {/* <label className="add__label">Trạng thái sản phẩm</label>
               <select
                 className="add__input"
                 onChange={(e) => {
@@ -211,7 +263,7 @@ const AddProduct = () => {
                 </option>
                 <option value="Sẵn hàng">Sẵn hàng</option>
                 <option value="Cháy hàng">Cháy hàng</option>
-              </select>
+              </select> */}
             </div>
           </div>
 

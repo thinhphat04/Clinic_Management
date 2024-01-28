@@ -26,12 +26,13 @@ const Dashboard = () => {
       fetch(`https://localhost:7096/api/Products`)
          .then((res) => res.json())
         .then((data) => {
+          console.log("product data:: ", data);
           setCountProduct(data.length);
           processDataProduct(data);
         });
       // fetch(`https://localhost:7096/api/admins`)
-      fetch(`https://localhost:7096/api/User/1`)
-         .then((res) => res.json())
+      fetch(`https://localhost:7096/api/User/user/1`)
+        .then((res) => res.json())
         .then((data) => {
           setCountAdmin(data.length);
         });
@@ -48,7 +49,7 @@ const Dashboard = () => {
       fetch(`https://localhost:7096/api/Order`)
         .then((res) => res.json())
         .then((data) => {
-          processDataOrder(data);
+          // processDataOrder(data);
         });
     };
     fetchAPIs();
@@ -56,7 +57,9 @@ const Dashboard = () => {
   }, []);
 
   const processDataProduct = (data) => {
-    const groupedData = _.groupBy(data, 'type');
+
+    console.log("dataKHAI: ", data);
+    const groupedData = _.groupBy(data, 'product_type');
 
     setChartDataProduct({
       labels: Object.keys(groupedData),

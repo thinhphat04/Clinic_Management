@@ -24,15 +24,16 @@ const AdminSidebar = () => {
 
   useEffect(() => {
     const fetchAPIs = () => {
-      fetch('https://localhost:7096/api/User/1')
+      fetch('https://localhost:7096/api/User/user/1')
         .then((res) => res.json())
         .then((data) => {
-          setAdmins(data);
+          // console.log("dataaAAAA: ", data);
+          setAdmins([data]);
         });
     };
     fetchAPIs();
   }, []);
-  console.log("admins:: ", admins);
+  // console.log("admins:: ", admins);
 
   useEffect(() => {
     admins.map((admin, index) => {

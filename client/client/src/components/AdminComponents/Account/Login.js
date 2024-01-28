@@ -52,7 +52,7 @@ const Login = () => {
         if (true) {
         localStorage.setItem('authAdmin', JSON.stringify(res.data));
         setAuthAdmin({
-          admin: res.data.admin,
+          admin: res.data.admin,  
           token: res.data.token,
         });
 

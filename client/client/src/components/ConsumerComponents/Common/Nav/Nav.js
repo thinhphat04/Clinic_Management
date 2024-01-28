@@ -41,7 +41,7 @@ const Nav = () => {
           });
     };
     fetchAPI();
-  }, [JSON.parse(window.localStorage.getItem('auth')).id]);
+  }, []);
 
   const handleLoggout = (e) => {
     e.preventDefault();

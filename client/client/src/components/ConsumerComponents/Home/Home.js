@@ -50,8 +50,7 @@ const Home = () => {
     };
     fetchAPIs();
     // handleLoadCountdown();
-  }, []);
-  console.log("loading:; ", loading);   
+  }, []);  
   console.log("products:; ", products);
   useEffect(() => {
     // show thông tin sản phẩm hot deal
@@ -483,11 +482,11 @@ const Home = () => {
                     <label className="product__sell-item-sold">
                       Đánh giá:
                       <span className="product__sell-item-star-icon">
-                        {handleFormatStarProduct(product.star)}
+                        {handleFormatStarProduct(product.product_star)}
                       </span>
                     </label>
                     <div className="home__flash-sale-item-tag">
-                      Giảm {product.product_quantity}%
+                      Giảm {product.product_percent}%
                     </div>
                   </li>
                  
@@ -629,11 +628,11 @@ const Home = () => {
                     <label className="product__sell-item-sold">
                       Đánh giá:
                       <span className="product__sell-item-star-icon">
-                        {handleFormatStarProduct(product.star)}
+                        {handleFormatStarProduct(product.product_star)}
                       </span>
                     </label>
                     <div className="home__flash-sale-item-tag">
-                      Giảm {product.product_quantity}%
+                      Giảm {product.product_percent}%
                     </div>
                   </li>
                 ))
@@ -699,11 +698,11 @@ const Home = () => {
                     <label className="product__sell-item-sold">
                       Đánh giá:
                       <span className="product__sell-item-star-icon">
-                        {handleFormatStarProduct(product.star)}
+                        {handleFormatStarProduct(product.product_star)}
                       </span>
                     </label>
                     <div className="home__flash-sale-item-tag">
-                      Giảm {product.product_quantity}%
+                      Giảm {product.product_percent}%
                     </div>
                   </li>
                 ))

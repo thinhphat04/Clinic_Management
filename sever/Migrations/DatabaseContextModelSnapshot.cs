@@ -295,7 +295,7 @@ namespace PJ_SEM03.Migrations
                             order_id = 1,
                             order_address = "HCM",
                             order_code = "ORD001",
-                            order_datetime = new DateTime(2024, 1, 28, 10, 4, 52, 486, DateTimeKind.Local).AddTicks(9335),
+                            order_datetime = new DateTime(2024, 1, 28, 12, 22, 0, 733, DateTimeKind.Local).AddTicks(3717),
                             order_phone = "123",
                             order_status = "Processing",
                             order_total = 100,
@@ -306,7 +306,7 @@ namespace PJ_SEM03.Migrations
                             order_id = 2,
                             order_address = "Ca Mau",
                             order_code = "ORD001",
-                            order_datetime = new DateTime(2024, 1, 28, 10, 4, 52, 486, DateTimeKind.Local).AddTicks(9366),
+                            order_datetime = new DateTime(2024, 1, 28, 12, 22, 0, 733, DateTimeKind.Local).AddTicks(3729),
                             order_phone = "124",
                             order_status = "Delivered",
                             order_total = 200,
@@ -385,10 +385,16 @@ namespace PJ_SEM03.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("product_percent")
+                        .HasColumnType("int");
+
                     b.Property<int>("product_price")
                         .HasColumnType("int");
 
                     b.Property<int>("product_quantity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("product_star")
                         .HasColumnType("int");
 
                     b.Property<string>("product_type")
@@ -406,20 +412,24 @@ namespace PJ_SEM03.Migrations
                         {
                             product_id = 1,
                             product_description = "What is Costar Evening Primrose Oil? Uses and correct usage\nCostar Evening Primrose Oil is a health care product extracted from evening primrose essential oil. Supports anti-oxidation and reduces symptoms of hot flashes in postmenopausal and premenopausal women. This article will introduce more information about the ingredients, uses, usage and intended users of Costar pills",
-                            product_img = "https://www.bresser.de/out/pictures/generated/product/1/380_340_75/8851000_1.jpg",
+                            product_img = "https://data-service.pharmacity.io/pmc-upload-media/production/pmc-ecm-core/products/P17315_1.jpg",
                             product_name = "Costar Evening Primrose Oil",
+                            product_percent = 10,
                             product_price = 90,
                             product_quantity = 10,
+                            product_star = 5,
                             product_type = "Medical"
                         },
                         new
                         {
                             product_id = 2,
                             product_description = "The Bresser Science ETD-201 is a high-quality stereo microscope with transmitted and incident light. It is ideally suited for use in schools and universities as well as for the training of apprentices and in the field of electronics. The 360° rotatable binocular head allows comfortable viewing for both left and right-handed users. The magnification range of 20x to 80x can be extended with the included Barlow lens to 40x to 160x. The LED lighting is continuously dimmable and can be operated with batteries or the included power supply. The microscope is equipped with a 2x and 4x objective and a pair of 10x wide field eyepieces. The interpupillary distance and diopter adjustment are individually adjustable. The microscope is supplied with a dust cover and 5 prepared slides.",
-                            product_img = "https://www.bresser.de/out/pictures/generated/product/1/380_340_75/8851000_1.jpg",
+                            product_img = "https://maykhoahoc.com/images/thumbnails/550/450/detailed/4/tu-bao-quan-thuoc-duoc-lieu-vacxin-haier-hbc-260-gia-re.jpg",
                             product_name = "Bresser Science ETD-201",
+                            product_percent = 20,
                             product_price = 100,
                             product_quantity = 10,
+                            product_star = 4,
                             product_type = "Scientific"
                         },
                         new
@@ -428,28 +438,34 @@ namespace PJ_SEM03.Migrations
                             product_description = "Description1",
                             product_img = "https://www.bresser.de/out/pictures/generated/product/1/380_340_75/8851000_1.jpg",
                             product_name = "Course 2",
+                            product_percent = 10,
                             product_price = 30,
                             product_quantity = 10,
+                            product_star = 5,
                             product_type = "Education"
                         },
                         new
                         {
                             product_id = 4,
                             product_description = "What is Costar Evening Primrose Oil? Uses and correct usage\nCostar Evening Primrose Oil is a health care product extracted from evening primrose essential oil. Supports anti-oxidation and reduces symptoms of hot flashes in postmenopausal and premenopausal women. This article will introduce more information about the ingredients, uses, usage and intended users of Costar pills",
-                            product_img = "https://www.bresser.de/out/pictures/generated/product/1/380_340_75/8851000_1.jpg",
+                            product_img = "https://data-service.pharmacity.io/pmc-upload-media/production/pmc-ecm-core/products/P17480_1.jpg",
                             product_name = "Acetylcystein",
+                            product_percent = 50,
                             product_price = 90,
                             product_quantity = 10,
+                            product_star = 5,
                             product_type = "Medical"
                         },
                         new
                         {
                             product_id = 5,
                             product_description = "The Bresser Science ETD-201 is a high-quality stereo microscope with transmitted and incident light. It is ideally suited for use in schools and universities as well as for the training of apprentices and in the field of electronics. The 360° rotatable binocular head allows comfortable viewing for both left and right-handed users. The magnification range of 20x to 80x can be extended with the included Barlow lens to 40x to 160x. The LED lighting is continuously dimmable and can be operated with batteries or the included power supply. The microscope is equipped with a 2x and 4x objective and a pair of 10x wide field eyepieces. The interpupillary distance and diopter adjustment are individually adjustable. The microscope is supplied with a dust cover and 5 prepared slides.",
-                            product_img = "https://www.bresser.de/out/pictures/generated/product/1/380_340_75/8851000_1.jpg",
+                            product_img = "https://maykhoahoc.com/images/thumbnails/550/450/detailed/4/tu-bao-quan-vacxine-thuoc-haier-hbc-150-gia-re.png",
                             product_name = "Adapter (LEN)",
+                            product_percent = 15,
                             product_price = 100,
                             product_quantity = 10,
+                            product_star = 4,
                             product_type = "Scientific"
                         },
                         new
@@ -458,8 +474,10 @@ namespace PJ_SEM03.Migrations
                             product_description = "Description1",
                             product_img = "https://www.bresser.de/out/pictures/generated/product/1/380_340_75/8851000_1.jpg",
                             product_name = "Course 1",
+                            product_percent = 0,
                             product_price = 30,
                             product_quantity = 10,
+                            product_star = 0,
                             product_type = "Education"
                         });
                 });
@@ -551,14 +569,14 @@ namespace PJ_SEM03.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0cc4e1b1-a150-4812-ae0f-1038226473c9",
+                            ConcurrencyStamp = "0e0ae20d-923d-499d-9bee-b9d3c86905f7",
                             Email = "admin@test.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEJCuQerws3cZCuEs3hOU8nJNAizz7ylr98wr/Vg4DyxcdiD27LT7wypxuomOm/y3WA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEFZK0PP6qdgdP4hLYpDEU/7oM/9FYoVUmOuPFR10qFngkdLEZWvP0wz/AUov+WfV0Q==",
                             PhoneNumberConfirmed = false,
                             Role = "Admin",
-                            SecurityStamp = "def7df02-faa1-4210-9767-7fe30556a111",
+                            SecurityStamp = "e300ee4b-d286-4636-bb4f-b5b5581a1fb3",
                             TwoFactorEnabled = false,
                             UserName = "admin",
                             user_fullName = "admin"
@@ -567,14 +585,14 @@ namespace PJ_SEM03.Migrations
                         {
                             Id = "2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6d0b17ed-cabc-4ffa-9c57-349e39dc0683",
+                            ConcurrencyStamp = "37430a87-9307-4002-a704-a7d068b9d078",
                             Email = "phat@test.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEGd029nTQsGUwuWOGPgsbETIQvbaaLSyI9RB+TugKfgM+0etDhE8SC/9+on3qwi2vw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJmmMPciGPMAX/tGJcbIiIm4+HxXXpcZK/lCeOlcXle37cJfrqJR4pMs42Bel0uSyw==",
                             PhoneNumberConfirmed = false,
                             Role = "Member",
-                            SecurityStamp = "2716135e-076a-4ae1-a821-11c5527986ac",
+                            SecurityStamp = "ce7a2d8e-830a-4a39-aa55-035439bea91f",
                             TwoFactorEnabled = false,
                             UserName = "phat",
                             user_fullName = "Ngo Thinh Phat"
@@ -583,14 +601,14 @@ namespace PJ_SEM03.Migrations
                         {
                             Id = "3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "cdc7d5c6-2889-423c-9cad-d3dd03e615d9",
+                            ConcurrencyStamp = "9d0b0b6d-a8cd-4ef0-bd8e-f0eff7f8cdb5",
                             Email = "khai@test.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEC9jj9IXgnTb0NajByqJA/E0Q9XncD9dNp9DEbLRrEGVuiIi5/6+g5AZBEIP0uIpQg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOey94RL4B2fBWyEP6KCOnD7WeatT/e3Z9WnTj3DUKaSPrpS0IsJpJzjrzXaapEqBw==",
                             PhoneNumberConfirmed = false,
                             Role = "Member",
-                            SecurityStamp = "50422e92-b63e-4ff9-a8c2-65c2368e040f",
+                            SecurityStamp = "be9f08a9-8806-4cdc-8358-2fed84250a8b",
                             TwoFactorEnabled = false,
                             UserName = "khai",
                             user_fullName = "Bui Tuan Khai"
@@ -599,14 +617,14 @@ namespace PJ_SEM03.Migrations
                         {
                             Id = "4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "82008e86-7604-4f0a-9144-3ca1e262e271",
+                            ConcurrencyStamp = "286ed928-54c1-460d-9521-3bc8a9e44069",
                             Email = "tram@test.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEHudvUIJvAFQCOy5gzAGWfJoad45ErDzcDrSO2aCn6RDJGDjSz8Qoefed8eLbnAx7Q==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPuQ0keUakaSC3VWbIkTXie2g0j5weZVyfjhgikNfMFCRNQWxdgu3SwwY1+Hrh37Pg==",
                             PhoneNumberConfirmed = false,
                             Role = "Member",
-                            SecurityStamp = "fc7ea63b-fce3-4da0-ab89-d184a2807374",
+                            SecurityStamp = "c58d560a-a321-4e61-a8cb-1f2b63125123",
                             TwoFactorEnabled = false,
                             UserName = "tram",
                             user_fullName = "Tran Bao Huyen Tram"

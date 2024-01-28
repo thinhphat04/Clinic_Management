@@ -3,11 +3,12 @@ import { useNavigate } from 'react-router-dom';
 
 const EditButtonCustomer = ({ user }) => {
   const navigate = useNavigate(user);
+  console.log("userDANHSACH:: ", user);
 
   const editInfo = (e) => {
     handLoadingPage(1);
     window.setTimeout(() => {
-      navigate(`/admin/customer/info/${user._id}`, { user });
+      navigate(`/admin/customer/info/${user.id}`, { user });
     }, 1000);
   };
 

@@ -95,7 +95,7 @@ const ProductPage = () => {
                     <label className="admin__item-info-label">
                       Loại sản phẩm:
                     </label>
-                    <p className="admin__item-info-content">{product.type}</p>
+                    <p className="admin__item-info-content">{product.product_type}</p>
                   </div>
                   <div className="admin__item-info">
                     <label className="admin__item-info-label">
