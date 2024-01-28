@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PJ_SEM03.CustomResult;
@@ -32,7 +33,7 @@ namespace PJ_SEM03.Controllers
                 return BadRequest(ex);
             }
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpGet("{product_id}")]
         public async Task<ActionResult> getFeedbackByProductId(int product_id, [FromQuery] PaginationParams paginationParams)
         {

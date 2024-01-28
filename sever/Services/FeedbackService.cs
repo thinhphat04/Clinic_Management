@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PJ_SEM03.DTO;
 using PJ_SEM03.Models;
@@ -58,7 +59,7 @@ namespace PJ_SEM03.Services
             return hasPurchased;
         }
 
-
+        [Authorize(Roles ="Admin")]
         public async Task<PagedList<Feedback>> getAll(int pageNumber, int pageSize)
         {
             var query = _dbContext.Feedbacks.AsQueryable();
