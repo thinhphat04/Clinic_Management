@@ -95,6 +95,29 @@ namespace PJ_SEM03.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpGet("user/{userId}")]
+        public async Task<IActionResult> GetOrdersByUserId(string userId)
+        {
+            try
+            {
+                var orders = await _orderRepo.GetOrdersByUserId(userId);
+                if (orders != null)
+                {
+                    return Ok(orders);
+                }
+                else
+                {
+                    return BadRequest("Order Details Not Found");
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
     }
 }
 
