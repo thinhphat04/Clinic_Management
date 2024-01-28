@@ -77,7 +77,7 @@ public class DatabaseContext : IdentityDbContext<User>
             .HasOne(p => p.GiftCode)
             .WithMany()
             .HasForeignKey(p => p.GiftCodeId)
-            .IsRequired(false);
+            .IsRequired(false); 
         //product
         modelBuilder.Entity<Product>()
             .HasMany(p => p.Feedbacks)
