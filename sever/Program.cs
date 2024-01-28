@@ -27,7 +27,7 @@ builder.Services.AddIdentityCore<User>()
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<DatabaseContext>();
 
-
+builder.Services.Configure<DataProtectionTokenProviderOptions>(options =>options.TokenLifespan = TimeSpan.FromHours(10));
 
 //Jwt
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

@@ -180,25 +180,6 @@ namespace PJ_SEM03.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Carts",
-                columns: table => new
-                {
-                    CartId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Carts", x => x.CartId);
-                    table.ForeignKey(
-                        name: "FK_Carts_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Orders",
                 columns: table => new
                 {
@@ -206,7 +187,6 @@ namespace PJ_SEM03.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     order_code = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     user_id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    CartId = table.Column<int>(type: "int", nullable: false),
                     order_datetime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     order_status = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     order_address = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -221,6 +201,31 @@ namespace PJ_SEM03.Migrations
                         column: x => x.user_id,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Carts",
+                columns: table => new
+                {
+                    product_id = table.Column<int>(type: "int", nullable: false),
+                    user_id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    product_quantity = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Carts", x => new { x.product_id, x.user_id });
+                    table.ForeignKey(
+                        name: "FK_Carts_AspNetUsers_user_id",
+                        column: x => x.user_id,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Carts_Products_product_id",
+                        column: x => x.product_id,
+                        principalTable: "Products",
+                        principalColumn: "product_id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -314,65 +319,9 @@ namespace PJ_SEM03.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CartItems",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Quantity = table.Column<int>(type: "int", nullable: false),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
-                    CartId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CartItems", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_CartItems_Carts_CartId",
-                        column: x => x.CartId,
-                        principalTable: "Carts",
-                        principalColumn: "CartId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_CartItems_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
-                        principalColumn: "product_id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Items",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Quantity = table.Column<int>(type: "int", nullable: false),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
-                    CartId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Items", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Items_Carts_CartId",
-                        column: x => x.CartId,
-                        principalTable: "Carts",
-                        principalColumn: "CartId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Items_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
-                        principalColumn: "product_id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "OrderDetails",
                 columns: table => new
                 {
-                    order_detail_id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
                     order_id = table.Column<int>(type: "int", nullable: false),
                     product_id = table.Column<int>(type: "int", nullable: false),
                     order_quantity = table.Column<int>(type: "int", nullable: false),
@@ -380,7 +329,7 @@ namespace PJ_SEM03.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrderDetails", x => x.order_detail_id);
+                    table.PrimaryKey("PK_OrderDetails", x => new { x.product_id, x.order_id });
                     table.ForeignKey(
                         name: "FK_OrderDetails_Orders_order_id",
                         column: x => x.order_id,
@@ -400,10 +349,10 @@ namespace PJ_SEM03.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Role", "SecurityStamp", "TwoFactorEnabled", "UserName", "user_address", "user_fullName" },
                 values: new object[,]
                 {
-                    { "1", 0, "8c0d03fd-a7db-4351-8faa-a97d363973bf", "admin@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAELOE7Aw8ggUghKl+2lYebfHHvdrDH/7zDtneMXi2P9VGR6XI6uaaco5r5vWGiwvNJA==", null, false, "Admin", "0d4902ee-f46c-44b0-818f-b254c1fb8b96", false, "admin", null, "admin" },
-                    { "2", 0, "8386a334-498b-40ff-975e-6ee541556023", "phat@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEDU5vl3j/6Kyi6vp325tV7wJ6dTh+QiRPIrTGsNgVQpUuslSqgJibqCAC9Xru/31UA==", null, false, "Member", "b514c836-ead0-430d-bb0d-7f2fe907f062", false, "phat", null, "Ngo Thinh Phat" },
-                    { "3", 0, "3e7fdfb8-6ca9-45c3-8a4b-08c8f7f1f19f", "khai@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEIW2RGGnRTxDOuffIE6RYihM4+z5BNTE+k/ENRY+PilXBbouR3LloES7LNnQUR3LSA==", null, false, "Member", "a4ca0e3c-9ca6-41ec-850f-9d72ef286bb2", false, "khai", null, "Bui Tuan Khai" },
-                    { "4", 0, "07e560ce-c0d5-4749-be4b-d8c58fcf29e9", "tram@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAECphPAqeLlV9CALh9HmWrtFNd+HuWPf2nujtWFID1HqEaqEAxol9teBuMT4909lN9w==", null, false, "Member", "6e1f3ae0-2a3a-4b75-9a64-0326dc142fc3", false, "tram", null, "Tran Bao Huyen Tram" }
+                    { "1", 0, "edbfe0ae-bed5-47c2-8efd-78da6b6eb9ee", "admin@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEC/Gs7yWZx4wme9pK3cGwjuS/beOUBp/YFeeInS9yaKNsqmMjT4HsuB/xmmtLl6CwQ==", null, false, "Admin", "d77e7238-6d3a-4870-b7b5-363b8d8fd4b4", false, "admin", null, "admin" },
+                    { "2", 0, "45666ed7-16a5-41a7-9e4f-ed21ca468a9e", "phat@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEBCuOLbh2g1+K6gQz1e3o20lry2AP7J4z2jg9ve+mlztGeS1Ogzxsf/ITFuxQ52LRQ==", null, false, "Member", "ec30e2fc-9bed-45f5-8b72-7cba613e1361", false, "phat", null, "Ngo Thinh Phat" },
+                    { "3", 0, "8b37e3f3-3b5d-4a1f-987e-72c09c840a3f", "khai@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEAYXWtefqXeXvB+MxVsKj2BcUYx4Thfw1HZJvvH6xwFZ3VKIOv6SRzIOTqoQmqpXmQ==", null, false, "Member", "83d12d79-59aa-4f9b-8ea4-ba63eb252284", false, "khai", null, "Bui Tuan Khai" },
+                    { "4", 0, "52e2112f-2f34-40e3-915c-16a9ce56b893", "tram@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAECPXAAzOGfoKR4rsNCW6JdQQQESegfqqqLf9gQCQAQfj5tG4KGAPKEI/qkQR/uocKQ==", null, false, "Member", "e77b1462-2d1d-4e5d-90d8-1dd2a6726c0f", false, "tram", null, "Tran Bao Huyen Tram" }
                 });
 
             migrationBuilder.InsertData(
@@ -421,11 +370,12 @@ namespace PJ_SEM03.Migrations
 
             migrationBuilder.InsertData(
                 table: "Carts",
-                columns: new[] { "CartId", "UserId" },
+                columns: new[] { "product_id", "user_id", "product_quantity" },
                 values: new object[,]
                 {
-                    { 1, "1" },
-                    { 2, "2" }
+                    { 1, "1", 2 },
+                    { 2, "2", 1 },
+                    { 3, "3", 3 }
                 });
 
             migrationBuilder.InsertData(
@@ -434,27 +384,28 @@ namespace PJ_SEM03.Migrations
                 values: new object[,]
                 {
                     { 1, "Good Service", 5, 1, "1" },
-                    { 2, "Great", 5, 2, "2" },
-                    { 3, "Good product!", 5, 2, "1" }
+                    { 2, "Great", 5, 3, "2" },
+                    { 3, "Good product!", 5, 5, "3" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Orders",
-                columns: new[] { "order_id", "CartId", "order_address", "order_code", "order_datetime", "order_phone", "order_status", "order_total", "user_id" },
+                columns: new[] { "order_id", "order_address", "order_code", "order_datetime", "order_phone", "order_status", "order_total", "user_id" },
                 values: new object[,]
                 {
-                    { 1, 1, "123 Street, City, Country", "ORD123", new DateTime(2024, 1, 25, 15, 39, 19, 182, DateTimeKind.Local).AddTicks(6690), "1234567890", "Processing", 290, "1" },
-                    { 2, 0, "456 Avenue, City, Country", "ORD456", new DateTime(2024, 1, 25, 15, 39, 19, 182, DateTimeKind.Local).AddTicks(6722), "0987654321", "Delivered", 100, "2" }
+                    { 1, "HCM", "ORD001", new DateTime(2024, 1, 27, 21, 53, 17, 719, DateTimeKind.Local).AddTicks(2595), "123", "Processing", 100, "1" },
+                    { 2, "Ca Mau", "ORD001", new DateTime(2024, 1, 27, 21, 53, 17, 719, DateTimeKind.Local).AddTicks(2622), "124", "Delivered", 200, "2" }
                 });
 
             migrationBuilder.InsertData(
-                table: "CartItems",
-                columns: new[] { "Id", "CartId", "ProductId", "Quantity" },
+                table: "OrderDetails",
+                columns: new[] { "order_id", "product_id", "order_price", "order_quantity" },
                 values: new object[,]
                 {
-                    { 1, 1, 1, 1 },
-                    { 2, 1, 2, 2 },
-                    { 3, 2, 2, 1 }
+                    { 1, 1, 45, 2 },
+                    { 2, 2, 100, 4 },
+                    { 1, 3, 30, 3 },
+                    { 2, 4, 90, 1 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -511,19 +462,9 @@ namespace PJ_SEM03.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CartItems_CartId",
-                table: "CartItems",
-                column: "CartId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CartItems_ProductId",
-                table: "CartItems",
-                column: "ProductId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Carts_UserId",
+                name: "IX_Carts_user_id",
                 table: "Carts",
-                column: "UserId");
+                column: "user_id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Feedbacks_product_id",
@@ -536,24 +477,9 @@ namespace PJ_SEM03.Migrations
                 column: "user_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Items_CartId",
-                table: "Items",
-                column: "CartId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Items_ProductId",
-                table: "Items",
-                column: "ProductId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_OrderDetails_order_id",
                 table: "OrderDetails",
                 column: "order_id");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_OrderDetails_product_id",
-                table: "OrderDetails",
-                column: "product_id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_user_id",
@@ -580,16 +506,13 @@ namespace PJ_SEM03.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "CartItems");
+                name: "Carts");
 
             migrationBuilder.DropTable(
                 name: "Educations");
 
             migrationBuilder.DropTable(
                 name: "Feedbacks");
-
-            migrationBuilder.DropTable(
-                name: "Items");
 
             migrationBuilder.DropTable(
                 name: "Medicals");
@@ -602,9 +525,6 @@ namespace PJ_SEM03.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
-
-            migrationBuilder.DropTable(
-                name: "Carts");
 
             migrationBuilder.DropTable(
                 name: "Orders");

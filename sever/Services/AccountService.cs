@@ -7,6 +7,7 @@ using PJ_SEM03.Models;
 using PJ_SEM03.Repository;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Policy;
 using System.Text;
 
 namespace PJ_SEM03.Services
@@ -16,12 +17,16 @@ namespace PJ_SEM03.Services
         private readonly UserManager<User> _userManager;
         private readonly DatabaseContext _context;
         private readonly IConfiguration _config;
+        //private readonly EmailService _emailService;
 
-        public AccountService(UserManager<User> userManager, DatabaseContext context, IConfiguration config)
+        public AccountService(UserManager<User> userManager, DatabaseContext context, IConfiguration config
+            //,EmailService emailService
+            )
         {
             _userManager = userManager;
             _context = context;
             _config = config;
+            //_emailService = emailService;
         }
 
         public async Task<UserDto> Login(LoginDto loginDto)
@@ -80,5 +85,7 @@ namespace PJ_SEM03.Services
                 return (false, errors);
             }
         }
+
+       
     }
 }
