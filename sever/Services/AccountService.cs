@@ -41,6 +41,7 @@ namespace PJ_SEM03.Services
                 Id = user.Id,
                 Role = user.Role,
                 Email = user.Email,
+                Username = user.UserName,
                 Token = await GenerateToken(user)
             };
         }

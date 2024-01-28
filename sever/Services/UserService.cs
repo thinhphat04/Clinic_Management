@@ -28,6 +28,13 @@ namespace PJ_SEM03.Services
             return await _dbContext.Users.SingleOrDefaultAsync(u => u.Id == user_id);
         }
 
+        public async Task<PagedList<User>> getUserByRole(string user_Role, int pageNumber, int pageSize)
+        {
+            var query = _dbContext.Users.Where(x => x.Role.ToLower() == user_Role.ToLower()).AsQueryable();
+            var users = await PagedList<User>.ToPagedList(query, pageNumber, pageSize);
+            return users;
+        }
+
         public Task<bool> UpdateUser(User user)
         {
             throw new NotImplementedException();

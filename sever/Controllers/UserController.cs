@@ -44,8 +44,7 @@ namespace PJ_SEM03.Controllers
                 return NotFound();
             }
         }
-
-        [HttpGet("{user_id}")]
+        [HttpGet("user/{user_id}", Name = "GetUserById")]
         public async Task<ActionResult<User>> getUserById(string user_id)
         {
             try
@@ -58,5 +57,17 @@ namespace PJ_SEM03.Controllers
             }
         }
 
+        [HttpGet("role/{user_role}", Name = "GetUserByRole")]
+        public async Task<ActionResult<PagedList<User>>> GetUserByRole (string user_role, [FromQuery] PaginationParams paginationParams)
+        {
+            try
+            {
+                return Ok(await userRepo.getUserByRole(user_role, paginationParams.PageNumber, paginationParams.PageSize));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
     }
 }
