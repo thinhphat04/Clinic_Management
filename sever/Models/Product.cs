@@ -28,5 +28,5 @@ public class Product
 
     public ICollection<OrderDetail>? OrderDetails { get; set; }
 
-    public ICollection<Feedback> Feedbacks { get; set; }
+    public ICollection<Feedback>? Feedbacks { get; set; }
 }

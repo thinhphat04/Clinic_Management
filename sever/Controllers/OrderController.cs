@@ -17,10 +17,7 @@ namespace PJ_SEM03.Controllers
         {
             this._orderRepo = orderRepo;
         }
-        //
-
-
-      
+       
         [HttpGet]
         public async Task<ActionResult<PagedList<Order>>> GetAll([FromQuery] PaginationParams paginationParams)
         {
@@ -58,11 +55,11 @@ namespace PJ_SEM03.Controllers
             }
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult<Order>> UpdateOrderStatus(int id, string status)
-        {
-            return await _orderRepo.updateOrderStatus(id, status);
-        }
+        // [HttpPut("{id}")]
+        // public async Task<ActionResult<Order>> UpdateOrderStatus(int id, string status)
+        // {
+        //     return await _orderRepo.updateOrderStatus(id, status);
+        // }
         
         [HttpGet("search/{phone}/{code}")]
         public async Task<IActionResult> GetOrderByPhoneAndCode(string phone, string code)

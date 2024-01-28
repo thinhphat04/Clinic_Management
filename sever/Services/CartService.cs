@@ -18,8 +18,15 @@ namespace PJ_SEM03.Services
         public async Task<bool> AddCart(Cart cart)
         {
             var oldCart = await db.Carts.SingleOrDefaultAsync(c => c.user_id == cart.user_id && c.product_id == cart.product_id);
+            var product = await db.Products.SingleOrDefaultAsync(p => p.product_id == cart.product_id);
+
             if (oldCart == null)
             {
+                if (cart.product_quantity > product.product_quantity)
+                {
+                    throw new Exception("The quantity in the cart cannot exceed the available product quantity.");
+                }
+
                 db.Carts.Add(cart);
                 var result = await db.SaveChangesAsync();
                 if (result == 1)
@@ -28,6 +35,12 @@ namespace PJ_SEM03.Services
                 }
                 return false;
             }
+
+            if (oldCart.product_quantity + cart.product_quantity > product.product_quantity)
+            {
+                throw new Exception("The quantity in the cart cannot exceed the available product quantity.");
+            }
+
             oldCart.product_quantity += cart.product_quantity;
             return await UpdateCartQuantity(oldCart);
         }

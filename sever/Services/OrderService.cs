@@ -52,19 +52,19 @@ namespace PJ_SEM03.Services
             }
         }
 
-        public async Task<ActionResult<Order>> updateOrderStatus(int id, string status)
-        {
-            var order = await db.Orders.FindAsync(id);
-            if (order == null)
-            {
-                return null;
-            }
-
-            order.order_status = status;
-            await db.SaveChangesAsync();
-
-            return order;
-        }
+        // public async Task<ActionResult<Order>> updateOrderStatus(int id, string order_status)
+        // {
+        //     var order = await db.Orders.FindAsync(id);
+        //     if (order == null)
+        //     {
+        //         return null;
+        //     }
+        //
+        //     order.order_status = order_status;
+        //     await db.SaveChangesAsync();
+        //
+        //     return order;
+        // }
 
         public async Task<Order> GetOrderByPhoneAndCode(string phone, string code)
         {
@@ -87,7 +87,12 @@ namespace PJ_SEM03.Services
     
     public async Task<List<Order>> GetOrdersByUserId(string userId)
         {
-            return await db.Orders.Where(o => o.user_id == userId).ToListAsync();
+            return await db.Orders
+                .Where(o => o.user_id == userId)
+                .Include(o => o.User)
+                .Include(o => o.OrderDetails)
+                .ThenInclude(od => od.Product)
+                .ToListAsync();
         }
 }
 }
