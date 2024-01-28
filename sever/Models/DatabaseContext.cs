@@ -283,7 +283,11 @@ public class DatabaseContext : IdentityDbContext<User>
         //         order_price = 3,           
         //     }
         //     });
-            
+        // modelBuilder.Entity<GiftCode>().HasData(new GiftCode[]
+        // {
+        //     new GiftCode {Id=1, giftName = "Welcome", Describe = "Reduce 5%", percentReduce = 5, ApplyFor ="Medical, Education, Scientific"},
+        //     new GiftCode {Id=2, giftName = "Goodbye", Describe = "Reduce 10%", percentReduce = 10, ApplyFor = "Medical, Education, Scientific"},
+        // });
         modelBuilder.Entity<Product>().HasData(new Product[]
             {
                 new Product
