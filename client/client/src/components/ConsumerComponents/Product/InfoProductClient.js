@@ -21,7 +21,7 @@ const InfoProductClient = () => {
 
   useEffect(() => {
     document.title = "Clinic Online | " + name;
-    console.log("name:: ", name);
+    // console.log("name:: ", name);
     const fetchAPIs = () => {
       fetch("https://localhost:7096/api/Products/search/" + name)
         .then((res) => res.json())
@@ -31,7 +31,7 @@ const InfoProductClient = () => {
             handleLoadingPage(999);
             return;
           }
-          console.log("dataINFO:  ", data);
+          // console.log("dataINFO:  ", data);
           setProduct(data[0]);
           // setImageList(data.imageList);
           // setOption(data.option);
@@ -46,15 +46,15 @@ const InfoProductClient = () => {
     };
     fetchAPIs();
   }, []);
-  console.log("product:: ", product);
+  // console.log("product:: ", comments);
 
   useEffect(() => {
     const fetchAPIs = () => {
       fetch("https://localhost:7096/api/Products/" + product.product_type)
         .then((res) => res.json())
         .then((data) => {
-          console.log("dataABCD:: ", data);
-          console.log("ABCDproducttype:: ", product.product_type);
+          // console.log("dataABCD:: ", data);
+          // console.log("ABCDproducttype:: ", product.product_type);
           setProducts(data);
           setLoading(false);
         });
@@ -279,40 +279,49 @@ const InfoProductClient = () => {
     const elementClickActive = document.querySelector(
       ".info-product__detail-option-item.info-product__detail-option-item--active"
     );
-    if (elementClickActive) {
+    // if (elementClickActive) {
+      
       if (!window.localStorage.getItem("auth")) {
         showErrorNotLoginMessage();
         return;
       }
+      console.log("KHAIproduct:: ", product.product_id);
+      console.log("KHAIusser:: ",JSON.parse(window.localStorage.getItem("auth")).id );
+      console.log("KHAIproductquantity:: ",1);
 
       axios
-        .put(
-          "https://server-Clinic Online.onrender.com/api/users/add-product-to-cart-user/" +
-            JSON.parse(window.localStorage.getItem("auth")).user._id,
+        .post(
+          "https://localhost:7096/api/Cart",          
+            // JSON.parse(window.localStorage.getItem("auth")).id,
           {
-            imageLink: product.product_img,
-            productName: name,
-            option: optionEdit,
-            color: colorEdit,
-            price: priceEdit,
-            percent: product.percent,
-            quantity: 1,
-            voted: false,
+            // imageLink: product.product_img,
+            // productName: name,
+            // option: optionEdit,
+            // color: colorEdit,
+            // price: priceEdit,
+            // percent: product.percent,
+            // quantity: 1,
+            // voted: false,
+            user_id: JSON.parse(window.localStorage.getItem("auth")).id,
+            product_id: product.product_id,
+            product_quantity: 1
+
           }
         )
         .then((response) => {
+          console.log("response::: ", response);
           showSuccessMessage();
-          handleLoadingPage(1);
+           handleLoadingPage(1);
           window.setTimeout(() => {
-            window.location.href = window.location.href;
+            window.location.href ='/cart';
           }, 1000);
         })
         .catch((error) => {
           console.error(error);
         });
-    } else {
-      showErrorMessage();
-    }
+    // } else {
+    //   // showErrorMessage();
+    // }
   };
 
   const handleClickBuyNow = () => {
@@ -354,7 +363,7 @@ const InfoProductClient = () => {
     }
   };
 
-  console.log("productINFO:: ", product.product_type);
+  // console.log("productINFO:: ", product.product_type);
 
   // var product = product[0]
 
@@ -649,12 +658,12 @@ const InfoProductClient = () => {
                           }}
                         ></div>
                         <div className="info-product__review-item-fullname">
-                          {comment.ownerName}
+                          {comment.feedback_id}
                         </div>
                       </div>
                       <p className="info-product__review-item-time">
                         <i className="info-product__review-item-time-icon fa fa-clock"></i>
-                        {comment.time}
+                        {comment.feedback_id}
                       </p>
                     </div>
 
@@ -662,7 +671,7 @@ const InfoProductClient = () => {
                       <label className="info-product__review-item-vote-title">
                         Đánh giá sản phẩm:
                         <span className="info-product__review-item-vote-start">
-                          {handleFormatStarProduct(comment.starVoted)}
+                          {handleFormatStarProduct(comment.feedback_rating)}
                         </span>
                       </label>
                     </div>
@@ -673,7 +682,7 @@ const InfoProductClient = () => {
                       </label>
                       <div className="info-product__review-item-feedback-box">
                         <p className="info-product__review-item-feedback-content">
-                          {comment.content}
+                          {comment.feedback_description}
                         </p>
                       </div>
                     </div>

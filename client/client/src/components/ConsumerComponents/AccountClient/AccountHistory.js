@@ -17,7 +17,7 @@ const AccountHistory = () => {
     document.title = 'Clinic Online | Lịch sử mua hàng';
     const fetchAPIs = () => {
       fetch('https://localhost:7096/api/orders')
-        .then((res) => res.json())
+        // .then((res) => res.json())
         .then((data) => {
           setOrders(data);
           setLoading(false);

@@ -7,7 +7,7 @@ import './styles/login-style.css';
 
 const Login = () => {
   const [authAdmin, setAuthAdmin] = useContext(AuthAdminContext);
-  const [details, setDetails] = useState({ adminName: '', password: '' });
+  const [details, setDetails] = useState({ userName: '', password: '' });
 
   useEffect(() => {
     document.title = 'Clinic Online | Đăng nhập quản trị viên';
@@ -28,25 +28,36 @@ const Login = () => {
     });
   }
 
+  function showLoginToast() {
+    Toast({
+      title: 'Đăng nhập thành công',
+      message: 'Chào mừng bạn đến với trang quản trị viên',
+      type: 'success',
+      duration: 3000,
+    });
+  }
+
   const handleSubmitLogin = async (e) => {
     e.preventDefault();
     try {
-      // const res = await axios.post(
-      //   `${process.env.REACT_APP_API}/api/admins/login`,
-      //   {
-      //     adminName: details.adminName,
-      //     password: details.password,
-      //   },
-      // );
-      // if (res && res.data.success) {
+      const res = await axios.post(
+        `https://localhost:7096/api/Account/login`,
+        {
+          userName: details.userName,
+          password: details.password,
+        },
+      );
+      console.log("resSSS:: ", res);
+      if (res && res.status === 200) {
         if (true) {
-        // localStorage.setItem('authAdmin', JSON.stringify(res.data));
-        // setAuthAdmin({
-        //   admin: res.data.admin,
-        //   token: res.data.token,
-        // });
+        localStorage.setItem('authAdmin', JSON.stringify(res.data));
+        setAuthAdmin({
+          admin: res.data.admin,
+          token: res.data.token,
+        });
 
-        alert('Đăng nhập thành công');
+         alert('Đăng nhập thành công');
+        // showLoginToast();
         handleLoadingPage(1);
         window.setTimeout(() => {
           window.location.href = `/admin/dashboard`;
@@ -54,6 +65,7 @@ const Login = () => {
       } else {
         showErrorToast();
       }
+    }
     } catch (error) {
       console.log(error);
       showErrorToast();
@@ -74,9 +86,9 @@ const Login = () => {
             className="login__input"
             name="username"
             onChange={(e) =>
-              setDetails({ ...details, adminName: e.target.value })
+              setDetails({ ...details, userName: e.target.value })
             }
-            value={details.adminName}
+            value={details.userName}
             required
             minLength={5}
             placeholder="Admin ..."
