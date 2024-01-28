@@ -53,6 +53,10 @@ builder.Services.AddCors(options =>
                           .AllowAnyHeader());
 });
 
+//Mail configure
+var emailConfig = builder.Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>();
+builder.Services.AddSingleton(emailConfig);
+
 //khai báo các service
 builder.Services.AddScoped<IUserRepo, UserService>();
 builder.Services.AddScoped<IAccountRepo, AccountService>();
@@ -61,6 +65,8 @@ builder.Services.AddScoped<IOrderRepo, OrderService>();
 builder.Services.AddScoped<ICartRepo, CartService>();
 builder.Services.AddScoped<CloudinaryService>();
 builder.Services.AddScoped<IFeedbackRepo, FeedbackService>();
+builder.Services.AddScoped<IGiftcode, GiftcodeService>();
+//builder.Services.AddScoped<IEmailRepo, EmailService>();
 
 /****************************************************************************************/
 builder.Services.AddControllers().AddJsonOptions(x =>

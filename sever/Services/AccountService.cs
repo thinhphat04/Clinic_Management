@@ -40,6 +40,9 @@ namespace PJ_SEM03.Services
             {
                 Id = user.Id,
                 Role = user.Role,
+                Fullname = user.user_fullName,
+                Address = user.user_address,
+                PhoneNumber = user.PhoneNumber,
                 Email = user.Email,
                 Username = user.UserName,
                 Token = GenerateToken(user)
