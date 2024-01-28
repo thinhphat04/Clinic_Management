@@ -189,7 +189,8 @@ namespace PJ_SEM03.Migrations
                     order_status = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     order_address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     order_phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    order_total = table.Column<int>(type: "int", nullable: false)
+                    order_total = table.Column<int>(type: "int", nullable: false),
+                    AppliedGiftCodeId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -200,6 +201,11 @@ namespace PJ_SEM03.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Orders_GiftCodes_AppliedGiftCodeId",
+                        column: x => x.AppliedGiftCodeId,
+                        principalTable: "GiftCodes",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -373,10 +379,10 @@ namespace PJ_SEM03.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Role", "SecurityStamp", "TwoFactorEnabled", "UserName", "user_address", "user_fullName" },
                 values: new object[,]
                 {
-                    { "1", 0, "baac7018-ad1d-4522-b50c-ec70c4ffff38", "admin@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEC6HFZjYqUkVPVpwhu5LXjSv/i0jFQrKz03wzeUNSqvD4RGm+1S90r6KWqsIiioNjQ==", null, false, "Admin", "981dec44-d699-4051-b752-2c355c93a148", false, "admin", null, "admin" },
-                    { "2", 0, "061b6b56-026a-46dc-ad70-d80c2c1bc1cc", "phat@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEHmFEV4+yTq2ktpAag7WoFTtw9TeE97LFeqk0rU1Tg5Cc7XE6ijzAV8mPQRLgJmrfg==", null, false, "Member", "48c6e144-a9dc-450a-a2b7-3c64b69e3d33", false, "phat", null, "Ngo Thinh Phat" },
-                    { "3", 0, "47df6196-19b2-49f5-8d92-5110f85e7aa2", "khai@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAENUkP0Os08oysudU71e8SO391NgDnxBVPPLNTMb2pI9QW00nZcncBeGnzoHd19Omrw==", null, false, "Member", "bf506646-f838-4f24-b729-49667d935aa8", false, "khai", null, "Bui Tuan Khai" },
-                    { "4", 0, "a676afde-5e3c-41d1-b056-a84eb9462556", "tram@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEKg4EZIo2X0oi+PoKOlMAw0rAIPJjsBbcNo0amEtyT6fFcuo5PKA6CFlop+A7HWTMA==", null, false, "Member", "ae7dbfda-f238-4618-9c54-4de3b7535dda", false, "tram", null, "Tran Bao Huyen Tram" }
+                    { "1", 0, "c10d3d16-2044-44bc-983e-cdc9c47076da", "admin@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEH6Q+1VXa/5iSoV9z05picGwqyPE1B+DiyWLKJDdQ4R34fiW04BV1lQ3KrsNmJfJ3g==", null, false, "Admin", "70d78c5d-c002-4b9e-8856-7b372836879d", false, "admin", null, "admin" },
+                    { "2", 0, "6f34dd50-f5cf-4819-8078-3a59b2791937", "phat@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEC13ehfvZhY9PkeaY68fB4iX9JNDkyapirRf4kmpY0FmCWmeMiny94KkWUs7S7mTdg==", null, false, "Member", "9450a133-0c35-42e2-bd69-05a350b7986e", false, "phat", null, "Ngo Thinh Phat" },
+                    { "3", 0, "992d9f9f-c179-413c-b00c-9f44987d2616", "khai@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEOxv3zrJ5YMzmdP3IDecVIq63IebaH86BVjG4bmMbyHZ+S3ezGgVGAem4MO1Cyr8lA==", null, false, "Member", "67aca9f5-6037-475e-b445-27b6b4ac0ddb", false, "khai", null, "Bui Tuan Khai" },
+                    { "4", 0, "5273175e-e544-482b-a56f-99762a3d4e08", "tram@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEJLdOBXizh4XI6s6AWrE5DOOU+pe5vmKahZNpu9Q6HibiLL5fx8vgXacpNEkjLFajA==", null, false, "Member", "5a64533e-fa75-4ad6-bb5b-e5bda20b4bab", false, "tram", null, "Tran Bao Huyen Tram" }
                 });
 
             migrationBuilder.InsertData(
@@ -423,11 +429,11 @@ namespace PJ_SEM03.Migrations
 
             migrationBuilder.InsertData(
                 table: "Orders",
-                columns: new[] { "order_id", "order_address", "order_code", "order_datetime", "order_phone", "order_status", "order_total", "user_id" },
+                columns: new[] { "order_id", "AppliedGiftCodeId", "order_address", "order_code", "order_datetime", "order_phone", "order_status", "order_total", "user_id" },
                 values: new object[,]
                 {
-                    { 1, "HCM", "ORD001", new DateTime(2024, 1, 28, 15, 31, 49, 681, DateTimeKind.Local).AddTicks(3956), "123", "Processing", 100, "1" },
-                    { 2, "Ca Mau", "ORD001", new DateTime(2024, 1, 28, 15, 31, 49, 681, DateTimeKind.Local).AddTicks(3973), "124", "Delivered", 200, "2" }
+                    { 1, null, "HCM", "ORD001", new DateTime(2024, 1, 28, 16, 49, 3, 369, DateTimeKind.Local).AddTicks(1776), "123", "Processing", 100, "1" },
+                    { 2, null, "Ca Mau", "ORD001", new DateTime(2024, 1, 28, 16, 49, 3, 369, DateTimeKind.Local).AddTicks(1789), "124", "Delivered", 200, "2" }
                 });
 
             migrationBuilder.InsertData(
@@ -513,6 +519,11 @@ namespace PJ_SEM03.Migrations
                 name: "IX_OrderDetails_order_id",
                 table: "OrderDetails",
                 column: "order_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_AppliedGiftCodeId",
+                table: "Orders",
+                column: "AppliedGiftCodeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_user_id",

@@ -14,16 +14,16 @@ const Giftcode = () => {
     document.title = 'Clinic Online | Mã khuyến mãi';
     const fetchAPIs = () => {
       fetch(
-        `https://localhost:7096/api/users/${
-          JSON.parse(window.localStorage.getItem('auth')).user._id
+        `https://localhost:7096/api/Cart/${
+          JSON.parse(window.localStorage.getItem('auth')).id
         }`,
       )
         .then((res) => res.json())
         .then((data) => {
-          setCartUser(data.cart);
+          setCartUser(data);
         });
 
-      fetch('https://localhost:7096/api/giftcodes')
+      fetch('https://localhost:7096/api/GiftCode')
         .then((res) => res.json())
         .then((data) => {
           setGiftcodes(data);
@@ -31,19 +31,21 @@ const Giftcode = () => {
     };
     fetchAPIs();
   }, []);
+  console.log("giftcodes:: ", giftcodes);
 
   useEffect(() => {
     // set thông tin % giảm cho khuyến mãi
     giftcodes.map((gf, i) => {
-      if (giftcodeID === gf.id) {
+      if (giftcodeID === gf.giftName) {
         setPercentReduce(gf.percentReduce);
       }
     });
-
+// console.log("cartUser:: ", cartUser);
     // show thông tin tổng tiền giỏ hàng
     let countPriceAll = 0;
     cartUser.map((cartItem, index) => {
-      if (cartItem) countPriceAll += Number(cartItem.price) * cartItem.quantity;
+      // if (cartItem) countPriceAll += Number(cartItem.price) * cartItem.quantity;
+      if (cartItem) countPriceAll += Number(cartItem.product.product_price) * cartItem.product_quantity;
     });
     setCountTotalPrice(countPriceAll);
   });
@@ -81,7 +83,7 @@ const Giftcode = () => {
     if (giftcodeID == '') showErrorMessage();
     else {
       giftcodes.map((gf, i) => {
-        if (giftcodeID === gf.id) {
+        if (giftcodeID === gf.giftName) {
           boolCheckGiftcode = true;
           var priceAppliedGiftcode =
             countTotalPrice * Number((100 - Number(gf.percentReduce)) / 100);
@@ -155,6 +157,7 @@ const Giftcode = () => {
       }, 1000);
     }
   };
+  console.log("giftcodeID:: ", giftcodeID);
 
   return (
     <>
