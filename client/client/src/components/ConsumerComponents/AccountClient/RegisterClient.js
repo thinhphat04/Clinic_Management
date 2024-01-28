@@ -62,6 +62,7 @@ const RegisterClient = () => {
           email: emailRegister,
           phoneNumber: phoneRegister,
           address: addressRegister,
+          fullname:fullnameRegister,
         },
       );
       if (res && res.data.success) {
@@ -75,7 +76,7 @@ const RegisterClient = () => {
           }, 1000);
         }
       } else {
-        window.alert('Đã gặp lỗi khi đăng ký! Vui lòng thử lại');
+        window.alert('Đã gặp lỗi khi đăng ký! Vui lòng thử lại');   
       }
     } catch (error) {
       console.log(error);
@@ -154,7 +155,7 @@ const RegisterClient = () => {
                     <span className="form-message"></span>
                   </div>
 
-                  {/* <div className="form-group">
+                  <div className="form-group">
                     <label htmlFor="fullname" className="form-label">
                       Full name
                     </label>
@@ -168,7 +169,7 @@ const RegisterClient = () => {
                       className="form-control"
                     ></input>
                     <span className="form-message"></span>
-                  </div> */}
+                  </div>
 
                   <div
                     className="form-group form-group-2-col"

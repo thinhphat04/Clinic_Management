@@ -23,28 +23,29 @@ const Dashboard = () => {
   useEffect(() => {
     document.title = 'Clinic Online | Thống kê';
     const fetchAPIs = () => {
-      fetch(`https://localhost:7096/api/products`)
-        .then((res) => res.json())
+      fetch(`https://localhost:7096/api/Products`)
+         .then((res) => res.json())
         .then((data) => {
           setCountProduct(data.length);
           processDataProduct(data);
         });
-      fetch(`https://localhost:7096/api/admins`)
-        .then((res) => res.json())
+      // fetch(`https://localhost:7096/api/admins`)
+      fetch(`https://localhost:7096/api/User/1`)
+         .then((res) => res.json())
         .then((data) => {
           setCountAdmin(data.length);
         });
-      fetch(`https://localhost:7096/api/users`)
+      fetch(`https://localhost:7096/api/User`)
         .then((res) => res.json())
         .then((data) => {
           setCountUser(data.length);
         });
-      fetch(`https://localhost:7096/api/promotes`)
-        .then((res) => res.json())
-        .then((data) => {
-          setCountPromotes(data.length);
-        });
-      fetch(`https://localhost:7096/api/orders`)
+      // fetch(`https://localhost:7096/api/promotes`)
+      //   .then((res) => res.json())
+      //   .then((data) => {
+      //     setCountPromotes(data.length);
+      //   });
+      fetch(`https://localhost:7096/api/Order`)
         .then((res) => res.json())
         .then((data) => {
           processDataOrder(data);

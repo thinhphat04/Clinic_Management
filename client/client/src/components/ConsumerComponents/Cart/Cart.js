@@ -15,18 +15,20 @@ const Cart = () => {
 
   useEffect(() => {
     document.title = 'Clinic Online | Giỏ hàng';
+    console.log("trungid ::: ", JSON.parse(window.localStorage.getItem('auth')).id);
     const fetchAPIs = () => {
       if (window.localStorage.auth)
         fetch(
-          `https://localhost:7096/api/users/${
+          `https://localhost:7096/api/Cart/${
             JSON.parse(window.localStorage.getItem('auth')).id
           }`,
         )
-          // .then((res) => res.json())
+           .then((res) => res.json())
           .then((data) => {
-            setUser(data);
+            console.log("dataCart:: ",data );
+            setUser(JSON.parse(window.localStorage.getItem('auth')).id);
             setLoading(false);
-            // setCartUser(data.cart);
+            setCartUser(data);
           });
       else {
         document.querySelector('.cart__label--empty').innerText =
@@ -35,12 +37,14 @@ const Cart = () => {
     };
     fetchAPIs();
   }, []);
+  console.log("user:: ", user);
+  console.log("cartUser:: ", cartUser);
 
   useEffect(() => {
     // show thông tin tổng tiền giỏ hàng
     let countPriceAll = 0;
     cartUser.map((cartItem, index) => {
-      if (cartItem) countPriceAll += Number(cartItem.price) * cartItem.quantity;
+      if (cartItem) countPriceAll += Number(cartItem.product.product_price) * cartItem.product_quantity;
     });
     setCountTotalPrice(countPriceAll);
 
@@ -191,26 +195,29 @@ const Cart = () => {
                     <img
                       className="cart__item-img"
                       src={
-                        p.imageLink ||
+                        p.product_img ||
                         'https://localhost:7096/public/products/img-product-empty.png'
                       }
                     ></img>
                     <div className="cart__item-info">
                       <label className="cart__item-info-name">
-                        {p.productName} - {p.option} - {p.color}
+                        {/* {p.product_name} - {p.option} - {p.color} */}
+                        {p.product.product_name}
                       </label>
                       <p className="cart__item-info-price">
-                        {Number(p.price).toLocaleString()} đ
+                        {Number(p.product.product_price).toLocaleString()} đ
                       </p>
                       <p className="cart__item-info-old-price">
                         {(
-                          (Number(p.price) * (100 + p.percent)) /
+                          // (Number(p.product.product_price) * (100 + p.percent)) /
+                          (Number(p.product.product_price) * (100 + 10)) /
                           100
                         ).toLocaleString()}
                         đ
                       </p>
                       <span className="cart__item-info-percent">
-                        -{p.percent}%
+                        {/* -{p.percent}% */}
+                        -10% 
                       </span>
                       <span className="cart__item-info-installment">
                         <i className="cart__item-info-installment-icon fa fa-tag"></i>
@@ -220,20 +227,20 @@ const Cart = () => {
                         <button
                           className="cart__item-quantity-edit"
                           onClick={(e) => {
-                            handleClickMinusQuantity(p.productName);
+                            handleClickMinusQuantity(p.product_name);
                           }}
                         >
                           -
                         </button>
                         <input
                           className="cart__item-quantity-input"
-                          defaultValue={p.quantity}
+                          defaultValue={p.product_quantity}
                           readOnly
                         />
                         <button
                           className="cart__item-quantity-edit"
                           onClick={(e) => {
-                            handleClickAddQuantity(p.productName);
+                            handleClickAddQuantity(p.product_name);
                           }}
                         >
                           +
@@ -243,7 +250,7 @@ const Cart = () => {
                     <button
                       className="cart__item-remove"
                       onClick={(e) => {
-                        handleClickRemoveProduct(p.productName);
+                        handleClickRemoveProduct(p.product_name);
                       }}
                     >
                       <i className="cart__item-remove-icon fa fa-trash"></i>

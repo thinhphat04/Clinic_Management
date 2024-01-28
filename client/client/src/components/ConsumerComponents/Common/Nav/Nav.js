@@ -9,22 +9,39 @@ const Nav = () => {
   const [keySearch, setKeySearch] = useState('');
   const [auth, setAuth] = useContext(AuthContext);
 
+  // useEffect(() => {
+  //   const fetchAPI = () => {
+  //     if (localStorage.auth)
+  //       fetch(
+  //         'https://localhost:7096/api/users/' +
+  //           JSON.parse(window.localStorage.getItem('auth')).id,
+  //       )
+  //         //  .then((res) => res.json())
+  //         .then((data) => {
+  //           console.log("KHAIdata:: ", data);
+  //           // setCountQuantity(data.cart.length);
+  //         });
+  //   };
+  //   fetchAPI();
+  // }, []);
+
+  // https://localhost:7096/api/Cart/a264217d-67ce-4e5e-8376-75516209aced
+
   useEffect(() => {
     const fetchAPI = () => {
       if (localStorage.auth)
         fetch(
-          'https://localhost:7096/api/users/' +
+          'https://localhost:7096/api/Cart/' +
             JSON.parse(window.localStorage.getItem('auth')).id,
         )
-          // .then((res) => res.json())
+           .then((res) => res.json())
           .then((data) => {
-
             console.log("KHAIdata:: ", data);
-            // setCountQuantity(data.cart.length);
+            setCountQuantity(data.length);
           });
     };
     fetchAPI();
-  }, []);
+  }, [JSON.parse(window.localStorage.getItem('auth')).id]);
 
   const handleLoggout = (e) => {
     e.preventDefault();

@@ -13,11 +13,11 @@ const AdminHeader = () => {
   useEffect(() => {
     const fetchAPI = () => {
       fetch(
-        `${process.env.REACT_APP_API}/api/admins/${
-          JSON.parse(window.localStorage.getItem('authAdmin')).admin._id
+        `https://localhost:7096/api/User/${
+          JSON.parse(window.localStorage.getItem('authAdmin')).id
         }`,
       )
-        .then((res) => res.json())
+        // .then((res) => res.json())
         .then((data) => {
           setAdmin(data);
         });

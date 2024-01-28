@@ -24,7 +24,7 @@ const AdminSidebar = () => {
 
   useEffect(() => {
     const fetchAPIs = () => {
-      fetch('https://localhost:7096/api/admins')
+      fetch('https://localhost:7096/api/User/1')
         .then((res) => res.json())
         .then((data) => {
           setAdmins(data);
@@ -32,10 +32,11 @@ const AdminSidebar = () => {
     };
     fetchAPIs();
   }, []);
+  console.log("admins:: ", admins);
 
   useEffect(() => {
     admins.map((admin, index) => {
-      if (admin.adminName == window.localStorage.getItem('adminNameLogin')) {
+      if (admin.userName == window.localStorage.getItem('adminNameLogin')) {
         setAdminID(admin.adminID);
       }
     });
