@@ -59,7 +59,8 @@ namespace PJ_SEM03.Services
             existingProduct.product_img = product.product_img;
             existingProduct.product_quantity = product.product_quantity;
             existingProduct.product_price = product.product_price;
-
+    
+            _dbContext.Products.Update(existingProduct);
             await _dbContext.SaveChangesAsync();
 
             return existingProduct;
