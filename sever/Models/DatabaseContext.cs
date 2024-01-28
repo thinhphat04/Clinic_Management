@@ -275,7 +275,7 @@ public class DatabaseContext : IdentityDbContext<User>
                      product_id = 1,
                      product_name = "Costar Evening Primrose Oil",
                      product_description = "What is Costar Evening Primrose Oil? Uses and correct usage\nCostar Evening Primrose Oil is a health care product extracted from evening primrose essential oil. Supports anti-oxidation and reduces symptoms of hot flashes in postmenopausal and premenopausal women. This article will introduce more information about the ingredients, uses, usage and intended users of Costar pills",
-                     product_img = "https://www.bresser.de/out/pictures/generated/product/1/380_340_75/8851000_1.jpg",
+                     product_img = "https://data-service.pharmacity.io/pmc-upload-media/production/pmc-ecm-core/products/P17315_1.jpg",
                      product_type = "Medical",
                      product_quantity = 10,
                      product_price = 90
@@ -287,7 +287,7 @@ public class DatabaseContext : IdentityDbContext<User>
                      product_name = "Bresser Science ETD-201",
                      product_price = 100,
                      product_description = "The Bresser Science ETD-201 is a high-quality stereo microscope with transmitted and incident light. It is ideally suited for use in schools and universities as well as for the training of apprentices and in the field of electronics. The 360° rotatable binocular head allows comfortable viewing for both left and right-handed users. The magnification range of 20x to 80x can be extended with the included Barlow lens to 40x to 160x. The LED lighting is continuously dimmable and can be operated with batteries or the included power supply. The microscope is equipped with a 2x and 4x objective and a pair of 10x wide field eyepieces. The interpupillary distance and diopter adjustment are individually adjustable. The microscope is supplied with a dust cover and 5 prepared slides.",
-                     product_img = "https://www.bresser.de/out/pictures/generated/product/1/380_340_75/8851000_1.jpg",
+                     product_img = "https://maykhoahoc.com/images/thumbnails/550/450/detailed/4/tu-bao-quan-thuoc-duoc-lieu-vacxin-haier-hbc-260-gia-re.jpg",
                      product_type = "Scientific",
                      product_quantity = 10
                  },
@@ -306,7 +306,7 @@ public class DatabaseContext : IdentityDbContext<User>
                         product_id = 4,
                         product_name = "Acetylcystein",
                         product_description = "What is Costar Evening Primrose Oil? Uses and correct usage\nCostar Evening Primrose Oil is a health care product extracted from evening primrose essential oil. Supports anti-oxidation and reduces symptoms of hot flashes in postmenopausal and premenopausal women. This article will introduce more information about the ingredients, uses, usage and intended users of Costar pills",
-                        product_img = "https://www.bresser.de/out/pictures/generated/product/1/380_340_75/8851000_1.jpg",
+                        product_img = "https://data-service.pharmacity.io/pmc-upload-media/production/pmc-ecm-core/products/P17480_1.jpg",
                         product_type = "Medical",
                         product_quantity = 10,
                         product_price = 90
@@ -318,7 +318,7 @@ public class DatabaseContext : IdentityDbContext<User>
                      product_name = "Adapter (LEN)",
                      product_price = 100,
                      product_description = "The Bresser Science ETD-201 is a high-quality stereo microscope with transmitted and incident light. It is ideally suited for use in schools and universities as well as for the training of apprentices and in the field of electronics. The 360° rotatable binocular head allows comfortable viewing for both left and right-handed users. The magnification range of 20x to 80x can be extended with the included Barlow lens to 40x to 160x. The LED lighting is continuously dimmable and can be operated with batteries or the included power supply. The microscope is equipped with a 2x and 4x objective and a pair of 10x wide field eyepieces. The interpupillary distance and diopter adjustment are individually adjustable. The microscope is supplied with a dust cover and 5 prepared slides.",
-                     product_img = "https://www.bresser.de/out/pictures/generated/product/1/380_340_75/8851000_1.jpg",
+                     product_img = "https://maykhoahoc.com/images/thumbnails/550/450/detailed/4/tu-bao-quan-vacxine-thuoc-haier-hbc-150-gia-re.png",
                      product_type = "Scientific",
                      product_quantity = 10
                  },
