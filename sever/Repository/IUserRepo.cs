@@ -9,7 +9,7 @@ public interface IUserRepo
 {
 
     //edit user info
-    Task<bool> UpdateUser(User user);
+    Task<bool> UpdateUser(UserDto user);
     Task<PagedList<User>> getAll(int pageNumber, int pageSize);
     Task<User> getUserById(string user_id);
     Task<PagedList<User>> getUserByRole(string user_Role, int pageNumber, int pageSize);

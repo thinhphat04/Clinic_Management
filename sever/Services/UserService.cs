@@ -35,18 +35,18 @@ namespace PJ_SEM03.Services
             return users;
         }
 
-        public async Task<bool> UpdateUser(User user)
+        public async Task<bool> UpdateUser(UserDto user)
         {
             var query = await _dbContext.Users.SingleOrDefaultAsync(x=> x.Id == user.Id);
             if(query != null)
             {
-                query.UserName = user.UserName;
-                query.user_fullName = user.user_fullName;
-                query.user_address = user.user_address;
+                query.UserName = user.Username;
+                query.user_fullName = user.Fullname;
+                query.user_address = user.Address;
                 query.PhoneNumber = user.PhoneNumber;
-                query.user_fullName = user.user_fullName;
+                query.user_fullName = user.Fullname;
 
-                _dbContext.Update(query);
+                _dbContext.Users.Update(query);
                 _dbContext.SaveChanges();
                 return true;
             }
