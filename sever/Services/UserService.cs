@@ -35,9 +35,22 @@ namespace PJ_SEM03.Services
             return users;
         }
 
-        public Task<bool> UpdateUser(User user)
+        public async Task<bool> UpdateUser(User user)
         {
-            throw new NotImplementedException();
+            var query = await _dbContext.Users.SingleOrDefaultAsync(x=> x.Id == user.Id);
+            if(query != null)
+            {
+                query.UserName = user.UserName;
+                query.user_fullName = user.user_fullName;
+                query.user_address = user.user_address;
+                query.PhoneNumber = user.PhoneNumber;
+                query.user_fullName = user.user_fullName;
+
+                _dbContext.Update(query);
+                _dbContext.SaveChanges();
+                return true;
+            }
+            return false;
         }
     }
 
