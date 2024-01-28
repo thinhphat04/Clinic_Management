@@ -33,7 +33,7 @@ namespace PJ_SEM03.Controllers
                 return BadRequest(ex);
             }
         }
-        [Authorize(Roles = "Admin")]
+
         [HttpGet("{product_id}")]
         public async Task<ActionResult> getFeedbackByProductId(int product_id, [FromQuery] PaginationParams paginationParams)
         {

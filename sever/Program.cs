@@ -65,6 +65,7 @@ builder.Services.AddScoped<IOrderRepo, OrderService>();
 builder.Services.AddScoped<ICartRepo, CartService>();
 builder.Services.AddScoped<CloudinaryService>();
 builder.Services.AddScoped<IFeedbackRepo, FeedbackService>();
+builder.Services.AddScoped<IGiftcode, GiftcodeService>();
 //builder.Services.AddScoped<IEmailRepo, EmailService>();
 
 /****************************************************************************************/

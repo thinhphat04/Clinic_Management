@@ -1,9 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using PJ_SEM03.Models;
-using System.Data;
-using System.Reflection.Emit;
 
 namespace PJ_SEM03.Models;
 
@@ -21,6 +18,7 @@ public class DatabaseContext : IdentityDbContext<User>
     public DbSet<Product> Products { get; set; }
     public DbSet<Feedback> Feedbacks { get; set; }
     public DbSet<Cart> Carts { get; set; }
+    public DbSet<GiftCode> GiftCodes { get; set; }
     //public DbSet<User> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -241,6 +239,12 @@ public class DatabaseContext : IdentityDbContext<User>
                      feedback_rating = 5,
                  },
              });
+
+        modelBuilder.Entity<GiftCode>().HasData(new GiftCode[]
+        {
+            new GiftCode {Id=1, giftName = "Welcome", Describe = "Reduce 5%",percentReduce = 5, ApplyFor ="Medical, Education, Scientific"},
+            new GiftCode {Id=2, giftName = "Goodbye", Describe = "Reduce 10%",percentReduce = 10, ApplyFor = "Medical, Education, Scientific"}
+        });
         
         // modelBuilder.Entity<OrderDetail>().HasData(new OrderDetail[]
         // {

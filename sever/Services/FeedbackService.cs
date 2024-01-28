@@ -59,11 +59,19 @@ namespace PJ_SEM03.Services
             return hasPurchased;
         }
 
-        [Authorize(Roles ="Admin")]
-        public async Task<PagedList<Feedback>> getAll(int pageNumber, int pageSize)
+        public async Task<PagedList<FeedbackDto>> getAll(int pageNumber, int pageSize)
         {
-            var query = _dbContext.Feedbacks.AsQueryable();
-            var feedbacks = await PagedList<Feedback>.ToPagedList(query, pageNumber, pageSize);
+            var query = _dbContext.Feedbacks.Include(f => f.User).AsQueryable();
+            var feedbacks = await PagedList<FeedbackDto>.ToPagedList(query.Select(x => new FeedbackDto
+            {
+                FeedbackId = x.feedback_id,
+                ProductId = x.product_id,
+                UserId = x.user_id,
+                UserName = x.User.UserName,
+                Fullname = x.User.user_fullName,
+                Descrisption = x.feedback_description,
+                Rating = x.feedback_rating
+            }), pageNumber,pageSize);
             return feedbacks;
         }
 
@@ -75,8 +83,10 @@ namespace PJ_SEM03.Services
                 FeedbackId = x.feedback_id,
                 ProductId = x.product_id,
                 UserId = x.user_id,
-                UserName = x.User.UserName, // Assuming UserName is a property in the User entity
-                                            // Include other properties you want in FeedbackDto
+                UserName = x.User.UserName, 
+                Fullname = x.User.user_fullName,
+                Descrisption = x.feedback_description,
+                Rating = x.feedback_rating
             }), pageNumber, pageSize);
             return feedbacks;
         }
