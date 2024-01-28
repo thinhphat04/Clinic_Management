@@ -31,36 +31,41 @@ const InfoProductClient = () => {
             handleLoadingPage(999);
             return;
           }
-          // console.log("dataINFO:  ", data);
           setProduct(data[0]);
-          // setImageList(data.imageList);
-          // setOption(data.option);
-          // setColor(data.color);
-        });
-      fetch("https://localhost:7096/api/Feedback")
-        .then((res) => res.json())
-        .then((data) => {
-          setComments(data);
-          setLoading(false);
         });
     };
     fetchAPIs();
   }, []);
   // console.log("product:: ", comments);
 
+ 
   useEffect(() => {
     const fetchAPIs = () => {
       fetch("https://localhost:7096/api/Products/" + product.product_type)
         .then((res) => res.json())
         .then((data) => {
-           console.log("dataABCD:: ", data);
           // console.log("ABCDproducttype:: ", product.product_type);
           setProducts(data);
           setLoading(false);
         });
+
+
+        fetch("https://localhost:7096/api/Feedback")
+        .then((res) => res.json())
+        .then((data) => {
+           console.log("dataABCD:: ", data);
+          setComments(data);
+          setLoading(false);  
+        });
     };
     fetchAPIs();
   }, [product.product_type]);
+
+
+
+  console.log("productAAAA: ", product);
+
+  console.log("comments:: ", comments)
 
   useEffect(() => {
     // show các khuyến mãi dành cho sản phẩm
@@ -102,13 +107,15 @@ const InfoProductClient = () => {
       const infoVote = document.querySelectorAll(".info-product__review-item")[
         index
       ];
-      if (name === comment.nameProductVoted) {
+      console.log("product.product_id:: ", product.product_id);
+      console.log("comment.productId:: ", comment.productId);
+      if (product.product_id === comment.productId) {
         infoVote.style.display = "block";
       }
     });
 
     handleFormatCrumbs();
-    handleFeedbackEmpty();
+   // handleFeedbackEmpty();
   });
 
   const handleFormatCrumbs = () => {
@@ -607,7 +614,7 @@ const InfoProductClient = () => {
                       <label className="product__sell-item-sold">
                         Đánh giá:
                         <span className="product__sell-item-star">
-                          {handleFormatStarProduct(product.star)}
+                          {handleFormatStarProduct(product.product_star)}
                         </span>
                       </label>
                     </li>
@@ -622,14 +629,14 @@ const InfoProductClient = () => {
                   ĐÁNH GIÁ SẢN PHẨM
                 </label>
                 <p className="info-product__rating-star">
-                  {Number(product.star).toFixed(1)}/5
+                  {Number(product.product_star).toFixed(1)}/5
                 </p>
                 <p className="info-product__rating-star-icon">
-                  {handleFormatStarProduct(Number(product.star))}
+                  {handleFormatStarProduct(Number(product.product_star))}
                 </p>
-                <p className="info-product__rating-number">
+                {/* <p className="info-product__rating-number">
                   {product.voter} lượt đánh giá
-                </p>
+                </p> */}
               </div>
 
               <ul className="info-product__review-list">
@@ -641,24 +648,24 @@ const InfoProductClient = () => {
                         <div
                           className="info-product__review-item-avatar"
                           style={{
-                            backgroundImage: `url(${comment.ownerAvatar})`,
+                            backgroundImage: `url("https://i.pinimg.com/564x/8f/a2/78/8fa2789888f34e2b1013964df0c5738c.jpg")`,
                           }}
                         ></div>
                         <div className="info-product__review-item-fullname">
-                          {comment.feedback_id}
+                          {comment.fullname}
                         </div>
                       </div>
-                      <p className="info-product__review-item-time">
+                      {/* <p className="info-product__review-item-time">
                         <i className="info-product__review-item-time-icon fa fa-clock"></i>
-                        {comment.feedback_id}
-                      </p>
+                        {comment.feedbackId}
+                      </p> */}
                     </div>
 
                     <div className="info-product__review-item-vote">
                       <label className="info-product__review-item-vote-title">
                         Đánh giá sản phẩm:
                         <span className="info-product__review-item-vote-start">
-                          {handleFormatStarProduct(comment.feedback_rating)}
+                          {handleFormatStarProduct(comment.rating)}
                         </span>
                       </label>
                     </div>
@@ -669,7 +676,7 @@ const InfoProductClient = () => {
                       </label>
                       <div className="info-product__review-item-feedback-box">
                         <p className="info-product__review-item-feedback-content">
-                          {comment.feedback_description}
+                          {comment.descrisption}
                         </p>
                       </div>
                     </div>
