@@ -27,13 +27,13 @@ namespace PJ_SEM03.Services
                 // User has purchased the product, create feedback
                 var feedbackDto = new Feedback
                 {
-                    user_id = userId,
-                    product_id = productId,
-                    feedback_description= feedback.feedback_description,
-                    feedback_rating= feedback.feedback_rating,
+                    user_id = feedback.user_id,
+                    product_id = feedback.product_id,
+                    feedback_description = feedback.feedback_description,
+                    feedback_rating = feedback.feedback_rating
                 };
 
-                _dbContext.Feedbacks.Add(feedback);
+                _dbContext.Feedbacks.Add(feedbackDto);
                 await _dbContext.SaveChangesAsync();
                 return true;
             }

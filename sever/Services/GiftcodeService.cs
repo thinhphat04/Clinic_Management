@@ -12,19 +12,14 @@ namespace PJ_SEM03.Services
         {
             this.db = db;
         }
-
-        public async Task<IEnumerable<GiftCode>> GetGiftCodes()
+        public async Task<GiftCode> GetGiftCodeById(int id)
         {
-            try
-            {
-                var allCodes = await db.GiftCodes.ToListAsync();
-                return allCodes;
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-
+            return await db.GiftCodes.FindAsync(id);
+        }
+        
+        public async Task<IEnumerable<GiftCode>> GetAllGiftCodes()
+        {
+            return await db.GiftCodes.ToListAsync();
         }
     }
 }

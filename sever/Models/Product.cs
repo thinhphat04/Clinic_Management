@@ -24,7 +24,7 @@ public class Product
     [Range(1,5)]
     public int product_star { get; set; }
     public int? GiftCodeId { get; set; }  
-    public GiftCode GiftCode { get; set; }  
+    public GiftCode? GiftCode { get; set; }  
 
     public ICollection<Cart>? Carts { get; set; }
 
