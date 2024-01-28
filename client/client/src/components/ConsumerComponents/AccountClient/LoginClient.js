@@ -31,6 +31,15 @@ const LoginClient = () => {
     });
   };
 
+  const showSuccessToast = () => {
+    Toast({
+      title: 'Đăng nhập thành công',
+      message: 'Chúc mừng bạn đã đăng nhập thành công!',
+      type: 'success',
+      duration: 3000,
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -49,12 +58,13 @@ const LoginClient = () => {
           // userName: res.data.user.username,
           token: res.data.token,
         });
-        console.log(res.data);
-        alert('Đăng nhập thành công');
+        // console.log(res.data);
+        // alert('Đăng nhập thành công');
+        showSuccessToast();
         handleLoadingPage(1);
         window.setTimeout(() => {
           navigate('/account');
-        }, 1000);
+        }, 4000);
       } else {
         showErrorToast();
       }

@@ -12,18 +12,20 @@ const AccountClientInfo = () => {
     document.title = 'Clinic Online | Thông tin cá nhân';
     const fetchAPIs = () => {
       fetch(
-        `https://localhost:7096/api/users/${
+        `https://localhost:7096/api/User/user/${
           JSON.parse(window.localStorage.getItem('auth')).id
         }`,
       )
-        // .then((res) => res.json())
+        .then((res) => res.json())
         .then((data) => {
+
           setUser(data);
         });
     };
     fetchAPIs();
     handleLoadOptionSidebar(1);
   }, []);
+  console.log("userr:: ",user);
 
   const changeImageUser = () => {
     const preview = document.querySelector('.account__box-info-avatar');
@@ -172,7 +174,7 @@ const AccountClientInfo = () => {
                 </label>
                 <input
                   className="account__box-info-input"
-                  defaultValue={user.fullname}
+                  defaultValue={user.user_fullName}
                   name="fullname"
                 />
 
@@ -189,7 +191,7 @@ const AccountClientInfo = () => {
                 <input
                   className="account__box-info-input"
                   type="text"
-                  defaultValue={user.phone}
+                  defaultValue={user.phoneNumber}
                   name="phone"
                 />
 
@@ -198,7 +200,7 @@ const AccountClientInfo = () => {
                 </label>
                 <input
                   className="account__box-info-input"
-                  defaultValue={user.address}
+                  defaultValue={user.user_address}
                   name="address"
                 />
 

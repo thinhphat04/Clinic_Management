@@ -93,7 +93,7 @@ const InfoAdmin = () => {
         axios
           .put(
             `${process.env.REACT_APP_API}/api/admins/update-info/${
-              JSON.parse(window.localStorage.getItem('authAdmin')).admin._id
+              JSON.parse(window.localStorage.getItem('authAdmin')).id
             } `,
             {
               avatarUrl: admin.avatarUrl,
@@ -162,7 +162,7 @@ const InfoAdmin = () => {
               >
                 Thay đổi Avatar
               </label>
-              <label className="info-page__user-id">{admin.adminName}</label>
+              <label className="info-page__user-id">{admin.user_fullName}</label>
             </div>
 
             <div className="info-page__col-2">

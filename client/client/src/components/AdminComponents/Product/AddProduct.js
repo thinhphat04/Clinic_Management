@@ -98,13 +98,6 @@ const AddProduct = () => {
           product_percent,
           product_img,
           product_star,
-          feedbacks: [
-            {
-                "user_id": "1",  
-                "feedback_description": "Good product!",
-                "feedback_rating": 5
-            }
-          ]
         },
       );
 
