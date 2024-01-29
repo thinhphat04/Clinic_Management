@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using EmailService.Models;
+using EmailService.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PJ_SEM03.DTO;
@@ -16,16 +18,16 @@ namespace PJ_SEM03.Controllers
         private readonly UserManager<User> _userManager;
         private readonly IConfiguration _config;
         private readonly IAccountRepo repo;
-        //private readonly EmailService _emailService;
+        private readonly IEmailSender emailSender;
 
-        public AccountController(IAccountRepo repo, UserManager<User> _userManager, IConfiguration _config
-            //, EmailService emailService
+        public AccountController(IAccountRepo repo, UserManager<User> _userManager, IConfiguration _config,
+            IEmailSender emailSender
             )
         {
             this.repo = repo;
             this._userManager = _userManager;
             this._config = _config;
-            //_emailService = emailService;
+            this.emailSender = emailSender;
         }
 
         [HttpPost("login")]
@@ -125,5 +127,12 @@ namespace PJ_SEM03.Controllers
         //    return BadRequest("Can not send email, please try again");
         //}
 
+        [HttpGet]
+        public async Task<IActionResult> sendEmail()
+        {
+            var message = new Message(new string[] { "tramtbhts2209059@fpt.edu.vn" }, "Test email async", "This is the content from our async email.");
+            await emailSender.SendEmailAsync(message);
+            return Ok("Email Sent");
+        }
     }
 }

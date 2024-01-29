@@ -1,5 +1,6 @@
 using System.Text;
 using System.Text.Json.Serialization;
+using EmailService.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -54,9 +55,14 @@ builder.Services.AddCors(options =>
 });
 
 //Mail configure
-var emailConfig = builder.Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>();
-builder.Services.AddSingleton(emailConfig);
+var emailConfig = builder.Configuration
+    .GetSection("EmailConfiguration")
+    .Get<EmailConfiguration>();
 
+builder.Services.AddSingleton(emailConfig);
+builder.Services.AddScoped<IEmailSender, EmailSender>();
+
+builder.Services.AddControllers();
 //khai báo các service
 builder.Services.AddScoped<IUserRepo, UserService>();
 builder.Services.AddScoped<IAccountRepo, AccountService>();
@@ -66,7 +72,7 @@ builder.Services.AddScoped<ICartRepo, CartService>();
 builder.Services.AddScoped<CloudinaryService>();
 builder.Services.AddScoped<IFeedbackRepo, FeedbackService>();
 builder.Services.AddScoped<IGiftcode, GiftcodeService>();
-//builder.Services.AddScoped<IEmailRepo, EmailService>();
+
 
 /****************************************************************************************/
 builder.Services.AddControllers().AddJsonOptions(x =>

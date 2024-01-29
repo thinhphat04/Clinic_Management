@@ -17,10 +17,10 @@ namespace PJ_SEM03.Services
             _dbContext = dbContext;
         }
 
-        public async Task<bool> CreateFeedback(string userId, int productId, Feedback feedback)
+        public async Task<bool> CreateFeedback( Feedback feedback)
         {
             // Check if the user has purchased the product
-            bool hasPurchased = await CheckUserPurchase(userId, productId);
+            bool hasPurchased = await CheckUserPurchase(feedback.user_id, feedback.product_id);
 
             if (hasPurchased)
             {

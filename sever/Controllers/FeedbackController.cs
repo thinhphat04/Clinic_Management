@@ -49,14 +49,14 @@ namespace PJ_SEM03.Controllers
         }
 
         [HttpPost("createFeedback")]
-        public async Task<IActionResult> CreateFeedback(string userId, int productId, [FromBody] Feedback feedback)
+        public async Task<IActionResult> CreateFeedback( [FromBody] Feedback feedback)
         {
             try
             {
-                bool hasPurchased = await repo.CheckUserPurchase(userId, productId);
+                bool hasPurchased = await repo.CheckUserPurchase(feedback.user_id, feedback.product_id);
                 if (hasPurchased)
                 {
-                    var result = await repo.CreateFeedback(userId, productId, feedback);
+                    var result = await repo.CreateFeedback(feedback);
                     if (result)
                     {
                         return Ok("Feedback created successfully.");

@@ -37,19 +37,27 @@ namespace PJ_SEM03.Services
 
         public async Task<bool> UpdateUser(UserDto user)
         {
-            var query = await _dbContext.Users.SingleOrDefaultAsync(x=> x.Id == user.Id);
-            if(query != null)
+            try
             {
-                query.UserName = user.Username;
-                query.user_fullName = user.Fullname;
-                query.user_address = user.Address;
-                query.PhoneNumber = user.PhoneNumber;
+                var query = await _dbContext.Users.SingleOrDefaultAsync(x => x.Id == user.Id);
 
-                _dbContext.Users.Update(query);
-                _dbContext.SaveChanges();
-                return true;
+                if (query != null)
+                {
+                    query.UserName = user.Username;
+                    query.user_fullName = user.Fullname;
+                    query.user_address = user.Address;
+                    query.PhoneNumber = user.PhoneNumber;
+
+                    _dbContext.Users.Update(query);
+                    await _dbContext.SaveChangesAsync(); // Use SaveChangesAsync instead of SaveChanges
+                    return true;
+                }
+                return false;
             }
-            return false;
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
     }
 
