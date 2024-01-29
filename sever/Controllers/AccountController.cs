@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PJ_SEM03.DTO;
@@ -16,16 +17,13 @@ namespace PJ_SEM03.Controllers
         private readonly UserManager<User> _userManager;
         private readonly IConfiguration _config;
         private readonly IAccountRepo repo;
-        //private readonly EmailService _emailService;
 
         public AccountController(IAccountRepo repo, UserManager<User> _userManager, IConfiguration _config
-            //, EmailService emailService
             )
         {
             this.repo = repo;
             this._userManager = _userManager;
             this._config = _config;
-            //_emailService = emailService;
         }
 
         [HttpPost("login")]
@@ -125,5 +123,6 @@ namespace PJ_SEM03.Controllers
         //    return BadRequest("Can not send email, please try again");
         //}
 
+       
     }
 }

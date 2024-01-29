@@ -48,9 +48,9 @@ const CartInfo = () => {
     );
     const inputElement = document.querySelectorAll('.cart-info__input');
     if (checkboxDefaultInfo.checked) {
-      inputElement[0].value = `${user.username}`;
+      inputElement[0].value = `${user.fullname}`;
       inputElement[1].value = `${user.email}`;
-      inputElement[2].value = `${user.phone}`;
+      inputElement[2].value = `${user.phoneNumber}`;
       setFullNameEdit(user.fullname);
       setEmailEdit(user.email);
       setPhoneEdit(user.phone);

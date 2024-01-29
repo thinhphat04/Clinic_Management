@@ -15,13 +15,13 @@ const CartConfirm = () => {
     document.title = 'Clinic Online | Xác nhận đơn hàng';
     const fetchAPIs = () => {
       fetch(
-        `https://localhost:7096/api/users/${
-          JSON.parse(window.localStorage.getItem('auth')).user._id
+        `https://localhost:7096/api/Cart/${
+          JSON.parse(window.localStorage.getItem('auth')).id
         }`,
       )
         .then((res) => res.json())
         .then((data) => {
-          setCartUser(data.cart);
+          setCartUser(data);
           setLoading(false);
         });
     };
@@ -36,9 +36,9 @@ const CartConfirm = () => {
     cartUser.map((cartItem, index) => {
       if (cartItem) {
         countTotalPriceOld +=
-          ((Number(cartItem.price) * (100 + cartItem.percent)) / 100) *
-          cartItem.quantity;
-        countPriceAll += Number(cartItem.price) * cartItem.quantity;
+          ((Number(cartItem.product.product_price) * (100 + cartItem.product.product_percent)) / 100) *
+          cartItem.product_quantity;
+        countPriceAll += Number(cartItem.product.product_price) * cartItem.product_quantity;
       }
     });
 
@@ -65,6 +65,8 @@ const CartConfirm = () => {
       window.location.href = '/cart/info/giftcode/confirm/payment';
     }, 2000);
   };
+
+  console.log("cartUser::: ", cartUser);
 
   return (
     <>
@@ -158,20 +160,20 @@ const CartConfirm = () => {
                     <li className="cart-confirm__item-product" key={i}>
                       <img
                         className="cart-confirm__item-product-img"
-                        src={product.product_img}
+                        src={product.product.product_img}
                       ></img>
                       <div className="cart-confirm__item-product-info">
                         <label className="cart-confirm__item-product-info-label">
-                          {product.productName}
+                          {product.product.productName}
                         </label>
                         <p className="cart-confirm__item-product-info-quantity">
-                          x{product.quantity}
+                          x{product.product_quantity}
                         </p>
                         <p className="cart-confirm__item-product-info-price">
-                          {product.quantity} x{' '}
-                          {Number(product.product_price).toLocaleString()} đ ={' '}
+                          {product.product_quantity} x{' '}
+                          {Number(product.product.product_price).toLocaleString()} đ ={' '}
                           {Number(
-                            product.quantity * product.product_price,
+                            product.product_quantity * product.product.product_price,
                           ).toLocaleString()}{' '}
                           đ
                         </p>
@@ -203,9 +205,9 @@ const CartConfirm = () => {
                         Khuyến mãi giảm cho sản phẩm #{i + 1}:{' '}
                       </label>
                       <span className="detail-price__item-price">
-                        - {Number(product.percent)}% ={' '}
+                        - {Number(product.product.product_percent)}% ={' '}
                         {Number(
-                          (product.percent / 100) * product.product_price,
+                          (product.product.product_percent / 100) * product.product_price,
                         ).toLocaleString()}{' '}
                         đ
                       </span>

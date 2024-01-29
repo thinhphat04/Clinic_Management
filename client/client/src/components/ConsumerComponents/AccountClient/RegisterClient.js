@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Validator from '../../Common/Validator';
-import { handleLoadingPage } from '../../Common';
+import { Toast, handleLoadingPage } from '../../Common';
 import { Breadcrumbs, Nav } from '../Common';
 
 const RegisterClient = () => {
@@ -50,6 +50,16 @@ const RegisterClient = () => {
     // });
   }, []);
 
+  const showErrorToast = () => {
+    Toast({
+      title: 'Đăng ký thành công',
+      message: 'Đang quay trở lại trang đăng nhập!',
+      type: 'success',
+      duration: 3000,
+    });
+  };
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -70,10 +80,11 @@ const RegisterClient = () => {
           window.alert(res.data.message);
         } else {
           window.alert('Đăng ký thành công! Đang quay trở lại trang đăng nhập');
+        //  showErrorToast();
           handleLoadingPage(1);
           window.setTimeout(() => {
             window.location.href = '/login';
-          }, 1000);
+          }, 4000);
         }
       } else {
         window.alert('Đã gặp lỗi khi đăng ký! Vui lòng thử lại');   

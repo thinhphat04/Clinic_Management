@@ -12,7 +12,7 @@ using PJ_SEM03.Models;
 namespace PJ_SEM03.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240128052201_InitialCreate")]
+    [Migration("20240128094903_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -215,6 +215,7 @@ namespace PJ_SEM03.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("user_id")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("feedback_id");
@@ -252,6 +253,52 @@ namespace PJ_SEM03.Migrations
                         });
                 });
 
+            modelBuilder.Entity("PJ_SEM03.Models.GiftCode", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ApplyFor")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Describe")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("giftName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("percentReduce")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("GiftCodes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ApplyFor = "Medical, Education, Scientific",
+                            Describe = "Reduce 5%",
+                            giftName = "Welcome",
+                            percentReduce = 5
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ApplyFor = "Medical, Education, Scientific",
+                            Describe = "Reduce 10%",
+                            giftName = "Goodbye",
+                            percentReduce = 10
+                        });
+                });
+
             modelBuilder.Entity("PJ_SEM03.Models.Order", b =>
                 {
                     b.Property<int>("order_id")
@@ -259,6 +306,9 @@ namespace PJ_SEM03.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("order_id"));
+
+                    b.Property<int?>("AppliedGiftCodeId")
+                        .HasColumnType("int");
 
                     b.Property<string>("order_address")
                         .IsRequired()
@@ -288,6 +338,8 @@ namespace PJ_SEM03.Migrations
 
                     b.HasKey("order_id");
 
+                    b.HasIndex("AppliedGiftCodeId");
+
                     b.HasIndex("user_id");
 
                     b.ToTable("Orders");
@@ -298,7 +350,7 @@ namespace PJ_SEM03.Migrations
                             order_id = 1,
                             order_address = "HCM",
                             order_code = "ORD001",
-                            order_datetime = new DateTime(2024, 1, 28, 12, 22, 0, 733, DateTimeKind.Local).AddTicks(3717),
+                            order_datetime = new DateTime(2024, 1, 28, 16, 49, 3, 369, DateTimeKind.Local).AddTicks(1776),
                             order_phone = "123",
                             order_status = "Processing",
                             order_total = 100,
@@ -309,7 +361,7 @@ namespace PJ_SEM03.Migrations
                             order_id = 2,
                             order_address = "Ca Mau",
                             order_code = "ORD001",
-                            order_datetime = new DateTime(2024, 1, 28, 12, 22, 0, 733, DateTimeKind.Local).AddTicks(3729),
+                            order_datetime = new DateTime(2024, 1, 28, 16, 49, 3, 369, DateTimeKind.Local).AddTicks(1789),
                             order_phone = "124",
                             order_status = "Delivered",
                             order_total = 200,
@@ -376,6 +428,9 @@ namespace PJ_SEM03.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("product_id"));
 
+                    b.Property<int?>("GiftCodeId")
+                        .HasColumnType("int");
+
                     b.Property<string>("product_description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -405,6 +460,8 @@ namespace PJ_SEM03.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("product_id");
+
+                    b.HasIndex("GiftCodeId");
 
                     b.ToTable("Products", (string)null);
 
@@ -572,14 +629,14 @@ namespace PJ_SEM03.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0e0ae20d-923d-499d-9bee-b9d3c86905f7",
+                            ConcurrencyStamp = "c10d3d16-2044-44bc-983e-cdc9c47076da",
                             Email = "admin@test.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEFZK0PP6qdgdP4hLYpDEU/7oM/9FYoVUmOuPFR10qFngkdLEZWvP0wz/AUov+WfV0Q==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEH6Q+1VXa/5iSoV9z05picGwqyPE1B+DiyWLKJDdQ4R34fiW04BV1lQ3KrsNmJfJ3g==",
                             PhoneNumberConfirmed = false,
                             Role = "Admin",
-                            SecurityStamp = "e300ee4b-d286-4636-bb4f-b5b5581a1fb3",
+                            SecurityStamp = "70d78c5d-c002-4b9e-8856-7b372836879d",
                             TwoFactorEnabled = false,
                             UserName = "admin",
                             user_fullName = "admin"
@@ -588,14 +645,14 @@ namespace PJ_SEM03.Migrations
                         {
                             Id = "2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "37430a87-9307-4002-a704-a7d068b9d078",
+                            ConcurrencyStamp = "6f34dd50-f5cf-4819-8078-3a59b2791937",
                             Email = "phat@test.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEJmmMPciGPMAX/tGJcbIiIm4+HxXXpcZK/lCeOlcXle37cJfrqJR4pMs42Bel0uSyw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEC13ehfvZhY9PkeaY68fB4iX9JNDkyapirRf4kmpY0FmCWmeMiny94KkWUs7S7mTdg==",
                             PhoneNumberConfirmed = false,
                             Role = "Member",
-                            SecurityStamp = "ce7a2d8e-830a-4a39-aa55-035439bea91f",
+                            SecurityStamp = "9450a133-0c35-42e2-bd69-05a350b7986e",
                             TwoFactorEnabled = false,
                             UserName = "phat",
                             user_fullName = "Ngo Thinh Phat"
@@ -604,14 +661,14 @@ namespace PJ_SEM03.Migrations
                         {
                             Id = "3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9d0b0b6d-a8cd-4ef0-bd8e-f0eff7f8cdb5",
+                            ConcurrencyStamp = "992d9f9f-c179-413c-b00c-9f44987d2616",
                             Email = "khai@test.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEOey94RL4B2fBWyEP6KCOnD7WeatT/e3Z9WnTj3DUKaSPrpS0IsJpJzjrzXaapEqBw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOxv3zrJ5YMzmdP3IDecVIq63IebaH86BVjG4bmMbyHZ+S3ezGgVGAem4MO1Cyr8lA==",
                             PhoneNumberConfirmed = false,
                             Role = "Member",
-                            SecurityStamp = "be9f08a9-8806-4cdc-8358-2fed84250a8b",
+                            SecurityStamp = "67aca9f5-6037-475e-b445-27b6b4ac0ddb",
                             TwoFactorEnabled = false,
                             UserName = "khai",
                             user_fullName = "Bui Tuan Khai"
@@ -620,14 +677,14 @@ namespace PJ_SEM03.Migrations
                         {
                             Id = "4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "286ed928-54c1-460d-9521-3bc8a9e44069",
+                            ConcurrencyStamp = "5273175e-e544-482b-a56f-99762a3d4e08",
                             Email = "tram@test.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEPuQ0keUakaSC3VWbIkTXie2g0j5weZVyfjhgikNfMFCRNQWxdgu3SwwY1+Hrh37Pg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJLdOBXizh4XI6s6AWrE5DOOU+pe5vmKahZNpu9Q6HibiLL5fx8vgXacpNEkjLFajA==",
                             PhoneNumberConfirmed = false,
                             Role = "Member",
-                            SecurityStamp = "c58d560a-a321-4e61-a8cb-1f2b63125123",
+                            SecurityStamp = "5a64533e-fa75-4ad6-bb5b-e5bda20b4bab",
                             TwoFactorEnabled = false,
                             UserName = "tram",
                             user_fullName = "Tran Bao Huyen Tram"
@@ -770,13 +827,13 @@ namespace PJ_SEM03.Migrations
                 {
                     b.HasOne("PJ_SEM03.Models.Product", "Product")
                         .WithMany("Feedbacks")
-                        .HasForeignKey("product_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("product_id");
 
                     b.HasOne("PJ_SEM03.Models.User", "User")
                         .WithMany("Feedbacks")
-                        .HasForeignKey("user_id");
+                        .HasForeignKey("user_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Product");
 
@@ -785,11 +842,17 @@ namespace PJ_SEM03.Migrations
 
             modelBuilder.Entity("PJ_SEM03.Models.Order", b =>
                 {
+                    b.HasOne("PJ_SEM03.Models.GiftCode", "AppliedGiftCode")
+                        .WithMany()
+                        .HasForeignKey("AppliedGiftCodeId");
+
                     b.HasOne("PJ_SEM03.Models.User", "User")
                         .WithMany("Orders")
                         .HasForeignKey("user_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("AppliedGiftCode");
 
                     b.Navigation("User");
                 });
@@ -811,6 +874,15 @@ namespace PJ_SEM03.Migrations
                     b.Navigation("Order");
 
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("PJ_SEM03.Models.Product", b =>
+                {
+                    b.HasOne("PJ_SEM03.Models.GiftCode", "GiftCode")
+                        .WithMany()
+                        .HasForeignKey("GiftCodeId");
+
+                    b.Navigation("GiftCode");
                 });
 
             modelBuilder.Entity("PJ_SEM03.Models.Education", b =>

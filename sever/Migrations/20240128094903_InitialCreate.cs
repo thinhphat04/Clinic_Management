@@ -56,23 +56,19 @@ namespace PJ_SEM03.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Products",
+                name: "GiftCodes",
                 columns: table => new
                 {
-                    product_id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    product_name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    product_description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    product_type = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    product_img = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    product_quantity = table.Column<int>(type: "int", nullable: false),
-                    product_price = table.Column<int>(type: "int", nullable: false),
-                    product_percent = table.Column<int>(type: "int", nullable: false),
-                    product_star = table.Column<int>(type: "int", nullable: false)
+                    giftName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Describe = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    percentReduce = table.Column<int>(type: "int", nullable: false),
+                    ApplyFor = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Products", x => x.product_id);
+                    table.PrimaryKey("PK_GiftCodes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -193,7 +189,8 @@ namespace PJ_SEM03.Migrations
                     order_status = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     order_address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     order_phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    order_total = table.Column<int>(type: "int", nullable: false)
+                    order_total = table.Column<int>(type: "int", nullable: false),
+                    AppliedGiftCodeId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -204,6 +201,37 @@ namespace PJ_SEM03.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Orders_GiftCodes_AppliedGiftCodeId",
+                        column: x => x.AppliedGiftCodeId,
+                        principalTable: "GiftCodes",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Products",
+                columns: table => new
+                {
+                    product_id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    product_name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    product_description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    product_type = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    product_img = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    product_quantity = table.Column<int>(type: "int", nullable: false),
+                    product_price = table.Column<int>(type: "int", nullable: false),
+                    product_percent = table.Column<int>(type: "int", nullable: false),
+                    product_star = table.Column<int>(type: "int", nullable: false),
+                    GiftCodeId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Products", x => x.product_id);
+                    table.ForeignKey(
+                        name: "FK_Products_GiftCodes_GiftCodeId",
+                        column: x => x.GiftCodeId,
+                        principalTable: "GiftCodes",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -258,7 +286,7 @@ namespace PJ_SEM03.Migrations
                 {
                     feedback_id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    user_id = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    user_id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     product_id = table.Column<int>(type: "int", nullable: false),
                     feedback_description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     feedback_rating = table.Column<int>(type: "int", nullable: false)
@@ -270,13 +298,13 @@ namespace PJ_SEM03.Migrations
                         name: "FK_Feedbacks_AspNetUsers_user_id",
                         column: x => x.user_id,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Feedbacks_Products_product_id",
                         column: x => x.product_id,
                         principalTable: "Products",
-                        principalColumn: "product_id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "product_id");
                 });
 
             migrationBuilder.CreateTable(
@@ -294,26 +322,6 @@ namespace PJ_SEM03.Migrations
                     table.PrimaryKey("PK_Medicals", x => x.product_id);
                     table.ForeignKey(
                         name: "FK_Medicals_Products_product_id",
-                        column: x => x.product_id,
-                        principalTable: "Products",
-                        principalColumn: "product_id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Scientifics",
-                columns: table => new
-                {
-                    product_id = table.Column<int>(type: "int", nullable: false),
-                    sci_id = table.Column<int>(type: "int", nullable: false),
-                    sci_uses = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    sci_brand = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Scientifics", x => x.product_id);
-                    table.ForeignKey(
-                        name: "FK_Scientifics_Products_product_id",
                         column: x => x.product_id,
                         principalTable: "Products",
                         principalColumn: "product_id",
@@ -346,28 +354,57 @@ namespace PJ_SEM03.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Scientifics",
+                columns: table => new
+                {
+                    product_id = table.Column<int>(type: "int", nullable: false),
+                    sci_id = table.Column<int>(type: "int", nullable: false),
+                    sci_uses = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    sci_brand = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Scientifics", x => x.product_id);
+                    table.ForeignKey(
+                        name: "FK_Scientifics_Products_product_id",
+                        column: x => x.product_id,
+                        principalTable: "Products",
+                        principalColumn: "product_id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Role", "SecurityStamp", "TwoFactorEnabled", "UserName", "user_address", "user_fullName" },
                 values: new object[,]
                 {
-                    { "1", 0, "0e0ae20d-923d-499d-9bee-b9d3c86905f7", "admin@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEFZK0PP6qdgdP4hLYpDEU/7oM/9FYoVUmOuPFR10qFngkdLEZWvP0wz/AUov+WfV0Q==", null, false, "Admin", "e300ee4b-d286-4636-bb4f-b5b5581a1fb3", false, "admin", null, "admin" },
-                    { "2", 0, "37430a87-9307-4002-a704-a7d068b9d078", "phat@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEJmmMPciGPMAX/tGJcbIiIm4+HxXXpcZK/lCeOlcXle37cJfrqJR4pMs42Bel0uSyw==", null, false, "Member", "ce7a2d8e-830a-4a39-aa55-035439bea91f", false, "phat", null, "Ngo Thinh Phat" },
-                    { "3", 0, "9d0b0b6d-a8cd-4ef0-bd8e-f0eff7f8cdb5", "khai@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEOey94RL4B2fBWyEP6KCOnD7WeatT/e3Z9WnTj3DUKaSPrpS0IsJpJzjrzXaapEqBw==", null, false, "Member", "be9f08a9-8806-4cdc-8358-2fed84250a8b", false, "khai", null, "Bui Tuan Khai" },
-                    { "4", 0, "286ed928-54c1-460d-9521-3bc8a9e44069", "tram@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEPuQ0keUakaSC3VWbIkTXie2g0j5weZVyfjhgikNfMFCRNQWxdgu3SwwY1+Hrh37Pg==", null, false, "Member", "c58d560a-a321-4e61-a8cb-1f2b63125123", false, "tram", null, "Tran Bao Huyen Tram" }
+                    { "1", 0, "c10d3d16-2044-44bc-983e-cdc9c47076da", "admin@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEH6Q+1VXa/5iSoV9z05picGwqyPE1B+DiyWLKJDdQ4R34fiW04BV1lQ3KrsNmJfJ3g==", null, false, "Admin", "70d78c5d-c002-4b9e-8856-7b372836879d", false, "admin", null, "admin" },
+                    { "2", 0, "6f34dd50-f5cf-4819-8078-3a59b2791937", "phat@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEC13ehfvZhY9PkeaY68fB4iX9JNDkyapirRf4kmpY0FmCWmeMiny94KkWUs7S7mTdg==", null, false, "Member", "9450a133-0c35-42e2-bd69-05a350b7986e", false, "phat", null, "Ngo Thinh Phat" },
+                    { "3", 0, "992d9f9f-c179-413c-b00c-9f44987d2616", "khai@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEOxv3zrJ5YMzmdP3IDecVIq63IebaH86BVjG4bmMbyHZ+S3ezGgVGAem4MO1Cyr8lA==", null, false, "Member", "67aca9f5-6037-475e-b445-27b6b4ac0ddb", false, "khai", null, "Bui Tuan Khai" },
+                    { "4", 0, "5273175e-e544-482b-a56f-99762a3d4e08", "tram@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEJLdOBXizh4XI6s6AWrE5DOOU+pe5vmKahZNpu9Q6HibiLL5fx8vgXacpNEkjLFajA==", null, false, "Member", "5a64533e-fa75-4ad6-bb5b-e5bda20b4bab", false, "tram", null, "Tran Bao Huyen Tram" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "GiftCodes",
+                columns: new[] { "Id", "ApplyFor", "Describe", "giftName", "percentReduce" },
+                values: new object[,]
+                {
+                    { 1, "Medical, Education, Scientific", "Reduce 5%", "Welcome", 5 },
+                    { 2, "Medical, Education, Scientific", "Reduce 10%", "Goodbye", 10 }
                 });
 
             migrationBuilder.InsertData(
                 table: "Products",
-                columns: new[] { "product_id", "product_description", "product_img", "product_name", "product_percent", "product_price", "product_quantity", "product_star", "product_type" },
+                columns: new[] { "product_id", "GiftCodeId", "product_description", "product_img", "product_name", "product_percent", "product_price", "product_quantity", "product_star", "product_type" },
                 values: new object[,]
                 {
-                    { 1, "What is Costar Evening Primrose Oil? Uses and correct usage\nCostar Evening Primrose Oil is a health care product extracted from evening primrose essential oil. Supports anti-oxidation and reduces symptoms of hot flashes in postmenopausal and premenopausal women. This article will introduce more information about the ingredients, uses, usage and intended users of Costar pills", "https://data-service.pharmacity.io/pmc-upload-media/production/pmc-ecm-core/products/P17315_1.jpg", "Costar Evening Primrose Oil", 10, 90, 10, 5, "Medical" },
-                    { 2, "The Bresser Science ETD-201 is a high-quality stereo microscope with transmitted and incident light. It is ideally suited for use in schools and universities as well as for the training of apprentices and in the field of electronics. The 360° rotatable binocular head allows comfortable viewing for both left and right-handed users. The magnification range of 20x to 80x can be extended with the included Barlow lens to 40x to 160x. The LED lighting is continuously dimmable and can be operated with batteries or the included power supply. The microscope is equipped with a 2x and 4x objective and a pair of 10x wide field eyepieces. The interpupillary distance and diopter adjustment are individually adjustable. The microscope is supplied with a dust cover and 5 prepared slides.", "https://maykhoahoc.com/images/thumbnails/550/450/detailed/4/tu-bao-quan-thuoc-duoc-lieu-vacxin-haier-hbc-260-gia-re.jpg", "Bresser Science ETD-201", 20, 100, 10, 4, "Scientific" },
-                    { 3, "Description1", "https://www.bresser.de/out/pictures/generated/product/1/380_340_75/8851000_1.jpg", "Course 2", 10, 30, 10, 5, "Education" },
-                    { 4, "What is Costar Evening Primrose Oil? Uses and correct usage\nCostar Evening Primrose Oil is a health care product extracted from evening primrose essential oil. Supports anti-oxidation and reduces symptoms of hot flashes in postmenopausal and premenopausal women. This article will introduce more information about the ingredients, uses, usage and intended users of Costar pills", "https://data-service.pharmacity.io/pmc-upload-media/production/pmc-ecm-core/products/P17480_1.jpg", "Acetylcystein", 50, 90, 10, 5, "Medical" },
-                    { 5, "The Bresser Science ETD-201 is a high-quality stereo microscope with transmitted and incident light. It is ideally suited for use in schools and universities as well as for the training of apprentices and in the field of electronics. The 360° rotatable binocular head allows comfortable viewing for both left and right-handed users. The magnification range of 20x to 80x can be extended with the included Barlow lens to 40x to 160x. The LED lighting is continuously dimmable and can be operated with batteries or the included power supply. The microscope is equipped with a 2x and 4x objective and a pair of 10x wide field eyepieces. The interpupillary distance and diopter adjustment are individually adjustable. The microscope is supplied with a dust cover and 5 prepared slides.", "https://maykhoahoc.com/images/thumbnails/550/450/detailed/4/tu-bao-quan-vacxine-thuoc-haier-hbc-150-gia-re.png", "Adapter (LEN)", 15, 100, 10, 4, "Scientific" },
-                    { 6, "Description1", "https://www.bresser.de/out/pictures/generated/product/1/380_340_75/8851000_1.jpg", "Course 1", 0, 30, 10, 0, "Education" }
+                    { 1, null, "What is Costar Evening Primrose Oil? Uses and correct usage\nCostar Evening Primrose Oil is a health care product extracted from evening primrose essential oil. Supports anti-oxidation and reduces symptoms of hot flashes in postmenopausal and premenopausal women. This article will introduce more information about the ingredients, uses, usage and intended users of Costar pills", "https://data-service.pharmacity.io/pmc-upload-media/production/pmc-ecm-core/products/P17315_1.jpg", "Costar Evening Primrose Oil", 10, 90, 10, 5, "Medical" },
+                    { 2, null, "The Bresser Science ETD-201 is a high-quality stereo microscope with transmitted and incident light. It is ideally suited for use in schools and universities as well as for the training of apprentices and in the field of electronics. The 360° rotatable binocular head allows comfortable viewing for both left and right-handed users. The magnification range of 20x to 80x can be extended with the included Barlow lens to 40x to 160x. The LED lighting is continuously dimmable and can be operated with batteries or the included power supply. The microscope is equipped with a 2x and 4x objective and a pair of 10x wide field eyepieces. The interpupillary distance and diopter adjustment are individually adjustable. The microscope is supplied with a dust cover and 5 prepared slides.", "https://maykhoahoc.com/images/thumbnails/550/450/detailed/4/tu-bao-quan-thuoc-duoc-lieu-vacxin-haier-hbc-260-gia-re.jpg", "Bresser Science ETD-201", 20, 100, 10, 4, "Scientific" },
+                    { 3, null, "Description1", "https://www.bresser.de/out/pictures/generated/product/1/380_340_75/8851000_1.jpg", "Course 2", 10, 30, 10, 5, "Education" },
+                    { 4, null, "What is Costar Evening Primrose Oil? Uses and correct usage\nCostar Evening Primrose Oil is a health care product extracted from evening primrose essential oil. Supports anti-oxidation and reduces symptoms of hot flashes in postmenopausal and premenopausal women. This article will introduce more information about the ingredients, uses, usage and intended users of Costar pills", "https://data-service.pharmacity.io/pmc-upload-media/production/pmc-ecm-core/products/P17480_1.jpg", "Acetylcystein", 50, 90, 10, 5, "Medical" },
+                    { 5, null, "The Bresser Science ETD-201 is a high-quality stereo microscope with transmitted and incident light. It is ideally suited for use in schools and universities as well as for the training of apprentices and in the field of electronics. The 360° rotatable binocular head allows comfortable viewing for both left and right-handed users. The magnification range of 20x to 80x can be extended with the included Barlow lens to 40x to 160x. The LED lighting is continuously dimmable and can be operated with batteries or the included power supply. The microscope is equipped with a 2x and 4x objective and a pair of 10x wide field eyepieces. The interpupillary distance and diopter adjustment are individually adjustable. The microscope is supplied with a dust cover and 5 prepared slides.", "https://maykhoahoc.com/images/thumbnails/550/450/detailed/4/tu-bao-quan-vacxine-thuoc-haier-hbc-150-gia-re.png", "Adapter (LEN)", 15, 100, 10, 4, "Scientific" },
+                    { 6, null, "Description1", "https://www.bresser.de/out/pictures/generated/product/1/380_340_75/8851000_1.jpg", "Course 1", 0, 30, 10, 0, "Education" }
                 });
 
             migrationBuilder.InsertData(
@@ -392,11 +429,11 @@ namespace PJ_SEM03.Migrations
 
             migrationBuilder.InsertData(
                 table: "Orders",
-                columns: new[] { "order_id", "order_address", "order_code", "order_datetime", "order_phone", "order_status", "order_total", "user_id" },
+                columns: new[] { "order_id", "AppliedGiftCodeId", "order_address", "order_code", "order_datetime", "order_phone", "order_status", "order_total", "user_id" },
                 values: new object[,]
                 {
-                    { 1, "HCM", "ORD001", new DateTime(2024, 1, 28, 12, 22, 0, 733, DateTimeKind.Local).AddTicks(3717), "123", "Processing", 100, "1" },
-                    { 2, "Ca Mau", "ORD001", new DateTime(2024, 1, 28, 12, 22, 0, 733, DateTimeKind.Local).AddTicks(3729), "124", "Delivered", 200, "2" }
+                    { 1, null, "HCM", "ORD001", new DateTime(2024, 1, 28, 16, 49, 3, 369, DateTimeKind.Local).AddTicks(1776), "123", "Processing", 100, "1" },
+                    { 2, null, "Ca Mau", "ORD001", new DateTime(2024, 1, 28, 16, 49, 3, 369, DateTimeKind.Local).AddTicks(1789), "124", "Delivered", 200, "2" }
                 });
 
             migrationBuilder.InsertData(
@@ -484,9 +521,19 @@ namespace PJ_SEM03.Migrations
                 column: "order_id");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Orders_AppliedGiftCodeId",
+                table: "Orders",
+                column: "AppliedGiftCodeId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Orders_user_id",
                 table: "Orders",
                 column: "user_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Products_GiftCodeId",
+                table: "Products",
+                column: "GiftCodeId");
         }
 
         /// <inheritdoc />
@@ -536,6 +583,9 @@ namespace PJ_SEM03.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "GiftCodes");
         }
     }
 }

@@ -32,7 +32,7 @@ namespace PJ_SEM03.Controllers
         }
         
         [HttpPut]
-        public async Task<IActionResult> UpdateUser(User user)
+        public async Task<IActionResult> UpdateUser(UserDto user)
         {
             var result = await userRepo.UpdateUser(user);
             if (result)

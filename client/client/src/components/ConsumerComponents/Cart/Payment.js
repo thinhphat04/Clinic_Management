@@ -16,14 +16,14 @@ const Payment = ({ socket }) => {
     document.title = 'Clinic Online | Thanh toán đơn hàng';
     const fetchAPIs = () => {
       fetch(
-        `https://localhost:7096/api/users/${
-          JSON.parse(window.localStorage.getItem('auth')).user._id
+        `https://localhost:7096/api/Cart/${
+          JSON.parse(window.localStorage.getItem('auth')).id
         }`,
       )
         .then((res) => res.json())
         .then((data) => {
-          setUser(data);
-          setCartUser(data.cart);
+          setUser(JSON.parse(window.localStorage.getItem('auth')));
+          setCartUser(data);
         });
 
       fetch('https://localhost:7096/api/orders')
@@ -149,7 +149,7 @@ const Payment = ({ socket }) => {
     setTimeOrder(dateTime);
     try {
       const res = await axios.post(
-        `${process.env.REACT_APP_API}/api/orders/create`,
+        `https://localhost:7096/api/Order`,
         {
           orderID: window.localStorage.getItem('orderIDCache'),
           owner: JSON.parse(window.localStorage.getItem('auth')).user.username,
@@ -166,6 +166,28 @@ const Payment = ({ socket }) => {
           lists: cartUser,
         },
       );
+
+
+      // {
+      //   "order_code":"",
+      //    "user_id": "2",
+      //    "order_datetime": "2024-01-24T04:18:39.828Z",
+      //    "order_status": "Pending",
+      //    "order_address": "123 Main St",
+      //    "order_phone": "0866692970",
+      //    "order_total": 35,
+      //    "OrderDetails": [
+      //      {
+      //        "product_id": 1,
+      //        "order_quantity": 1,
+      //        "order_price": 5
+      //      }
+      //    ]
+      //  }
+
+
+
+
       if (res && res.data.success) {
         try {
           const res = await axios.post(
