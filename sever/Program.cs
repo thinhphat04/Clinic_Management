@@ -1,6 +1,5 @@
 using System.Text;
 using System.Text.Json.Serialization;
-using EmailService.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -54,13 +53,7 @@ builder.Services.AddCors(options =>
                           .AllowAnyHeader());
 });
 
-//Mail configure
-var emailConfig = builder.Configuration
-    .GetSection("EmailConfiguration")
-    .Get<EmailConfiguration>();
 
-builder.Services.AddSingleton(emailConfig);
-builder.Services.AddScoped<IEmailSender, EmailSender>();
 
 builder.Services.AddControllers();
 //khai báo các service
