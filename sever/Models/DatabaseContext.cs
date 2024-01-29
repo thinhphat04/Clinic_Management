@@ -108,10 +108,10 @@ public class DatabaseContext : IdentityDbContext<User>
             od.HasOne(od => od.Order).WithMany(o => o.OrderDetails).HasForeignKey(od => od.order_id);
             od.HasData(new OrderDetail[]
             {
-                new OrderDetail {order_id=1, product_id=1, order_quantity=2, order_price=45},
-                new OrderDetail {order_id=1, product_id=3, order_quantity=3, order_price=30},
-                new OrderDetail {order_id=2, product_id=2, order_quantity=4, order_price=100},
-                new OrderDetail {order_id=2, product_id=4, order_quantity=1, order_price=90}
+                new OrderDetail {order_id=1, product_id=1, product_quantity = 2},
+                new OrderDetail {order_id=1, product_id=3, product_quantity=3},
+                new OrderDetail {order_id=2, product_id=2, product_quantity=4},
+                new OrderDetail {order_id=2, product_id=4, product_quantity=1}
             });
         });
 

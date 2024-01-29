@@ -17,8 +17,6 @@ namespace PJ_SEM03.Services
             this.db = db;
         }
 
-
-       
         public async Task<Order> addOrder(Order order)
         {
             using(var transaction = db.Database.BeginTransaction())
@@ -31,7 +29,7 @@ namespace PJ_SEM03.Services
                     {
                         OrderDetail details = new OrderDetail();
                         details.product_id = cart.product_id;
-                        details.order_quantity = cart.product_quantity;
+                        details.product_quantity = cart.product_quantity;
                         order.OrderDetails.Add(details);
                     }
                     db.Orders.Add(order);

@@ -11,9 +11,12 @@ public class OrderDetail
     
     public int product_id { get; set; }
     
-    public int order_quantity { get; set; } // số lượng sản phẩm
+    public int product_quantity { get; set; }
+
     
-    public int order_price { get; set; } // giá sản phẩm
+    // public int order_quantity { get; set; } // số lượng sản phẩm
+    //
+    // public int order_price { get; set; } // giá sản phẩm
     
     public Order? Order { get; set; }
 
