@@ -16,7 +16,7 @@ public class DatabaseContext : IdentityDbContext<User>
     public DbSet<Order> Orders { get; set; }
     public DbSet<OrderDetail> OrderDetails { get; set; }
     public DbSet<Product> Products { get; set; }
-    public DbSet<Feedback> Feedbacks { get; set; }
+    public DbSet<Contact> Contacts { get; set; }
     public DbSet<Cart> Carts { get; set; }
     public DbSet<GiftCode> GiftCodes { get; set; }
     //public DbSet<User> Users { get; set; }
@@ -211,40 +211,40 @@ public class DatabaseContext : IdentityDbContext<User>
         //    new IdentityRole { Name = "Admin", NormalizedName = "ADMIN" 
         //});
 
-        modelBuilder.Entity<Feedback>().HasData(new Feedback[] {
-                 new Feedback
+        modelBuilder.Entity<Contact>().HasData(new Contact[] {
+                 new Contact
                  {
-                     feedback_id = 1,
-                     feedback_fullname ="Bui Tuan Khai",
-                     feedback_email = "khai@gmail.com",
-                     feedback_type = "Account",
-                     feedback_content = "So easy to register and login! Like it"
+                     Id = 1,
+                    Fullname ="Bui Tuan Khai",
+                     Email = "khai@gmail.com",
+                     Type= "Account",
+                     Content = "So easy to register and login! Like it"
                  },
-                  new Feedback
+                  new Contact
                  {
-                    feedback_id = 2,
-                     feedback_fullname ="Nguyen Thanh Trung",
-                     feedback_email = "trung@gmail.com",
-                     feedback_type = "Promotion",
-                     feedback_content = "I love promotion of this month"
+                    Id = 2,
+                     Fullname ="Nguyen Thanh Trung",
+                     Email = "trung@gmail.com",
+                     Type= "Promotion",
+                     Content = "I love promotion of this month"
                  },
-                  new Feedback
+                  new Contact
                  {
-                      feedback_id = 3,
-                     feedback_fullname ="Ngo Thinh Phat",
-                     feedback_email = "phat@gmail.com",
-                     feedback_type = "System",
-                     feedback_content = "The system run smoothly"
+                     Id = 3,
+                     Fullname ="Ngo Thinh Phat",
+                     Email = "phat@gmail.com",
+                     Type = "System",
+                     Content = "The system run smoothly"
                  },
-                   new Feedback
+                   new Contact
                  {
-                      feedback_id = 4,
-                     feedback_fullname ="Tran Bao Huyen Tram",
-                     feedback_email = "tram@gmail.com",
-                     feedback_type = "Other",
-                     feedback_content = "The staffs are so friendly"
+                      Id = 4,
+                     Fullname ="Tran Bao Huyen Tram",
+                     Email = "tram@gmail.com",
+                     Type = "Other",
+                     Content= "The staffs are so friendly"
                  },
-             });
+             }); ;
 
         modelBuilder.Entity<GiftCode>().HasData(new GiftCode[]
         {

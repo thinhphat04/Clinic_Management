@@ -10,7 +10,6 @@ public class User : IdentityUser
     public string Role { get; set; }
 
     public ICollection<Order> Orders { get; set; }
-    public ICollection<Feedback>? Feedbacks { get; set; }
     
     public ICollection<Cart>? Carts { get; set; }
     
