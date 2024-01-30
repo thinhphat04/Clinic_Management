@@ -20,11 +20,9 @@ namespace PJ_SEM03.Services
             _dbContext = dbContext;
         }
 
-        public async Task<PagedList<Product>> getAll(int pageNumber, int pageSize)
+        public async Task<List<Product>> getAll()
         {
-            var query = _dbContext.Products.AsQueryable();
-            var products = await PagedList<Product>.ToPagedList(query, pageNumber, pageSize);
-            return products;
+            return await _dbContext.Products.ToListAsync();
         }
 
         public async Task<Product> getProductById(int product_id)
