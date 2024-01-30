@@ -51,5 +51,15 @@ namespace PJ_SEM03.Controllers
             }
             return BadRequest();
         }
+        
+        [HttpPut("decrease")]
+        public async Task<IActionResult> DecreaseCartQuantity(string userId, int productId)
+        {
+            if (await _cartRepo.DecreaseCartQuantity(userId, productId))
+            {
+                return Ok("success");
+            }
+            return BadRequest();
+        }
     }
 }

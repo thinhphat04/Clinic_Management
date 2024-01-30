@@ -45,6 +45,29 @@ namespace PJ_SEM03.Services
             return await UpdateCartQuantity(oldCart);
         }
 
+        public async Task<bool> DecreaseCartQuantity(string userId, int productId)
+        {
+            var cart = await db.Carts.SingleOrDefaultAsync(c => c.user_id == userId && c.product_id == productId);
+            if (cart != null)
+            {
+                if (cart.product_quantity > 1)
+                {
+                    cart.product_quantity -= 1;
+                    db.Carts.Update(cart);
+                    await db.SaveChangesAsync();
+                    return true;
+                }
+                else
+                {
+                    db.Carts.Remove(cart);
+                    await db.SaveChangesAsync();
+                    return true;
+                }
+            }
+
+            return false;
+        }
+        
         public async Task<bool> UpdateCartQuantity(Cart newCart)
         {
             try
