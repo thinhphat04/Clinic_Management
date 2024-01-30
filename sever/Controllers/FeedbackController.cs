@@ -27,7 +27,7 @@ namespace PJ_SEM03.Controllers
         {
             try
             {
-                return Ok(await repo.getAll(paginationParams.PageNumber, paginationParams.PageSize));
+                return Ok(await repo.GetAll());
             }
             catch (Exception ex)
             {
@@ -35,12 +35,12 @@ namespace PJ_SEM03.Controllers
             }
         }
 
-        [HttpGet("{product_id}")]
-        public async Task<ActionResult> getFeedbackByProductId(int product_id, [FromQuery] PaginationParams paginationParams)
+        [HttpGet("{type}")]
+        public async Task<ActionResult> getFeedbackByType(string type)
         {
             try
             {                
-                return Ok(await repo.getFeedbackByProductId(product_id, paginationParams.PageNumber, paginationParams.PageSize));
+                return Ok(await repo.GetByType(type));
             }
             catch (Exception)
             {
@@ -49,27 +49,11 @@ namespace PJ_SEM03.Controllers
         }
 
         [HttpPost("createFeedback")]
-        public async Task<IActionResult> CreateFeedback( [FromBody] Feedback feedback)
+        public async Task<IActionResult> CreateFeedback(Feedback feedback)
         {
             try
             {
-                bool hasPurchased = await repo.CheckUserPurchase(feedback.user_id, feedback.product_id);
-                if (hasPurchased)
-                {
-                    var result = await repo.CreateFeedback(feedback);
-                    if (result)
-                    {
-                        return Ok("Feedback created successfully.");
-                    }
-                    else
-                    {
-                        return BadRequest("Failed to create feedback.");
-                    }
-                }
-                else
-                {
-                    return Forbid("User has not purchased the product.");
-                }
+                return Ok(repo.CreateFeedback(feedback));
             }
             catch (Exception ex)
             {

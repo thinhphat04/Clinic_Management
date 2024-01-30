@@ -61,17 +61,7 @@ public class DatabaseContext : IdentityDbContext<User>
         });
         
         //feedback
-        modelBuilder.Entity<Feedback>(f =>
-        {
-            f.HasOne(f => f.User)
-             .WithMany(u => u.Feedbacks)
-             .HasForeignKey(f => f.user_id);
 
-            f.HasOne(f => f.Product)
-                      .WithMany(p => p.Feedbacks)
-                      .HasForeignKey(f => f.product_id);
-
-        });
         //giftcode
         modelBuilder.Entity<Product>()
             .HasOne(p => p.GiftCode)
@@ -79,11 +69,7 @@ public class DatabaseContext : IdentityDbContext<User>
             .HasForeignKey(p => p.GiftCodeId)
             .IsRequired(false); 
         //product
-        modelBuilder.Entity<Product>()
-            .HasMany(p => p.Feedbacks)
-            .WithOne(f => f.Product)
-            .HasForeignKey(f => f.product_id)
-            .IsRequired(false);
+
         //user
         modelBuilder.Entity<User>(entity =>
         {
@@ -229,26 +215,34 @@ public class DatabaseContext : IdentityDbContext<User>
                  new Feedback
                  {
                      feedback_id = 1,
-                     user_id = "1",
-                     product_id =1,
-                     feedback_description = "Good Service",
-                     feedback_rating = 5,
+                     feedback_fullname ="Bui Tuan Khai",
+                     feedback_email = "khai@gmail.com",
+                     feedback_type = "Account",
+                     feedback_content = "So easy to register and login! Like it"
                  },
                   new Feedback
                  {
-                     user_id = "2",
-                     feedback_id = 2,
-                     product_id =3,
-                     feedback_description = "Great",
-                     feedback_rating = 5,
+                    feedback_id = 2,
+                     feedback_fullname ="Nguyen Thanh Trung",
+                     feedback_email = "trung@gmail.com",
+                     feedback_type = "Promotion",
+                     feedback_content = "I love promotion of this month"
                  },
                   new Feedback
                  {
-                     feedback_id = 3,
-                     user_id="3",   
-                     product_id =5,
-                     feedback_description = "Good product!",
-                     feedback_rating = 5,
+                      feedback_id = 3,
+                     feedback_fullname ="Ngo Thinh Phat",
+                     feedback_email = "phat@gmail.com",
+                     feedback_type = "System",
+                     feedback_content = "The system run smoothly"
+                 },
+                   new Feedback
+                 {
+                      feedback_id = 4,
+                     feedback_fullname ="Tran Bao Huyen Tram",
+                     feedback_email = "tram@gmail.com",
+                     feedback_type = "Other",
+                     feedback_content = "The staffs are so friendly"
                  },
              });
 
