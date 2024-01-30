@@ -61,5 +61,15 @@ namespace PJ_SEM03.Controllers
             }
             return BadRequest();
         }
+        
+        [HttpDelete("{userId}")]
+        public async Task<IActionResult> ClearCart(string userId)
+        {
+            if (await _cartRepo.ClearCart(userId))
+            {
+                return Ok("success");
+            }
+            return BadRequest();
+        }
     }
 }

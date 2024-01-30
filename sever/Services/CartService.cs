@@ -96,17 +96,7 @@ namespace PJ_SEM03.Services
         {
             return await db.Carts.Include(c => c.Product).Where(c => c.user_id == userId).ToListAsync();
         }
-
-        // public async Task<bool> DeleteCart(string userId, int productId)
-        // {
-        //     var cartItem = await db.Carts.FirstOrDefaultAsync(c => c.product_id == productId && c.user_id == userId);
-        //     if (cartItem != null)
-        //     {
-        //         db.Carts.Remove(cartItem);
-        //         return await db.SaveChangesAsync() > 0;
-        //     }
-        //     return false;
-        // }
+        
         
         public async Task<bool> DeleteCart(string userId, int productId)
         {
@@ -120,10 +110,19 @@ namespace PJ_SEM03.Services
 
             return false;
         }
+        
+        public async Task<bool> ClearCart(string userId)
+        {
+            var cartItems = await db.Carts.Where(c => c.user_id == userId).ToListAsync();
+            if (cartItems != null)
+            {
+                db.Carts.RemoveRange(cartItems);
+                await db.SaveChangesAsync();
+                return true;
+            }
 
-        // public async Task<Cart> GetCartByUserIdAndProductId(string userId, int productId)
-        // {
-        //     return await db.Carts.FirstOrDefaultAsync(c => c.user_id == userId && c.product_id == productId);
-        // }
+            return false;
+        }
+        
     }
 }
