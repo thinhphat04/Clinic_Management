@@ -12,8 +12,8 @@ using PJ_SEM03.Models;
 namespace PJ_SEM03.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240130155421_Init")]
-    partial class Init
+    [Migration("20240130170001_1")]
+    partial class _1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -196,76 +196,66 @@ namespace PJ_SEM03.Migrations
                         });
                 });
 
-            modelBuilder.Entity("PJ_SEM03.Models.Feedback", b =>
+            modelBuilder.Entity("PJ_SEM03.Models.Contact", b =>
                 {
-                    b.Property<int>("feedback_id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("feedback_id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("feedback_content")
+                    b.Property<string>("Content")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("feedback_email")
+                    b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("feedback_fullname")
+                    b.Property<string>("Fullname")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("feedback_type")
+                    b.Property<string>("Type")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("product_id")
-                        .HasColumnType("int");
+                    b.HasKey("Id");
 
-                    b.HasKey("feedback_id");
-
-                    b.HasIndex("UserId");
-
-                    b.HasIndex("product_id");
-
-                    b.ToTable("Feedbacks");
+                    b.ToTable("Contacts");
 
                     b.HasData(
                         new
                         {
-                            feedback_id = 1,
-                            feedback_content = "So easy to register and login! Like it",
-                            feedback_email = "khai@gmail.com",
-                            feedback_fullname = "Bui Tuan Khai",
-                            feedback_type = "Account"
+                            Id = 1,
+                            Content = "So easy to register and login! Like it",
+                            Email = "khai@gmail.com",
+                            Fullname = "Bui Tuan Khai",
+                            Type = "Account"
                         },
                         new
                         {
-                            feedback_id = 2,
-                            feedback_content = "I love promotion of this month",
-                            feedback_email = "trung@gmail.com",
-                            feedback_fullname = "Nguyen Thanh Trung",
-                            feedback_type = "Promotion"
+                            Id = 2,
+                            Content = "I love promotion of this month",
+                            Email = "trung@gmail.com",
+                            Fullname = "Nguyen Thanh Trung",
+                            Type = "Promotion"
                         },
                         new
                         {
-                            feedback_id = 3,
-                            feedback_content = "The system run smoothly",
-                            feedback_email = "phat@gmail.com",
-                            feedback_fullname = "Ngo Thinh Phat",
-                            feedback_type = "System"
+                            Id = 3,
+                            Content = "The system run smoothly",
+                            Email = "phat@gmail.com",
+                            Fullname = "Ngo Thinh Phat",
+                            Type = "System"
                         },
                         new
                         {
-                            feedback_id = 4,
-                            feedback_content = "The staffs are so friendly",
-                            feedback_email = "tram@gmail.com",
-                            feedback_fullname = "Tran Bao Huyen Tram",
-                            feedback_type = "Other"
+                            Id = 4,
+                            Content = "The staffs are so friendly",
+                            Email = "tram@gmail.com",
+                            Fullname = "Tran Bao Huyen Tram",
+                            Type = "Other"
                         });
                 });
 
@@ -366,7 +356,7 @@ namespace PJ_SEM03.Migrations
                             order_id = 1,
                             order_address = "HCM",
                             order_code = "ORD001",
-                            order_datetime = new DateTime(2024, 1, 30, 22, 54, 20, 684, DateTimeKind.Local).AddTicks(5172),
+                            order_datetime = new DateTime(2024, 1, 31, 0, 0, 0, 638, DateTimeKind.Local).AddTicks(5778),
                             order_phone = "123",
                             order_status = "Processing",
                             order_total = 100,
@@ -377,7 +367,7 @@ namespace PJ_SEM03.Migrations
                             order_id = 2,
                             order_address = "Ca Mau",
                             order_code = "ORD001",
-                            order_datetime = new DateTime(2024, 1, 30, 22, 54, 20, 684, DateTimeKind.Local).AddTicks(5198),
+                            order_datetime = new DateTime(2024, 1, 31, 0, 0, 0, 638, DateTimeKind.Local).AddTicks(5792),
                             order_phone = "124",
                             order_status = "Delivered",
                             order_total = 200,
@@ -638,14 +628,14 @@ namespace PJ_SEM03.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7dc95eda-91ef-4ae5-ad27-dffe4b73a2fb",
+                            ConcurrencyStamp = "e788b9d5-1726-485e-afa3-1f3c989e6a1b",
                             Email = "admin@test.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEBB11QRaTvVV9NYN1B80a7Yf2Ox+JlQRZ0Y38r4H33HkHkIfD95kof3LJMpdl1lu9Q==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEFnPH/2vZcI0g7uUu4j2H9C5w20lye9jQuFZb8WfHxJeBCQu8nzmG13T4XVaeH2wCA==",
                             PhoneNumberConfirmed = false,
                             Role = "Admin",
-                            SecurityStamp = "df7dc811-501e-4552-8ff8-183660580424",
+                            SecurityStamp = "80d774fc-ad9e-42ad-a04b-3ef88bc41f3c",
                             TwoFactorEnabled = false,
                             UserName = "admin",
                             user_fullName = "admin"
@@ -654,14 +644,14 @@ namespace PJ_SEM03.Migrations
                         {
                             Id = "2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d36490ce-f9ba-4866-97f8-3de8083b2d53",
+                            ConcurrencyStamp = "0614aca5-019b-4a5d-9f5f-a2506ce908a5",
                             Email = "phat@test.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAENlkobPLeSMyOFFVNc7fptTW+Q0vRIPjp8nG/8nPiTCE3n7R5CPcXexK9p9CE0NzZw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJ6UtxJVDvmm1A0Q6GF/nc/CwdNABoXeUcR5mNCbpLvJOH8cpMa2nPWg4/1QSQDuyQ==",
                             PhoneNumberConfirmed = false,
                             Role = "Member",
-                            SecurityStamp = "0557984a-144a-4d14-8a66-08910a4c9d6e",
+                            SecurityStamp = "583cab72-ae09-4a63-9c0e-0c29ce367e56",
                             TwoFactorEnabled = false,
                             UserName = "phat",
                             user_fullName = "Ngo Thinh Phat"
@@ -670,14 +660,14 @@ namespace PJ_SEM03.Migrations
                         {
                             Id = "3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a8f74b16-32fb-4999-ba3a-98ec4518507e",
+                            ConcurrencyStamp = "4816155a-43af-4825-adad-e9e3f0c69989",
                             Email = "khai@test.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEPNlVMlVmz8evPgxWsRuZVO7Xvu7MukqxoTmcTo74clSuLeNQbjyXxnQdllWikCuvQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEP63bxVaT+fd7eRhCZ5f7DJxZhGgpqtlFXi58w6j1xWOev5tsHSDsqki5yIEq3roDA==",
                             PhoneNumberConfirmed = false,
                             Role = "Member",
-                            SecurityStamp = "9bd7f0f3-2a01-433a-8fa4-313e70b7d89f",
+                            SecurityStamp = "716627bd-084b-40cc-a8ee-26f730a0e564",
                             TwoFactorEnabled = false,
                             UserName = "khai",
                             user_fullName = "Bui Tuan Khai"
@@ -686,14 +676,14 @@ namespace PJ_SEM03.Migrations
                         {
                             Id = "4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7cbc36d1-07eb-422f-90de-bcf742be2e5e",
+                            ConcurrencyStamp = "131285de-50c9-4630-9ade-db3e1b2a16de",
                             Email = "tram@test.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEL/3tRXi/i0wd4h0wSC8ktatWUqTmmVC6HTaOIK69fX5WV7khgy5t+psxp6sIfqvUA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEA23rJfZI4uomHfn3dknEbqhuLSMNO6yHWpifJ4RGNBMUW5/BODbOIpQkBEsx+/nAQ==",
                             PhoneNumberConfirmed = false,
                             Role = "Member",
-                            SecurityStamp = "c1e41e80-4bd7-4cca-8801-b72bd157684e",
+                            SecurityStamp = "94a7f271-4d87-473d-b497-52c67a1b16e7",
                             TwoFactorEnabled = false,
                             UserName = "tram",
                             user_fullName = "Tran Bao Huyen Tram"
@@ -832,17 +822,6 @@ namespace PJ_SEM03.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("PJ_SEM03.Models.Feedback", b =>
-                {
-                    b.HasOne("PJ_SEM03.Models.User", null)
-                        .WithMany("Feedbacks")
-                        .HasForeignKey("UserId");
-
-                    b.HasOne("PJ_SEM03.Models.Product", null)
-                        .WithMany("Feedbacks")
-                        .HasForeignKey("product_id");
-                });
-
             modelBuilder.Entity("PJ_SEM03.Models.Order", b =>
                 {
                     b.HasOne("PJ_SEM03.Models.GiftCode", "AppliedGiftCode")
@@ -924,16 +903,12 @@ namespace PJ_SEM03.Migrations
                 {
                     b.Navigation("Carts");
 
-                    b.Navigation("Feedbacks");
-
                     b.Navigation("OrderDetails");
                 });
 
             modelBuilder.Entity("PJ_SEM03.Models.User", b =>
                 {
                     b.Navigation("Carts");
-
-                    b.Navigation("Feedbacks");
 
                     b.Navigation("Orders");
                 });

@@ -58,12 +58,12 @@ builder.Services.AddCors(options =>
 builder.Services.AddControllers();
 //khai báo các service
 builder.Services.AddScoped<IUserRepo, UserService>();
-builder.Services.AddScoped<IAccountRepo, AccountService>();
+builder.Services.AddScoped<IContactRepo, ContactService>();
 builder.Services.AddScoped<IProductRepo, ProductService>();
 builder.Services.AddScoped<IOrderRepo, OrderService>();
 builder.Services.AddScoped<ICartRepo, CartService>();
 builder.Services.AddScoped<CloudinaryService>();
-builder.Services.AddScoped<IFeedbackRepo, FeedbackService>();
+builder.Services.AddScoped<IAccountRepo, AccountService>();
 builder.Services.AddScoped<IGiftcode, GiftcodeService>();
 
 

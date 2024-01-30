@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace PJ_SEM03.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class _1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -53,6 +53,22 @@ namespace PJ_SEM03.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Contacts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Fullname = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Contacts", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -281,34 +297,6 @@ namespace PJ_SEM03.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Feedbacks",
-                columns: table => new
-                {
-                    feedback_id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    feedback_email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    feedback_fullname = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    feedback_type = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    feedback_content = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    product_id = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Feedbacks", x => x.feedback_id);
-                    table.ForeignKey(
-                        name: "FK_Feedbacks_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Feedbacks_Products_product_id",
-                        column: x => x.product_id,
-                        principalTable: "Products",
-                        principalColumn: "product_id");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Medicals",
                 columns: table => new
                 {
@@ -379,21 +367,21 @@ namespace PJ_SEM03.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Role", "SecurityStamp", "TwoFactorEnabled", "UserName", "user_address", "user_fullName" },
                 values: new object[,]
                 {
-                    { "1", 0, "7dc95eda-91ef-4ae5-ad27-dffe4b73a2fb", "admin@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEBB11QRaTvVV9NYN1B80a7Yf2Ox+JlQRZ0Y38r4H33HkHkIfD95kof3LJMpdl1lu9Q==", null, false, "Admin", "df7dc811-501e-4552-8ff8-183660580424", false, "admin", null, "admin" },
-                    { "2", 0, "d36490ce-f9ba-4866-97f8-3de8083b2d53", "phat@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAENlkobPLeSMyOFFVNc7fptTW+Q0vRIPjp8nG/8nPiTCE3n7R5CPcXexK9p9CE0NzZw==", null, false, "Member", "0557984a-144a-4d14-8a66-08910a4c9d6e", false, "phat", null, "Ngo Thinh Phat" },
-                    { "3", 0, "a8f74b16-32fb-4999-ba3a-98ec4518507e", "khai@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEPNlVMlVmz8evPgxWsRuZVO7Xvu7MukqxoTmcTo74clSuLeNQbjyXxnQdllWikCuvQ==", null, false, "Member", "9bd7f0f3-2a01-433a-8fa4-313e70b7d89f", false, "khai", null, "Bui Tuan Khai" },
-                    { "4", 0, "7cbc36d1-07eb-422f-90de-bcf742be2e5e", "tram@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEL/3tRXi/i0wd4h0wSC8ktatWUqTmmVC6HTaOIK69fX5WV7khgy5t+psxp6sIfqvUA==", null, false, "Member", "c1e41e80-4bd7-4cca-8801-b72bd157684e", false, "tram", null, "Tran Bao Huyen Tram" }
+                    { "1", 0, "e788b9d5-1726-485e-afa3-1f3c989e6a1b", "admin@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEFnPH/2vZcI0g7uUu4j2H9C5w20lye9jQuFZb8WfHxJeBCQu8nzmG13T4XVaeH2wCA==", null, false, "Admin", "80d774fc-ad9e-42ad-a04b-3ef88bc41f3c", false, "admin", null, "admin" },
+                    { "2", 0, "0614aca5-019b-4a5d-9f5f-a2506ce908a5", "phat@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEJ6UtxJVDvmm1A0Q6GF/nc/CwdNABoXeUcR5mNCbpLvJOH8cpMa2nPWg4/1QSQDuyQ==", null, false, "Member", "583cab72-ae09-4a63-9c0e-0c29ce367e56", false, "phat", null, "Ngo Thinh Phat" },
+                    { "3", 0, "4816155a-43af-4825-adad-e9e3f0c69989", "khai@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEP63bxVaT+fd7eRhCZ5f7DJxZhGgpqtlFXi58w6j1xWOev5tsHSDsqki5yIEq3roDA==", null, false, "Member", "716627bd-084b-40cc-a8ee-26f730a0e564", false, "khai", null, "Bui Tuan Khai" },
+                    { "4", 0, "131285de-50c9-4630-9ade-db3e1b2a16de", "tram@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEA23rJfZI4uomHfn3dknEbqhuLSMNO6yHWpifJ4RGNBMUW5/BODbOIpQkBEsx+/nAQ==", null, false, "Member", "94a7f271-4d87-473d-b497-52c67a1b16e7", false, "tram", null, "Tran Bao Huyen Tram" }
                 });
 
             migrationBuilder.InsertData(
-                table: "Feedbacks",
-                columns: new[] { "feedback_id", "UserId", "feedback_content", "feedback_email", "feedback_fullname", "feedback_type", "product_id" },
+                table: "Contacts",
+                columns: new[] { "Id", "Content", "Email", "Fullname", "Type" },
                 values: new object[,]
                 {
-                    { 1, null, "So easy to register and login! Like it", "khai@gmail.com", "Bui Tuan Khai", "Account", null },
-                    { 2, null, "I love promotion of this month", "trung@gmail.com", "Nguyen Thanh Trung", "Promotion", null },
-                    { 3, null, "The system run smoothly", "phat@gmail.com", "Ngo Thinh Phat", "System", null },
-                    { 4, null, "The staffs are so friendly", "tram@gmail.com", "Tran Bao Huyen Tram", "Other", null }
+                    { 1, "So easy to register and login! Like it", "khai@gmail.com", "Bui Tuan Khai", "Account" },
+                    { 2, "I love promotion of this month", "trung@gmail.com", "Nguyen Thanh Trung", "Promotion" },
+                    { 3, "The system run smoothly", "phat@gmail.com", "Ngo Thinh Phat", "System" },
+                    { 4, "The staffs are so friendly", "tram@gmail.com", "Tran Bao Huyen Tram", "Other" }
                 });
 
             migrationBuilder.InsertData(
@@ -433,8 +421,8 @@ namespace PJ_SEM03.Migrations
                 columns: new[] { "order_id", "AppliedGiftCodeId", "order_address", "order_code", "order_datetime", "order_phone", "order_status", "order_total", "user_id" },
                 values: new object[,]
                 {
-                    { 1, null, "HCM", "ORD001", new DateTime(2024, 1, 30, 22, 54, 20, 684, DateTimeKind.Local).AddTicks(5172), "123", "Processing", 100, "1" },
-                    { 2, null, "Ca Mau", "ORD001", new DateTime(2024, 1, 30, 22, 54, 20, 684, DateTimeKind.Local).AddTicks(5198), "124", "Delivered", 200, "2" }
+                    { 1, null, "HCM", "ORD001", new DateTime(2024, 1, 31, 0, 0, 0, 638, DateTimeKind.Local).AddTicks(5778), "123", "Processing", 100, "1" },
+                    { 2, null, "Ca Mau", "ORD001", new DateTime(2024, 1, 31, 0, 0, 0, 638, DateTimeKind.Local).AddTicks(5792), "124", "Delivered", 200, "2" }
                 });
 
             migrationBuilder.InsertData(
@@ -507,16 +495,6 @@ namespace PJ_SEM03.Migrations
                 column: "user_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Feedbacks_product_id",
-                table: "Feedbacks",
-                column: "product_id");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Feedbacks_UserId",
-                table: "Feedbacks",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_OrderDetails_order_id",
                 table: "OrderDetails",
                 column: "order_id");
@@ -559,10 +537,10 @@ namespace PJ_SEM03.Migrations
                 name: "Carts");
 
             migrationBuilder.DropTable(
-                name: "Educations");
+                name: "Contacts");
 
             migrationBuilder.DropTable(
-                name: "Feedbacks");
+                name: "Educations");
 
             migrationBuilder.DropTable(
                 name: "Medicals");
