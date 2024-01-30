@@ -73,7 +73,7 @@ namespace PJ_SEM03.Services
 
         public async Task<PagedList<Order>> getAll(int pageNumber, int pageSize)
         {
-            var query = db.Orders.AsQueryable();
+            var query = db.Orders.Include(o => o.OrderDetails).AsQueryable();
             var orders = await PagedList<Order>.ToPagedList(query, pageNumber, pageSize);
             return orders;
         }
