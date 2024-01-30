@@ -19,35 +19,35 @@ const RegisterClient = () => {
       window.location.href = '/account';
     }
     document.title = 'Clinic Online | Đăng ký';
-    // Validator({
-    //   form: '#form-1',
-    //   error: '.form-message',
-    //   rules: [
-    //     Validator.isRequired('#username'),
-    //     Validator.isMinLength('#username', 5),
+    Validator({
+      form: '#form-1',
+      error: '.form-message',
+      rules: [
+        Validator.isRequired('#username'),
+        Validator.isMinLength('#username', 5),
 
-    //     // Validator.isRequired('#password'),
-    //     // Validator.isMinLength('#password', 6),
+        // Validator.isRequired('#password'),
+        // Validator.isMinLength('#password', 6),
 
-    //     // Validator.isRequired('#password_confirmation'),
-    //     // Validator.isConfirmed('#password_confirmation', () => {
-    //     //   return document.getElementById('password').value;
-    //     // }),
+        // Validator.isRequired('#password_confirmation'),
+        // Validator.isConfirmed('#password_confirmation', () => {
+        //   return document.getElementById('password').value;
+        // }),
 
-    //     Validator.isRequired('#fullname'),
-    //     Validator.isMinLength('#fullname', 5),
+        Validator.isRequired('#fullname'),
+        Validator.isMinLength('#fullname', 5),
 
-    //     Validator.isRequired('#email'),
-    //     Validator.isEmail('#email'),
+        Validator.isRequired('#email'),
+        Validator.isEmail('#email'),
 
-    //     Validator.isRequired('#phone'),
-    //     Validator.isMinLength('#phone', 10),
-    //     Validator.isMaxLength('#phone', 10),
+        Validator.isRequired('#phone'),
+        Validator.isMinLength('#phone', 10),
+        Validator.isMaxLength('#phone', 10),
 
-    //     Validator.isRequired('#address'),
-    //     Validator.isMinLength('#address', 5),
-    //   ],
-    // });
+        Validator.isRequired('#address'),
+        Validator.isMinLength('#address', 5),
+      ],
+    });
   }, []);
 
   const showErrorToast = () => {

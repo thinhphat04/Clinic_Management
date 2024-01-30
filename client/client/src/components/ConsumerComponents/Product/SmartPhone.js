@@ -29,7 +29,7 @@ const SmartPhone = () => {
       const infoProductFeaturedSmartphone = document.querySelectorAll(
         '.product-client__item',
       )[index];
-      if (product.product_type === 'Education') {
+      if (product.product_type === 'Medical') {
         infoProductFeaturedSmartphone.style.display = 'block';
       }
     });
@@ -174,7 +174,7 @@ const SmartPhone = () => {
             ></img> */}
           </div>
 
-          <label className="product-client__title-brand">
+          {/* <label className="product-client__title-brand">
           TOP BRAND
           </label>
           <div className="product-brand-list">
@@ -212,7 +212,7 @@ const SmartPhone = () => {
                 src="https://server-Clinic Online.onrender.com/public/product-img/smartphone-img/logo-vivo.png"
               ></img>
             </div>
-          </div>
+          </div> */}
 
           <label className="product-client__title-brand">Filter products</label>
           <FillterByPrice
@@ -242,11 +242,11 @@ const SmartPhone = () => {
                 </label>
                 <img
                   className="product-client__item-hot-icon"
-                  src="https://server-Clinic Online.onrender.com/public/product-img/smartphone-img/icon-hot.gif"
+                  src="https://server-shoptech.onrender.com/public/product-img/smartphone-img/icon-hot.gif"
                 ></img>
                 <img
                   className="product-client__item-icon"
-                  src="https://server-Clinic Online.onrender.com/public/product-img/smartphone-img/icon-18-month.png"
+                  src="https://server-shoptech.onrender.com/public/product-img/smartphone-img/icon-18-month.png"
                 ></img>
                 <label className="product-client__item-price">
                   {Number(product.product_price).toLocaleString()} ₫
@@ -256,12 +256,12 @@ const SmartPhone = () => {
                 </span>
                 <label className="product-client__item-vote">
                   <span className="product-client__item-star-icon">
-                    {handleFormatStarProduct(product.star)}{' '}
+                    {handleFormatStarProduct(product.product_star)}{' '}
                   </span>{' '}
                   ({product.voter || 0} đánh giá)
                 </label>
                 <div className="product-client__item-tag">
-                  Giảm {product.product_quantity}%
+                  Giảm {product.product_percent}%
                 </div>
               </li>
             ))}

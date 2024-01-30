@@ -29,7 +29,7 @@ const Tablet = () => {
       const infoProductFeaturedTablet = document.querySelectorAll(
         '.product-client__item',
       )[index];
-      if (product.product_type === 'Scientific') {
+      if (product.product_type === 'Education') {
         infoProductFeaturedTablet.style.display = 'block';
       }
     });
@@ -126,7 +126,7 @@ const Tablet = () => {
           <SideBanner />
           <div className="product-client__event">
             <img
-              src="https://cdn.nhathuoclongchau.com.vn/unsafe/1440x0/filters:quality(90)/https://cms-prod.s3-sgn09.fptcloud.com/1196x352_aed681f792.jpg"
+              src="hhttps://data-service.pharmacity.io/pmc-ecm-webapp-config-api/production/banner/913x280%20(x1.5)%20copy%202-1703904593788.png"
               alt=""
               className="product-client__event-primary"
             ></img>
@@ -169,7 +169,7 @@ const Tablet = () => {
             ></img> */}
           </div>
 
-          <label className="product-client__title-brand">
+          {/* <label className="product-client__title-brand">
           TOP BRANDS
           </label>
           <div className="product-brand-list">
@@ -203,7 +203,7 @@ const Tablet = () => {
                 src="https://server-Clinic Online.onrender.com/public/product-img/tablet-img/logo-nokia.png"
               ></img>
             </div>
-          </div>
+          </div> */}
 
           <label className="product-client__title-brand">Filter products</label>
           <FillterByPrice
@@ -237,11 +237,11 @@ const Tablet = () => {
                   </label>
                   <img
                     className="product-client__item-hot-icon"
-                    src="https://server-Clinic Online.onrender.com/public/product-img/tablet-img/icon-hot.gif"
+                    src="https://server-shoptech.onrender.com/public/product-img/tablet-img/icon-hot.gif"
                   ></img>
                   <img
                     className="product-client__item-icon"
-                    src="https://server-Clinic Online.onrender.com/public/product-img/tablet-img/icon-18-month.png"
+                    src="https://server-shoptech.onrender.com/public/product-img/tablet-img/icon-18-month.png"
                   ></img>
                   <label className="product-client__item-price">
                     {Number(product.product_price).toLocaleString()} ₫
@@ -251,12 +251,12 @@ const Tablet = () => {
                   </span>
                   <label className="product-client__item-vote">
                     <span className="product-client__item-star-icon">
-                      {handleFormatStarProduct(product.star)}{' '}
+                      {handleFormatStarProduct(product.product_star)}{' '}
                     </span>{' '}
                     ({product.voter || 0} đánh giá)
                   </label>
                   <div className="product-client__item-tag">
-                    Giảm {product.product_quantity}%
+                    Giảm {product.product_percent}%
                   </div>
                 </li>
               ))

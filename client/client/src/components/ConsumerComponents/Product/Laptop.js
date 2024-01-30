@@ -33,7 +33,7 @@ console.log("productsAAAA:: ", products);
       const infoProductFeaturedlaptop = document.querySelectorAll(
         '.product-client__item',
       )[index];
-      if (product.product_type === 'Medical') {
+      if (product.product_type === 'Scientific') {
         infoProductFeaturedlaptop.style.display = 'block';
       }
     });
@@ -181,7 +181,7 @@ console.log("productsAAAA:: ", products);
             ></img> */}
           </div>
 
-          <label className="product-client__title-brand">
+          {/* <label className="product-client__title-brand">
           TOP BRANDS
           </label>
           <div className="product-brand-list">
@@ -227,7 +227,7 @@ console.log("productsAAAA:: ", products);
                 src="https://server-Clinic Online.onrender.com/public/product-img/laptop-img/logo-masstel.png"
               ></img>
             </div>
-          </div>
+          </div> */}
 
           <label className="product-client__title-brand">Filter products</label>
           <FillterByPrice
@@ -260,11 +260,11 @@ console.log("productsAAAA:: ", products);
                   </label>
                   <img
                     className="product-client__item-hot-icon"
-                    src="https://server-Clinic Online.onrender.com/public/product-img/laptop-img/icon-hot.gif"
+                    src="https://server-shoptech.onrender.com/public/product-img/laptop-img/icon-hot.gif"
                   ></img>
                   <img
                     className="product-client__item-icon"
-                    src="https://server-Clinic Online.onrender.com/public/product-img/laptop-img/icon-18-month.png"
+                    src="https://server-shoptech.onrender.com/public/product-img/laptop-img/icon-18-month.png"
                   ></img>
                   <label className="product-client__item-price">
                     {Number(product.product_price).toLocaleString()} ₫

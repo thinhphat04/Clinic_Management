@@ -117,7 +117,7 @@ const AddProduct = () => {
       window.alert(error);
     }
   };
-  console.log("aaaa", product_name);
+  console.log("aaaa", product_type);
 
   return (
     <div className="add-product__container">
@@ -157,20 +157,20 @@ const AddProduct = () => {
                 style={{ fontWeight: '500' }}
                 className="add__input"
                 onChange={(e) => {
-                  setType(e.target.value);
-                  switch (e.target.value.toLowerCase()) {
-                    case 'Medical':
-                      setEnType('Medical');
-                      break;
-                    case 'Education':
-                      setEnType('Education');
-                      break;
-                    case 'Scientific':
-                      setEnType('Scientific');
-                      break;
-                  }
+                  setEnType(e.target.value);
+                  // switch (e.target.value.toLowerCase()) {
+                  //   case 'Medical':
+                  //     setEnType('Medical');
+                  //     break;
+                  //   case 'Education':
+                  //     setEnType('Education');
+                  //     break;
+                  //   case 'Scientific':
+                  //     setEnType('Scientific');
+                  //     break;
+                  // }
                 }}
-                value={type}
+                value={product_type}
               >
                 <option value="">Chọn loại sản phẩm ...</option>
                 <option value="Education">Education</option>

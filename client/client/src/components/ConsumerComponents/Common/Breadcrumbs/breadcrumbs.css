@@ -37,7 +37,7 @@
 }
 
 .breadcrumbs .crumb:after {
-  content: '//';
+  content: '||';
   margin-left: 10px;
 }
 
