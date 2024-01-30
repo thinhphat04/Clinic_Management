@@ -12,7 +12,8 @@ namespace PJ_SEM03.Repository
        Task<ActionResult<Product>> deleteProduct(int id);
        
        Task<IEnumerable<Product>> GetProductsByName(string name);
-       Task<PagedList<Product>> getAll(int pageNumber, int pageSize);
+       //list 
+       Task<List<Product>> getAll();
        Task<IEnumerable<Product>> getProductByType(string product_type);
        Task<Product> getProductById(int product_id);
        //image upload
