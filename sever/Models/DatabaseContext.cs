@@ -16,7 +16,7 @@ public class DatabaseContext : IdentityDbContext<User>
     public DbSet<Order> Orders { get; set; }
     public DbSet<OrderDetail> OrderDetails { get; set; }
     public DbSet<Product> Products { get; set; }
-    public DbSet<Feedback> Feedbacks { get; set; }
+    public DbSet<Contact> Contacts { get; set; }
     public DbSet<Cart> Carts { get; set; }
     public DbSet<GiftCode> GiftCodes { get; set; }
     //public DbSet<User> Users { get; set; }
@@ -61,17 +61,7 @@ public class DatabaseContext : IdentityDbContext<User>
         });
         
         //feedback
-        modelBuilder.Entity<Feedback>(f =>
-        {
-            f.HasOne(f => f.User)
-             .WithMany(u => u.Feedbacks)
-             .HasForeignKey(f => f.user_id);
 
-            f.HasOne(f => f.Product)
-                      .WithMany(p => p.Feedbacks)
-                      .HasForeignKey(f => f.product_id);
-
-        });
         //giftcode
         modelBuilder.Entity<Product>()
             .HasOne(p => p.GiftCode)
@@ -79,11 +69,7 @@ public class DatabaseContext : IdentityDbContext<User>
             .HasForeignKey(p => p.GiftCodeId)
             .IsRequired(false); 
         //product
-        modelBuilder.Entity<Product>()
-            .HasMany(p => p.Feedbacks)
-            .WithOne(f => f.Product)
-            .HasForeignKey(f => f.product_id)
-            .IsRequired(false);
+
         //user
         modelBuilder.Entity<User>(entity =>
         {
@@ -225,32 +211,40 @@ public class DatabaseContext : IdentityDbContext<User>
         //    new IdentityRole { Name = "Admin", NormalizedName = "ADMIN" 
         //});
 
-        modelBuilder.Entity<Feedback>().HasData(new Feedback[] {
-                 new Feedback
+        modelBuilder.Entity<Contact>().HasData(new Contact[] {
+                 new Contact
                  {
-                     feedback_id = 1,
-                     user_id = "1",
-                     product_id =1,
-                     feedback_description = "Good Service",
-                     feedback_rating = 5,
+                     Id = 1,
+                    Fullname ="Bui Tuan Khai",
+                     Email = "khai@gmail.com",
+                     Type= "Account",
+                     Content = "So easy to register and login! Like it"
                  },
-                  new Feedback
+                  new Contact
                  {
-                     user_id = "2",
-                     feedback_id = 2,
-                     product_id =3,
-                     feedback_description = "Great",
-                     feedback_rating = 5,
+                    Id = 2,
+                     Fullname ="Nguyen Thanh Trung",
+                     Email = "trung@gmail.com",
+                     Type= "Promotion",
+                     Content = "I love promotion of this month"
                  },
-                  new Feedback
+                  new Contact
                  {
-                     feedback_id = 3,
-                     user_id="3",   
-                     product_id =5,
-                     feedback_description = "Good product!",
-                     feedback_rating = 5,
+                     Id = 3,
+                     Fullname ="Ngo Thinh Phat",
+                     Email = "phat@gmail.com",
+                     Type = "System",
+                     Content = "The system run smoothly"
                  },
-             });
+                   new Contact
+                 {
+                      Id = 4,
+                     Fullname ="Tran Bao Huyen Tram",
+                     Email = "tram@gmail.com",
+                     Type = "Other",
+                     Content= "The staffs are so friendly"
+                 },
+             }); ;
 
         modelBuilder.Entity<GiftCode>().HasData(new GiftCode[]
         {
