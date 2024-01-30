@@ -12,7 +12,7 @@ using PJ_SEM03.Models;
 namespace PJ_SEM03.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240128094903_InitialCreate")]
+    [Migration("20240130064615_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -350,7 +350,7 @@ namespace PJ_SEM03.Migrations
                             order_id = 1,
                             order_address = "HCM",
                             order_code = "ORD001",
-                            order_datetime = new DateTime(2024, 1, 28, 16, 49, 3, 369, DateTimeKind.Local).AddTicks(1776),
+                            order_datetime = new DateTime(2024, 1, 30, 13, 46, 15, 70, DateTimeKind.Local).AddTicks(4911),
                             order_phone = "123",
                             order_status = "Processing",
                             order_total = 100,
@@ -361,7 +361,7 @@ namespace PJ_SEM03.Migrations
                             order_id = 2,
                             order_address = "Ca Mau",
                             order_code = "ORD001",
-                            order_datetime = new DateTime(2024, 1, 28, 16, 49, 3, 369, DateTimeKind.Local).AddTicks(1789),
+                            order_datetime = new DateTime(2024, 1, 30, 13, 46, 15, 70, DateTimeKind.Local).AddTicks(4922),
                             order_phone = "124",
                             order_status = "Delivered",
                             order_total = 200,
@@ -377,10 +377,7 @@ namespace PJ_SEM03.Migrations
                     b.Property<int>("order_id")
                         .HasColumnType("int");
 
-                    b.Property<int>("order_price")
-                        .HasColumnType("int");
-
-                    b.Property<int>("order_quantity")
+                    b.Property<int>("product_quantity")
                         .HasColumnType("int");
 
                     b.HasKey("product_id", "order_id");
@@ -394,29 +391,25 @@ namespace PJ_SEM03.Migrations
                         {
                             product_id = 1,
                             order_id = 1,
-                            order_price = 45,
-                            order_quantity = 2
+                            product_quantity = 2
                         },
                         new
                         {
                             product_id = 3,
                             order_id = 1,
-                            order_price = 30,
-                            order_quantity = 3
+                            product_quantity = 3
                         },
                         new
                         {
                             product_id = 2,
                             order_id = 2,
-                            order_price = 100,
-                            order_quantity = 4
+                            product_quantity = 4
                         },
                         new
                         {
                             product_id = 4,
                             order_id = 2,
-                            order_price = 90,
-                            order_quantity = 1
+                            product_quantity = 1
                         });
                 });
 
@@ -629,14 +622,14 @@ namespace PJ_SEM03.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c10d3d16-2044-44bc-983e-cdc9c47076da",
+                            ConcurrencyStamp = "027d7e80-8e8c-49e7-a18d-e54be503c72e",
                             Email = "admin@test.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEH6Q+1VXa/5iSoV9z05picGwqyPE1B+DiyWLKJDdQ4R34fiW04BV1lQ3KrsNmJfJ3g==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMHcSjUVxK4RyQ53zM/e/Nw7kITCc0IA5Ho5ygxfw5EDMfu42khj7dsNImtD0elJBw==",
                             PhoneNumberConfirmed = false,
                             Role = "Admin",
-                            SecurityStamp = "70d78c5d-c002-4b9e-8856-7b372836879d",
+                            SecurityStamp = "ad5991b9-9d35-4eba-8138-f5d13d11e98a",
                             TwoFactorEnabled = false,
                             UserName = "admin",
                             user_fullName = "admin"
@@ -645,14 +638,14 @@ namespace PJ_SEM03.Migrations
                         {
                             Id = "2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6f34dd50-f5cf-4819-8078-3a59b2791937",
+                            ConcurrencyStamp = "ab24e85f-c454-46d4-83f7-cf3e258209b7",
                             Email = "phat@test.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEC13ehfvZhY9PkeaY68fB4iX9JNDkyapirRf4kmpY0FmCWmeMiny94KkWUs7S7mTdg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAECKZ5vQw6CEWczTBQUQi/xUp5HhFXt9Kn89oxoScvRl+8P0wKNSkKk+eS/2zYAmdFg==",
                             PhoneNumberConfirmed = false,
                             Role = "Member",
-                            SecurityStamp = "9450a133-0c35-42e2-bd69-05a350b7986e",
+                            SecurityStamp = "5b4e3d89-bd22-4bc6-b9bf-f7e2f317a20d",
                             TwoFactorEnabled = false,
                             UserName = "phat",
                             user_fullName = "Ngo Thinh Phat"
@@ -661,14 +654,14 @@ namespace PJ_SEM03.Migrations
                         {
                             Id = "3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "992d9f9f-c179-413c-b00c-9f44987d2616",
+                            ConcurrencyStamp = "4e2aa00e-3149-47ab-b42f-fedfdb454bbf",
                             Email = "khai@test.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEOxv3zrJ5YMzmdP3IDecVIq63IebaH86BVjG4bmMbyHZ+S3ezGgVGAem4MO1Cyr8lA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEGSQ8Di6fzsNURdGZ40qJfpxQqEoSz1sGZ1q3GE/KzEMMllm9nUBUpWrcC4PxAFMog==",
                             PhoneNumberConfirmed = false,
                             Role = "Member",
-                            SecurityStamp = "67aca9f5-6037-475e-b445-27b6b4ac0ddb",
+                            SecurityStamp = "e40ba4d2-087e-4fac-95a7-2497cca8f515",
                             TwoFactorEnabled = false,
                             UserName = "khai",
                             user_fullName = "Bui Tuan Khai"
@@ -677,14 +670,14 @@ namespace PJ_SEM03.Migrations
                         {
                             Id = "4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5273175e-e544-482b-a56f-99762a3d4e08",
+                            ConcurrencyStamp = "2b7317b7-9eb1-4b23-9231-bf34316e18f1",
                             Email = "tram@test.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEJLdOBXizh4XI6s6AWrE5DOOU+pe5vmKahZNpu9Q6HibiLL5fx8vgXacpNEkjLFajA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEAVOrCcpow80MVVjgGqLjCDeFPtuiPRebipBtFd24ryMvhiLuCpAn0dH9HKBYaGyMw==",
                             PhoneNumberConfirmed = false,
                             Role = "Member",
-                            SecurityStamp = "5a64533e-fa75-4ad6-bb5b-e5bda20b4bab",
+                            SecurityStamp = "b8629688-e480-45e6-91de-76094054a9b2",
                             TwoFactorEnabled = false,
                             UserName = "tram",
                             user_fullName = "Tran Bao Huyen Tram"

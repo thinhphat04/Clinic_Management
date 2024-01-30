@@ -334,8 +334,7 @@ namespace PJ_SEM03.Migrations
                 {
                     order_id = table.Column<int>(type: "int", nullable: false),
                     product_id = table.Column<int>(type: "int", nullable: false),
-                    order_quantity = table.Column<int>(type: "int", nullable: false),
-                    order_price = table.Column<int>(type: "int", nullable: false)
+                    product_quantity = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -379,10 +378,10 @@ namespace PJ_SEM03.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Role", "SecurityStamp", "TwoFactorEnabled", "UserName", "user_address", "user_fullName" },
                 values: new object[,]
                 {
-                    { "1", 0, "c10d3d16-2044-44bc-983e-cdc9c47076da", "admin@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEH6Q+1VXa/5iSoV9z05picGwqyPE1B+DiyWLKJDdQ4R34fiW04BV1lQ3KrsNmJfJ3g==", null, false, "Admin", "70d78c5d-c002-4b9e-8856-7b372836879d", false, "admin", null, "admin" },
-                    { "2", 0, "6f34dd50-f5cf-4819-8078-3a59b2791937", "phat@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEC13ehfvZhY9PkeaY68fB4iX9JNDkyapirRf4kmpY0FmCWmeMiny94KkWUs7S7mTdg==", null, false, "Member", "9450a133-0c35-42e2-bd69-05a350b7986e", false, "phat", null, "Ngo Thinh Phat" },
-                    { "3", 0, "992d9f9f-c179-413c-b00c-9f44987d2616", "khai@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEOxv3zrJ5YMzmdP3IDecVIq63IebaH86BVjG4bmMbyHZ+S3ezGgVGAem4MO1Cyr8lA==", null, false, "Member", "67aca9f5-6037-475e-b445-27b6b4ac0ddb", false, "khai", null, "Bui Tuan Khai" },
-                    { "4", 0, "5273175e-e544-482b-a56f-99762a3d4e08", "tram@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEJLdOBXizh4XI6s6AWrE5DOOU+pe5vmKahZNpu9Q6HibiLL5fx8vgXacpNEkjLFajA==", null, false, "Member", "5a64533e-fa75-4ad6-bb5b-e5bda20b4bab", false, "tram", null, "Tran Bao Huyen Tram" }
+                    { "1", 0, "027d7e80-8e8c-49e7-a18d-e54be503c72e", "admin@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEMHcSjUVxK4RyQ53zM/e/Nw7kITCc0IA5Ho5ygxfw5EDMfu42khj7dsNImtD0elJBw==", null, false, "Admin", "ad5991b9-9d35-4eba-8138-f5d13d11e98a", false, "admin", null, "admin" },
+                    { "2", 0, "ab24e85f-c454-46d4-83f7-cf3e258209b7", "phat@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAECKZ5vQw6CEWczTBQUQi/xUp5HhFXt9Kn89oxoScvRl+8P0wKNSkKk+eS/2zYAmdFg==", null, false, "Member", "5b4e3d89-bd22-4bc6-b9bf-f7e2f317a20d", false, "phat", null, "Ngo Thinh Phat" },
+                    { "3", 0, "4e2aa00e-3149-47ab-b42f-fedfdb454bbf", "khai@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEGSQ8Di6fzsNURdGZ40qJfpxQqEoSz1sGZ1q3GE/KzEMMllm9nUBUpWrcC4PxAFMog==", null, false, "Member", "e40ba4d2-087e-4fac-95a7-2497cca8f515", false, "khai", null, "Bui Tuan Khai" },
+                    { "4", 0, "2b7317b7-9eb1-4b23-9231-bf34316e18f1", "tram@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEAVOrCcpow80MVVjgGqLjCDeFPtuiPRebipBtFd24ryMvhiLuCpAn0dH9HKBYaGyMw==", null, false, "Member", "b8629688-e480-45e6-91de-76094054a9b2", false, "tram", null, "Tran Bao Huyen Tram" }
                 });
 
             migrationBuilder.InsertData(
@@ -432,19 +431,19 @@ namespace PJ_SEM03.Migrations
                 columns: new[] { "order_id", "AppliedGiftCodeId", "order_address", "order_code", "order_datetime", "order_phone", "order_status", "order_total", "user_id" },
                 values: new object[,]
                 {
-                    { 1, null, "HCM", "ORD001", new DateTime(2024, 1, 28, 16, 49, 3, 369, DateTimeKind.Local).AddTicks(1776), "123", "Processing", 100, "1" },
-                    { 2, null, "Ca Mau", "ORD001", new DateTime(2024, 1, 28, 16, 49, 3, 369, DateTimeKind.Local).AddTicks(1789), "124", "Delivered", 200, "2" }
+                    { 1, null, "HCM", "ORD001", new DateTime(2024, 1, 30, 13, 46, 15, 70, DateTimeKind.Local).AddTicks(4911), "123", "Processing", 100, "1" },
+                    { 2, null, "Ca Mau", "ORD001", new DateTime(2024, 1, 30, 13, 46, 15, 70, DateTimeKind.Local).AddTicks(4922), "124", "Delivered", 200, "2" }
                 });
 
             migrationBuilder.InsertData(
                 table: "OrderDetails",
-                columns: new[] { "order_id", "product_id", "order_price", "order_quantity" },
+                columns: new[] { "order_id", "product_id", "product_quantity" },
                 values: new object[,]
                 {
-                    { 1, 1, 45, 2 },
-                    { 2, 2, 100, 4 },
-                    { 1, 3, 30, 3 },
-                    { 2, 4, 90, 1 }
+                    { 1, 1, 2 },
+                    { 2, 2, 4 },
+                    { 1, 3, 3 },
+                    { 2, 4, 1 }
                 });
 
             migrationBuilder.CreateIndex(

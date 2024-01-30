@@ -110,7 +110,7 @@ const AddProduct = () => {
           navigate('/admin/product');
         }, 1000);
       } else {
-        window.alert('Đã gặp lỗi khi tạo! Vui lòng thử lại');
+        window.alert('Đã gặp lỗi khi tạo! Vui lòng thử lại');    
       }
     } catch (error) {
       console.log(error);
@@ -168,9 +168,6 @@ const AddProduct = () => {
                     case 'Scientific':
                       setEnType('Scientific');
                       break;
-                    // case 'phụ kiện':
-                    //   setEnType('accessories');
-                    //   break;
                   }
                 }}
                 value={type}
