@@ -115,7 +115,29 @@ public class DatabaseContext : IdentityDbContext<User>
             });
         });
 
+   
+        modelBuilder.Entity<Feedback>().HasData(
+            new Feedback
+            {
+                feedback_id = 1,
+                user_id = "2",
+                product_id = 1,
+                feedback_description = "Great product!",
+                feedback_rating = 5
+            },
+            new Feedback
+            {
+                feedback_id = 2,
+                user_id = "3",
+                product_id = 2,
+                feedback_description = "Not as expected.",
+                feedback_rating = 3
+            }
+            // Add more feedbacks here
+        );
 
+        // Other model configurations...
+    
 
         PasswordHasher<User> passwordHasher = new PasswordHasher<User>();
 
