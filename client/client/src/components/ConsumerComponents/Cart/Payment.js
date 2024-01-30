@@ -26,11 +26,11 @@ const Payment = ({ socket }) => {
           setCartUser(data);
         });
 
-      fetch('https://localhost:7096/api/orders')
-        .then((res) => res.json())
-        .then((data) => {
-          setOrders(data);
-        });
+      // fetch('https://localhost:7096/api/orders')
+      //   .then((res) => res.json())
+      //   .then((data) => {
+      //     setOrders(data);
+      //   });
     };
     fetchAPIs();
   }, []);
@@ -41,7 +41,7 @@ const Payment = ({ socket }) => {
       message:
         'Đơn hàng của bạn đã được xác nhận, vui lòng kiểm tra đơn hàng trong tài khoản của bạn nhé!',
       type: 'success',
-      duration: 5000,
+      duration: 3000,
     });
   };
   const showErrorMessage = () => {
@@ -128,6 +128,13 @@ const Payment = ({ socket }) => {
     document.querySelector('.block-process').style.display = 'none';
   };
 
+  var cartUserUpdate = cartUser.map(item => {
+    return {
+      product_id: item.product_id,
+      product_quantity: item.product_quantity
+    };
+  });
+
   const handleClickRemoveAll = () => {
     axios.put(
       'https://localhost:7096/api/users/remove-all-in-cart/' +
@@ -151,21 +158,25 @@ const Payment = ({ socket }) => {
       const res = await axios.post(
         `https://localhost:7096/api/Order`,
         {
-          orderID: window.localStorage.getItem('orderIDCache'),
-          owner: JSON.parse(window.localStorage.getItem('auth')).user.username,
-          fullname: window.localStorage.getItem('fullnameCache'),
-          email: window.localStorage.getItem('emailCache'),
-          phone: window.localStorage.getItem('phoneCache'),
-          method: window.localStorage.getItem('methodCache'),
-          address: window.localStorage.getItem('addressCache'),
-          note: window.localStorage.getItem('noteCache'),
-          price: window.localStorage.getItem('countTotalPriceCache'),
-          giftcodeApply: window.localStorage.getItem('percentApply'),
-          time: dateTime,
-          status: 'Đang giao hàng',
-          lists: cartUser,
-        },
+           order_code:"",
+           user_id: JSON.parse(window.localStorage.getItem('auth')).id,
+           order_datetime: new Date().toISOString(),
+           order_status: "Pending",
+           order_address: window.localStorage.getItem('addressCache'),
+           order_phone:window.localStorage.getItem('phoneCache'),
+           order_total: window.localStorage.getItem('countTotalPriceCache'),
+           OrderDetails: cartUserUpdate
+         }
       );
+
+      if(res && res.data && res.status === 200){
+        showSuccessMessage()
+        window.setTimeout(() => {
+          window.location.href = '/order';
+        }, 4000);
+      } else{
+        showErrorMessage()
+      }
 
 
       // {
@@ -185,52 +196,57 @@ const Payment = ({ socket }) => {
       //    ]
       //  }
 
+      
+    
+    // console.log("Khaires::: ", res);
+      
 
-
-
-      if (res && res.data.success) {
-        try {
-          const res = await axios.post(
-            `${process.env.REACT_APP_API}/api/orders/create`,
-            {
-              orderID: window.localStorage.getItem('orderIDCache'),
-              owner: JSON.parse(window.localStorage.getItem('auth')).user
-                .username,
-              fullname: window.localStorage.getItem('fullnameCache'),
-              email: window.localStorage.getItem('emailCache'),
-              phone: window.localStorage.getItem('phoneCache'),
-              method: window.localStorage.getItem('methodCache'),
-              address: window.localStorage.getItem('addressCache'),
-              note: window.localStorage.getItem('noteCache'),
-              price: window.localStorage.getItem('countTotalPriceCache'),
-              giftcodeApply: window.localStorage.getItem('percentApply'),
-              time: dateTime,
-              status: 'Đang giao hàng',
-              lists: cartUser,
-            },
-          );
-          if (res && res.data.success) {
-            handleClickRemoveAll();
-            handleLoadingPage(2);
-            setTimeout(() => {
-              completePayment();
-            }, 2000);
-            showSuccessMessage();
-          } else {
-            window.alert('Đã gặp lỗi khi tạo! Vui lòng thử lại');
-          }
-        } catch (error) {
-          console.log(error);
-          window.alert(error);
-        }
-      } else {
-        window.alert('Đã gặp lỗi khi tạo! Vui lòng thử lại');
-      }
+      // if (res && res.data.success) {
+      //   try {
+      //     const res = await axios.post(
+      //       `${process.env.REACT_APP_API}/api/orders/create`,
+      //       {
+      //         orderID: window.localStorage.getItem('orderIDCache'),
+      //         owner: JSON.parse(window.localStorage.getItem('auth')).user.username,
+      //         fullname: window.localStorage.getItem('fullnameCache'),
+      //         email: window.localStorage.getItem('emailCache'),
+      //         phone: window.localStorage.getItem('phoneCache'),
+      //         method: window.localStorage.getItem('methodCache'),
+      //         address: window.localStorage.getItem('addressCache'),
+      //         note: window.localStorage.getItem('noteCache'),
+      //         price: window.localStorage.getItem('countTotalPriceCache'),
+      //         giftcodeApply: window.localStorage.getItem('percentApply'),
+      //         time: dateTime,
+      //         status: 'Đang giao hàng',
+      //         lists: cartUser,
+      //       },
+      //     );
+      //     if (res && res.data.success) {
+      //       handleClickRemoveAll();
+      //       handleLoadingPage(2);
+      //       setTimeout(() => {
+      //         completePayment();
+      //       }, 2000);
+      //       showSuccessMessage();
+      //     } else {
+      //       window.alert('Đã gặp lỗi khi tạo! Vui lòng thử lại');
+      //     }
+      //   } catch (error) {
+      //     console.log(error);
+      //     window.alert(error);
+      //   }
+      // } else {
+      //   window.alert('Đã gặp lỗi khi tạo! Vui lòng thử lại');
+      // }
     } catch (error) {
       console.log(error);
       window.alert(error);
     }
   };
+
+ 
+
+  // console.log("cartUserKHAI::: ", cartUserUpdate);
 
   return (
     <>
@@ -253,7 +269,7 @@ const Payment = ({ socket }) => {
               <h1 className="cart__title">THANH TOÁN ĐƠN HÀNG</h1>
 
               <ul className="cart-confirm__list-info">
-                <li className="cart-confirm__item">
+                {/* <li className="cart-confirm__item">
                   <label className="cart-confirm__label">
                     Mã đơn hàng của bạn:
                     <span className="cart-confirm__label-span">
@@ -263,7 +279,7 @@ const Payment = ({ socket }) => {
                   <p className="cart-confirm__data" style={{ color: 'green' }}>
                     {window.localStorage.getItem('orderIDCache')}
                   </p>
-                </li>
+                </li> */}
                 <li className="cart-confirm__item">
                   <label className="cart-confirm__label">
                     Tổng số tiền thanh toán:

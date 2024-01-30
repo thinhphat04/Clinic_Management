@@ -476,7 +476,7 @@ const Home = () => {
                       {Number(product.product_price).toLocaleString()} ₫
                     </label>
                     <span className="product__sell-item-percent">
-                      {(Number(product.product_price) * 1.065).toLocaleString()}
+                      {((Number(product.product_price) * 100)/ (100-Number(product.product_percent))).toLocaleString()}
                       đ
                     </span>
                     <label className="product__sell-item-sold">
@@ -549,17 +549,17 @@ const Home = () => {
                       {Number(product.product_price).toLocaleString()} ₫
                     </label>
                     <span className="product__sell-item-percent">
-                      {(Number(product.product_price) * 1.065).toLocaleString()}
+                    {((Number(product.product_price) * 100)/ (100-Number(product.product_percent))).toLocaleString()}
                       đ
                     </span>
                     <label className="product__sell-item-sold">
                       Đánh giá:
                       <span className="product__sell-item-star-icon">
-                        {handleFormatStarProduct(product.star)}
+                        {handleFormatStarProduct(product.product_star)}
                       </span>
                     </label>
                     <div className="home__flash-sale-item-tag">
-                      Giảm {product.product_quantity}%
+                      Giảm {product.product_percent}%
                     </div>
                   </li>
                 ))
@@ -622,7 +622,7 @@ const Home = () => {
                       {Number(product.product_price).toLocaleString()} ₫
                     </label>
                     <span className="product__sell-item-percent">
-                      {(Number(product.product_price) * 1.065).toLocaleString()}
+                    {((Number(product.product_price) * 100)/ (100-Number(product.product_percent))).toLocaleString()}
                       đ
                     </span>
                     <label className="product__sell-item-sold">
@@ -692,7 +692,7 @@ const Home = () => {
                       {Number(product.product_price).toLocaleString()} ₫
                     </label>
                     <span className="product__sell-item-percent">
-                      {(Number(product.product_price) * 1.065).toLocaleString()}
+                    {((Number(product.product_price) * 100)/ (100-Number(product.product_percent))).toLocaleString()}
                       đ
                     </span>
                     <label className="product__sell-item-sold">

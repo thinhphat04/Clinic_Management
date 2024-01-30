@@ -43,7 +43,7 @@ const HomeList = () => {
           <div className="home__list-product-img-3"></div>
           <p className="home__list-product-name">Education</p>
         </li>
-        <li
+        {/* <li
           className="home__list-product-item"
           onClick={(e) => {
             handLoadingPage(1.5, '/product/accessories');
@@ -51,7 +51,7 @@ const HomeList = () => {
         >
           <div className="home__list-product-img-4"></div>
           <p className="home__list-product-name">All PRODUCTS</p>
-        </li>
+        </li> */}
       </ul>
     </div>
   );

@@ -61,7 +61,7 @@ const LoginClient = () => {
         // console.log(res.data);
         // alert('Đăng nhập thành công');
         showSuccessToast();
-        handleLoadingPage(1);
+        //handleLoadingPage(1);
         window.setTimeout(() => {
           navigate('/account');
         }, 4000);

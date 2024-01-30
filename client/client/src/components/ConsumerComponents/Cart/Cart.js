@@ -66,23 +66,26 @@ const Cart = () => {
     }
   }, [user]);
 
-  const handleClickAddQuantity = (productName) => {
-    axios
-      .put(
-        'https://localhost:7096/api/users/increase-quantity-product-in-cart/' +
-          JSON.parse(window.localStorage.getItem('auth')).user._id,
-        { productName },
-      )
+  const handleClickAddQuantity = (productId) => {
+      axios.post(
+                "https://localhost:7096/api/Cart",          
+                {
+                  user_id : String(JSON.parse(window.localStorage.getItem("auth"))?.id),
+                  product_id: String(productId),
+                  product_quantity: 1
+                }
+              )
       .then((response) => {
-        handleLoadingPage(1);
-        window.setTimeout(() => {
-          window.location.reload();
-        }, 1000);
+        //handleLoadingPage(1);
+         window.setTimeout(() => {
+           window.location.reload();
+         }, 500);
       })
       .catch((error) => {
         console.error(error);
       });
   };
+
 
   const handleClickMinusQuantity = (productName) => {
     cartUser.map((p, i) => {
@@ -90,7 +93,7 @@ const Cart = () => {
         axios
           .put(
             'https://localhost:7096/api/users/decrease-quantity-product-in-cart/' +
-              JSON.parse(window.localStorage.getItem('auth')).user._id,
+              JSON.parse(window.localStorage.getItem('auth')).id,
             { productName },
           )
           .then((response) => {
@@ -109,12 +112,10 @@ const Cart = () => {
     window.alert('Không thể giảm số lượng sản phẩm = 0');
   };
 
-  const handleClickRemoveProduct = (productName) => {
+  const handleClickRemoveProduct = (productId) => {
     axios
-      .put(
-        'https://localhost:7096/api/users/remove-product-in-cart/' +
-          JSON.parse(window.localStorage.getItem('auth')).user._id,
-        { productName },
+      .delete(
+        `https://localhost:7096/api/Cart/${JSON.parse(window.localStorage.getItem('auth')).id}/${productId}`
       )
       .then((response) => {
         handleLoadingPage(1);
@@ -132,9 +133,9 @@ const Cart = () => {
       window.confirm('Bạn có chắc muốn xóa toàn bộ sản phẩm trong giỏ hàng')
     ) {
       axios
-        .put(
+        .delete(
           'https://localhost:7096/api/users/remove-all-in-cart/' +
-            JSON.parse(window.localStorage.getItem('auth')).user._id,
+            JSON.parse(window.localStorage.getItem('auth')).id,
         )
         .then(() => {
           handleLoadingPage(1);
@@ -210,14 +211,15 @@ const Cart = () => {
                       <p className="cart__item-info-old-price">
                         {(
                           // (Number(p.product.product_price) * (100 + p.percent)) /
-                          (Number(p.product.product_price) * (100 + 10)) /
+                          (Number(p.product.product_price) * (100 + Number(p.product.product_percent))) /
                           100
                         ).toLocaleString()}
                         đ
                       </p>
                       <span className="cart__item-info-percent">
                         {/* -{p.percent}% */}
-                        -10% 
+                        {p.product.product_percent}%
+                        {/* -10%  */}
                       </span>
                       <span className="cart__item-info-installment">
                         <i className="cart__item-info-installment-icon fa fa-tag"></i>
@@ -227,7 +229,7 @@ const Cart = () => {
                         <button
                           className="cart__item-quantity-edit"
                           onClick={(e) => {
-                            handleClickMinusQuantity(p.product_name);
+                            handleClickMinusQuantity(p.product.product_name);
                           }}
                         >
                           -
@@ -240,7 +242,7 @@ const Cart = () => {
                         <button
                           className="cart__item-quantity-edit"
                           onClick={(e) => {
-                            handleClickAddQuantity(p.product_name);
+                            handleClickAddQuantity(p.product_id);
                           }}
                         >
                           +
@@ -250,7 +252,7 @@ const Cart = () => {
                     <button
                       className="cart__item-remove"
                       onClick={(e) => {
-                        handleClickRemoveProduct(p.product_name);
+                        handleClickRemoveProduct(p.product_id);
                       }}
                     >
                       <i className="cart__item-remove-icon fa fa-trash"></i>

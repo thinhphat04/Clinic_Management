@@ -73,6 +73,19 @@ Validator.isEmail = (selector) => {
   };
 };
 
+
+Validator.isPassword = (selector) => {
+  return {
+    selector: selector,
+    test: (value) => {
+      // Regex này kiểm tra ít nhất một ký tự in hoa và một ký tự đặc biệt
+      var regex = /^(?=.*[A-Z])(?=.*[!@#$&*]).*$/;
+      return regex.test(value) ? undefined : `Mật khẩu cần có ít nhất một ký tự in hoa và một ký tự đặc biệt`;
+    },
+  };
+};
+
+
 Validator.isMinLength = (selector, min) => {
   return {
     selector: selector,
@@ -83,6 +96,7 @@ Validator.isMinLength = (selector, min) => {
     },
   };
 };
+
 
 Validator.isMaxLength = (selector, max) => {
   return {
