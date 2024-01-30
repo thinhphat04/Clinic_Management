@@ -201,25 +201,33 @@ namespace PJ_SEM03.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("feedback_id"));
 
-                    b.Property<string>("feedback_description")
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("feedback_content")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("feedback_rating")
-                        .HasColumnType("int");
-
-                    b.Property<int>("product_id")
-                        .HasColumnType("int");
-
-                    b.Property<string>("user_id")
+                    b.Property<string>("feedback_email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("feedback_fullname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("feedback_type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("product_id")
+                        .HasColumnType("int");
 
                     b.HasKey("feedback_id");
 
-                    b.HasIndex("product_id");
+                    b.HasIndex("UserId");
 
-                    b.HasIndex("user_id");
+                    b.HasIndex("product_id");
 
                     b.ToTable("Feedbacks");
 
@@ -227,26 +235,34 @@ namespace PJ_SEM03.Migrations
                         new
                         {
                             feedback_id = 1,
-                            feedback_description = "Good Service",
-                            feedback_rating = 5,
-                            product_id = 1,
-                            user_id = "1"
+                            feedback_content = "So easy to register and login! Like it",
+                            feedback_email = "khai@gmail.com",
+                            feedback_fullname = "Bui Tuan Khai",
+                            feedback_type = "Account"
                         },
                         new
                         {
                             feedback_id = 2,
-                            feedback_description = "Great",
-                            feedback_rating = 5,
-                            product_id = 3,
-                            user_id = "2"
+                            feedback_content = "I love promotion of this month",
+                            feedback_email = "trung@gmail.com",
+                            feedback_fullname = "Nguyen Thanh Trung",
+                            feedback_type = "Promotion"
                         },
                         new
                         {
                             feedback_id = 3,
-                            feedback_description = "Good product!",
-                            feedback_rating = 5,
-                            product_id = 5,
-                            user_id = "3"
+                            feedback_content = "The system run smoothly",
+                            feedback_email = "phat@gmail.com",
+                            feedback_fullname = "Ngo Thinh Phat",
+                            feedback_type = "System"
+                        },
+                        new
+                        {
+                            feedback_id = 4,
+                            feedback_content = "The staffs are so friendly",
+                            feedback_email = "tram@gmail.com",
+                            feedback_fullname = "Tran Bao Huyen Tram",
+                            feedback_type = "Other"
                         });
                 });
 
@@ -347,7 +363,7 @@ namespace PJ_SEM03.Migrations
                             order_id = 1,
                             order_address = "HCM",
                             order_code = "ORD001",
-                            order_datetime = new DateTime(2024, 1, 30, 13, 46, 15, 70, DateTimeKind.Local).AddTicks(4911),
+                            order_datetime = new DateTime(2024, 1, 30, 22, 54, 20, 684, DateTimeKind.Local).AddTicks(5172),
                             order_phone = "123",
                             order_status = "Processing",
                             order_total = 100,
@@ -358,7 +374,7 @@ namespace PJ_SEM03.Migrations
                             order_id = 2,
                             order_address = "Ca Mau",
                             order_code = "ORD001",
-                            order_datetime = new DateTime(2024, 1, 30, 13, 46, 15, 70, DateTimeKind.Local).AddTicks(4922),
+                            order_datetime = new DateTime(2024, 1, 30, 22, 54, 20, 684, DateTimeKind.Local).AddTicks(5198),
                             order_phone = "124",
                             order_status = "Delivered",
                             order_total = 200,
@@ -619,14 +635,14 @@ namespace PJ_SEM03.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "027d7e80-8e8c-49e7-a18d-e54be503c72e",
+                            ConcurrencyStamp = "7dc95eda-91ef-4ae5-ad27-dffe4b73a2fb",
                             Email = "admin@test.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEMHcSjUVxK4RyQ53zM/e/Nw7kITCc0IA5Ho5ygxfw5EDMfu42khj7dsNImtD0elJBw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEBB11QRaTvVV9NYN1B80a7Yf2Ox+JlQRZ0Y38r4H33HkHkIfD95kof3LJMpdl1lu9Q==",
                             PhoneNumberConfirmed = false,
                             Role = "Admin",
-                            SecurityStamp = "ad5991b9-9d35-4eba-8138-f5d13d11e98a",
+                            SecurityStamp = "df7dc811-501e-4552-8ff8-183660580424",
                             TwoFactorEnabled = false,
                             UserName = "admin",
                             user_fullName = "admin"
@@ -635,14 +651,14 @@ namespace PJ_SEM03.Migrations
                         {
                             Id = "2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ab24e85f-c454-46d4-83f7-cf3e258209b7",
+                            ConcurrencyStamp = "d36490ce-f9ba-4866-97f8-3de8083b2d53",
                             Email = "phat@test.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAECKZ5vQw6CEWczTBQUQi/xUp5HhFXt9Kn89oxoScvRl+8P0wKNSkKk+eS/2zYAmdFg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENlkobPLeSMyOFFVNc7fptTW+Q0vRIPjp8nG/8nPiTCE3n7R5CPcXexK9p9CE0NzZw==",
                             PhoneNumberConfirmed = false,
                             Role = "Member",
-                            SecurityStamp = "5b4e3d89-bd22-4bc6-b9bf-f7e2f317a20d",
+                            SecurityStamp = "0557984a-144a-4d14-8a66-08910a4c9d6e",
                             TwoFactorEnabled = false,
                             UserName = "phat",
                             user_fullName = "Ngo Thinh Phat"
@@ -651,14 +667,14 @@ namespace PJ_SEM03.Migrations
                         {
                             Id = "3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4e2aa00e-3149-47ab-b42f-fedfdb454bbf",
+                            ConcurrencyStamp = "a8f74b16-32fb-4999-ba3a-98ec4518507e",
                             Email = "khai@test.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEGSQ8Di6fzsNURdGZ40qJfpxQqEoSz1sGZ1q3GE/KzEMMllm9nUBUpWrcC4PxAFMog==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPNlVMlVmz8evPgxWsRuZVO7Xvu7MukqxoTmcTo74clSuLeNQbjyXxnQdllWikCuvQ==",
                             PhoneNumberConfirmed = false,
                             Role = "Member",
-                            SecurityStamp = "e40ba4d2-087e-4fac-95a7-2497cca8f515",
+                            SecurityStamp = "9bd7f0f3-2a01-433a-8fa4-313e70b7d89f",
                             TwoFactorEnabled = false,
                             UserName = "khai",
                             user_fullName = "Bui Tuan Khai"
@@ -667,14 +683,14 @@ namespace PJ_SEM03.Migrations
                         {
                             Id = "4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2b7317b7-9eb1-4b23-9231-bf34316e18f1",
+                            ConcurrencyStamp = "7cbc36d1-07eb-422f-90de-bcf742be2e5e",
                             Email = "tram@test.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEAVOrCcpow80MVVjgGqLjCDeFPtuiPRebipBtFd24ryMvhiLuCpAn0dH9HKBYaGyMw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEL/3tRXi/i0wd4h0wSC8ktatWUqTmmVC6HTaOIK69fX5WV7khgy5t+psxp6sIfqvUA==",
                             PhoneNumberConfirmed = false,
                             Role = "Member",
-                            SecurityStamp = "b8629688-e480-45e6-91de-76094054a9b2",
+                            SecurityStamp = "c1e41e80-4bd7-4cca-8801-b72bd157684e",
                             TwoFactorEnabled = false,
                             UserName = "tram",
                             user_fullName = "Tran Bao Huyen Tram"
@@ -815,19 +831,13 @@ namespace PJ_SEM03.Migrations
 
             modelBuilder.Entity("PJ_SEM03.Models.Feedback", b =>
                 {
-                    b.HasOne("PJ_SEM03.Models.Product", "Product")
+                    b.HasOne("PJ_SEM03.Models.User", null)
+                        .WithMany("Feedbacks")
+                        .HasForeignKey("UserId");
+
+                    b.HasOne("PJ_SEM03.Models.Product", null)
                         .WithMany("Feedbacks")
                         .HasForeignKey("product_id");
-
-                    b.HasOne("PJ_SEM03.Models.User", "User")
-                        .WithMany("Feedbacks")
-                        .HasForeignKey("user_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("PJ_SEM03.Models.Order", b =>

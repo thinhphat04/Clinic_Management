@@ -7,9 +7,8 @@ namespace PJ_SEM03.Repository
 {
     public interface IFeedbackRepo
     {
-        Task<PagedList<FeedbackDto>> getAll(int pageNumber, int pageSize);
-        Task<PagedList<FeedbackDto>> getFeedbackByProductId(int product_id, int pageNumber, int pageSize);
-        Task<bool> CreateFeedback(Feedback feedback);
-        Task<bool> CheckUserPurchase(string userId, int productId);
+        Task<IEnumerable<Feedback>> GetAll();
+        Task<IEnumerable<Feedback>> GetByType(string type);
+        Task<Feedback> CreateFeedback(Feedback feedback);
     }
 }
