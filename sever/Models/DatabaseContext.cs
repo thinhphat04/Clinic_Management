@@ -113,6 +113,7 @@ public class DatabaseContext : IdentityDbContext<User>
                 UserName = "admin",
                 Email = "admin@test.com",
                 user_fullName = "admin",
+                user_address = "Ho Chi Minh",
                 Role = "Admin",
                 PasswordHash = passwordHasher.HashPassword(new User(), "Admin*123")
             },
@@ -124,6 +125,7 @@ public class DatabaseContext : IdentityDbContext<User>
                 Email = "phat@test.com",
                 user_fullName = "Ngo Thinh Phat",
                 Role = "Member",
+                user_address = "Quan 2, HCM",
                 PasswordHash = passwordHasher.HashPassword(new User(), "Phat*123")
             },
 
@@ -134,6 +136,7 @@ public class DatabaseContext : IdentityDbContext<User>
                 Email = "khai@test.com",
                 user_fullName = "Bui Tuan Khai",
                 Role = "Member",
+                user_address = "Tan Binh, HCM",
                 PasswordHash = passwordHasher.HashPassword(new User(), "Khai*123")
             },
 
@@ -144,6 +147,7 @@ public class DatabaseContext : IdentityDbContext<User>
                 Email = "tram@test.com",
                 user_fullName = "Tran Bao Huyen Tram",
                 Role = "Member",
+                user_address = "Thu Duc, HCM",
                 PasswordHash = passwordHasher.HashPassword(new User(), "Tram*123")
             },
         });
