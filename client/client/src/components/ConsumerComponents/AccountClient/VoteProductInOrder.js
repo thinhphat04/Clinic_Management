@@ -26,7 +26,7 @@ const VoteProductInOrder = ({ socket }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    document.title = 'Clinic Online | Đánh giá sản phẩm';
+    document.title = 'Clinic Online |Product reviews';
     const fetchAPIs = () => {
       fetch(
         `https://localhost:7096/api/users/${
@@ -164,7 +164,7 @@ const VoteProductInOrder = ({ socket }) => {
       <Nav />
       <div className="vote-product__cover">
         <div className="vote-product">
-          <div className="vote-product__header">ĐÁNH GIÁ SẢN PHẨM</div>
+          <div className="vote-product__header">PRODUCT REVIEWS</div>
           <div className="vote-product__body">
             <div className="vote-product__item">
               <img src={imageLink} className="vote-product__item-img" />
@@ -179,10 +179,10 @@ const VoteProductInOrder = ({ socket }) => {
             </div>
 
             <label className="vote-product__title">
-              Bạn thấy thế nào về sản phẩm này?
+            How do you feel about this product?
             </label>
             <p className="vote-product__describe">
-              Hãy đánh giá và để lại nhận xét dành cho Clinic Online nhé
+            Please rate and leave a comment for Clinic Online
             </p>
 
             <ul className="vote-product__start-group">
@@ -209,7 +209,7 @@ const VoteProductInOrder = ({ socket }) => {
               className="vote-product__btn-confirm"
               onClick={handleConfirm}
             >
-              Xác nhận
+              Confirm
               <i className="vote-product__btn-icon fa fa-check"></i>
             </button>
             <button

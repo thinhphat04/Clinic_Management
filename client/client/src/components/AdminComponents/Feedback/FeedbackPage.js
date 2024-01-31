@@ -52,16 +52,16 @@ const FeedbackPage = () => {
         <AdminHeader />
         <div className="admin__title">
           <label className="admin__tilte-label">
-            Chúc một ngày tốt lành, quản trị viên!
+          Have a nice day, admin!
           </label>
           <label className="admin__tilte-describe">
-            Trang quản lý ý kiến khách hàng
+          Customer opinion management page
           </label>
         </div>
 
         <div className="promote__group">
           <label className="dash__group-title">
-            Danh sách ý kiến của khách hàng
+          List of customer comments
           </label>
 
           <div className="admin__list" style={{ maxHeight: 'none' }}>
@@ -78,7 +78,7 @@ const FeedbackPage = () => {
                   }, 1000);
                 }}
               >
-                Tất cả
+                All
               </button>
               <button
                 className="search-control__btn"
@@ -89,7 +89,7 @@ const FeedbackPage = () => {
                   }, 1000);
                 }}
               >
-                Vấn đề tài khoản
+                Account problem
               </button>
               <button
                 className="search-control__btn"
@@ -100,7 +100,7 @@ const FeedbackPage = () => {
                   }, 1000);
                 }}
               >
-                Vấn đề khuyến mãi
+                Promotion problem
               </button>
               <button
                 className="search-control__btn"
@@ -111,7 +111,7 @@ const FeedbackPage = () => {
                   }, 1000);
                 }}
               >
-                Cải thiện hệ thống
+                System improvements
               </button>
               <button
                 className="search-control__btn"
@@ -122,7 +122,7 @@ const FeedbackPage = () => {
                   }, 1000);
                 }}
               >
-                Vấn đề khác
+                Other problems
               </button>
             </div>
 
@@ -130,9 +130,9 @@ const FeedbackPage = () => {
               <thead>
                 <tr className="table__thead-primary">
                   <td>STT</td>
-                  <td>Họ tên khách hàng</td>
+                  <td>Customer's full name</td>
                   <td>Email</td>
-                  <td>Loại góp ý</td>
+                  <td>Type of comments</td>
                   <td>Nội dung</td>
                 </tr>
               </thead>

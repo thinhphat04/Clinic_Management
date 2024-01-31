@@ -9,7 +9,7 @@ const AccountClientInfo = () => {
   const [imageFile, setImageFile] = useState(null);
 
   useEffect(() => {
-    document.title = 'Clinic Online | Thông tin cá nhân';
+    document.title = 'Clinic Online | Personal information';
     const fetchAPIs = () => {
       fetch(
         `https://localhost:7096/api/User/user/${
@@ -49,7 +49,7 @@ const AccountClientInfo = () => {
   const handleEditInfo = async (e) => {
     e.preventDefault();
     const inputElements = document.querySelectorAll('.account__box-info-input');
-    if (window.confirm('Bạn muốn sửa đổi thông tin cá nhân!') == true) {
+    if (window.confirm('You want to modify personal information!') == true) {
       try {
         if (imageFile) {
           const formData = new FormData();
@@ -81,13 +81,13 @@ const AccountClientInfo = () => {
                 )
                 .then((res) => {
                   if (res && res.data.success) {
-                    alert('Cập nhật thông tin thành công!');
+                    alert('Successfully updated!');
                     handleLoadingPage(1);
                     window.setTimeout(() => {
                       window.location.reload();
                     }, 1000);
                   } else {
-                    alert('Cập nhật thông tin thất bại');
+                    alert('Update information failed');
                   }
                 });
             })
@@ -111,13 +111,13 @@ const AccountClientInfo = () => {
             )
             .then((res) => {
               if (res && res.data.success) {
-                alert('Cập nhật thông tin thành công!');
+                alert('Successfully updated!');
                 handleLoadingPage(1);
                 window.setTimeout(() => {
                   window.location.reload();
                 }, 1000);
               } else {
-                alert('Cập nhật thông tin thất bại');
+                alert('Update information failed');
               }
             });
         }
@@ -157,20 +157,20 @@ const AccountClientInfo = () => {
                     className="account__box-info-avatar-btn"
                     htmlFor="avatar-change"
                   >
-                    Thay đổi Avatar
+                   Change Avatar
                   </label>
                 </div>
 
-                <label className="account__box-info-label">Xin chào</label>
+                <label className="account__box-info-label">HELLO</label>
                 <label className="account__box-info-fullname">
                   {user.fullname}
                 </label>
                 <label className="account__box-info-header">
-                  THÔNG TIN CÁ NHÂN
+                PERSONAL INFORMATION
                 </label>
 
                 <label className="account__box-info-title">
-                  Họ và tên đầy đủ:
+                Full name:
                 </label>
                 <input
                   className="account__box-info-input"
@@ -208,7 +208,7 @@ const AccountClientInfo = () => {
                   className="account__box-info-btn"
                   onClick={handleEditInfo}
                 >
-                  Cập nhật thông tin
+                  Update information
                 </button>
               </div>
             </div>

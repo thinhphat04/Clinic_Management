@@ -43,36 +43,36 @@ const PromotePage = () => {
         <AdminHeader />
         <div className="admin__title">
           <label className="admin__tilte-label">
-            Chào một ngày tốt lành, quản trị viên!
+          Good day, admin!
           </label>
           <label className="admin__tilte-describe">
-            Trang quản lý chương trình khuyến mãi
+          Promotions management page
           </label>
         </div>
 
         <div className="promote__group">
           <div className="promote__header">
             <label className="promote__header-title">
-              Danh sách chương trình khuyến mãi
+            List of promotions
             </label>
           </div>
 
           <div className="promote__btn-container">
             <button className="promote__btn-add" onClick={handleAddPromote}>
-              Thêm chương trình khuyến mãi
+            Add promotions
             </button>
           </div>
 
           <table className="table">
             <thead>
               <tr className="table__thead-primary">
-                <td>Mã ID</td>
-                <td>Tên chương trình</td>
+                <td>Code ID</td>
+                <td>Program name</td>
                  {/* <td>Từ ngày</td> */}
-                <td>Mô tả</td> 
-                <td>% giảm</td>
-                <td>Áp dụng cho</td>
-                <td>Chỉnh sửa</td>
+                <td>Describe</td> 
+                <td>% reduce</td>
+                <td>Apply for</td>
+                <td>Edit</td>
               </tr>
             </thead>
             <tbody className="table__tbody-primary">

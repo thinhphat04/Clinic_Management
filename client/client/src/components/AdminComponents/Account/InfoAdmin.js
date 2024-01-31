@@ -125,16 +125,16 @@ const InfoAdmin = () => {
         <AdminHeader />
         <div className="admin__title">
           <label className="admin__tilte-label">
-            Chào một ngày tốt lành, quản trị viên!
+          Good day, admin!
           </label>
           <label className="admin__tilte-describe">
-            Trang thông tin quản trị viên
+          Admin information page
           </label>
         </div>
 
         <div className="info-page__group">
           <div className="info-page__header">
-            CHỈNH SỬA THÔNG TIN QUẢN TRỊ VIÊN
+          EDIT ADMIN INFORMATION
           </div>
 
           <div className="info-page__body">
@@ -160,16 +160,16 @@ const InfoAdmin = () => {
                 className="info-page__avatar-btn"
                 htmlFor="avatar-change-input"
               >
-                Thay đổi Avatar
+                Change Avatar
               </label>
               <label className="info-page__user-id">{admin.user_fullName}</label>
             </div>
 
             <div className="info-page__col-2">
-              <label className="info-page__title">Thông tin cá nhân</label>
+              <label className="info-page__title">Personal information</label>
 
               <div className="info-page__box-info">
-                <label className="info-page__label">Mã quản trị viên</label>
+                <label className="info-page__label">Administrator code</label>
                 <input
                   style={{ fontWeight: 'bold' }}
                   readOnly
@@ -177,7 +177,7 @@ const InfoAdmin = () => {
                   value={String(admin.id).toUpperCase()}
                 />
 
-                <label className="info-page__label">Họ và tên đầy đủ</label>
+                <label className="info-page__label">Full name</label>
                 <input
                   className="info-page__input"
                   defaultValue={admin.user_fullName}
@@ -197,7 +197,7 @@ const InfoAdmin = () => {
                   defaultValue={admin.phoneNumber}
                 />
 
-                <label className="info-page__label">Địa chỉ</label>
+                <label className="info-page__label">Address</label>
                 <input
                   className="info-page__input"
                   defaultValue={admin.user_address}
@@ -208,7 +208,7 @@ const InfoAdmin = () => {
 
           <div className="info-page__footer">
             <button className="info-page__btn" onClick={handleConfirmChange}>
-              Xác nhận<i className="ti-check"></i>
+            Confirm<i className="ti-check"></i>
             </button>
           </div>
         </div>

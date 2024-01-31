@@ -159,7 +159,7 @@ const Cart = () => {
           <div className="cart__container--empty">
             <div className="cart__icon"></div>
             <label className="cart__label--empty">
-              Bạn chưa thêm sản phẩm nào vào trong giỏ hàng!
+            You haven't added any products to your cart yet!
             </label>
             <button
               className="cart__btn--empty"
@@ -223,7 +223,7 @@ const Cart = () => {
                       </span>
                       <span className="cart__item-info-installment">
                         <i className="cart__item-info-installment-icon fa fa-tag"></i>
-                        Trả góp 0%
+                        0% installment payment
                       </span>
                       <div className="cart__item-quantity">
                         <button

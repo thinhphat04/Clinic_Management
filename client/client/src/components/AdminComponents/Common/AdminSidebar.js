@@ -83,11 +83,11 @@ const AdminSidebar = () => {
           className="sidebar__component-item-icon fa fa-home"
           aria-hidden="true"
         ></i>
-        Thống kê
+        Statistical
       </div>
 
       <div className="sidebar__component">
-        <label className="sidebar__component-label">Quản lý dữ liệu</label>
+        <label className="sidebar__component-label">Data management</label>
         <div
           className="sidebar__component-item"
           onClick={() => {
@@ -98,7 +98,7 @@ const AdminSidebar = () => {
             className="sidebar__component-item-icon fa fa-users"
             aria-hidden="true"
           ></i>
-          Khách hàng
+          Client
         </div>
         <div
           className="sidebar__component-item"
@@ -110,7 +110,7 @@ const AdminSidebar = () => {
             className="sidebar__component-item-icon fa fa-table"
             aria-hidden="true"
           ></i>
-          Sản phẩm
+          Product 
         </div>
         <div
           className="sidebar__component-item"
@@ -122,7 +122,7 @@ const AdminSidebar = () => {
             className="sidebar__component-item-icon fa fa-tag"
             aria-hidden="true"
           ></i>
-          Khuyến mãi
+          Promotion
         </div>
         <div
           className="sidebar__component-item"
@@ -134,12 +134,12 @@ const AdminSidebar = () => {
             className="sidebar__component-item-icon fa fa-comments"
             aria-hidden="true"
           ></i>
-          Ý kiến khách hàng
+          Customer reviews
         </div>
       </div>
 
       <div className="sidebar__component">
-        <label className="sidebar__component-label">Tùy chọn</label>
+        <label className="sidebar__component-label">Option</label>
         <div
           className="sidebar__component-item"
           onClick={() => {
@@ -150,14 +150,14 @@ const AdminSidebar = () => {
             className="sidebar__component-item-icon fa fa-user"
             aria-hidden="true"
           ></i>
-          Thông tin cá nhân
+          Personal information
         </div>
         <div className="sidebar__component-item" onClick={LogOut}>
           <i
             className="sidebar__component-item-icon fa fa-sign-out"
             aria-hidden="true"
           ></i>
-          Đăng xuất
+          Log out
         </div>
       </div>
     </div>

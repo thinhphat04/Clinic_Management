@@ -44,19 +44,19 @@ const ProductPage = () => {
         <AdminHeader />
         <div className="admin__title">
           <label className="admin__tilte-label">
-            Chúc một ngày tốt lành, quản trị viên!
+          Have a nice day, admin!
           </label>
           <label className="admin__tilte-describe">
-            Trang quản lý sản phẩm
+          Product management page
           </label>
         </div>
 
         <div className="product__group">
           <div className="product__header">
-            <label className="product__header-title">Danh sách sản phẩm</label>
+            <label className="product__header-title">List of products</label>
             <div className="product__header-counting">
               {' '}
-              Tổng số lượng sản phẩm:
+              Total product quantity:
               <span className="customer__header-counting-number">
                 {countProduct}
               </span>
@@ -65,7 +65,7 @@ const ProductPage = () => {
 
           <div className="product__list">
             {loading ? (
-              <p>Đang kết nối đến server ... </p>
+              <p>Connecting to the server... </p>
             ) : (
               products.map((product, index) => (
                 <div className="product__item" key={index}>
@@ -93,13 +93,13 @@ const ProductPage = () => {
 
                   <div className="admin__item-info">
                     <label className="admin__item-info-label">
-                      Loại sản phẩm:
+                    Product Type:
                     </label>
                     <p className="admin__item-info-content">{product.product_type}</p>
                   </div>
                   <div className="admin__item-info">
                     <label className="admin__item-info-label">
-                      Trạng thái:
+                    Status:
                     </label>
                     <p className="admin__item-info-content">
                       {' '}
@@ -143,7 +143,7 @@ const ProductPage = () => {
 
           <div className="product__btn-container">
             <button className="product__btn-add" onClick={handleClickBtnAdd}>
-              Thêm sản phẩm mới
+            Add new products
             </button>
           </div>
         </div>
