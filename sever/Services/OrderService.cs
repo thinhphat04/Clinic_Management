@@ -21,7 +21,7 @@ namespace PJ_SEM03.Services
 
         public async Task<Order> addOrder(Order order)
         {
-            using(var transaction = db.Database.BeginTransaction())
+            using (var transaction = db.Database.BeginTransaction())
             {
                 try
                 {
@@ -51,7 +51,7 @@ namespace PJ_SEM03.Services
                 }
             }
         }
-        
+
         public async Task<PagedList<Order>> getAll(int pageNumber, int pageSize)
         {
             var query = db.Orders.Include(o => o.OrderDetails)
@@ -77,7 +77,9 @@ namespace PJ_SEM03.Services
 
         public async Task<Order> GetOrderByPhoneAndCode(string phone, string code)
         {
-            return await db.Orders.FirstOrDefaultAsync(o => o.order_phone == phone && o.order_code == code);
+            return await db.Orders
+                .Include(o => o.OrderDetails) // Include OrderDetails in the query
+                .FirstOrDefaultAsync(o => o.order_phone == phone && o.order_code == code);
         }
 
        
