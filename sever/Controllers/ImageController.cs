@@ -10,7 +10,7 @@ namespace PJ_SEM03.Controllers
     public class ImageController : ControllerBase
     {
         private readonly ImageService _imageService;
-
+    // Compare this snippet from sever/Controllers/ImageController.cs:
         public ImageController(ImageService imageService)
         {
             _imageService = imageService;
