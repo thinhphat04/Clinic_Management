@@ -8,11 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace PJ_SEM03.Migrations
 {
     /// <inheritdoc />
-<<<<<<<< HEAD:sever/Migrations/20240131070636_InitialCreate.cs
-    public partial class InitialCreate : Migration
-========
-    public partial class _2 : Migration
->>>>>>>> 718b40644c1514709c638b0e6cdb1e5ba59ccf07:sever/Migrations/20240131065433_2.cs
+    public partial class _1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -301,6 +297,34 @@ namespace PJ_SEM03.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Feedbacks",
+                columns: table => new
+                {
+                    feedback_id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    user_id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    product_id = table.Column<int>(type: "int", nullable: false),
+                    feedback_description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    feedback_rating = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Feedbacks", x => x.feedback_id);
+                    table.ForeignKey(
+                        name: "FK_Feedbacks_AspNetUsers_user_id",
+                        column: x => x.user_id,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Feedbacks_Products_product_id",
+                        column: x => x.product_id,
+                        principalTable: "Products",
+                        principalColumn: "product_id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Medicals",
                 columns: table => new
                 {
@@ -371,17 +395,10 @@ namespace PJ_SEM03.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Role", "SecurityStamp", "TwoFactorEnabled", "UserName", "user_address", "user_fullName" },
                 values: new object[,]
                 {
-<<<<<<<< HEAD:sever/Migrations/20240131070636_InitialCreate.cs
-                    { "1", 0, "7d4138a4-56db-4143-8043-abb8bab4ad2b", "admin@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEGUyh+kS/JZBP/c+kIzen1mlG8avp8ZN1n8e1bJtMXZPSooLNUwEWzwD0e5GWDf9kg==", null, false, "Admin", "da68d596-8e4a-4bb0-adda-41b07b31c573", false, "admin", null, "admin" },
-                    { "2", 0, "2817a960-5e93-4f02-944a-c34371dd5119", "phat@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEHi9DTQyFLcOE00fCMT0DM803JijvfiIcKpixfiHU1BDencQP4YC43pJ4gJY5dySUw==", null, false, "Member", "6990a499-603b-4228-b78f-d3049c809e59", false, "phat", null, "Ngo Thinh Phat" },
-                    { "3", 0, "53bafa21-790f-4ea1-be54-164f10eda10e", "khai@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEIntHu++iZH8r80tao9MucdtQswAWX1ri2PVe/dTzffE/vAqgO7mtoLMS1Etg7EW2A==", null, false, "Member", "87eacaa1-29cb-4899-8426-3c1a2a529977", false, "khai", null, "Bui Tuan Khai" },
-                    { "4", 0, "ab5b76fa-0772-495c-85de-14ba6500801e", "tram@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEL5bXUW5fLc1KM1FzlzJZt/KU91ioDfiaYoyMnzdA8zfz/VfArGGVRFEaPiM+InPFw==", null, false, "Member", "d6ef8960-4d71-4d2b-b3f0-be344b4bac59", false, "tram", null, "Tran Bao Huyen Tram" }
-========
-                    { "1", 0, "00f9a379-7dc5-4088-8d02-851ac1e911de", "admin@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEDjgOQoCUjM/+a3VGJONrbEMUQ0X42uWt0AZeKNhvZ3847g+j1GwRwE3EvQyOfjsoA==", null, false, "Admin", "b7872b63-831e-4ec5-ade5-ae548272f4e9", false, "admin", "Ho Chi Minh", "admin" },
-                    { "2", 0, "f7ec223b-535c-4cc1-a0c2-c89705a79b21", "phat@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEOA6SM6Vi/1fne1XrMbJ7doluuY3zm7LnNkDA9/RrbQ0gCdro2Af+DqQgVpdxWUZ6A==", null, false, "Member", "1e063ac8-8d10-40cd-8328-92fab3a1d768", false, "phat", "Quan 2, HCM", "Ngo Thinh Phat" },
-                    { "3", 0, "9a574588-710f-4297-acfc-5213f235ff25", "khai@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEOYDGzbdszu3X6SyURJKMWQB28Ac+OD6NIjaBnVvHGKwt9GZ78Gq3KPixIzVkG8w9g==", null, false, "Member", "e9e6b6fa-f85a-48a5-81a2-00a20587c86b", false, "khai", "Tan Binh, HCM", "Bui Tuan Khai" },
-                    { "4", 0, "2b3e66e8-9687-4739-bbba-cad366231c60", "tram@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEAWqxt7+PMFxjeuUPOla579HUnyKgUzFEnaA4egiRdkrVmVspi1GtrW20ajbuKt0hg==", null, false, "Member", "cf73b3e2-df2b-4946-9edc-a644ded17ba8", false, "tram", "Thu Duc, HCM", "Tran Bao Huyen Tram" }
->>>>>>>> 718b40644c1514709c638b0e6cdb1e5ba59ccf07:sever/Migrations/20240131065433_2.cs
+                    { "1", 0, "0e47eed7-342d-47e2-a10d-8f0c1d760b05", "admin@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEEBwrh3XoDfwraBOi3baw7PDIoqEDwqvPBxpOsw9nVF2IYsbGs2kNvlVuRaCfrmtOQ==", null, false, "Admin", "439403ae-1252-4cf7-82b3-b18865cf746b", false, "admin", "Ho Chi Minh", "admin" },
+                    { "2", 0, "01143c7d-afa9-4863-937b-d55cf818549f", "phat@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEJF3adu30zLAgGQlryJPsik6duTovNmLKwENiqWdu0Ob/3fKLOZfnQIYukKDibPMHA==", null, false, "Member", "a9d32e55-0031-4661-b2f8-f1e6045aa431", false, "phat", "Quan 2, HCM", "Ngo Thinh Phat" },
+                    { "3", 0, "e3a0cc27-b794-4877-bd33-ecd646f077e5", "khai@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEAsGll1gNrrlaTS/Y2F+Tl5D1CphSIE6+gkCNh5+Uifqw1KCxffo/RVFz3m9jB031Q==", null, false, "Member", "8748d768-9123-4e1c-a55e-87536d54cf0f", false, "khai", "Tan Binh, HCM", "Bui Tuan Khai" },
+                    { "4", 0, "428c78e1-8a20-4846-b309-f1d6581dec0d", "tram@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEMrnrz75f/SxrqDuWQoWSY2epE9TfVzWsFj2/Ic4kmsqfCIwXPMMPj9RNrXGCLXqGA==", null, false, "Member", "1647e077-0e3c-49d4-aa4f-dd566f54fbe4", false, "tram", "Thu Duc, HCM", "Tran Bao Huyen Tram" }
                 });
 
             migrationBuilder.InsertData(
@@ -428,17 +445,22 @@ namespace PJ_SEM03.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Feedbacks",
+                columns: new[] { "feedback_id", "feedback_description", "feedback_rating", "product_id", "user_id" },
+                values: new object[,]
+                {
+                    { 1, "Good Service", 5, 1, "1" },
+                    { 2, "Great", 5, 3, "2" },
+                    { 3, "Good product!", 5, 5, "3" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Orders",
                 columns: new[] { "order_id", "AppliedGiftCodeId", "order_address", "order_code", "order_datetime", "order_phone", "order_status", "order_total", "user_id" },
                 values: new object[,]
                 {
-<<<<<<<< HEAD:sever/Migrations/20240131070636_InitialCreate.cs
-                    { 1, null, "HCM", "ORD001", new DateTime(2024, 1, 31, 14, 6, 36, 6, DateTimeKind.Local).AddTicks(3433), "123", "Processing", 100, "1" },
-                    { 2, null, "Ca Mau", "ORD001", new DateTime(2024, 1, 31, 14, 6, 36, 6, DateTimeKind.Local).AddTicks(3455), "124", "Delivered", 200, "2" }
-========
-                    { 1, null, "HCM", "ORD001", new DateTime(2024, 1, 31, 13, 54, 32, 674, DateTimeKind.Local).AddTicks(8812), "123", "Processing", 100, "1" },
-                    { 2, null, "Ca Mau", "ORD001", new DateTime(2024, 1, 31, 13, 54, 32, 674, DateTimeKind.Local).AddTicks(8825), "124", "Delivered", 200, "2" }
->>>>>>>> 718b40644c1514709c638b0e6cdb1e5ba59ccf07:sever/Migrations/20240131065433_2.cs
+                    { 1, null, "HCM", "ORD001", new DateTime(2024, 1, 31, 23, 41, 42, 58, DateTimeKind.Local).AddTicks(6893), "123", "Processing", 100, "1" },
+                    { 2, null, "Ca Mau", "ORD001", new DateTime(2024, 1, 31, 23, 41, 42, 58, DateTimeKind.Local).AddTicks(6921), "124", "Delivered", 200, "2" }
                 });
 
             migrationBuilder.InsertData(
@@ -511,6 +533,16 @@ namespace PJ_SEM03.Migrations
                 column: "user_id");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Feedbacks_product_id",
+                table: "Feedbacks",
+                column: "product_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Feedbacks_user_id",
+                table: "Feedbacks",
+                column: "user_id");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_OrderDetails_order_id",
                 table: "OrderDetails",
                 column: "order_id");
@@ -557,6 +589,9 @@ namespace PJ_SEM03.Migrations
 
             migrationBuilder.DropTable(
                 name: "Educations");
+
+            migrationBuilder.DropTable(
+                name: "Feedbacks");
 
             migrationBuilder.DropTable(
                 name: "Medicals");
