@@ -1,5 +1,6 @@
 using System.Text;
 using System.Text.Json.Serialization;
+using CloudinaryDotNet;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -45,6 +46,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
+
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigin",
@@ -58,15 +61,18 @@ builder.Services.AddCors(options =>
 builder.Services.AddControllers();
 //khai báo các service
 builder.Services.AddScoped<IUserRepo, UserService>();
-builder.Services.AddScoped<IContactRepo, ContactService>();
+// builder.Services.AddScoped<IContactRepo, ContactService>();
 builder.Services.AddScoped<IProductRepo, ProductService>();
 builder.Services.AddScoped<IOrderRepo, OrderService>();
 builder.Services.AddScoped<ICartRepo, CartService>();
-builder.Services.AddScoped<CloudinaryService>();
+// builder.Services.AddScoped<CloudinaryService>();
 builder.Services.AddScoped<IAccountRepo, AccountService>();
 builder.Services.AddScoped<IGiftcode, GiftcodeService>();
+builder.Services.AddScoped<ImageService>();
 
+// // Retrieve Cloudinary settings from appsettings.json
 
+builder.Services.Configure<Cloudinary>(builder.Configuration.GetSection("Cloudinary"));
 /****************************************************************************************/
 builder.Services.AddControllers().AddJsonOptions(x =>
     x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
@@ -90,3 +96,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
