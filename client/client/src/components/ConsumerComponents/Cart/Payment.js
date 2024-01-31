@@ -165,7 +165,8 @@ const Payment = ({ socket }) => {
            order_address: window.localStorage.getItem('addressCache'),
            order_phone:window.localStorage.getItem('phoneCache'),
            order_total: window.localStorage.getItem('countTotalPriceCache'),
-           OrderDetails: cartUserUpdate
+           OrderDetails: cartUserUpdate,
+           order_note: window.localStorage.getItem('noteCache')
          }
       );
 

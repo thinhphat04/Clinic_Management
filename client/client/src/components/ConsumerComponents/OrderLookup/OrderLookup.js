@@ -21,8 +21,8 @@ const OrderLookup = () => {
     lists.map((item, index) => {
       if (item) {
         countTotalPriceOld +=
-          ((Number(item.price) * (100 + item.percent)) / 100) * item.quantity;
-        countPriceAll += Number(item.price) * item.quantity;
+          ((Number(item.product.product_price) * (100 + item.product.product_percent)) / 100) * item.product_quantity;
+        countPriceAll += Number(item.product.product_price) * item.product_quantity;
       }
     });
     setTotalPriceOld(countTotalPriceOld);
@@ -163,7 +163,7 @@ const OrderLookup = () => {
                         className="cart-confirm__data"
                         style={{ fontWeight: 400 }}
                       >
-                        {order.address}
+                        {order.order_address}
                       </p>
                     </li>
                     <li className="cart-confirm__item">
@@ -176,7 +176,7 @@ const OrderLookup = () => {
                           fontStyle: 'italic',
                         }}
                       >
-                        "{order.note}"
+                        "{order.order_note}"
                       </p>
                     </li>
                     <li className="cart-confirm__item">
@@ -187,7 +187,7 @@ const OrderLookup = () => {
                         className="cart-confirm__data"
                         style={{ fontWeight: 600, color: 'blue' }}
                       >
-                        {order.status}
+                        {order.order_status}
                       </p>
                     </li>
                   </ul>
@@ -201,20 +201,20 @@ const OrderLookup = () => {
                         <li className="cart-confirm__item-product" key={i}>
                           <img
                             className="cart-confirm__item-product-img"
-                            src={item.imageLink}
+                            src={item.product.product_img}
                           ></img>
                           <div className="cart-confirm__item-product-info">
                             <label className="cart-confirm__item-product-info-label">
-                              {item.productName}
+                              {item.product.product_name}
                             </label>
                             <p className="cart-confirm__item-product-info-quantity">
-                              x{item.quantity}
+                              x{item.product_quantity}
                             </p>
                             <p className="cart-confirm__item-product-info-price">
-                              {item.quantity} x{' '}
-                              {Number(item.price).toLocaleString()} đ ={' '}
+                              {item.product_quantity} x{' '}
+                              {Number(item.product.product_price).toLocaleString()} đ ={' '}
                               {Number(
-                                item.quantity * item.price,
+                                item.product_quantity * item.product.product_price,
                               ).toLocaleString()}{' '}
                               đ
                             </p>
