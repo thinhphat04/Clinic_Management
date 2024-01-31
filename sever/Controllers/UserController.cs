@@ -30,20 +30,31 @@ namespace PJ_SEM03.Controllers
                 return BadRequest(ex);
             }
         }
-        
+
         [HttpPut]
         public async Task<IActionResult> UpdateUser(UserDto user)
         {
-            var result = await userRepo.UpdateUser(user);
-            if (result)
+            var (success, result) = await userRepo.UpdateUser(user);
+
+            if (success)
             {
-                return Ok();
+                return Ok(result); 
             }
             else
             {
-                return NotFound();
+                if (result is string errorMessage)
+                {
+                    return BadRequest(errorMessage);
+                }
+                else
+                {
+                    return NotFound(); 
+                }
             }
         }
+
+
+
         [HttpGet("user/{user_id}", Name = "GetUserById")]
         public async Task<ActionResult<User>> getUserById(string user_id)
         {

@@ -53,7 +53,7 @@ const CartInfo = () => {
       inputElement[2].value = `${user.phoneNumber}`;
       setFullNameEdit(user.fullname);
       setEmailEdit(user.email);
-      setPhoneEdit(user.phone);
+      setPhoneEdit(user.phoneNumber);
     } else {
       inputElement[0].value = ``;
       inputElement[1].value = ``;

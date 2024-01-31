@@ -26,13 +26,14 @@ const RegisterClient = () => {
         Validator.isRequired('#username'),
         Validator.isMinLength('#username', 5),
 
-        // Validator.isRequired('#password'),
-        // Validator.isMinLength('#password', 6),
+        Validator.isRequired('#password'),
+        Validator.isPassword('#password'),
+        Validator.isMinLength('#password', 7),
 
-        // Validator.isRequired('#password_confirmation'),
-        // Validator.isConfirmed('#password_confirmation', () => {
-        //   return document.getElementById('password').value;
-        // }),
+        Validator.isRequired('#password_confirmation'),
+        Validator.isConfirmed('#password_confirmation', () => {
+          return document.getElementById('password').value;
+        }),
 
         Validator.isRequired('#fullname'),
         Validator.isMinLength('#fullname', 5),
@@ -50,7 +51,7 @@ const RegisterClient = () => {
     });
   }, []);
 
-  const showErrorToast = () => {
+  const showSuccessToast = () => {
     Toast({
       title: 'Đăng ký thành công',
       message: 'Đang quay trở lại trang đăng nhập!',
@@ -80,18 +81,19 @@ const RegisterClient = () => {
           window.alert(res.data.message);
         } else {
           window.alert('Đăng ký thành công! Đang quay trở lại trang đăng nhập');
-        //  showErrorToast();
+          //showSuccessToast();
           handleLoadingPage(1);
+         
           window.setTimeout(() => {
             window.location.href = '/login';
-          }, 4000);
+          }, 2000);
         }
       } else {
         window.alert('Đã gặp lỗi khi đăng ký! Vui lòng thử lại');   
       }
     } catch (error) {
       console.log(error);
-      window.alert(error);
+     // window.alert(error);
     }
   };
 

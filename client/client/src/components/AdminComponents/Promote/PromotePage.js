@@ -15,7 +15,7 @@ const PromotePage = () => {
   useEffect(() => {
     const fetchAPI = () => {
       document.title = 'Clinic Online | Chương trình khuyến mãi';
-      fetch('https://localhost:7096/api/promotes')
+      fetch('https://localhost:7096/api/GiftCode')
         .then((res) => res.json())
         .then((data) => {
           setPromotes(data);
@@ -25,6 +25,8 @@ const PromotePage = () => {
     fetchAPI();
     handleLoadOptionSelected(3);
   }, []);
+
+  console.log("promotes::: ", promotes);
 
   const handleAddPromote = (event) => {
     event.preventDefault();
@@ -64,10 +66,10 @@ const PromotePage = () => {
           <table className="table">
             <thead>
               <tr className="table__thead-primary">
-                <td>Mã KM</td>
+                <td>Mã ID</td>
                 <td>Tên chương trình</td>
-                <td>Từ ngày</td>
-                <td>Đến ngày</td>
+                 {/* <td>Từ ngày</td> */}
+                <td>Mô tả</td> 
                 <td>% giảm</td>
                 <td>Áp dụng cho</td>
                 <td>Chỉnh sửa</td>
@@ -97,13 +99,13 @@ const PromotePage = () => {
                         textAlign: 'left',
                       }}
                     >
-                      {promote.name}
+                      {promote.giftName}
                     </td>
-                    <td style={{ backgroundColor: '#e0f1d4' }}>
+                    {/* <td style={{ backgroundColor: '#e0f1d4' }}>
                       {promote.timeStart}
-                    </td>
+                    </td> */}
                     <td style={{ backgroundColor: '#d5a2f7', fontWeight: 700 }}>
-                      {promote.timeEnd}
+                      {promote.describe}
                     </td>
                     <td
                       style={{
@@ -113,10 +115,10 @@ const PromotePage = () => {
                         color: 'red',
                       }}
                     >
-                      {promote.percent || 'None'} %
+                      {promote.percentReduce || 'None'} %
                     </td>
                     <td style={{ backgroundColor: '#fff2c1' }}>
-                      {promote.apply}
+                      {promote.applyFor}
                     </td>
                     <td>
                       <div className="table__edit-btn">

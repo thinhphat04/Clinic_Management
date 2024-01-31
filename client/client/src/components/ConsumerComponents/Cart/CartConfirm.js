@@ -36,8 +36,7 @@ const CartConfirm = () => {
     cartUser.map((cartItem, index) => {
       if (cartItem) {
         countTotalPriceOld +=
-          ((Number(cartItem.product.product_price) * (100 + cartItem.product.product_percent)) / 100) *
-          cartItem.product_quantity;
+          ((Number(cartItem.product.product_price) )) * cartItem.product_quantity;
         countPriceAll += Number(cartItem.product.product_price) * cartItem.product_quantity;
       }
     });
@@ -88,7 +87,7 @@ const CartConfirm = () => {
               <h1 className="cart__title">ORDER CONFIRMATION</h1>
 
               <ul className="cart-confirm__list-info">
-                <li className="cart-confirm__item">
+                {/* <li className="cart-confirm__item">
                   <label className="cart-confirm__label">
                   Code orders:
                     <span className="cart-confirm__label-span">
@@ -98,7 +97,7 @@ const CartConfirm = () => {
                   <p className="cart-confirm__data" style={{ color: 'red' }}>
                     {orderID}
                   </p>
-                </li>
+                </li> */}
                 <li className="cart-confirm__item">
                   <label className="cart-confirm__label">Orderer:</label>
                   <p className="cart-confirm__data" style={{ color: 'green' }}>
@@ -196,7 +195,7 @@ const CartConfirm = () => {
                   </span>
                 </li>
 
-                {loading ? (
+                {/* {loading ? (
                   <p>Connecting to the server... </p>
                 ) : (
                   cartUser.map((product, i) => (
@@ -206,14 +205,12 @@ const CartConfirm = () => {
                       </label>
                       <span className="detail-price__item-price">
                         - {Number(product.product.product_percent)}% ={' '}
-                        {Number(
-                          (product.product.product_percent / 100) * product.product_price,
-                        ).toLocaleString()}{' '}
-                        đ
-                      </span>
+                        {/* {((Number(product.product.product_percent) / 100) * Number(product.product_price)).toLocaleString()}{' '} */}
+                        {/* {(Number(totalPriceOld)*(100-Number(product.product.product_percent))).toLocaleString()} đ */}
+                      {/* </span>
                     </li>
                   ))
-                )}
+                )}  */}
 
                 <li className="detail-price__item">
                   <label className="detail-price__item-label">
@@ -245,7 +242,7 @@ const CartConfirm = () => {
                     Giảm giá phí vận chuyển:
                   </label>
                   <span className="detail-price__item-price">
-                    - 100% = - 29,000 đ
+                    - 100% =  29,000 đ
                   </span>
                 </li>
 

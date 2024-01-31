@@ -43,9 +43,10 @@ const OrderLookup = () => {
     handleLoadingPage(10);
     try {
       const res = await axios.get(
-        `${process.env.REACT_APP_API}/api/orders/${orderID}`,
+        `https://localhost:7096/api/Order/search/${phone}/${orderID}`,
       );
       document.querySelector('.modal__cover').classList.remove('modal--active');
+      console.log("resBTK:: ", res);
       setOrder(res.data);
       setLists(res.data.lists);
       document.querySelector('.order-lookup__box').style.display = 'none';
