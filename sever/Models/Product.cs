@@ -27,7 +27,7 @@ public class Product
     public GiftCode? GiftCode { get; set; }  
 
     public ICollection<Cart>? Carts { get; set; }
-
+    public ICollection<Feedback>? Feedbacks { get; set; }
     public ICollection<OrderDetail>? OrderDetails { get; set; }
 
 }

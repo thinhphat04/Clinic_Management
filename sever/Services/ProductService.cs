@@ -25,10 +25,10 @@ namespace PJ_SEM03.Services
             return await _dbContext.Products.ToListAsync();
         }
 
-        public async Task<Product> getProductById(int product_id)
-        {
-            return await _dbContext.Products.SingleOrDefaultAsync(x => x.product_id == product_id);
-        }
+        // public async Task<Product> getProductById(int product_id)
+        // {
+        //     return await _dbContext.Products.SingleOrDefaultAsync(x => x.product_id == product_id);
+        // }
 
         public async Task<IEnumerable<Product>> getProductByType(string product_type)
         {
@@ -81,6 +81,34 @@ namespace PJ_SEM03.Services
         public async Task<IEnumerable<Product>> GetProductsByName(string name)
         {
             return await _dbContext.Products.Where(p => p.product_name.Contains(name)).ToListAsync();
+        }
+        public async Task<ActionResult<Product>> DecreaseQuantity(int productId, int quantity)
+        {
+            var product = await _dbContext.Products.FindAsync(productId);
+            if (product == null)
+            {
+                throw new Exception("Product not found");
+            }
+
+            if (product.product_quantity < quantity)
+            {
+                throw new Exception("Not enough product in stock");
+            }
+
+            product.product_quantity -= quantity;
+
+            try
+            {
+                await _dbContext.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                // Log the exception message
+                Console.WriteLine(ex.Message);
+                throw;
+            }
+
+            return product;
         }
     }
 }
