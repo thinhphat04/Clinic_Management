@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import './styles/info-product.css';
-import { Breadcrumbs, Footer, Nav } from '../Common';
-import { Toast, handleLoadingPage } from '../../Common';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import "./styles/info-product.css";
+import { Breadcrumbs, Footer, Nav } from "../Common";
+import { Toast, handleLoadingPage } from "../../Common";
+import axios from "axios";
 
 const InfoProductClient = () => {
   const [products, setProducts] = useState([]);
@@ -11,7 +11,7 @@ const InfoProductClient = () => {
   const { name } = useParams();
   const [imageList, setImageList] = useState([]);
   const [option, setOption] = useState([]);
-  const [optionEdit, setOptionEdit] = useState('');
+  const [optionEdit, setOptionEdit] = useState("");
   const [color, setColor] = useState([]);
   const [colorEdit, setColorEdit] = useState([]);
   const [priceEdit, setPriceEdit] = useState(0);
@@ -20,67 +20,72 @@ const InfoProductClient = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    document.title = 'ShopTECH | ' + name;
+    document.title = "Clinic Online | " + name;
+    // console.log("name:: ", name);
     const fetchAPIs = () => {
-      fetch(
-        'https://server-shoptech.onrender.com/api/products/get-by-name/' + name,
-      )
+      fetch("https://localhost:7096/api/Products/search/" + name)
         .then((res) => res.json())
         .then((data) => {
           if (!data) {
-            window.alert('Sản phẩm hiện không có sẵn hoặc đã bị xóa');
+            window.alert("Sản phẩm hiện không có sẵn hoặc đã bị xóa");
             handleLoadingPage(999);
             return;
           }
-          setProduct(data);
-          setImageList(data.imageList);
-          setOption(data.option);
-          setColor(data.color);
-        });
-
-      fetch('https://server-shoptech.onrender.com/api/promotes')
-        .then((res) => res.json())
-        .then((data) => {
-          setPromotes(data);
-          setLoading(false);
-        });
-
-      fetch('https://server-shoptech.onrender.com/api/comments')
-        .then((res) => res.json())
-        .then((data) => {
-          setComments(data);
-          setLoading(false);
-        });
-
-      fetch('https://server-shoptech.onrender.com/api/products/')
-        .then((res) => res.json())
-        .then((data) => {
-          setProducts(data);
-          setLoading(false);
+          setProduct(data[0]);
         });
     };
     fetchAPIs();
   }, []);
+  // console.log("product:: ", comments);
+
+ 
+  useEffect(() => {
+    const fetchAPIs = () => {
+      fetch("https://localhost:7096/api/Products/" + product.product_type)
+        .then((res) => res.json())
+        .then((data) => {
+          // console.log("ABCDproducttype:: ", product.product_type);
+          setProducts(data);
+          setLoading(false);
+        });
+
+
+        fetch("https://localhost:7096/api/Feedback")
+        .then((res) => res.json())
+        .then((data) => {
+           console.log("dataABCD:: ", data);
+          setComments(data);
+          setLoading(false);  
+        });
+    };
+    fetchAPIs();
+  }, [product.product_type]);
+
+
+
+  console.log("productAAAA: ", product);
+
+  console.log("comments:: ", comments)
 
   useEffect(() => {
     // show các khuyến mãi dành cho sản phẩm
     var indexPromote = 1;
     promotes.map((promote, index) => {
       const promoteElement = document.querySelectorAll(
-        '.info-product__detail-promote-item',
+        ".info-product__detail-promote-item"
       )[index];
       const promoteIndex = promoteElement.querySelector(
-        '.info-product__detail-promote-item-index',
+        ".info-product__detail-promote-item-index"
       );
       products.map((product, i) => {
-        if (name === product.name) {
+        if (name === product.product_name) {
           if (
             String(promote.apply)
               .toLowerCase()
               .includes(String(product.type).toLowerCase())
           ) {
             promoteIndex.innerHTML = `<span>${indexPromote}</span>`;
-            promoteElement.style.display = 'flex';
+            promoteElement.style.display = "flex";
             indexPromote++;
           }
         }
@@ -90,46 +95,48 @@ const InfoProductClient = () => {
     // show thông tin sản phẩm tương tự
     products.map((p, index) => {
       const infoProductSimilar = document.querySelectorAll(
-        '.product__sell-item',
+        ".product__sell-item"
       )[index];
       if (p.type === product.type) {
-        infoProductSimilar.style.display = 'block';
+        infoProductSimilar.style.display = "block";
       }
     });
 
     // show thông tin đánh giá sản phẩm
     comments.map((comment, index) => {
-      const infoVote = document.querySelectorAll('.info-product__review-item')[
+      const infoVote = document.querySelectorAll(".info-product__review-item")[
         index
       ];
-      if (name === comment.nameProductVoted) {
-        infoVote.style.display = 'block';
+      console.log("product.product_id:: ", product.product_id);
+      console.log("comment.productId:: ", comment.productId);
+      if (product.product_id === comment.productId) {
+        infoVote.style.display = "block";
       }
     });
 
     handleFormatCrumbs();
-    handleFeedbackEmpty();
+   // handleFeedbackEmpty();
   });
 
   const handleFormatCrumbs = () => {
-    const crumbLinks = document.querySelectorAll('.crumb-link');
+    const crumbLinks = document.querySelectorAll(".crumb-link");
     crumbLinks.forEach((crumbLink) => {
-      if (crumbLink.innerHTML.includes('%')) {
-        crumbLink.style.display = 'none';
+      if (crumbLink.innerHTML.includes("%")) {
+        crumbLink.style.display = "none";
       }
     });
   };
 
   const handleFeedbackEmpty = () => {
     const feedbackGroup = document.querySelectorAll(
-      '.info-product__review-item-feedback',
+      ".info-product__review-item-feedback"
     );
     feedbackGroup.forEach((feedbackItem, index) => {
       const feedbackContent = feedbackItem.querySelector(
-        '.info-product__review-item-feedback-content',
+        ".info-product__review-item-feedback-content"
       );
-      if (feedbackContent.textContent === '')
-        feedbackItem.style.display = 'none';
+      if (feedbackContent.textContent === "")
+        feedbackItem.style.display = "none";
     });
   };
 
@@ -150,18 +157,17 @@ const InfoProductClient = () => {
   };
 
   const handleSelectOption = (optionData, data) => {
-    const optionList = document.querySelector('.info-product__detail-option');
+    const optionList = document.querySelector(".info-product__detail-option");
     const optionItems = optionList.querySelectorAll(
-      '.info-product__detail-option-item',
+      ".info-product__detail-option-item"
     );
-    document.querySelector(
-      '.info-product__detail-current-price',
-    ).textContent = `${Number(data).toLocaleString()} đ`;
+    document.querySelector(".info-product__detail-current-price").textContent =
+      `${Number(data).toLocaleString()} đ`;
     const colorList = document.querySelectorAll(
-      '.info-product__detail-option',
+      ".info-product__detail-option"
     )[1];
     const colorItemPrices = colorList.querySelectorAll(
-      '.info-product__detail-option-item-price',
+      ".info-product__detail-option-item-price"
     );
     colorItemPrices.forEach((colorItemPrice, i) => {
       colorItemPrice.innerHTML = `${Number(data).toLocaleString()} đ`;
@@ -169,15 +175,15 @@ const InfoProductClient = () => {
     optionItems.forEach((optionItem, index) => {
       optionItem.onclick = () => {
         const optionItemActive = optionList.querySelector(
-          '.info-product__detail-option-item.info-product__detail-option-item--active',
+          ".info-product__detail-option-item.info-product__detail-option-item--active"
         );
         if (optionItemActive) {
           optionItemActive.classList.remove(
-            'info-product__detail-option-item--active',
+            "info-product__detail-option-item--active"
           );
-          optionItem.classList.add('info-product__detail-option-item--active');
+          optionItem.classList.add("info-product__detail-option-item--active");
         } else {
-          optionItem.classList.add('info-product__detail-option-item--active');
+          optionItem.classList.add("info-product__detail-option-item--active");
         }
       };
     });
@@ -187,23 +193,23 @@ const InfoProductClient = () => {
 
   const handleSelectColor = (data) => {
     const colorList = document.querySelectorAll(
-      '.info-product__detail-option',
+      ".info-product__detail-option"
     )[1];
     const colorItems = colorList.querySelectorAll(
-      '.info-product__detail-option-item',
+      ".info-product__detail-option-item"
     );
     colorItems.forEach((colorItem, index) => {
       colorItem.onclick = () => {
         const colorItemActive = colorList.querySelector(
-          '.info-product__detail-option-item.info-product__detail-option-item--active',
+          ".info-product__detail-option-item.info-product__detail-option-item--active"
         );
         if (colorItemActive) {
           colorItemActive.classList.remove(
-            'info-product__detail-option-item--active',
+            "info-product__detail-option-item--active"
           );
-          colorItem.classList.add('info-product__detail-option-item--active');
+          colorItem.classList.add("info-product__detail-option-item--active");
         } else {
-          colorItem.classList.add('info-product__detail-option-item--active');
+          colorItem.classList.add("info-product__detail-option-item--active");
         }
       };
     });
@@ -211,28 +217,28 @@ const InfoProductClient = () => {
   };
 
   const changeImage = (fileName) => {
-    const imageElement = document.querySelector('.info-product__image-primary');
+    const imageElement = document.querySelector(".info-product__image-primary");
     imageElement.style.backgroundImage = `url(${fileName})`;
     imageElement.style.animation = `toRight 0.2s linear`;
 
-    const imgItems = document.querySelectorAll('.info-product__image-item');
+    const imgItems = document.querySelectorAll(".info-product__image-item");
     imgItems.forEach((imgItem, index) => {
       imgItem.onclick = () => {
         const imgItemActive = document.querySelector(
-          '.info-product__image-item.info-product__image-item--active',
+          ".info-product__image-item.info-product__image-item--active"
         );
         if (imgItemActive) {
-          imgItemActive.classList.remove('info-product__image-item--active');
-          imgItem.classList.add('info-product__image-item--active');
+          imgItemActive.classList.remove("info-product__image-item--active");
+          imgItem.classList.add("info-product__image-item--active");
         } else {
-          imgItem.classList.add('.info-product__image-item--active');
+          imgItem.classList.add(".info-product__image-item--active");
         }
       };
     });
   };
 
   const arrayImage = [];
-  arrayImage.push(product.imagePrimary, product.imageLink);
+  arrayImage.push(product.imagePrimary, product.product_img);
   imageList.map((imageItem, i) => {
     arrayImage.push(imageItem);
   });
@@ -241,97 +247,95 @@ const InfoProductClient = () => {
   const handleNextImage = () => {
     if (indexImageInArray >= arrayImage.length - 1) indexImageInArray = -1;
     indexImageInArray++;
-    const imageElement = document.querySelector('.info-product__image-primary');
+    const imageElement = document.querySelector(".info-product__image-primary");
     imageElement.style.backgroundImage = `url(${arrayImage[indexImageInArray]})`;
   };
   const handlePrevImage = () => {
     if (indexImageInArray <= 0) indexImageInArray = arrayImage.length;
     indexImageInArray--;
-    const imageElement = document.querySelector('.info-product__image-primary');
+    const imageElement = document.querySelector(".info-product__image-primary");
     imageElement.style.backgroundImage = `url(${arrayImage[indexImageInArray]})`;
   };
 
   const showSuccessMessage = () => {
     Toast({
-      title: 'Thêm thành công',
-      message: 'Sản phẩm của bạn đã được thêm vào giỏ hàng, Xem ngay nào!',
-      type: 'success',
+      title: "Thêm thành công",
+      message: "Sản phẩm của bạn đã được thêm vào giỏ hàng, Xem ngay nào!",
+      type: "success",
       duration: 3000,
     });
   };
   const showErrorMessage = () => {
     Toast({
-      title: 'Không thể thêm sản phẩm vào giỏ hàng',
-      message: 'Bạn vui lòng chọn đủ phiên bản và màu sắc của sản phẩm!',
-      type: 'error',
+      title: "Không thể thêm sản phẩm vào giỏ hàng",
+      message: "Bạn vui lòng chọn đủ phiên bản và màu sắc của sản phẩm!",
+      type: "error",
       duration: 3000,
     });
   };
   const showErrorNotLoginMessage = () => {
     Toast({
-      title: 'Bạn chưa đăng nhập vào ShopTECH',
-      message: 'Vui lòng đăng nhập để sử dụng tính năng này!',
-      type: 'error',
+      title: "Bạn chưa đăng nhập vào Clinic Online",
+      message: "Vui lòng đăng nhập để sử dụng tính năng này!",
+      type: "error",
       duration: 4000,
     });
   };
 
   const handleClickAddToCart = () => {
     const elementClickActive = document.querySelector(
-      '.info-product__detail-option-item.info-product__detail-option-item--active',
+      ".info-product__detail-option-item.info-product__detail-option-item--active"
     );
-    if (elementClickActive) {
-      if (!window.localStorage.getItem('auth')) {
+    // if (elementClickActive) {
+      
+      if (!window.localStorage.getItem("auth")) {
         showErrorNotLoginMessage();
         return;
       }
+      console.log("KHAIproduct:: ", product.product_id);
+      console.log("KHAIusser:: ",JSON.parse(window.localStorage.getItem("auth")).id );
+      console.log("KHAIproductquantity:: ", 1);
 
-      axios
-        .put(
-          'https://server-shoptech.onrender.com/api/users/add-product-to-cart-user/' +
-            JSON.parse(window.localStorage.getItem('auth')).user._id,
+      axios.post(
+          "https://localhost:7096/api/Cart",          
           {
-            imageLink: product.imageLink,
-            productName: name,
-            option: optionEdit,
-            color: colorEdit,
-            price: priceEdit,
-            percent: product.percent,
-            quantity: 1,
-            voted: false,
-          },
+            user_id : String(JSON.parse(window.localStorage.getItem("auth"))?.id),
+            product_id: String(product.product_id),
+            product_quantity: 1
+          }
         )
         .then((response) => {
+          console.log("response::: ", response);   
           showSuccessMessage();
           handleLoadingPage(1);
           window.setTimeout(() => {
-            window.location.href = window.location.href;
+            window.location.href ='/cart';
           }, 1000);
         })
         .catch((error) => {
           console.error(error);
         });
-    } else {
-      showErrorMessage();
-    }
+    // } else {
+    //   // showErrorMessage();
+    // }
   };
 
   const handleClickBuyNow = () => {
     const elementClickActive = document.querySelector(
-      '.info-product__detail-option-item.info-product__detail-option-item--active',
+      ".info-product__detail-option-item.info-product__detail-option-item--active"
     );
     if (elementClickActive) {
-      if (!window.localStorage.getItem('auth')) {
+      if (!window.localStorage.getItem("auth")) {
         showErrorNotLoginMessage();
         return;
       }
 
       axios
         .put(
-          'https://server-shoptech.onrender.com/api/users/add-product-to-cart-user/' +
-            JSON.parse(window.localStorage.getItem('auth')).user._id,
+          "https://server-Clinic Online.onrender.com/api/users/add-product-to-cart-user/" +
+            JSON.parse(window.localStorage.getItem("auth")).user._id,
           {
-            imageLink: product.imageLink,
+            imageLink: product.product_img,
             productName: name,
             option: optionEdit,
             color: colorEdit,
@@ -339,12 +343,12 @@ const InfoProductClient = () => {
             percent: product.percent,
             quantity: 1,
             voted: false,
-          },
+          }
         )
         .then((response) => {
           handleLoadingPage(1);
           window.setTimeout(() => {
-            window.location.href = '/cart/info';
+            window.location.href = "/cart/info";
           }, 1000);
         })
         .catch((error) => {
@@ -354,6 +358,10 @@ const InfoProductClient = () => {
       showErrorMessage();
     }
   };
+
+  // console.log("productINFO:: ", product.product_type);
+
+  // var product = product[0]
 
   return (
     <>
@@ -366,11 +374,11 @@ const InfoProductClient = () => {
             <div className="info-product__header">
               <label className="info-product__header-name">{name}</label>
               <p className="info-product__header-star">
-                {handleFormatStarProduct(product.star)}
+                {handleFormatStarProduct(product.product_star)}
               </p>
-              <p className="info-product__header-voters">
+              {/* <p className="info-product__header-voters">
                 ({product.voter} người bình chọn)
-              </p>
+              </p> */}
             </div>
 
             <div className="info-product__box">
@@ -378,11 +386,11 @@ const InfoProductClient = () => {
                 <div
                   className="info-product__image-primary"
                   style={{
-                    backgroundImage: `url(${product.imagePrimary})`,
-                    backgroundPosition: 'center center',
-                    backgroundColor: 'transparent',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundSize: 'contain',
+                    backgroundImage: `url(${product.product_img})`,
+                    backgroundPosition: "center center",
+                    backgroundColor: "transparent",
+                    backgroundRepeat: "no-repeat",
+                    backgroundSize: "contain",
                   }}
                 >
                   <div
@@ -404,19 +412,19 @@ const InfoProductClient = () => {
                 <ul className="info-product__image-list">
                   <li
                     style={{
-                      backgroundImage: `url(${product.imageLink})`,
-                      backgroundPosition: 'center center',
-                      backgroundColor: 'transparent',
-                      backgroundRepeat: 'no-repeat',
-                      backgroundSize: 'contain',
+                      backgroundImage: `url(${product.product_img})`,
+                      backgroundPosition: "center center",
+                      backgroundColor: "transparent",
+                      backgroundRepeat: "no-repeat",
+                      backgroundSize: "contain",
                     }}
                     className="info-product__image-item info-product__image-item--active"
                     onClick={(e) => {
-                      changeImage(product.imageLink);
+                      changeImage(product.product_img);
                     }}
                   ></li>
 
-                  {loading ? (
+                  {/* {loading ? (
                     <p>Đang kết nối đến server ... </p>
                   ) : (
                     imageList.map((image, i) => (
@@ -424,10 +432,10 @@ const InfoProductClient = () => {
                         key={i}
                         style={{
                           backgroundImage: `url(${image})`,
-                          backgroundPosition: 'center center',
-                          backgroundColor: 'transparent',
-                          backgroundRepeat: 'no-repeat',
-                          backgroundSize: 'cover',
+                          backgroundPosition: "center center",
+                          backgroundColor: "transparent",
+                          backgroundRepeat: "no-repeat",
+                          backgroundSize: "cover",
                         }}
                         className="info-product__image-item"
                         onClick={(e) => {
@@ -435,7 +443,7 @@ const InfoProductClient = () => {
                         }}
                       ></li>
                     ))
-                  )}
+                  )} */}
                 </ul>
                 <div className="info-product__policy">
                   <label className="info-product__policy-header">
@@ -444,10 +452,10 @@ const InfoProductClient = () => {
                   <div className="info-product__policy-item">
                     <i className="info-product__policy-item-icon fa fa-wrench"></i>
                     <p className="info-product__policy-item-content">
-                      Bảo hành chính hãng{' '}
-                      <span style={{ fontWeight: 'bold' }}>12 tháng </span> tại
+                      Bảo hành chính hãng{" "}
+                      <span style={{ fontWeight: "bold" }}>12 tháng </span> tại
                       trung tâm bảo hành ủy quyền của hệ thống cửa hàng của
-                      ShopTech
+                      Clinic Online
                       <button className="info-product__policy-item-btn">
                         (Xem chi tiết)
                       </button>
@@ -456,11 +464,11 @@ const InfoProductClient = () => {
                   <div className="info-product__policy-item">
                     <i className="info-product__policy-item-icon fa fa-refresh"></i>
                     <p className="info-product__policy-item-content">
-                      <span style={{ fontWeight: 'bold' }}>1 ĐỔI 1 </span>trong
-                      vòng 30 ngày đầu sử dụng và{' '}
-                      <span style={{ fontWeight: 'bold' }}>
-                        HỎNG GÌ ĐỔI NẤY{' '}
-                      </span>{' '}
+                      <span style={{ fontWeight: "bold" }}>1 ĐỔI 1 </span>trong
+                      vòng 30 ngày đầu sử dụng và{" "}
+                      <span style={{ fontWeight: "bold" }}>
+                        HỎNG GÌ ĐỔI NẤY{" "}
+                      </span>{" "}
                       trong 90 ngày
                       <button className="info-product__policy-item-btn">
                         (Xem chi tiết)
@@ -470,10 +478,10 @@ const InfoProductClient = () => {
                   <div className="info-product__policy-item">
                     <i className="info-product__policy-item-icon fa fa-retweet"></i>
                     <p className="info-product__policy-item-content">
-                      Chính sách{' '}
-                      <span style={{ fontWeight: 'bold' }}>
-                        Trade-in lên đời{' '}
-                      </span>{' '}
+                      Chính sách{" "}
+                      <span style={{ fontWeight: "bold" }}>
+                        Trade-in lên đời{" "}
+                      </span>{" "}
                       luôn hỗ trợ cho mọi sản phẩm
                       <button className="info-product__policy-item-btn">
                         (Xem chi tiết)
@@ -489,17 +497,16 @@ const InfoProductClient = () => {
                 </label>
                 <div className="info-product__detail-price">
                   <label className="info-product__detail-current-price">
-                    {Number(product.price || 0).toLocaleString()} đ
+                    {Number(product.product_price || 0).toLocaleString()} đ
                   </label>
                   <label className="info-product__detail-old-price">
                     {(
-                      (Number(product.price || 0) * (100 + product.percent)) /
-                      100
-                    ).toLocaleString()}{' '}
+                      (Number(product.product_price || 0) *100) / product.product_percent
+                    ).toLocaleString()}{" "}
                     đ
                   </label>
                   <label className="info-product__detail-percent">
-                    -{product.percent || 0}%
+                    -{product.product_percent || 0}%
                   </label>
                 </div>
                 <label className="info-product__detail-installment">
@@ -507,54 +514,12 @@ const InfoProductClient = () => {
                   Trả góp 0%
                 </label>
                 <div className="info-product__detail-option">
-                  <label className="info-product__detail-label">
-                    Chọn phiên bản:
-                  </label>
-                  {loading ? (
-                    <p>Đang kết nối đến server ... </p>
-                  ) : (
-                    option.map((o, i) => (
-                      <div
-                        key={i}
-                        className="info-product__detail-option-item"
-                        onClick={() => {
-                          handleSelectOption(o.data, o.price);
-                        }}
-                      >
-                        <div className="info-product__detail-option-item-content">
-                          {o.data}
-                        </div>
-                        <div className="info-product__detail-option-item-price">
-                          {Number(o.price).toLocaleString()} đ
-                        </div>
-                      </div>
-                    ))
-                  )}
-                </div>
-                <div className="info-product__detail-option">
-                  <label className="info-product__detail-label">
-                    Chọn màu sắc:
-                  </label>
-                  {loading ? (
-                    <p>Đang kết nối đến server ... </p>
-                  ) : (
-                    color.map((c, i) => (
-                      <div
-                        key={i}
-                        className="info-product__detail-option-item"
-                        onClick={() => {
-                          handleSelectColor(c);
-                        }}
-                      >
-                        <div className="info-product__detail-option-item-content">
-                          {c}
-                        </div>
-                        <div className="info-product__detail-option-item-price">
-                          {Number(product.price).toLocaleString()} đ
-                        </div>
-                      </div>
-                    ))
-                  )}
+                  <p
+                    className="info-product__policy-item-content"
+                    style={{ marginRight: "10px" }}
+                  >
+                    {product.product_description}
+                  </p>
                 </div>
                 <div className="info-product__detail-promote">
                   <label className="info-product__detail-promote-label">
@@ -627,26 +592,29 @@ const InfoProductClient = () => {
                       key={index}
                       onClick={(e) => {
                         e.preventDefault();
-                        window.location.href = `/product/${product.enType}/${product.name}`;
+                        window.location.href = `/product/${product.product_type}/${product.product_name}`;
                       }}
                     >
                       <img
-                        src={product.imageLink}
+                        src={product.product_img}
                         className="product__sell-item-img"
                       ></img>
                       <label className="product__sell-item-label">
-                        {product.name}
+                        {product.product_name}
                       </label>
                       <label className="product__sell-item-price">
-                        {Number(product.price).toLocaleString()} ₫
+                        {Number(product.product_price).toLocaleString()} ₫
                       </label>
                       <span className="product__sell-item-percent">
-                        {(Number(product.price) * 1.065).toLocaleString()}đ
+                        {(
+                          Number(product.product_price) * 1.065
+                        ).toLocaleString()}
+                        đ
                       </span>
                       <label className="product__sell-item-sold">
                         Đánh giá:
                         <span className="product__sell-item-star">
-                          {handleFormatStarProduct(product.star)}
+                          {handleFormatStarProduct(product.product_star)}
                         </span>
                       </label>
                     </li>
@@ -661,14 +629,14 @@ const InfoProductClient = () => {
                   ĐÁNH GIÁ SẢN PHẨM
                 </label>
                 <p className="info-product__rating-star">
-                  {Number(product.star).toFixed(1)}/5
+                  {Number(product.product_star).toFixed(1)}/5
                 </p>
                 <p className="info-product__rating-star-icon">
-                  {handleFormatStarProduct(Number(product.star))}
+                  {handleFormatStarProduct(Number(product.product_star))}
                 </p>
-                <p className="info-product__rating-number">
+                {/* <p className="info-product__rating-number">
                   {product.voter} lượt đánh giá
-                </p>
+                </p> */}
               </div>
 
               <ul className="info-product__review-list">
@@ -680,24 +648,24 @@ const InfoProductClient = () => {
                         <div
                           className="info-product__review-item-avatar"
                           style={{
-                            backgroundImage: `url(${comment.ownerAvatar})`,
+                            backgroundImage: `url("https://i.pinimg.com/564x/8f/a2/78/8fa2789888f34e2b1013964df0c5738c.jpg")`,
                           }}
                         ></div>
                         <div className="info-product__review-item-fullname">
-                          {comment.ownerName}
+                          {comment.fullname}
                         </div>
                       </div>
-                      <p className="info-product__review-item-time">
+                      {/* <p className="info-product__review-item-time">
                         <i className="info-product__review-item-time-icon fa fa-clock"></i>
-                        {comment.time}
-                      </p>
+                        {comment.feedbackId}
+                      </p> */}
                     </div>
 
                     <div className="info-product__review-item-vote">
                       <label className="info-product__review-item-vote-title">
                         Đánh giá sản phẩm:
                         <span className="info-product__review-item-vote-start">
-                          {handleFormatStarProduct(comment.starVoted)}
+                          {handleFormatStarProduct(comment.rating)}
                         </span>
                       </label>
                     </div>
@@ -708,7 +676,7 @@ const InfoProductClient = () => {
                       </label>
                       <div className="info-product__review-item-feedback-box">
                         <p className="info-product__review-item-feedback-content">
-                          {comment.content}
+                          {comment.descrisption}
                         </p>
                       </div>
                     </div>
@@ -721,8 +689,9 @@ const InfoProductClient = () => {
       </div>
       <Footer />
       <p className="app-copyright">
-      ©️ Copyright belongs to Clinic Online - 2023 <br />
-      Address: 391 Nam Ky Khoi Nghia, Vo Thi Sau ward. District 3, Ho Chi Minh City.
+        ©️ Copyright belongs to Clinic Online - 2023 <br />
+        Address: 391 Nam Ky Khoi Nghia, Vo Thi Sau ward. District 3, Ho Chi Minh
+        City.
       </p>
     </>
   );

@@ -79,7 +79,7 @@ const RegisterClient = () => {
       );
 
       console.log('RESSS: ', res);
-      if (res && res.data.success) {
+      if (res && res.data&& res.status === 200) {
         if (res.data.message === 'This account has been registered by someone else!') {
           window.alert(res.data.message);
         } else {
