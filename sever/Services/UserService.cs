@@ -56,28 +56,28 @@ namespace PJ_SEM03.Services
                 {
                     var query = await _dbContext.Users.SingleOrDefaultAsync(x => x.Id == user.Id);
 
-                    if (query != null)
-                    {
-                        // Check if a new avatar file is provided
-                        if (user.AvatarFile != null && user.AvatarFile.Length > 0)
-                        {
-                            // Upload the avatar to Cloudinary
-                            var uploadParams = new ImageUploadParams
-                            {
-                                File = new FileDescription(user.AvatarFile.FileName, user.AvatarFile.OpenReadStream()),
-                                Transformation = new Transformation().Width(150).Height(150).Crop("fill"), // Adjust transformation parameters
-                            };
+                    //if (query != null)
+                    //{
+                    //    // Check if a new avatar file is provided
+                    //    if (user.AvatarFile != null && user.AvatarFile.Length > 0)
+                    //    {
+                    //        // Upload the avatar to Cloudinary
+                    //        var uploadParams = new ImageUploadParams
+                    //        {
+                    //            File = new FileDescription(user.AvatarFile.FileName, user.AvatarFile.OpenReadStream()),
+                    //            Transformation = new Transformation().Width(150).Height(150).Crop("fill"), // Adjust transformation parameters
+                    //        };
 
-                            var uploadResult = _cloudinary.Upload(uploadParams);
+                    //        var uploadResult = _cloudinary.Upload(uploadParams);
 
-                            if (uploadResult.Error != null)
-                            {
-                                return (false, $"Error uploading avatar: {uploadResult.Error.Message}");
-                            }
+                    //        if (uploadResult.Error != null)
+                    //        {
+                    //            return (false, $"Error uploading avatar: {uploadResult.Error.Message}");
+                    //        }
 
-                            // Update the user's avatar URL with the Cloudinary URL
-                            query.AvatarUrl = uploadResult.SecureUrl.AbsoluteUri;
-                        }
+                    //        // Update the user's avatar URL with the Cloudinary URL
+                    //        query.AvatarUrl = uploadResult.SecureUrl.AbsoluteUri;
+                    //    }
 
                         // Update other user information
                         query.UserName = user.Username;
@@ -91,7 +91,7 @@ namespace PJ_SEM03.Services
 
                         return (true, query);
                     }
-                }
+                
                 else
                 {
                     if (existingUserWithEmail != null)
