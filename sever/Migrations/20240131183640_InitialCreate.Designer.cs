@@ -12,8 +12,8 @@ using PJ_SEM03.Models;
 namespace PJ_SEM03.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240131164142_1")]
-    partial class _1
+    [Migration("20240131183640_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -413,7 +413,7 @@ namespace PJ_SEM03.Migrations
                             order_id = 1,
                             order_address = "HCM",
                             order_code = "ORD001",
-                            order_datetime = new DateTime(2024, 1, 31, 23, 41, 42, 58, DateTimeKind.Local).AddTicks(6893),
+                            order_datetime = new DateTime(2024, 2, 1, 1, 36, 39, 909, DateTimeKind.Local).AddTicks(7595),
                             order_phone = "123",
                             order_status = "Processing",
                             order_total = 100,
@@ -424,7 +424,7 @@ namespace PJ_SEM03.Migrations
                             order_id = 2,
                             order_address = "Ca Mau",
                             order_code = "ORD001",
-                            order_datetime = new DateTime(2024, 1, 31, 23, 41, 42, 58, DateTimeKind.Local).AddTicks(6921),
+                            order_datetime = new DateTime(2024, 2, 1, 1, 36, 39, 909, DateTimeKind.Local).AddTicks(7609),
                             order_phone = "124",
                             order_status = "Delivered",
                             order_total = 200,
@@ -687,14 +687,14 @@ namespace PJ_SEM03.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0e47eed7-342d-47e2-a10d-8f0c1d760b05",
+                            ConcurrencyStamp = "f388d2b5-9ea2-4f4c-ba7d-f47771358fd5",
                             Email = "admin@test.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEEBwrh3XoDfwraBOi3baw7PDIoqEDwqvPBxpOsw9nVF2IYsbGs2kNvlVuRaCfrmtOQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELbaMZtFvTa00KmlTAPXQ6ZyihKoI9nK/Cf+Vl7VtDpQ6OjObkogOjHcs9AuVre8Kg==",
                             PhoneNumberConfirmed = false,
                             Role = "Admin",
-                            SecurityStamp = "439403ae-1252-4cf7-82b3-b18865cf746b",
+                            SecurityStamp = "62fd5986-467a-4797-8121-86f70c26225b",
                             TwoFactorEnabled = false,
                             UserName = "admin",
                             user_address = "Ho Chi Minh",
@@ -704,14 +704,14 @@ namespace PJ_SEM03.Migrations
                         {
                             Id = "2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "01143c7d-afa9-4863-937b-d55cf818549f",
+                            ConcurrencyStamp = "91798d8a-fc43-4179-8cb9-277895bd6520",
                             Email = "phat@test.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEJF3adu30zLAgGQlryJPsik6duTovNmLKwENiqWdu0Ob/3fKLOZfnQIYukKDibPMHA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOATCcF1M5AVisfto0iYhNA+mcDvnUuoaV0lfPcgYzl3CFn2RrRAgi8gvz8gZTLnAA==",
                             PhoneNumberConfirmed = false,
                             Role = "Member",
-                            SecurityStamp = "a9d32e55-0031-4661-b2f8-f1e6045aa431",
+                            SecurityStamp = "9ad62055-f0a5-4c52-b071-0b2879a496d8",
                             TwoFactorEnabled = false,
                             UserName = "phat",
                             user_address = "Quan 2, HCM",
@@ -721,14 +721,14 @@ namespace PJ_SEM03.Migrations
                         {
                             Id = "3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e3a0cc27-b794-4877-bd33-ecd646f077e5",
+                            ConcurrencyStamp = "da0f9cea-df6d-4346-8f55-dce706a7e57d",
                             Email = "khai@test.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEAsGll1gNrrlaTS/Y2F+Tl5D1CphSIE6+gkCNh5+Uifqw1KCxffo/RVFz3m9jB031Q==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENcV0Z/2l5HjwekVBNbtxy4T7GFwCvjlDMzrhZ1bo7Bl8MJ6Fs5MOhjMmPecCyzBLA==",
                             PhoneNumberConfirmed = false,
                             Role = "Member",
-                            SecurityStamp = "8748d768-9123-4e1c-a55e-87536d54cf0f",
+                            SecurityStamp = "de5bee2a-f6de-4bfd-bcde-994123c52e27",
                             TwoFactorEnabled = false,
                             UserName = "khai",
                             user_address = "Tan Binh, HCM",
@@ -738,14 +738,14 @@ namespace PJ_SEM03.Migrations
                         {
                             Id = "4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "428c78e1-8a20-4846-b309-f1d6581dec0d",
+                            ConcurrencyStamp = "df890361-8878-44b8-8bd5-97bf26edacd8",
                             Email = "tram@test.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEMrnrz75f/SxrqDuWQoWSY2epE9TfVzWsFj2/Ic4kmsqfCIwXPMMPj9RNrXGCLXqGA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENnx4cC802XKVaCTi/xfvItdkp1FQPG887iYgEX6vagpW8kkxAKBgZ64GJo+mFArqw==",
                             PhoneNumberConfirmed = false,
                             Role = "Member",
-                            SecurityStamp = "1647e077-0e3c-49d4-aa4f-dd566f54fbe4",
+                            SecurityStamp = "1cded641-5216-45f6-b888-a1ad35a24b1b",
                             TwoFactorEnabled = false,
                             UserName = "tram",
                             user_address = "Thu Duc, HCM",

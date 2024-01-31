@@ -87,7 +87,7 @@ const CartConfirm = () => {
               <h1 className="cart__title">ORDER CONFIRMATION</h1>
 
               <ul className="cart-confirm__list-info">
-                {/* <li className="cart-confirm__item">
+                <li className="cart-confirm__item">
                   <label className="cart-confirm__label">
                   Code orders:
                     <span className="cart-confirm__label-span">
@@ -97,7 +97,7 @@ const CartConfirm = () => {
                   <p className="cart-confirm__data" style={{ color: 'red' }}>
                     {orderID}
                   </p>
-                </li> */}
+                </li>
                 <li className="cart-confirm__item">
                   <label className="cart-confirm__label">Orderer:</label>
                   <p className="cart-confirm__data" style={{ color: 'green' }}>

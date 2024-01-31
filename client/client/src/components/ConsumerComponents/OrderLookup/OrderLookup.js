@@ -48,7 +48,7 @@ const OrderLookup = () => {
       document.querySelector('.modal__cover').classList.remove('modal--active');
       console.log("resBTK:: ", res);
       setOrder(res.data);
-      setLists(res.data.lists);
+      setLists(res.data.orderDetails);
       document.querySelector('.order-lookup__box').style.display = 'none';
     } catch (error) {
       alert(error);

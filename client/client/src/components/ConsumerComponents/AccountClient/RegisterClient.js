@@ -76,6 +76,8 @@ const RegisterClient = () => {
           fullname:fullnameRegister,
         },
       );
+
+      console.log('RESSS: ', res);
       if (res && res.data.success) {
         if (res.data.message === 'Tài khoản này đã đăng ký bởi người khác!') {
           window.alert(res.data.message);
