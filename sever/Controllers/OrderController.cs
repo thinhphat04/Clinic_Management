@@ -37,7 +37,7 @@ namespace PJ_SEM03.Controllers
             try
             {
                 // Generate a random order code
-                order.GenerateOrderCode();
+                // order.GenerateOrderCode();
 
                 var newOrders = await _orderRepo.addOrder(order);
                 if (newOrders != null)

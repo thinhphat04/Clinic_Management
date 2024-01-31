@@ -18,14 +18,14 @@ namespace PJ_SEM03.Models
         public ICollection<OrderDetail>? OrderDetails { get; set; }
         public GiftCode? AppliedGiftCode { get; set; } // Trường mới để lưu trữ giftcode
 
-        public void GenerateOrderCode()
-        {
-            var length = 5;
-            var random = new Random();
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            order_code = new string(Enumerable.Repeat(chars, length)
-                .Select(s => s[random.Next(s.Length)]).ToArray());
-        }
+        // public void GenerateOrderCode()
+        // {
+        //     var length = 5;
+        //     var random = new Random();
+        //     const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        //     order_code = new string(Enumerable.Repeat(chars, length)
+        //         .Select(s => s[random.Next(s.Length)]).ToArray());
+        // }
         //
         // public void ApplyGiftCode(GiftCode giftCode)
         // {
