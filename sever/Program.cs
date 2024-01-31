@@ -69,6 +69,7 @@ builder.Services.AddScoped<ICartRepo, CartService>();
 builder.Services.AddScoped<IAccountRepo, AccountService>();
 builder.Services.AddScoped<IGiftcode, GiftcodeService>();
 builder.Services.AddScoped<ImageService>();
+builder.Services.AddScoped<IFeedbackRepo, FeedbackService>();
 
 // // Retrieve Cloudinary settings from appsettings.json
 

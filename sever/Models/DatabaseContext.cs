@@ -10,6 +10,7 @@ public class DatabaseContext : IdentityDbContext<User>
     {
     }
 
+    public DbSet<Feedback> Feedbacks { get; set; }
     public DbSet<Education> Education { get; set; } // Change DbSet name from Edu to Education
     public DbSet<Scientific> Scientific { get; set; }
     public DbSet<Medical> Medical { get; set; }
@@ -41,7 +42,7 @@ public class DatabaseContext : IdentityDbContext<User>
         
         modelBuilder.Entity<Scientific>()
             .ToTable("Scientifics");
-        
+
         // modelBuilder.Entity<OrderDetail>()
         //                      .HasOne(od => od.Order)
         //                      .WithMany(o => o.OrderDetails)
@@ -51,6 +52,16 @@ public class DatabaseContext : IdentityDbContext<User>
         //              .HasOne(od => od.Product)
         //              .WithMany(p => p.OrderDetails)
         //              .HasForeignKey(od => od.product_id);
+
+        modelBuilder.Entity<Feedback>(f =>
+        {
+            f.HasOne(f => f.user)
+             .WithMany(u => u.Feedbacks)
+             .HasForeignKey(f => f.user_id);
+            f.HasOne(f => f.product)
+                      .WithMany(p => p.Feedbacks)
+                      .HasForeignKey(f => f.product_id);
+        });
 
         //cart
         modelBuilder.Entity<Cart>(c =>
@@ -101,7 +112,35 @@ public class DatabaseContext : IdentityDbContext<User>
             });
         });
 
-  
+        modelBuilder.Entity<Feedback>().HasData(new Feedback[] {
+                 new Feedback
+                 {
+                     feedback_id = 1,
+                     
+                     user_id = "1",
+                     product_id =1,
+                     feedback_description = "Good Service",
+                     feedback_rating = 5,
+                 },
+                  new Feedback
+                 {
+                     
+                     user_id = "2",
+                     feedback_id = 2,
+                     product_id =3,
+                     feedback_description = "Great",
+                     feedback_rating = 5,
+                 },
+                  new Feedback
+                 {
+                     feedback_id = 3,
+                     user_id="3",
+                     product_id =5,
+                     feedback_description = "Good product!",
+                     feedback_rating = 5,
+                 },
+             });
+
 
         PasswordHasher<User> passwordHasher = new PasswordHasher<User>();
 
