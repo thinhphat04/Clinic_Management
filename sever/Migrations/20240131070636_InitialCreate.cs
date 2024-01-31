@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace PJ_SEM03.Migrations
 {
     /// <inheritdoc />
-    public partial class _1 : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -367,10 +367,10 @@ namespace PJ_SEM03.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Role", "SecurityStamp", "TwoFactorEnabled", "UserName", "user_address", "user_fullName" },
                 values: new object[,]
                 {
-                    { "1", 0, "e788b9d5-1726-485e-afa3-1f3c989e6a1b", "admin@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEFnPH/2vZcI0g7uUu4j2H9C5w20lye9jQuFZb8WfHxJeBCQu8nzmG13T4XVaeH2wCA==", null, false, "Admin", "80d774fc-ad9e-42ad-a04b-3ef88bc41f3c", false, "admin", null, "admin" },
-                    { "2", 0, "0614aca5-019b-4a5d-9f5f-a2506ce908a5", "phat@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEJ6UtxJVDvmm1A0Q6GF/nc/CwdNABoXeUcR5mNCbpLvJOH8cpMa2nPWg4/1QSQDuyQ==", null, false, "Member", "583cab72-ae09-4a63-9c0e-0c29ce367e56", false, "phat", null, "Ngo Thinh Phat" },
-                    { "3", 0, "4816155a-43af-4825-adad-e9e3f0c69989", "khai@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEP63bxVaT+fd7eRhCZ5f7DJxZhGgpqtlFXi58w6j1xWOev5tsHSDsqki5yIEq3roDA==", null, false, "Member", "716627bd-084b-40cc-a8ee-26f730a0e564", false, "khai", null, "Bui Tuan Khai" },
-                    { "4", 0, "131285de-50c9-4630-9ade-db3e1b2a16de", "tram@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEA23rJfZI4uomHfn3dknEbqhuLSMNO6yHWpifJ4RGNBMUW5/BODbOIpQkBEsx+/nAQ==", null, false, "Member", "94a7f271-4d87-473d-b497-52c67a1b16e7", false, "tram", null, "Tran Bao Huyen Tram" }
+                    { "1", 0, "7d4138a4-56db-4143-8043-abb8bab4ad2b", "admin@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEGUyh+kS/JZBP/c+kIzen1mlG8avp8ZN1n8e1bJtMXZPSooLNUwEWzwD0e5GWDf9kg==", null, false, "Admin", "da68d596-8e4a-4bb0-adda-41b07b31c573", false, "admin", null, "admin" },
+                    { "2", 0, "2817a960-5e93-4f02-944a-c34371dd5119", "phat@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEHi9DTQyFLcOE00fCMT0DM803JijvfiIcKpixfiHU1BDencQP4YC43pJ4gJY5dySUw==", null, false, "Member", "6990a499-603b-4228-b78f-d3049c809e59", false, "phat", null, "Ngo Thinh Phat" },
+                    { "3", 0, "53bafa21-790f-4ea1-be54-164f10eda10e", "khai@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEIntHu++iZH8r80tao9MucdtQswAWX1ri2PVe/dTzffE/vAqgO7mtoLMS1Etg7EW2A==", null, false, "Member", "87eacaa1-29cb-4899-8426-3c1a2a529977", false, "khai", null, "Bui Tuan Khai" },
+                    { "4", 0, "ab5b76fa-0772-495c-85de-14ba6500801e", "tram@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEL5bXUW5fLc1KM1FzlzJZt/KU91ioDfiaYoyMnzdA8zfz/VfArGGVRFEaPiM+InPFw==", null, false, "Member", "d6ef8960-4d71-4d2b-b3f0-be344b4bac59", false, "tram", null, "Tran Bao Huyen Tram" }
                 });
 
             migrationBuilder.InsertData(
@@ -421,8 +421,8 @@ namespace PJ_SEM03.Migrations
                 columns: new[] { "order_id", "AppliedGiftCodeId", "order_address", "order_code", "order_datetime", "order_phone", "order_status", "order_total", "user_id" },
                 values: new object[,]
                 {
-                    { 1, null, "HCM", "ORD001", new DateTime(2024, 1, 31, 0, 0, 0, 638, DateTimeKind.Local).AddTicks(5778), "123", "Processing", 100, "1" },
-                    { 2, null, "Ca Mau", "ORD001", new DateTime(2024, 1, 31, 0, 0, 0, 638, DateTimeKind.Local).AddTicks(5792), "124", "Delivered", 200, "2" }
+                    { 1, null, "HCM", "ORD001", new DateTime(2024, 1, 31, 14, 6, 36, 6, DateTimeKind.Local).AddTicks(3433), "123", "Processing", 100, "1" },
+                    { 2, null, "Ca Mau", "ORD001", new DateTime(2024, 1, 31, 14, 6, 36, 6, DateTimeKind.Local).AddTicks(3455), "124", "Delivered", 200, "2" }
                 });
 
             migrationBuilder.InsertData(
