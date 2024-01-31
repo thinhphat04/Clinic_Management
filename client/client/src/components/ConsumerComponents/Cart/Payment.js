@@ -158,7 +158,7 @@ const Payment = ({ socket }) => {
       const res = await axios.post(
         `https://localhost:7096/api/Order`,
         {
-           order_code:"",
+           order_code:window.localStorage.getItem('orderIDCache'),
            user_id: JSON.parse(window.localStorage.getItem('auth')).id,
            order_datetime: new Date().toISOString(),
            order_status: "Pending",
@@ -246,7 +246,7 @@ const Payment = ({ socket }) => {
 
  
 
-  // console.log("cartUserKHAI::: ", cartUserUpdate);
+  console.log("cartUserKHAI::: ", cartUserUpdate);
 
   return (
     <>
@@ -269,7 +269,7 @@ const Payment = ({ socket }) => {
               <h1 className="cart__title">THANH TOÁN ĐƠN HÀNG</h1>
 
               <ul className="cart-confirm__list-info">
-                {/* <li className="cart-confirm__item">
+                <li className="cart-confirm__item">
                   <label className="cart-confirm__label">
                     Mã đơn hàng của bạn:
                     <span className="cart-confirm__label-span">
@@ -279,7 +279,7 @@ const Payment = ({ socket }) => {
                   <p className="cart-confirm__data" style={{ color: 'green' }}>
                     {window.localStorage.getItem('orderIDCache')}
                   </p>
-                </li> */}
+                </li>
                 <li className="cart-confirm__item">
                   <label className="cart-confirm__label">
                     Tổng số tiền thanh toán:
