@@ -88,8 +88,9 @@ namespace PJ_SEM03.Services
             return await db.Orders
                 .Include(o => o.OrderDetails) // Include OrderDetails in the query
                 .ThenInclude(od => od.Product) // Include Product in the query
+                .Include(o => o.User) // Include User in the query
                 .FirstOrDefaultAsync(o => o.order_phone == phone && o.order_code == code);
-        } 
+        }
         
         
     public async Task<Order> OrderDetails(int orderId)
