@@ -34,30 +34,32 @@ const ContactPage = () => {
     ) {
       try {
         const res = await axios.post(
-          `${process.env.REACT_APP_API}/api/feedbacks/send`,
+          `https://localhost:7096/api/Contact`,
           {
-            name: name,
+            id: 0,
+            fullname: name,
             email: email,
             type: type,
             content: content,
           },
         );
-        if (res && res.data.success) {
-          emailjs
-            .sendForm(
-              'service_tz648gc',
-              'template_2tugvgr',
-              form.current,
-              'zD-R_dG5L23lbkbpU',
-            )
-            .then(
-              (result) => {
-                console.log(result.text);
-              },
-              (error) => {
-                console.log(error.text);
-              },
-            );
+        console.log("AAAAAAres:  ", res);
+        if (res && res.data&& res.status === 200) {
+          // emailjs
+          //   .sendForm(
+          //     'service_tz648gc',
+          //     'template_2tugvgr',
+          //     form.current,
+          //     'zD-R_dG5L23lbkbpU',
+          //   )
+          //   .then(
+          //     (result) => {
+          //       console.log(result.text);
+          //     },
+          //     (error) => {
+          //       console.log(error.text);
+          //     },
+          //   );
           showSuccessMessage();
           setTimeout(() => {
             handleLoadingPage(1);
@@ -156,25 +158,25 @@ const ContactPage = () => {
                 </option>
                 <option
                   className="contact__box-form-option"
-                  value="Vấn đề tài khoản"
+                  value="Account"
                 >
                   Account problem
                 </option>
                 <option
                   className="contact__box-form-option"
-                  value="Vấn đề khuyến mãi"
+                  value="Promotion"
                 >
                   Promotion problem
                 </option>
                 <option
                   className="contact__box-form-option"
-                  value="Cải thiện hệ thống"
+                  value="System"
                 >
                   System improvements
                 </option>
                 <option
                   className="contact__box-form-option"
-                  value="Vấn đề khác"
+                  value="Other"
                 >
                   Other problems
                 </option>

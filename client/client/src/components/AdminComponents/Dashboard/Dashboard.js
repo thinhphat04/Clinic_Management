@@ -41,15 +41,15 @@ const Dashboard = () => {
         .then((data) => {
           setCountUser(data.length);
         });
-      // fetch(`https://localhost:7096/api/promotes`)
-      //   .then((res) => res.json())
-      //   .then((data) => {
-      //     setCountPromotes(data.length);
-      //   });
+      fetch(`https://localhost:7096/api/GiftCode`)
+        .then((res) => res.json())
+        .then((data) => {
+          setCountPromotes(data.length);
+        });
       fetch(`https://localhost:7096/api/Order`)
         .then((res) => res.json())
         .then((data) => {
-          // processDataOrder(data);
+         processDataOrder(data);
         });
     };
     fetchAPIs();
@@ -85,29 +85,69 @@ const Dashboard = () => {
     });
   };
 
-  const processDataOrder = (data) => {
-    data.map((item) => {
-      item.time = item.time[5];
-    });
+  // const processDataOrder = (data) => {
+  //   data.map((item) => {
+  //     item.order_datetime = item.time[5];
+  //   });
+  //   console.log("dataaaKHAI:: ", data);
 
-    const groupedData = _.groupBy(data, 'time');
+  //   const groupedData = _.groupBy(data, 'time');
+
+  //   setChartDataOrder({
+  //     labels: Object.keys(groupedData).map(
+  //       (group) => (group = 'Tháng ' + group),
+  //     ),
+  //     datasets: [
+  //       {
+  //         label: 'Doanh thu sản phẩm',
+  //         data: Object.values(groupedData).map((group) => {
+  //           var total = 0;
+  //           group.map((item) => {
+  //             total += item.lists.reduce(
+  //               (sum, cur) => sum + Number(cur.price),
+  //               1,
+  //             );
+  //           });
+  //           return total;
+  //         }),
+  //         backgroundColor: [
+  //           'rgb(255, 99, 132)',
+  //           'rgb(255, 159, 64)',
+  //           'rgb(255, 205, 86)',
+  //           'rgb(75, 192, 192)',
+  //           'rgb(54, 162, 235)',
+  //         ],
+  //         borderWidth: 1,
+  //         display: true,
+  //         align: 'center',
+  //         font: {
+  //           size: '18px',
+  //         },
+  //       },
+  //     ],
+  //   });
+  // };
+
+
+
+  const processDataOrder = (data) => {
+    // Xử lý và nhóm dữ liệu theo tháng
+    const groupedData = data.reduce((acc, item) => {
+      const month = item.order_datetime.split('-')[1]; // Trích xuất tháng
+      if (!acc[month]) {
+        acc[month] = [];
+      }
+      acc[month].push(item);
+      return acc;
+    }, {});
+  
+    // Cập nhật chart data
     setChartDataOrder({
-      labels: Object.keys(groupedData).map(
-        (group) => (group = 'Tháng ' + group),
-      ),
+      labels: Object.keys(groupedData).map(month => `Tháng ${month}`),
       datasets: [
         {
           label: 'Doanh thu sản phẩm',
-          data: Object.values(groupedData).map((group) => {
-            var total = 0;
-            group.map((item) => {
-              total += item.lists.reduce(
-                (sum, cur) => sum + Number(cur.price),
-                1,
-              );
-            });
-            return total;
-          }),
+          data: Object.values(groupedData).map(group => group.reduce((sum, item) => sum + item.order_total, 0)),
           backgroundColor: [
             'rgb(255, 99, 132)',
             'rgb(255, 159, 64)',
@@ -125,6 +165,7 @@ const Dashboard = () => {
       ],
     });
   };
+  
 
   return (
     <div className="admin__container">

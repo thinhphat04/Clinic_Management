@@ -8,7 +8,7 @@ const FeedbackPage = () => {
 
   const fetchAPIs = () => {
     document.title = 'Clinic Online | Phản hồi khách hàng';
-    fetch('https://localhost:7096/api/feedbacks')
+    fetch('https://localhost:7096/api/Contact')
       .then((res) => res.json())
       .then((data) => {
         setFeedbacks(data);
@@ -22,7 +22,7 @@ const FeedbackPage = () => {
 
   const handleFillterByType = (type) => {
     var feedbackByType = [];
-    fetch('https://localhost:7096/api/feedbacks')
+    fetch('https://localhost:7096/api/Contact')
       .then((res) => res.json())
       .then((data) => {
         data.map((feedback) => {
@@ -43,6 +43,7 @@ const FeedbackPage = () => {
       };
     });
   };
+  console.log("feedbacksAAA: ", feedbacks);
 
   return (
     <React.Fragment>
@@ -84,7 +85,7 @@ const FeedbackPage = () => {
                 onClick={(e) => {
                   handleLoadingPage(1);
                   setTimeout(() => {
-                    handleFillterByType('Vấn đề tài khoản');
+                    handleFillterByType('Account');
                   }, 1000);
                 }}
               >
@@ -95,7 +96,7 @@ const FeedbackPage = () => {
                 onClick={(e) => {
                   handleLoadingPage(1);
                   setTimeout(() => {
-                    handleFillterByType('Vấn đề khuyến mãi');
+                    handleFillterByType('Promotion');
                   }, 1000);
                 }}
               >
@@ -106,7 +107,7 @@ const FeedbackPage = () => {
                 onClick={(e) => {
                   handleLoadingPage(1);
                   setTimeout(() => {
-                    handleFillterByType('Cải thiện hệ thống');
+                    handleFillterByType('System');
                   }, 1000);
                 }}
               >
@@ -117,7 +118,7 @@ const FeedbackPage = () => {
                 onClick={(e) => {
                   handleLoadingPage(1);
                   setTimeout(() => {
-                    handleFillterByType('Vấn đề khác');
+                    handleFillterByType('Other');
                   }, 1000);
                 }}
               >
@@ -154,7 +155,7 @@ const FeedbackPage = () => {
                         textAlign: 'left',
                       }}
                     >
-                      {feedback.name}
+                      {feedback.fullname}
                     </td>
                     <td>{feedback.email}</td>
                     <td style={{ fontWeight: 700, color: 'red' }}>
