@@ -67,7 +67,32 @@ namespace PJ_SEM03.Services
 
         public async Task<(bool Success, object Result)> RegisterUser(RegisterDto registerDto)
         {
-            var user = new User { UserName = registerDto.Username, Email = registerDto.Email, PhoneNumber = registerDto.phoneNumber, Role = "Member", user_address= registerDto.Address, user_fullName = registerDto.fullname };
+            // Check if a user with the same username already exists
+            var existingUserWithUsername = await _userManager.FindByNameAsync(registerDto.Username);
+            if (existingUserWithUsername != null)
+            {
+                var error = "Username is already taken.";
+                return (false, error);
+            }
+
+            // Check if a user with the same email already exists
+            var existingUserWithEmail = await _userManager.FindByEmailAsync(registerDto.Email);
+            if (existingUserWithEmail != null)
+            {
+                var error = "Email address is already registered.";
+                return (false, error);
+            }
+
+            var user = new User
+            {
+                UserName = registerDto.Username,
+                Email = registerDto.Email,
+                PhoneNumber = registerDto.phoneNumber,
+                Role = "Member",
+                user_address = registerDto.Address,
+                user_fullName = registerDto.fullname
+            };
+
             var result = await _userManager.CreateAsync(user, registerDto.Password);
 
             if (result.Succeeded)
@@ -91,6 +116,5 @@ namespace PJ_SEM03.Services
             }
         }
 
-       
     }
 }

@@ -28,7 +28,8 @@ const RegisterClient = () => {
 
         Validator.isRequired('#password'),
         Validator.isPassword('#password'),
-        Validator.isMinLength('#password', 7),
+        Validator.isMinLength('#password', 8),
+        Validator.isPassword('#password',  /(?=^.{6,10}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+}{&quot;:;'?/&gt;.&lt;,])(?!.*\s).*$/),
 
         Validator.isRequired('#password_confirmation'),
         Validator.isConfirmed('#password_confirmation', () => {
