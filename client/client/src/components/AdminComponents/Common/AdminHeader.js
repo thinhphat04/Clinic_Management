@@ -49,11 +49,11 @@ const AdminHeader = () => {
     <React.Fragment>
       <div className="admin__header">
         <div className="admin__header-title">
-          Trang quản trị hệ thống Clinic Online
+        Clinic Online system administration page
         </div>
         <div className="admin__header-admin">
           <div className="admin__header-info">
-            Xin chào,
+            Hello,
             <span className="admin__header-name">{admin.user_fullName}</span>
             --
           </div>
@@ -65,14 +65,14 @@ const AdminHeader = () => {
               className="admin__header-option-item"
               onClick={handleNevigateInfo}
             >
-              Thông tin cá nhân
+              Personal information
             </div>
             <div
               className="admin__header-option-item"
               onClick={LogOut}
               style={{ color: 'red', fontWeight: 600 }}
             >
-              Đăng xuất
+              Log out
             </div>
           </div>
         </div>

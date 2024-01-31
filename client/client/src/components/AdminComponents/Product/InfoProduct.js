@@ -296,13 +296,13 @@ const InfoProduct = () => {
               )
               .then((res) => {
                 if (res && res.data.success) {
-                  window.alert('Thành công!');
+                  window.alert('Success!');
                   handleLoadingPage(1);
                   window.setTimeout(() => {
                     window.location.reload();
                   }, 1000);
                 } else {
-                  alert('Cập nhật thông tin thất bại');
+                  alert('Update information failed');
                 }
               });
           })
@@ -326,7 +326,7 @@ const InfoProduct = () => {
                 window.location.reload();
               }, 1000);
             } else {
-              alert('Cập nhật thông tin thất bại');
+              alert('Update information failed');
             }
           });
       }
@@ -352,7 +352,7 @@ const InfoProduct = () => {
     const inputElements = document.querySelectorAll(
       '.info-admin-product__input',
     );
-    if (window.confirm('Bạn muốn cập nhật thông tin sản phẩm?') == true) {
+    if (window.confirm('You want to update product information?') == true) {
       try {
         const res = await axios.put(
           `${process.env.REACT_APP_API}/api/products/update=${id}`,
@@ -369,13 +369,13 @@ const InfoProduct = () => {
           },
         );
         if (res && res.data.success) {
-          window.alert('Thành công!');
+          window.alert('Success!');
           handleLoadingPage(1);
           window.setTimeout(() => {
             window.location.reload();
           }, 1000);
         } else {
-          alert('Cập nhật thông tin thất bại');
+          alert('Update information failed');
         }
       } catch (error) {
         alert(error);
@@ -388,7 +388,7 @@ const InfoProduct = () => {
     e.preventDefault();
     if (
       window.confirm(
-        'Bạn có chắc muốn xóa toàn bộ thông tin của sản phẩm này?',
+        'Are you sure you want to delete all information about this product??',
       ) == true
     ) {
       try {
@@ -396,13 +396,13 @@ const InfoProduct = () => {
           `${process.env.REACT_APP_API}/api/products/delete/${id}`,
         );
         if (res && res.data.success) {
-          window.alert('Xóa Thành công!');
+          window.alert('Delete Successfully!');
           handleLoadingPage(1);
           window.setTimeout(() => {
             window.location.href = '/admin/product';
           }, 1000);
         } else {
-          alert('Xóa thất bại');
+          alert('Delete failed');
         }
       } catch (error) {
         alert(error);
@@ -417,16 +417,16 @@ const InfoProduct = () => {
         <AdminHeader />
         <div className="admin__title">
           <label className="admin__tilte-label">
-            Chúc một ngày tốt lành, quản trị viên!
+          Have a nice day, admin!
           </label>
           <label className="admin__tilte-describe">
-            Trang quản lý khách hàng
+          Customer management page
           </label>
         </div>
 
         <div className="info-admin-product__group">
           <div className="info-admin-product__header">
-            CHỈNH SỬA THÔNG TIN SẢN PHẨM
+          EDIT PRODUCT INFORMATION
           </div>
 
           <div className="info-admin-product__body">
@@ -451,14 +451,14 @@ const InfoProduct = () => {
                     htmlFor="image-primary"
                     className="info-admin-product__image-btn"
                   >
-                    Chỉnh sửa
+                    Edit
                   </label>
                   <button
                     className="info-admin-product__image-btn"
                     style={{ backgroundColor: '#df8129', color: '#fff' }}
                     onClick={handleConfirmChangeImageLink}
                   >
-                    Xác nhận
+                    Confirm
                   </button>
                 </div>
               </div>
@@ -484,14 +484,14 @@ const InfoProduct = () => {
                       htmlFor="image-banner"
                       className="info-admin-product__image-btn"
                     >
-                      Chỉnh sửa
+                      Edit
                     </label>
                     <button
                       className="info-admin-product__image-btn"
                       style={{ backgroundColor: '#df8129', color: '#fff' }}
                       onClick={handleConfirmChangeImageBanner}
                     >
-                      Xác nhận
+                      Confirm
                     </button>
                   </div>
                 </div>
@@ -531,7 +531,7 @@ const InfoProduct = () => {
                   </div>
 
                   {loading ? (
-                    <p>Đang kết nối đến server...</p>
+                    <p>Connecting to the server...</p>
                   ) : (
                     product.imageList.map((item, index) => (
                       <div
@@ -556,7 +556,7 @@ const InfoProduct = () => {
                   }}
                   onClick={handleConfirmEditList}
                 >
-                  Xác nhận
+                  Confirm
                 </button>
               </div>
             </div>
@@ -564,7 +564,7 @@ const InfoProduct = () => {
             <div className="info-admin-product__col-2">
               <div className="info-admin-product__box-info">
                 <label className="info-admin-product__label">
-                  Tên sản phẩm
+                Product's name
                 </label>
                 <input
                   style={{ fontWeight: 'bold' }}
@@ -573,7 +573,7 @@ const InfoProduct = () => {
                 />
 
                 <label className="info-admin-product__label">
-                  Loại sản phẩm
+                Product type
                 </label>
                 <select
                   style={{ fontWeight: '500' }}

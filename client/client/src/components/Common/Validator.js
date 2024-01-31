@@ -68,7 +68,7 @@ Validator.isEmail = (selector) => {
     selector: selector,
     test: (value) => {
       var regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-      return regex.test(value) ? undefined : `Vui lòng nhập đúng địa chỉ email`;
+      return regex.test(value) ? undefined : `Please enter the correct email address`;
     },
   };
 };
@@ -80,7 +80,7 @@ Validator.isPassword = (selector) => {
     test: (value) => {
       // Regex này kiểm tra ít nhất một ký tự in hoa và một ký tự đặc biệt
       var regex = /^(?=.*[A-Z])(?=.*[!@#$&*]).*$/;
-      return regex.test(value) ? undefined : `Mật khẩu cần có ít nhất một ký tự in hoa và một ký tự đặc biệt`;
+      return regex.test(value) ? undefined : `Password must have at least one capital letter and one special character`;
     },
   };
 };
@@ -92,7 +92,7 @@ Validator.isMinLength = (selector, min) => {
     test: (value) => {
       return value.trim().length >= min
         ? undefined
-        : `Vui lòng tối thiểu ${min} ký tự trở lên`;
+        : `Minimum please ${min} characters or more`;
     },
   };
 };
@@ -104,7 +104,7 @@ Validator.isMaxLength = (selector, max) => {
     test: (value) => {
       return value.trim().length <= max
         ? undefined
-        : `Vui lòng nhập tối đa ${max} ký tự`;
+        : `Please enter max ${max} characters`;
     },
   };
 };
@@ -115,7 +115,7 @@ Validator.isConfirmed = (selector, getConfirmValue) => {
     test: (value) => {
       return value.trim() == getConfirmValue()
         ? undefined
-        : `Mật khẩu không đồng nhất`;
+        : `Passwords are inconsistent`;
     },
   };
 };

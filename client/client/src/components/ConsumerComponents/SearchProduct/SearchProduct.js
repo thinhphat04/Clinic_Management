@@ -75,7 +75,7 @@ const ResultSearch = () => {
                       Number(p.product_price) * 1.065
                     ).toLocaleString()}đ</span>
                     <label class='product__sell-item-sold'>
-                        Đánh giá: 
+                    Evaluate:
                         <span class='product__sell-item-star-icon'>${handleFormatStarProduct(
                           p.product_star,
                         )}</span>
@@ -129,7 +129,7 @@ const ResultSearch = () => {
                       Number(p.product_price) * 1.065
                     ).toLocaleString()}đ</span>
                     <label class='product__sell-item-sold'>
-                        Đánh giá: 
+                    Evaluate:
                         <span class='product__sell-item-star-icon'>${handleFormatStarProduct(
                           p.product_star,
                         )}</span>
@@ -197,18 +197,18 @@ const ResultSearch = () => {
           <div className="search-container">
             <div className="search-header">
               <label className="search-header__label">
-                Kết quả tìm kiếm cho từ khóa:
+              Search results for keywords:
                 <span className="search-header__label-key">"{keySearch}"</span> 
               </label>
               <p className="search-header__count">
-                Đã tìm thấy{' '}
+              Had found{' '}
                 <span
                   style={{ fontWeight: 'bold', fontStyle: 'normal' }}
                   className="search-header__count-number"
                 >
                   {countProducts || 0}
                 </span>{' '}
-                kết quả phù hợp
+                suitable results
               </p>
             </div>
 
@@ -274,7 +274,7 @@ const ResultSearch = () => {
               <div className="search-list--empty"></div>
             </ul>
             <button className="search-control__show-more">
-              Xem thêm sản phẩm
+            See more products
             </button>
           </div>
         </div>

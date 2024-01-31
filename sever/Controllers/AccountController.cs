@@ -1,5 +1,6 @@
 ﻿
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PJ_SEM03.DTO;
@@ -48,15 +49,22 @@ namespace PJ_SEM03.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
         {
-            var (success, result) = await repo.RegisterUser(registerDto);
+            try
+            {
+                var result = await repo.RegisterUser(registerDto);
 
-            if (success)
-            {
-                return Ok(new { Success = true, User = result, Message = "Registration successful" });
+                if (result.Success)
+                {
+                    return Ok(result.Result); // Successful registration
+                }
+                else
+                {
+                    return BadRequest(result.Result); // Registration failed with errors
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return BadRequest(new { Success = false, Errors = result });
+                return BadRequest(ex);
             }
         }
 

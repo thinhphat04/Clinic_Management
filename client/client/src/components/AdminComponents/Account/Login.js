@@ -21,8 +21,8 @@ const Login = () => {
 
   function showErrorToast() {
     Toast({
-      title: 'Đăng nhập thất bại',
-      message: 'Tên tài khoản hoặc mật khẩu không chính xác!',
+      title: 'Login failed',
+      message: 'Account name or password is incorrect!',
       type: 'error',
       duration: 3000,
     });
@@ -30,8 +30,8 @@ const Login = () => {
 
   function showLoginToast() {
     Toast({
-      title: 'Đăng nhập thành công',
-      message: 'Chào mừng bạn đến với trang quản trị viên',
+      title: 'Logged in successfully',
+      message: 'Welcome to the admin page',
       type: 'success',
       duration: 3000,
     });
@@ -56,7 +56,7 @@ const Login = () => {
           token: res.data.token,
         });
 
-         alert('Đăng nhập thành công');
+         alert('Logged in successfully');
         // showLoginToast();
         handleLoadingPage(1);
         window.setTimeout(() => {
@@ -112,7 +112,7 @@ const Login = () => {
             minLength={6}
             placeholder="Password ..."
           />
-          <button className="login__btn">ĐĂNG NHẬP</button>
+          <button className="login__btn">LOG IN</button>
         </form>
       </div>
       <p

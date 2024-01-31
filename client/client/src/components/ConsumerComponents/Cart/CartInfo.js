@@ -267,7 +267,7 @@ const CartInfo = () => {
                     id="note"
                     name="note"
                     type="text  "
-                    placeholder="Ghi chú (Tùy chọn)"
+                    placeholder="Ghi chú (Option)"
                     onChange={(e) => setNoteEdit(e.target.value)}
                     defaultValue={window.localStorage.getItem('noteCache')}
                     className="form-control cart-info__input"

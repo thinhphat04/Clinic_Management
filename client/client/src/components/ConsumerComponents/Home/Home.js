@@ -480,13 +480,13 @@ const Home = () => {
                       đ
                     </span>
                     <label className="product__sell-item-sold">
-                      Đánh giá:
+                    Evaluate:
                       <span className="product__sell-item-star-icon">
                         {handleFormatStarProduct(product.product_star)}
                       </span>
                     </label>
                     <div className="home__flash-sale-item-tag">
-                      Giảm {product.product_percent}%
+                    Reduce {product.product_percent}%
                     </div>
                   </li>
                  
@@ -510,17 +510,22 @@ const Home = () => {
               SCIENTIFIC
             </div>
             <div className="home__featured-brand-list">
-              <button className="home__product-brand-item">Apple</button>
-              <button className="home__product-brand-item">Samsung</button>
-              <button className="home__product-brand-item">Xiaomi</button>
-              <button className="home__product-brand-item">Oppo</button>
-              <button className="home__product-brand-item">Vivo</button>
-              <button className="home__product-brand-item">Huewei</button>
-              <button className="home__product-brand-item">Realme</button>
+              <button className="home__product-brand-item">
+                Pharmacist gives free consultation
+              </button>
+              <button className="home__product-brand-item">
+                Good cheap medicine
+              </button>
+              <button className="home__product-brand-item">
+                100% genuine medicine
+              </button>
+              <button className="home__product-brand-item">
+                Enough correct medicine
+              </button>
             </div>
             <ul className="home__featured-list">
               {loading ? (
-                <p>Đang kết nối đến server ... </p>
+                <p>Connecting to the server... </p>
               ) : (
                 products.map((product, index) => (
                   <li
@@ -553,13 +558,13 @@ const Home = () => {
                       đ
                     </span>
                     <label className="product__sell-item-sold">
-                      Đánh giá:
+                    Evaluate:
                       <span className="product__sell-item-star-icon">
                         {handleFormatStarProduct(product.product_star)}
                       </span>
                     </label>
                     <div className="home__flash-sale-item-tag">
-                      Giảm {product.product_percent}%
+                    Reduce {product.product_percent}%
                     </div>
                   </li>
                 ))
@@ -582,18 +587,21 @@ const Home = () => {
             </div>
             <div className="home__featured-brand-list">
               <button className="home__product-brand-item">
-                Apple Macbook
+                Pharmacist gives free consultation
               </button>
-              <button className="home__product-brand-item">ASUS</button>
-              <button className="home__product-brand-item">Lenovo</button>
-              <button className="home__product-brand-item">MSI</button>
-              <button className="home__product-brand-item">HP</button>
-              <button className="home__product-brand-item">DELL</button>
-              <button className="home__product-brand-item">Acer</button>
+              <button className="home__product-brand-item">
+                Good cheap medicine
+              </button>
+              <button className="home__product-brand-item">
+                100% genuine medicine
+              </button>
+              <button className="home__product-brand-item">
+                Enough correct medicine
+              </button>
             </div>
             <ul className="home__featured-list">
               {loading ? (
-                <p>Đang kết nối đến server ... </p>
+                <p>Connecting to the server... </p>
               ) : (
                 products.map((product, index) => (
                   <li
@@ -626,13 +634,13 @@ const Home = () => {
                       đ
                     </span>
                     <label className="product__sell-item-sold">
-                      Đánh giá:
+                    Evaluate:
                       <span className="product__sell-item-star-icon">
                         {handleFormatStarProduct(product.product_star)}
                       </span>
                     </label>
                     <div className="home__flash-sale-item-tag">
-                      Giảm {product.product_percent}%
+                    Reduce{product.product_percent}%
                     </div>
                   </li>
                 ))
@@ -654,16 +662,22 @@ const Home = () => {
               ALL PRODUCTS
             </div>
             <div className="home__featured-brand-list">
-              <button className="home__product-brand-item">Tai nghe</button>
-              <button className="home__product-brand-item">Cáp sạc</button>
-              <button className="home__product-brand-item">Sạc dự phòng</button>
-              <button className="home__product-brand-item">Ốp lưng</button>
-              <button className="home__product-brand-item">Chuột</button>
-              <button className="home__product-brand-item">Webcam</button>
+              <button className="home__product-brand-item">
+                Pharmacist gives free consultation
+              </button>
+              <button className="home__product-brand-item">
+                Good cheap medicine
+              </button>
+              <button className="home__product-brand-item">
+                100% genuine medicine
+              </button>
+              <button className="home__product-brand-item">
+                Enough correct medicine
+              </button>
             </div>
             <ul className="home__featured-list">
               {loading ? (
-                <p>Đang kết nối đến server ... </p>
+                <p>Connecting to the server... </p>
               ) : (
                 products.map((product, index) => (
                   <li
@@ -696,13 +710,13 @@ const Home = () => {
                       đ
                     </span>
                     <label className="product__sell-item-sold">
-                      Đánh giá:
+                    Evaluate:
                       <span className="product__sell-item-star-icon">
                         {handleFormatStarProduct(product.product_star)}
                       </span>
                     </label>
                     <div className="home__flash-sale-item-tag">
-                      Giảm {product.product_percent}%
+                    Reduce{product.product_percent}%
                     </div>
                   </li>
                 ))

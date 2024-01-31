@@ -258,10 +258,10 @@ const SmartPhone = () => {
                   <span className="product-client__item-star-icon">
                     {handleFormatStarProduct(product.product_star)}{' '}
                   </span>{' '}
-                  ({product.voter || 0} đánh giá)
+                  ({product.voter || 0} Evaluate)
                 </label>
                 <div className="product-client__item-tag">
-                  Giảm {product.product_percent}%
+                Reduce {product.product_percent}%
                 </div>
               </li>
             ))}

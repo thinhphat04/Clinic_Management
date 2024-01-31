@@ -58,10 +58,10 @@ const InfoCustomer = () => {
         <AdminHeader />
         <div className="admin__title">
           <label className="admin__tilte-label">
-            Chúc một ngày tốt lành, quản trị viên!
+          Have a nice day, admin!
           </label>
           <label className="admin__tilte-describe">
-            Trang quản lý khách hàng
+          Customer management page
           </label>
         </div>
 

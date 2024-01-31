@@ -25,7 +25,7 @@ const EditButtonProduct = ({ product }) => {
         <div className="modal">
           <div className="modal__body">
             <div className="modal__loading-spinner "></div>
-            <div>Đang tải dữ liệu ...</div>
+            <div>Loading ...</div>
           </div>
         </div>
       </div>

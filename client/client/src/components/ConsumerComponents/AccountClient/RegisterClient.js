@@ -28,7 +28,8 @@ const RegisterClient = () => {
 
         Validator.isRequired('#password'),
         Validator.isPassword('#password'),
-        Validator.isMinLength('#password', 7),
+        Validator.isMinLength('#password', 8),
+        Validator.isPassword('#password',  /(?=^.{6,10}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+}{&quot;:;'?/&gt;.&lt;,])(?!.*\s).*$/),
 
         Validator.isRequired('#password_confirmation'),
         Validator.isConfirmed('#password_confirmation', () => {
@@ -53,8 +54,8 @@ const RegisterClient = () => {
 
   const showSuccessToast = () => {
     Toast({
-      title: 'Đăng ký thành công',
-      message: 'Đang quay trở lại trang đăng nhập!',
+      title: 'Sign Up Success',
+      message: 'Returning to the login page!',
       type: 'success',
       duration: 3000,
     });
@@ -79,10 +80,10 @@ const RegisterClient = () => {
 
       console.log('RESSS: ', res);
       if (res && res.data.success) {
-        if (res.data.message === 'Tài khoản này đã đăng ký bởi người khác!') {
+        if (res.data.message === 'This account has been registered by someone else!') {
           window.alert(res.data.message);
         } else {
-          window.alert('Đăng ký thành công! Đang quay trở lại trang đăng nhập');
+          window.alert('Sign Up Success! Returning to the login page');
           //showSuccessToast();
           handleLoadingPage(1);
          
@@ -91,7 +92,7 @@ const RegisterClient = () => {
           }, 2000);
         }
       } else {
-        window.alert('Đã gặp lỗi khi đăng ký! Vui lòng thử lại');   
+        window.alert('An error occurred while registering! Please try again');   
       }
     } catch (error) {
       console.log(error);

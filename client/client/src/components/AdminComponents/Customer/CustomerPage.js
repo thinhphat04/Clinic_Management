@@ -35,19 +35,19 @@ const CustomerPage = () => {
         <AdminHeader />
         <div className="admin__title">
           <label className="admin__tilte-label">
-            Chúc một ngày tốt lành, quản trị viên!
+          Have a nice day, admin!
           </label>
           <label className="admin__tilte-describe">
-            Trang quản lý khách hàng
+          Customer management page
           </label>
         </div>
         <div className="customer__group">
           <div className="customer__header">
             <label className="customer__header-title">
-              Danh sách khách hàng
+            List of customers
             </label>
             <div className="customer__header-counting">
-              Số lượng khách hàng:
+            Customers number:
               <span className="customer__header-counting-number">
                 {countCustomer}
               </span>
@@ -59,12 +59,12 @@ const CustomerPage = () => {
               <thead>
                 <tr className="table__thead-primary">
                   <td>STT</td>
-                  <td>Tên tài khoản</td>
-                  <td>Họ và tên khách hàng</td>
+                  <td>Account name</td>
+                  <td>Customer's full name</td>
                   <td>Email</td>
                   <td>Phone number</td>
-                  <td>Địa chỉ</td>
-                  <td>Chỉnh sửa</td>
+                  <td>Address</td>
+                  <td>Edit</td>
                 </tr>
               </thead>
               <tbody className="table__tbody-primary">
