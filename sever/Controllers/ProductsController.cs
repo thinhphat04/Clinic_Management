@@ -15,12 +15,14 @@ namespace PJ_SEM03.Controllers
     public class ProductsController : ControllerBase
     {
         private readonly IProductRepo productRepo;
-        private readonly CloudinaryService _cloudinaryService;
+        // private readonly CloudinaryService _cloudinaryService;
+        //         private readonly IWebHostEnvironment HostEnvironment;
+
 
         public ProductsController(IProductRepo productRepo)
         {
             this.productRepo = productRepo;
-            this._cloudinaryService = _cloudinaryService;
+            // this._cloudinaryService = _cloudinaryService;
         }
 
         [HttpGet]
@@ -73,6 +75,8 @@ namespace PJ_SEM03.Controllers
         {
             return Ok(await productRepo.GetProductsByName(name));
         }
-
+        
+        
+        
     }
 }
