@@ -13,10 +13,12 @@ namespace PJ_SEM03.Services
     public class OrderService : IOrderRepo
     {
         private readonly DatabaseContext db;
+        private readonly IProductRepo productRepo;
 
-        public OrderService(DatabaseContext db)
+        public OrderService(DatabaseContext db, IProductRepo productRepo)
         {
             this.db = db;
+            this.productRepo = productRepo;
         }
 
         public async Task<Order> addOrder(Order order)
@@ -33,13 +35,18 @@ namespace PJ_SEM03.Services
                         details.product_id = cart.product_id;
                         details.product_quantity = cart.product_quantity;
                         order.OrderDetails.Add(details);
+
+                        // Decrease product quantity in stock
+                        await productRepo.DecreaseQuantity(cart.product_id, cart.product_quantity);
                     }
+
                     db.Orders.Add(order);
 
                     foreach (var cart in listCart)
                     {
                         db.Carts.Remove(cart);
                     }
+
                     await db.SaveChangesAsync();
                     transaction.Commit();
                     return order;
@@ -75,14 +82,14 @@ namespace PJ_SEM03.Services
         //     return order;
         // }
 
+
         public async Task<Order> GetOrderByPhoneAndCode(string phone, string code)
         {
             return await db.Orders
                 .Include(o => o.OrderDetails) // Include OrderDetails in the query
+                .ThenInclude(od => od.Product) // Include Product in the query
                 .FirstOrDefaultAsync(o => o.order_phone == phone && o.order_code == code);
-        }
-
-       
+        } 
         
         
     public async Task<Order> OrderDetails(int orderId)
@@ -101,33 +108,7 @@ namespace PJ_SEM03.Services
                 .ToListAsync();
         }
     
-    //mail service 
-        public void SendOrderConfirmationEmail(string toEmail, Order order)
-        {
-            var fromAddress = new MailAddress("your-email@example.com", "Your Name");
-            var toAddress = new MailAddress(toEmail);
-            const string fromPassword = "your-email-password";
-            string subject = "Order Confirmation";
-            string body = $"Thank you for your order. Your order id is {order.order_id} and total amount is {order.order_total}.";
-
-            var smtp = new SmtpClient
-            {
-                Host = "smtp.example.com",
-                Port = 587,
-                EnableSsl = true,
-                DeliveryMethod = SmtpDeliveryMethod.Network,
-                UseDefaultCredentials = false,
-                Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
-            };
-
-            using (var message = new MailMessage(fromAddress, toAddress)
-                   {
-                       Subject = subject,
-                       Body = body
-                   })
-            {
-                smtp.Send(message);
-            }
-        }
+   
+        
 }
 }

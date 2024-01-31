@@ -35,15 +35,16 @@ namespace PJ_SEM03.Services
             return await _dbContext.Products.Where(x => x.product_type == product_type).ToListAsync();
         }
         
-        public async Task<ActionResult<Product>> createProduct(Product product)
+        public async Task<ActionResult<Product>> createProduct(Product product, string imagePath)
         {
+            product.product_img = imagePath; // Set the image path
+
             _dbContext.Products.Add(product);
             await _dbContext.SaveChangesAsync();
 
             return product;
         }
-
-        public async Task<ActionResult<Product>> updateProduct(int id, Product product)
+        public async Task<ActionResult<Product>> updateProduct(int id, Product product, string imagePath)
         {
             var existingProduct = await _dbContext.Products.FindAsync(id);
             if (existingProduct == null)
@@ -54,7 +55,7 @@ namespace PJ_SEM03.Services
             existingProduct.product_name = product.product_name;
             existingProduct.product_description = product.product_description;
             existingProduct.product_type = product.product_type;
-            existingProduct.product_img = product.product_img;
+            existingProduct.product_img = imagePath;
             existingProduct.product_quantity = product.product_quantity;
             existingProduct.product_price = product.product_price;
     

@@ -13,6 +13,9 @@ namespace PJ_SEM03.Models
         public string order_status { get; set; }
         public string order_address { get; set; }
         public string order_phone { get; set; }
+        
+        public string order_note { get; set; } // new property
+
         public int order_total { get; set; }
         public User? User { get; set; }
         public ICollection<OrderDetail>? OrderDetails { get; set; }

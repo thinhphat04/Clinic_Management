@@ -20,7 +20,7 @@ public class DatabaseContext : IdentityDbContext<User>
     public DbSet<Contact> Contacts { get; set; }
     public DbSet<Cart> Carts { get; set; }
     public DbSet<GiftCode> GiftCodes { get; set; }
-    //public DbSet<User> Users { get; set; }
+    // public DbSet<User> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -93,8 +93,8 @@ public class DatabaseContext : IdentityDbContext<User>
             o.HasOne(o => o.User).WithMany(u => u.Orders).HasForeignKey(o => o.user_id);
             o.HasData(new Order[]
             {
-                new Order{order_id=1,order_code = "ORD001", user_id="1", order_address="HCM", order_phone="123", order_datetime=DateTime.Now, order_status="Processing", order_total=100},
-                new Order{order_id=2, order_code = "ORD001", user_id="2", order_address="Ca Mau", order_phone="124", order_datetime=DateTime.Now, order_status="Delivered", order_total=200}
+                new Order{order_id=1,order_code = "ORD001", user_id="1", order_address="HCM", order_phone="123", order_datetime=DateTime.Now, order_status="Processing", order_total=100, order_note = "Note 1"},
+                new Order{order_id=2, order_code = "ORD001", user_id="2", order_address="Ca Mau", order_phone="124", order_datetime=DateTime.Now, order_status="Delivered", order_total=200, order_note = "Note 2"}
             });
         });
         //orderdetail
@@ -254,40 +254,40 @@ public class DatabaseContext : IdentityDbContext<User>
         //    new IdentityRole { Name = "Admin", NormalizedName = "ADMIN" 
         //});
 
-        modelBuilder.Entity<Contact>().HasData(new Contact[] {
-                 new Contact
-                 {
-                     Id = 1,
-                    Fullname ="Bui Tuan Khai",
-                     Email = "khai@gmail.com",
-                     Type= "Account",
-                     Content = "So easy to register and login! Like it"
-                 },
-                  new Contact
-                 {
-                    Id = 2,
-                     Fullname ="Nguyen Thanh Trung",
-                     Email = "trung@gmail.com",
-                     Type= "Promotion",
-                     Content = "I love promotion of this month"
-                 },
-                  new Contact
-                 {
-                     Id = 3,
-                     Fullname ="Ngo Thinh Phat",
-                     Email = "phat@gmail.com",
-                     Type = "System",
-                     Content = "The system run smoothly"
-                 },
-                   new Contact
-                 {
-                      Id = 4,
-                     Fullname ="Tran Bao Huyen Tram",
-                     Email = "tram@gmail.com",
-                     Type = "Other",
-                     Content= "The staffs are so friendly"
-                 },
-             }); ;
+        // modelBuilder.Entity<Contact>().HasData(new Contact[] {
+        //          new Contact
+        //          {
+        //              Id = 1,
+        //             Fullname ="Bui Tuan Khai",
+        //              Email = "khai@gmail.com",
+        //              Type= "Account",
+        //              Content = "So easy to register and login! Like it"
+        //          },
+        //           new Contact
+        //          {
+        //             Id = 2,
+        //              Fullname ="Nguyen Thanh Trung",
+        //              Email = "trung@gmail.com",
+        //              Type= "Promotion",
+        //              Content = "I love promotion of this month"
+        //          },
+        //           new Contact
+        //          {
+        //              Id = 3,
+        //              Fullname ="Ngo Thinh Phat",
+        //              Email = "phat@gmail.com",
+        //              Type = "System",
+        //              Content = "The system run smoothly"
+        //          },
+        //            new Contact
+        //          {
+        //               Id = 4,
+        //              Fullname ="Tran Bao Huyen Tram",
+        //              Email = "tram@gmail.com",
+        //              Type = "Other",
+        //              Content= "The staffs are so friendly"
+        //          },
+        //      }); ;
 
         modelBuilder.Entity<GiftCode>().HasData(new GiftCode[]
         {
