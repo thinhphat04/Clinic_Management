@@ -85,14 +85,14 @@ const AccountClient = () => {
                   }
                   className="account__box-info-avatar"
                 ></img>
-                <label className="account__box-info-label">Xin chào</label>
+                <label className="account__box-info-label">HELLO</label>
                 <label className="account__box-info-fullname">
                   {user.fullname}
                 </label>
                 <div className="account__box-info-list">
                   <div className="account__box-info-item">
                     <label className="account__box-info-item-label">
-                      Đơn hàng đang giao
+                    Order is being delivered
                     </label>
                     <i className="account__box-info-item-icon fa fa-cart-arrow-down"></i>
                     <p className="account__box-info-item-data">
@@ -102,7 +102,7 @@ const AccountClient = () => {
 
                   <div className="account__box-info-item">
                     <label className="account__box-info-item-label">
-                      Đơn hàng đã hoàn thành
+                    Order has been completed
                     </label>
                     <i className="account__box-info-item-icon fa fa-list-alt"></i>
                     <p className="account__box-info-item-data">
@@ -112,7 +112,7 @@ const AccountClient = () => {
 
                   <div className="account__box-info-item">
                     <label className="account__box-info-item-label">
-                      Tổng giá trị mua hàng tại website
+                    Total purchase value on the website
                     </label>
                     <i className="account__box-info-item-icon fa fa-credit-card"></i>
                     <p
@@ -131,7 +131,7 @@ const AccountClient = () => {
                     1
                   </div>
                   <label className="account__box-option-item-title">
-                    Thông tin giỏ hàng
+                  Shopping cart information
                   </label>
                   <button
                     className="account__box-option-item-btn"
@@ -142,14 +142,14 @@ const AccountClient = () => {
                       }, 1000);
                     }}
                   >
-                    Xem chi tiết
+                   See details
                   </button>
                 </div>
 
                 <div className="account__box-option-item account__box-option-item--color-yellow">
                   <div className="account__box-option-item-img account__box-option-item-img--order"></div>
                   <label className="account__box-option-item-title">
-                    Đơn hàng của bạn
+                  Your order
                   </label>
                   <button
                     className="account__box-option-item-btn"
@@ -160,7 +160,7 @@ const AccountClient = () => {
                       }, 1000);
                     }}
                   >
-                    Xem chi tiết
+                    See details
                   </button>
                 </div>
 
@@ -169,7 +169,7 @@ const AccountClient = () => {
                     1
                   </div>
                   <label className="account__box-option-item-title">
-                    Lịch sử mua hàng
+                  Purchase history
                   </label>
                   <button
                     className="account__box-option-item-btn"
@@ -180,7 +180,7 @@ const AccountClient = () => {
                       }, 1000);
                     }}
                   >
-                    Xem chi tiết
+                    See details
                   </button>
                 </div>
               </div>

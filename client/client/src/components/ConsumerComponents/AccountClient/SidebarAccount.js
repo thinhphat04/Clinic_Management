@@ -49,7 +49,7 @@ const SidebarAccount = () => {
           }}
         >
           <i className="account__sidebar-item-icon fa fa-home"></i>
-          <label className="account__sidebar-label">Trang chủ</label>
+          <label className="account__sidebar-label">Home page</label>
         </li>
         <li
           className="account__sidebar-item"
@@ -61,7 +61,7 @@ const SidebarAccount = () => {
           }}
         >
           <i className="account__sidebar-item-icon fa fa-user"></i>
-          <label className="account__sidebar-label">Thông tin cá nhân</label>
+          <label className="account__sidebar-label">Personal information</label>
         </li>
         <li
           className="account__sidebar-item"
@@ -73,7 +73,7 @@ const SidebarAccount = () => {
           }}
         >
           <i className="account__sidebar-item-icon fa fa-shopping-cart"></i>
-          <label className="account__sidebar-label">Giỏ hàng</label>
+          <label className="account__sidebar-label">Cart</label>
         </li>
         <li
           className="account__sidebar-item"
@@ -85,7 +85,7 @@ const SidebarAccount = () => {
           }}
         >
           <i className="account__sidebar-item-icon fa fa-history"></i>
-          <label className="account__sidebar-label">Lịch sử mua hàng</label>
+          <label className="account__sidebar-label">Purchase history</label>
         </li>
         <li
           className="account__sidebar-item"
@@ -94,7 +94,7 @@ const SidebarAccount = () => {
           }}
         >
           <i className="account__sidebar-item-icon fa fa-sign-out"></i>
-          <label className="account__sidebar-label">Đăng xuất tài khoản</label>
+          <label className="account__sidebar-label">Sign out of your account</label>
         </li>
       </ul>
     </div>

@@ -143,10 +143,10 @@ const Dashboard = () => {
   
     // Cập nhật chart data
     setChartDataOrder({
-      labels: Object.keys(groupedData).map(month => `Tháng ${month}`),
+      labels: Object.keys(groupedData).map(month => `Month ${month}`),
       datasets: [
         {
-          label: 'Doanh thu sản phẩm',
+          label: 'Product revenue',
           data: Object.values(groupedData).map(group => group.reduce((sum, item) => sum + item.order_total, 0)),
           backgroundColor: [
             'rgb(255, 99, 132)',
@@ -175,9 +175,9 @@ const Dashboard = () => {
 
         <div className="admin__title">
           <label className="admin__tilte-label">
-            Chúc một ngày tốt lành, quản trị viên!
+          Have a nice day, admin!
           </label>
-          <label className="admin__tilte-describe">Trang thống kê</label>
+          <label className="admin__tilte-describe">Statistics page</label>
         </div>
 
         <div className="dash__counting">
@@ -186,7 +186,7 @@ const Dashboard = () => {
               <div className="dash__counting-number" style={{ color: 'red' }}>
                 {countUser}
               </div>
-              <div className="dash__counting-describe">Số lượng khách hàng</div>
+              <div className="dash__counting-describe">Customers number</div>
             </div>
             <i className="dash__counting-icon fa fa-users"></i>
           </div>
@@ -196,7 +196,7 @@ const Dashboard = () => {
               <div className="dash__counting-number" style={{ color: 'green' }}>
                 {countProduct}
               </div>
-              <div className="dash__counting-describe">Số lượng sản phẩm</div>
+              <div className="dash__counting-describe">The number of products</div>
             </div>
             <i className="dash__counting-icon fa fa-list"></i>
           </div>
@@ -206,7 +206,7 @@ const Dashboard = () => {
               <div className="dash__counting-number" style={{ color: 'blue' }}>
                 {countPromotes}
               </div>
-              <div className="dash__counting-describe">Số lượng khuyến mãi</div>
+              <div className="dash__counting-describe">Number of promotions</div>
             </div>
             <i className="dash__counting-icon fa fa-tag"></i>
           </div>
@@ -219,14 +219,14 @@ const Dashboard = () => {
               >
                 {countAdmin}
               </div>
-              <div className="dash__counting-describe">Quản trị viên</div>
+              <div className="dash__counting-describe">Administrators</div>
             </div>
             <i className="dash__counting-icon fa fa-user"></i>
           </div>
         </div>
 
         <div className="admin__group">
-          <label className="dash__group-title">Thống kê Clinic Online</label>
+          <label className="dash__group-title">Online Clinic Statistics</label>
           <div className="dash__chart-list">
             <div className="dash__chart-item dash__chart-item--pie">
               <PieChart chartData={chartDataProduct} />

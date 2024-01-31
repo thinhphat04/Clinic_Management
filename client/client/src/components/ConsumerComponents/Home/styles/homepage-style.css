@@ -505,7 +505,7 @@
   display: block;
   width: 100%;
   height: 100px;
-  background-image: url('../../../../assets/images/client/home-img/img-home-laptop.png');
+  background-image: url('../../../../assets/images/client/home-img/img-home-laptop.gif');
   margin: 30px 0 10px;
 }
 
@@ -513,7 +513,7 @@
   display: block;
   width: 100%;
   height: 100px;
-  background-image: url('../../../../assets/images/client/home-img/img-home-tablet.png');
+  background-image: url('../../../../assets/images/client/home-img/img-home-tablet.gif');
   margin: 30px 0 10px;
 }
 

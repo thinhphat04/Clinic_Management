@@ -24,7 +24,7 @@ const AddProduct = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    document.title = 'Clinic Online | Thêm sản phẩm';
+    document.title = 'Clinic Online | Add products';
   }, []);
 
   const handleAddOption = () => {
@@ -67,7 +67,7 @@ const AddProduct = () => {
 
     item.innerHTML = `
         <div class="add__option-item--confirm">
-            <label class="add__option-item-label">Tùy chọn:</label>
+            <label class="add__option-item-label">Option:</label>
             <p style="font-weight: 400; line-height: 2rem">${itemName}</p>
         </div>
         <div class="add__option-item--confirm">
@@ -104,13 +104,13 @@ const AddProduct = () => {
 
       console.log("resssProduct:: ", res);
       if (res && res.data !== null) {
-        alert('Thêm sản phẩm thành công');
+        alert('Added product successfully');
         handleLoadingPage(1);
         window.setTimeout(() => {
           navigate('/admin/product');
         }, 1000);
       } else {
-        window.alert('Đã gặp lỗi khi tạo! Vui lòng thử lại');    
+        window.alert('An error occurred while creating! Please try again');    
       }
     } catch (error) {
       console.log(error);
@@ -123,12 +123,12 @@ const AddProduct = () => {
     <div className="add-product__container">
       <div className="add__cover">
         <div className="add">
-          <div className="add__header">THÊM SẢN PHẨM MỚI</div>
+          <div className="add__header">ADD NEW PRODUCTS</div>
           <div className="add__body">
             <div className="add__col-right">
-              <label className="add__title">Thông tin sản phẩm</label>
+              <label className="add__title">Product information</label>
 
-              <label className="add__label">Tên sản phẩm</label>
+              <label className="add__label">Product's name</label>
               <input
                 className="add__input"
                 onChange={(e) => {
@@ -144,7 +144,7 @@ const AddProduct = () => {
                 }}
               />
 
-              <label className="add__label">Hình ảnh</label>
+              <label className="add__label">Image</label>
               <input
                 className="add__input"
                 onChange={(e) => {
@@ -152,7 +152,7 @@ const AddProduct = () => {
                 }}
               />
 
-              <label className="add__label">Loại sản phẩm</label>
+              <label className="add__label">Product type</label>
               <select
                 style={{ fontWeight: '500' }}
                 className="add__input"
@@ -172,7 +172,7 @@ const AddProduct = () => {
                 }}
                 value={product_type}
               >
-                <option value="">Chọn loại sản phẩm ...</option>
+                <option value="">Select product type...</option>
                 <option value="Education">Education</option>
                 <option value="Medical">Medical</option>
                 <option value="Scientific">Scientific</option>
@@ -206,7 +206,7 @@ const AddProduct = () => {
                 placeholder="(Mỗi màu sắc được ngăn cách bằng dấu phẩy). Vd: Đỏ, Vàng, ..."
               /> */}
 
-              <label className="add__label">Giá sản phẩm</label>
+              <label className="add__label">Product price</label>
               <input
                 type="number"
                 className="add__input"
@@ -259,7 +259,7 @@ const AddProduct = () => {
 
           <div className="add__footer">
             <button className="add__btn-confirm" onClick={handleAddProduct}>
-              Xác nhận
+            Confirm
               <i className="add__btn-icon fa fa-check"></i>
             </button>
 

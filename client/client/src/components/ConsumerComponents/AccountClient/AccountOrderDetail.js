@@ -14,7 +14,7 @@ const AccountOrderDetail = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    document.title = 'Clinic Online | Chi tiết đơn hàng';
+    document.title = 'Clinic Online | Order details';
     const fetchAPIs = () => {
       fetch('https://localhost:7096/api/orders/' + orderID)
         .then((res) => res.json())
@@ -30,7 +30,7 @@ const AccountOrderDetail = () => {
   }, []);
 
   useEffect(() => {
-    if (order.status === 'Giao hàng thành công') {
+    if (order.status === 'Successful delivery') {
       document.querySelector('.order-detail__btn').style.display = 'none';
     }
   }, [order.status]);
@@ -42,13 +42,13 @@ const AccountOrderDetail = () => {
         `${process.env.REACT_APP_API}/api/orders/update-status/${order._id}`,
       );
       if (res && res.data.success) {
-        alert('Xác nhận đã nhận hàng thành công!');
+        alert('Confirm successful receipt of goods!');
         handleLoadingPage(1);
         setTimeout(() => {
           window.location.reload();
         });
       } else {
-        alert('Cập nhật thông tin thất bại');
+        alert('Update information failed');
       }
     } catch (error) {
       alert(error);
@@ -71,7 +71,7 @@ const AccountOrderDetail = () => {
           className="order-detail__item-btn order-detail__item-btn--disabled"
           disabled
         >
-          Đã đánh giá{' '}
+          Have evaluated{' '}
         </button>
       );
     return (
@@ -79,16 +79,16 @@ const AccountOrderDetail = () => {
         className="order-detail__item-btn"
         onClick={(e) => {
           e.preventDefault();
-          if (order.status === 'Giao hàng thành công')
+          if (order.status === 'Successful delivery')
             navigate(`/account/history/${orderID}/${itemName}`);
           else {
             alert(
-              'Đơn hàng đang trong trạng thái giao hàng nên chưa thể đánh giá sản phẩm!',
+              'The order is in delivery status so the product cannot be evaluated yet!',
             );
           }
         }}
       >
-        Đánh giá
+        Evaluate
       </button>
     );
   };
@@ -109,15 +109,15 @@ const AccountOrderDetail = () => {
                     window.location.href = '/account/history';
                   }}
                 >
-                  <i className="cart__btn-cancel-icon fa fa-arrow-left"></i>Trở
-                  lại
+                  <i className="cart__btn-cancel-icon fa fa-arrow-left"></i>Return
+                   again
                 </button>
                 <label className="account__box-info-header">
-                  THÔNG TIN ĐƠN HÀNG
+                INFORMATION LINE
                 </label>
 
                 <label className="order-detail__title">
-                  Thông tin đơn hàng
+                Information line
                 </label>
                 <div className="order-detail">
                   <div className="order-detail__group">
@@ -131,13 +131,13 @@ const AccountOrderDetail = () => {
                   </div>
                   <div className="order-detail__group">
                     <label className="order-detail__label">
-                      Thời gian đặt hàng:
+                    Time Order:
                     </label>
                     <p className="order-detail__content">{order.time}</p>
                   </div>
                   <div className="order-detail__group">
                     <label className="order-detail__label">
-                      Trạng thái đơn hàng
+                    Order status
                     </label>
                     <p
                       style={{ color: 'purple', fontWeight: '600' }}
@@ -149,13 +149,13 @@ const AccountOrderDetail = () => {
                 </div>
 
                 <label className="order-detail__title">
-                  Thông tin giao nhận hàng
+                Delivery information
                 </label>
                 <div className="order-detail">
                   <div className="order-detail__group">
                     <label className="order-detail__label">
                       <i className="order-detail__label-icon fa fa-user"></i>
-                      Họ và tên người nhận:
+                      Recipient's full name:
                     </label>
                     <p className="order-detail__content">{order.fullname}</p>
                   </div>
@@ -176,7 +176,7 @@ const AccountOrderDetail = () => {
                   <div className="order-detail__group">
                     <label className="order-detail__label">
                       <i className="order-detail__label-icon fa fa-map"></i>
-                      Địa chỉ nhận hàng:
+                      Delivery address:
                     </label>
                     <p className="order-detail__content">
                       {order.address ||
@@ -186,7 +186,7 @@ const AccountOrderDetail = () => {
                 </div>
 
                 <label className="order-detail__title">
-                  Danh sách sản phẩm
+                List of products
                 </label>
                 <ul className="order-detail__list">
                   {loading ? (
@@ -223,7 +223,7 @@ const AccountOrderDetail = () => {
                   )}
                   <div className="order-detail__group">
                     <label className="order-detail__label">
-                      Tổng giá trị đơn hàng
+                    Total order value
                     </label>
                     <p
                       style={{ color: 'green', fontWeight: '600' }}
@@ -238,7 +238,7 @@ const AccountOrderDetail = () => {
                   className="order-detail__btn"
                   onClick={handleConfirmReceived}
                 >
-                  Đã nhận được hàng
+                  Goods received
                 </button>
               </div>
             </div>

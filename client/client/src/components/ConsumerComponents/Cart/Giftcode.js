@@ -11,7 +11,7 @@ const Giftcode = () => {
   const [percentReduce, setPercentReduce] = useState();
 
   useEffect(() => {
-    document.title = 'Clinic Online | Mã khuyến mãi';
+    document.title = 'Clinic Online | Promotional code';
     const fetchAPIs = () => {
       fetch(
         `https://localhost:7096/api/Cart/${
@@ -52,8 +52,8 @@ const Giftcode = () => {
 
   const showSuccessMessage = () => {
     Toast({
-      title: 'Áp dụng thành công',
-      message: 'Giá của các sản phẩm đã được cập nhật!',
+      title: 'Applied successfully',
+      message: 'The prices of the products have been updated!',
       type: 'success',
       duration: 5000,
     });
@@ -61,8 +61,8 @@ const Giftcode = () => {
 
   const showErrorMessage = () => {
     Toast({
-      title: 'Bạn chưa nhập mã khuyến mãi',
-      message: 'Vui lòng điền mã khuyến mãi mà bạn có!',
+      title: 'You have not entered a promotion code',
+      message: 'Please enter the promotional code you have!',
       type: 'error',
       duration: 5000,
     });
@@ -70,8 +70,8 @@ const Giftcode = () => {
 
   const showErrorGiftcodeIncorrect = () => {
     Toast({
-      title: 'Mã khuyến mãi không tồn tại hoặc không chính xác',
-      message: 'Vui lòng kiểm tra lại mã khuyến mãi mà bạn có!',
+      title: 'The promotional code does not exist or is incorrect',
+      message: 'Please check the promotional code you have!',
       type: 'error',
       duration: 5000,
     });
@@ -110,16 +110,16 @@ const Giftcode = () => {
       setTimeout(() => {
         main.style.animation = `fadeIn ease 1.5s`;
         main.innerHTML = `
-                    <label class="detail-price__header">Chi tiết đơn hàng</label>
+                    <label class="detail-price__header">Order details</label>
                     <li class='detail-price__item'>
-                        <label class="detail-price__item-label">Tổng giá trị giỏ hàng hiện tại: </label>
+                        <label class="detail-price__item-label">Current total cart value: </label>
                         <span class="detail-price__item-price">${Number(
                           countTotalPrice,
                         ).toLocaleString()} đ</span>
                     </li>
     
                     <li class='detail-price__item'>
-                        <label class="detail-price__item-label">Áp dụng mã giảm giá:</label>
+                        <label class="detail-price__item-label">Apply discount code:</label>
                         <span class="detail-price__item-price">-${percentReduce}% = -${(
                           (Number(countTotalPrice) * percentReduce) /
                           100
@@ -127,7 +127,7 @@ const Giftcode = () => {
                     </li>
     
                     <li class='detail-price__item detail-price__item-total'>
-                        <label class="detail-price__item-label">Thành tiền</label>
+                        <label class="detail-price__item-label">into money</label>
                         <span class="detail-price__item-price" style={{ color: 'red' }}>${(
                           (Number(countTotalPrice) * (100 - percentReduce)) /
                           100
@@ -174,16 +174,16 @@ const Giftcode = () => {
                   window.location.href = '/cart/info';
                 }}
               >
-                <i className="cart__btn-cancel-icon fa fa-arrow-left"></i>Trở
-                lại trang thông tin đơn hàng
+                <i className="cart__btn-cancel-icon fa fa-arrow-left"></i>Return
+                 return to the order information page
               </button>
-              <h1 className="cart__title">MÃ KHUYẾN MÃI CỦA BẠN</h1>
+              <h1 className="cart__title">YOUR PROMO CODE</h1>
             </div>
             <div className="form cart-info__form" id="form-info-cart">
               <div className="spacer"></div>
               <div className="cart-info__group">
                 <label className="cart-info__label">
-                  Nhập mã khuyến mãi của bạn vào đây (nếu có)
+                Enter your promotional code here (if applicable)
                 </label>
                 <div className="form-group">
                   <input
@@ -191,7 +191,7 @@ const Giftcode = () => {
                     id="giftcode"
                     name="giftcode"
                     type="text"
-                    placeholder="Mã khuyến mãi (tùy chọn)"
+                    placeholder="Promotional code (Option)"
                     onChange={(e) => setGiftcodeID(e.target.value)}
                     defaultValue={window.localStorage.getItem('giftcodeApply')}
                     className="form-control cart-info__input"
@@ -199,7 +199,7 @@ const Giftcode = () => {
                 </div>
               </div>
               <button className="giftcode__btn" onClick={handleCheckGiftcode}>
-                Xác nhận
+              Confirm
               </button>
               <ul className="detail-price__list"></ul>
             </div>
@@ -218,7 +218,7 @@ const Giftcode = () => {
           <li className="block-process__item block-process__item--active">
             <i className="block-process__item-icon fa fa-user block-process__item-icon--active"></i>
             <label className="block-process__item-label">
-              Thông tin đơn hàng
+            Information line
             </label>
           </li>
           <i className="block-process__item-arrow block-process__item-arrow--active">
@@ -227,7 +227,7 @@ const Giftcode = () => {
 
           <li className="block-process__item block-process__item--active">
             <i className="block-process__item-icon fa fa-tag block-process__item-icon--active"></i>
-            <label className="block-process__item-label ">Mã khuyến mãi</label>
+            <label className="block-process__item-label ">Promotional code</label>
           </li>
           <i className="block-process__item-arrow block-process__item-arrow--active">
             -
@@ -236,21 +236,21 @@ const Giftcode = () => {
           <li className="block-process__item">
             <i className="block-process__item-icon fa fa-check"></i>
             <label className="block-process__item-label">
-              Xác nhận đơn hàng
+            Order confirmation
             </label>
           </li>
           <i className="block-process__item-arrow">-</i>
 
           <li className="block-process__item">
             <i className="block-process__item-icon fa fa-credit-card"></i>
-            <label className="block-process__item-label">Thanh toán</label>
+            <label className="block-process__item-label">Pay</label>
           </li>
         </ul>
 
         <div className="cart__control-container">
           <div className="cart__control-total">
             <label className="cart__control-total-label">
-              Tổng tiền giỏ hàng:
+            Total cart amount:
             </label>
             <p className="cart__control-total-price">
               {Number(countTotalPrice).toLocaleString() || 0} đ
@@ -263,7 +263,7 @@ const Giftcode = () => {
                 handleNextStep();
               }}
             >
-              Bước tiếp theo
+              Next step
             </button>
             <button
               className="cart__control-btn cart__control-btn--more"
@@ -272,7 +272,7 @@ const Giftcode = () => {
                 window.location.href = '/cart/';
               }}
             >
-              Quay lại trang thông tin giỏ hàng
+              Return to the shopping cart information page
             </button>
           </div>
         </div>

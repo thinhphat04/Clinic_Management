@@ -24,8 +24,8 @@ const LoginClient = () => {
 
   const showErrorToast = () => {
     Toast({
-      title: 'Đăng nhập thất bại',
-      message: 'Tên tài khoản hoặc mật khẩu không chính xác!',
+      title: 'Login failed',
+      message: 'Account name or password is incorrect!',
       type: 'error',
       duration: 3000,
     });
@@ -33,8 +33,8 @@ const LoginClient = () => {
 
   const showSuccessToast = () => {
     Toast({
-      title: 'Đăng nhập thành công',
-      message: 'Chúc mừng bạn đã đăng nhập thành công!',
+      title: 'Logged in successfully',
+      message: 'Congratulations, you have successfully logged in!',
       type: 'success',
       duration: 3000,
     });
@@ -162,7 +162,7 @@ const LoginClient = () => {
 
                   <button className="login-client__direct-btn">
                     <img
-                      src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/588px-Google_%22G%22_Logo.svg.png"
+                      src="https://static.wixstatic.com/media/1d4581_ffeec63d86cc43d3b4bca95fa3ce5ec3~mv2.jpg/v1/fill/w_980,h_980,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/imgpsh_fullsize_anim.jpg"
                       alt=""
                       width="30"
                       className="login-client__direct-img"
