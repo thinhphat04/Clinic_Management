@@ -7,6 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using PJ_SEM03.Models;
 using PJ_SEM03.Repository;
 using PJ_SEM03.Services;
+using PJ_SEM03.Setting;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,6 +46,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
+//Mail
+builder.Services.Configure<MailSettings>(builder.Configuration.GetSection(nameof(MailSettings)));
+builder.Services.AddScoped<IMailRepo, MailService>();
+
+//Cors
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigin",

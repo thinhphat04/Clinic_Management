@@ -44,6 +44,8 @@ namespace PJ_SEM03.Controllers
                 return NotFound();
             }
         }
+
+
         [HttpGet("user/{user_id}", Name = "GetUserById")]
         public async Task<ActionResult<User>> getUserById(string user_id)
         {
