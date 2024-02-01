@@ -380,7 +380,7 @@ namespace PJ_SEM03.Migrations
                             order_id = 1,
                             order_address = "HCM",
                             order_code = "ORD001",
-                            order_datetime = new DateTime(2024, 2, 1, 15, 16, 35, 251, DateTimeKind.Local).AddTicks(168),
+                            order_datetime = new DateTime(2024, 2, 1, 22, 30, 3, 25, DateTimeKind.Local).AddTicks(7197),
                             order_note = "Note 1",
                             order_phone = "123",
                             order_status = "Processing",
@@ -392,7 +392,7 @@ namespace PJ_SEM03.Migrations
                             order_id = 2,
                             order_address = "Ca Mau",
                             order_code = "ORD001",
-                            order_datetime = new DateTime(2024, 2, 1, 15, 16, 35, 251, DateTimeKind.Local).AddTicks(182),
+                            order_datetime = new DateTime(2024, 2, 1, 22, 30, 3, 25, DateTimeKind.Local).AddTicks(7220),
                             order_note = "Note 2",
                             order_phone = "124",
                             order_status = "Delivered",
@@ -575,6 +575,9 @@ namespace PJ_SEM03.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<string>("AvatarUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -656,14 +659,15 @@ namespace PJ_SEM03.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1d650ea1-0986-4311-b4a4-68ef071c2cdf",
+                            AvatarUrl = "https://robohash.org/mail@ashallendesign.co.uk",
+                            ConcurrencyStamp = "4f0e4d4b-57ca-4e0d-8051-3fa6b26ed3c1",
                             Email = "admin@test.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAELcpzwLaP8b6VxaCzSc7t2sXIud7US9gL/jCC14+tMuHBLrZjqe+6FgHJP+WP2Kpog==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEP1mnnwnshRM3FHlc82RRm8/XOAVqYUSFst3whMqItC25Xl7YVAUXjgEo9MdwWEhow==",
                             PhoneNumberConfirmed = false,
                             Role = "Admin",
-                            SecurityStamp = "9aed6462-11d9-43b0-90df-040305798fb0",
+                            SecurityStamp = "572b3168-c856-4c37-a702-23a1141ec35f",
                             TwoFactorEnabled = false,
                             UserName = "admin",
                             user_address = "Ho Chi Minh",
@@ -673,14 +677,15 @@ namespace PJ_SEM03.Migrations
                         {
                             Id = "2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "329df527-49bb-4b01-916d-019f0ac165b3",
+                            AvatarUrl = "https://api.dicebear.com/7.x/adventurer-neutral/svg?seed=mail@ashallendesign.co.uk",
+                            ConcurrencyStamp = "a4c44ddd-bcc5-4d6f-988a-5acd3893fe46",
                             Email = "phat@test.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEIt6yf9BLV/PUdBRBDUi8SPmaDxbkT/P5r5i19/ohN0mQxs4GqjiE8/2p0vv5FmQ3Q==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEGNebQElMmvUVK3WvJEAWO8hp9ZhDqZ3k32XZdlKBWbStKuC9VelBAfnuYYQS1XUyA==",
                             PhoneNumberConfirmed = false,
                             Role = "Member",
-                            SecurityStamp = "5afbe052-2519-4c01-ac54-32b9bb9aa47b",
+                            SecurityStamp = "b91e8df3-ca20-49e4-bb4b-867644b80f2d",
                             TwoFactorEnabled = false,
                             UserName = "phat",
                             user_address = "Quan 2, HCM",
@@ -690,14 +695,15 @@ namespace PJ_SEM03.Migrations
                         {
                             Id = "3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8e17c881-70d7-45bd-9833-1f6a4f4c7696",
+                            AvatarUrl = "https://api.dicebear.com/7.x/adventurer-neutral/svg?seed=mail@ashallendesign.co.uk",
+                            ConcurrencyStamp = "0d050b53-4422-4ed5-b451-cb848d6ea969",
                             Email = "khai@test.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEHAQ4vrFvyp1tGa40+QaLtWBShf0Tou1RJA8ukgbScRITXAXiSLfMyRdZFwRs/amDg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELYuma++hXVRPOzgSPGRh+M5SVE0efXXFE7yZcLmndSMf4g0Lg/xWlcJfjibEq2D7Q==",
                             PhoneNumberConfirmed = false,
                             Role = "Member",
-                            SecurityStamp = "1cc7e962-e853-45a8-b871-0520e2cd6fab",
+                            SecurityStamp = "eca62191-2818-455e-8b95-f87633099519",
                             TwoFactorEnabled = false,
                             UserName = "khai",
                             user_address = "Tan Binh, HCM",
@@ -707,14 +713,15 @@ namespace PJ_SEM03.Migrations
                         {
                             Id = "4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9ed27815-4622-4189-ba76-b59370948f1b",
+                            AvatarUrl = "https://api.dicebear.com/7.x/adventurer-neutral/svg?seed=mail@ashallendesign.co.uk",
+                            ConcurrencyStamp = "2d74c05b-1f12-4396-a24a-4fc35767cc9e",
                             Email = "tram@test.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAELReD2hhin+fYzZkzNTBadvGfxgNrsMG5UKNyDxcQJTUdZg66iAJaXxWtl+szEa98g==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEFbratJB50gVXvepy09O6oNcJ6qHyS+8rMPd/muLp6BeQPOOq0G+WVxqHP33ZH+2gg==",
                             PhoneNumberConfirmed = false,
                             Role = "Member",
-                            SecurityStamp = "84eb2b1b-501d-4330-b7c4-f27350b1dff0",
+                            SecurityStamp = "d7229f81-ecb0-4eb6-afb5-3538a6deab21",
                             TwoFactorEnabled = false,
                             UserName = "tram",
                             user_address = "Thu Duc, HCM",

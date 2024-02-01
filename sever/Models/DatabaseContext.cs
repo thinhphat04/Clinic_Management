@@ -154,6 +154,7 @@ public class DatabaseContext : IdentityDbContext<User>
                 user_fullName = "admin",
                 user_address = "Ho Chi Minh",
                 Role = "Admin",
+                AvatarUrl="https://robohash.org/mail@ashallendesign.co.uk",
                 PasswordHash = passwordHasher.HashPassword(new User(), "Admin*123")
             },
 
@@ -164,6 +165,7 @@ public class DatabaseContext : IdentityDbContext<User>
                 Email = "phat@test.com",
                 user_fullName = "Ngo Thinh Phat",
                 Role = "Member",
+                AvatarUrl ="https://api.dicebear.com/7.x/adventurer-neutral/svg?seed=mail@ashallendesign.co.uk",
                 user_address = "Quan 2, HCM",
                 PasswordHash = passwordHasher.HashPassword(new User(), "Phat*123")
             },
@@ -175,6 +177,7 @@ public class DatabaseContext : IdentityDbContext<User>
                 Email = "khai@test.com",
                 user_fullName = "Bui Tuan Khai",
                 Role = "Member",
+                AvatarUrl ="https://api.dicebear.com/7.x/adventurer-neutral/svg?seed=mail@ashallendesign.co.uk",
                 user_address = "Tan Binh, HCM",
                 PasswordHash = passwordHasher.HashPassword(new User(), "Khai*123")
             },
@@ -186,6 +189,7 @@ public class DatabaseContext : IdentityDbContext<User>
                 Email = "tram@test.com",
                 user_fullName = "Tran Bao Huyen Tram",
                 Role = "Member",
+                AvatarUrl ="https://api.dicebear.com/7.x/adventurer-neutral/svg?seed=mail@ashallendesign.co.uk",
                 user_address = "Thu Duc, HCM",
                 PasswordHash = passwordHasher.HashPassword(new User(), "Tram*123")
             },

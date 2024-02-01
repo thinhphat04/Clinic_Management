@@ -8,7 +8,7 @@ public class User : IdentityUser
     public string user_fullName { get; set; }
     public string user_address { get; set; }
     public string Role { get; set; }
-    //public string? AvatarUrl { get; set; }
+    public string? AvatarUrl { get; set; }
 
     public ICollection<Order>? Orders { get; set; }
     public ICollection<Feedback>? Feedbacks { get; set; }
