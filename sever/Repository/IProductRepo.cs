@@ -1,5 +1,6 @@
 ﻿using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Mvc;
+using PJ_SEM03.DTO;
 using PJ_SEM03.Models;
 using PJ_SEM03.RequestHelpers;
 
@@ -7,7 +8,7 @@ namespace PJ_SEM03.Repository
 {
     public interface IProductRepo
     {
-       Task<ActionResult<Product>> createProduct(Product product);
+       Task<ActionResult<Product>> createProduct(productDTO product);
        // Task<Product> createProduct(Product product, IFormFile image);
        
        // Task<ActionResult<Product>> createProduct(Product product, IFormFile image);

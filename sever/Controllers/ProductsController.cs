@@ -3,6 +3,7 @@ using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PJ_SEM03.DTO;
 using PJ_SEM03.Models;
 using PJ_SEM03.Repository;
 using PJ_SEM03.RequestHelpers;
@@ -15,14 +16,14 @@ namespace PJ_SEM03.Controllers
     public class ProductsController : ControllerBase
     {
         private readonly IProductRepo productRepo;
-        // private readonly CloudinaryService _cloudinaryService;
+        private readonly CloudinaryService _cloudinaryService;
         //         private readonly IWebHostEnvironment HostEnvironment;
 
 
-        public ProductsController(IProductRepo productRepo)
+        public ProductsController(IProductRepo productRepo, CloudinaryService cloudinaryService)
         {
             this.productRepo = productRepo;
-            // this._cloudinaryService = _cloudinaryService;
+             this._cloudinaryService = cloudinaryService;
         }
 
         [HttpGet]
@@ -50,12 +51,20 @@ namespace PJ_SEM03.Controllers
                 return BadRequest(ex);
             }
         }
-        
-        
+
+
         [HttpPost]
-        public async Task<ActionResult<Product>> CreateProduct(Product product)
+        public async Task<ActionResult<Product>> CreateProduct([FromForm]productDTO product)
         {
-            return await productRepo.createProduct(product);
+            try
+            {
+                return Ok(await productRepo.createProduct(product));
+            }
+            catch (Exception  ex)
+            {
+                return BadRequest(ex);
+            }
+            
         }
 
         [HttpPut("{id}")]

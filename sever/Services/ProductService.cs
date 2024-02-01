@@ -7,18 +7,21 @@ using Microsoft.EntityFrameworkCore;
 using PJ_SEM03.Models;
 using PJ_SEM03.Repository;
 using PJ_SEM03.RequestHelpers;
+using PJ_SEM03.DTO;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace PJ_SEM03.Services
 {
     public class ProductService : IProductRepo
     {
         private readonly DatabaseContext _dbContext;
-        private readonly Cloudinary _cloudinary;
-       
+        private readonly CloudinaryService _cloudinaryService;
 
-        public ProductService(DatabaseContext dbContext )
+
+        public ProductService(DatabaseContext dbContext, CloudinaryService cloudinaryService)
         {
             _dbContext = dbContext;
+            _cloudinaryService = cloudinaryService;
         }
 
         public async Task<List<Product>> getAll()
@@ -36,11 +39,29 @@ namespace PJ_SEM03.Services
             return await _dbContext.Products.Where(x => x.product_type == product_type).ToListAsync();
         }
         
-        public async Task<ActionResult<Product>> createProduct(Product product)
+        public async Task<ActionResult<Product>> createProduct(productDTO product)
         {
-            _dbContext.Products.Add(product);
+            if (product.Image != null)
+            {
+                CloudinaryService cloud = new CloudinaryService();
+                string url = cloud.UploadImage(product.Image);
+                product.product_img = url;
+            }
+            var newProdut = new Product
+            {
+                product_description = product.product_description,
+                product_name = product.product_name,
+                product_type = product.product_type,
+                product_price = product.product_price,
+                product_star = product.product_star,
+                product_percent = product.product_percent,
+                product_quantity = product.product_quantity,
+                product_img = product.product_img,
+            };
+
+            _dbContext.Products.Add(newProdut);
             await _dbContext.SaveChangesAsync();
-            return product;
+            return newProdut;
         }
         public async Task<ActionResult<Product>> updateProduct(int id, Product product)
         {
