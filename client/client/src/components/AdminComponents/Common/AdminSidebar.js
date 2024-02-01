@@ -115,6 +115,19 @@ const AdminSidebar = () => {
         <div
           className="sidebar__component-item"
           onClick={() => {
+            handleNevigate(`/admin/order`);
+          }}
+        >
+          <i
+            className="sidebar__component-item-icon fa fa-table"
+            aria-hidden="true"
+          ></i>          
+          Order
+        </div>
+
+        <div
+          className="sidebar__component-item"
+          onClick={() => {
             handleNevigate(`/admin/promote`);
           }}
         >

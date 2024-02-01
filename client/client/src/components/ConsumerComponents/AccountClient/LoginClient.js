@@ -36,7 +36,7 @@ const LoginClient = () => {
       title: 'Logged in successfully',
       message: 'Congratulations, you have successfully logged in!',
       type: 'success',
-      duration: 3000,
+      duration: 1000,
     });
   };
 
@@ -62,9 +62,10 @@ const LoginClient = () => {
         // alert('Đăng nhập thành công');
         showSuccessToast();
         //handleLoadingPage(1);
-        window.setTimeout(() => {
+        window.setTimeout(() => {          
           navigate('/account');
-        }, 4000);
+          window.location.reload();
+        }, 2000);
       } else {
         showErrorToast();
       }

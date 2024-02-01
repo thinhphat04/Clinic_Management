@@ -23,7 +23,7 @@ const InfoAdmin = () => {
         });
     };
     fetchAPI();
-    handleLoadOptionSelected(5);
+    handleLoadOptionSelected(6);
   }, []);
 
   const changeImageAdmin = () => {
