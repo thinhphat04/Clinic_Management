@@ -8,6 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 using PJ_SEM03.Models;
 using PJ_SEM03.Repository;
 using PJ_SEM03.Services;
+using PJ_SEM03.Setting;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -57,10 +58,12 @@ builder.Services.AddCors(options =>
 });
 
 
-
+builder.Services.Configure<MailSettings>(builder.Configuration.GetSection(nameof(MailSettings)));
+builder.Services.AddScoped<IMailRepo, MailService>();
 builder.Services.AddControllers();
 //khai báo các service
 builder.Services.AddScoped<IUserRepo, UserService>();
+
 // builder.Services.AddScoped<IContactRepo, ContactService>();
 builder.Services.AddScoped<IProductRepo, ProductService>();
 builder.Services.AddScoped<IOrderRepo, OrderService>();

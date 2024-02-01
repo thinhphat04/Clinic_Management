@@ -6,12 +6,12 @@ namespace PJ_SEM03.DTO
 {
     public class RegisterDto { 
         [Required]
-        [UniqueUsername(ErrorMessage = "Username must be unique.")]
+        [UniqueUsername(ErrorMessage = "Username has been taken.")]
         public string Username { get; set; }
 
         [Required]
         [EmailAddress]
-        [UniqueEmail(ErrorMessage = "Email must be unique.")]
+        [UniqueEmail(ErrorMessage = "Email has been taken.")]
         public string Email { get; set; }
 
         [Required]
@@ -22,6 +22,7 @@ namespace PJ_SEM03.DTO
         public string confirmPassword { get; set; }
 
         [RegularExpression(@"^\d{10}$", ErrorMessage = "Phone number must be a 10-digit number.")]
+        [Required]
         public string phoneNumber { get; set; }
         [Required]
         public string fullname { get; set; }
