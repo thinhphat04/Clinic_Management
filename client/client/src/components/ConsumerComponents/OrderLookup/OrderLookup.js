@@ -98,13 +98,13 @@ const OrderLookup = () => {
               <div className="cart__container">
                 <div className="cart__header">
                   <h1 className="cart__title" style={{ padding: '30px 0' }}>
-                    THÔNG TIN ĐƠN HÀNG
+                  INFORMATION LINE
                   </h1>
 
                   <ul className="cart-confirm__list-info">
                     <li className="cart-confirm__item">
                       <label className="cart-confirm__label">
-                        Mã đơn hàng của bạn:
+                      Your order code:
                       </label>
                       <p
                         className="cart-confirm__data"
@@ -115,7 +115,7 @@ const OrderLookup = () => {
                     </li>
                     <li className="cart-confirm__item">
                       <label className="cart-confirm__label">
-                        Người đặt hàng:
+                      Orderer:
                       </label>
                       <p
                         className="cart-confirm__data"
@@ -146,7 +146,7 @@ const OrderLookup = () => {
                     </li>
                     <li className="cart-confirm__item">
                       <label className="cart-confirm__label">
-                        Hình thức nhận hàng:
+                      Delivery method:
                       </label>
                       <p
                         className="cart-confirm__data"
@@ -157,7 +157,7 @@ const OrderLookup = () => {
                     </li>
                     <li className="cart-confirm__item">
                       <label className="cart-confirm__label">
-                        Địa chỉ nhận hàng:
+                      Delivery address:
                       </label>
                       <p
                         className="cart-confirm__data"
@@ -167,7 +167,7 @@ const OrderLookup = () => {
                       </p>
                     </li>
                     <li className="cart-confirm__item">
-                      <label className="cart-confirm__label">Ghi chú:</label>
+                      <label className="cart-confirm__label">Note:</label>
                       <p
                         className="cart-confirm__data"
                         style={{
@@ -181,7 +181,7 @@ const OrderLookup = () => {
                     </li>
                     <li className="cart-confirm__item">
                       <label className="cart-confirm__label">
-                        Trạng thái đơn hàng:
+                      Order status:
                       </label>
                       <p
                         className="cart-confirm__data"
@@ -194,7 +194,7 @@ const OrderLookup = () => {
 
                   <ul className="cart-confirm__list">
                     <label className="detail-price__header">
-                      Chi tiết sản phẩm
+                    Product details
                     </label>
                     {lists &&
                       lists.map((item, i) => (
@@ -225,11 +225,11 @@ const OrderLookup = () => {
 
                   <ul className="cart-confirm__list">
                     <label className="detail-price__header">
-                      Chi tiết đơn hàng
+                    Order details
                     </label>
                     <li className="detail-price__item">
                       <label className="detail-price__item-label">
-                        Tổng giá trị đơn hàng:{' '}
+                      Total order value:{' '}
                       </label>
                       <span className="detail-price__item-price">
                         {Number(totalPriceOld).toLocaleString()} đ
@@ -240,7 +240,7 @@ const OrderLookup = () => {
                       lists.map((item, i) => (
                         <li className="detail-price__item" key="${i}">
                           <label className="detail-price__item-label">
-                            Khuyến mãi giảm cho sản phẩm #{i + 1}:{' '}
+                          Discount promotions for products #{i + 1}:{' '}
                           </label>
                           <span className="detail-price__item-price">
                             - {Number(item.percent)}% ={' '}
@@ -254,7 +254,7 @@ const OrderLookup = () => {
 
                     <li className="detail-price__item">
                       <label className="detail-price__item-label">
-                        Áp dụng mã giảm giá:
+                      Apply discount code:
                       </label>
                       <span className="detail-price__item-price">
                         - {Number(order.giftcodeApply)}% ={' '}
@@ -268,13 +268,13 @@ const OrderLookup = () => {
 
                     <li className="detail-price__item">
                       <label className="detail-price__item-label">
-                        Phí vận chuyển:
+                      Transport fee:
                       </label>
                       <span className="detail-price__item-price">29,000 đ</span>
                     </li>
                     <li className="detail-price__item">
                       <label className="detail-price__item-label">
-                        Giảm giá phí vận chuyển:
+                      Shipping fee discount:
                       </label>
                       <span className="detail-price__item-price">
                         - 100% = - 29,000 đ
@@ -283,7 +283,7 @@ const OrderLookup = () => {
 
                     <li className="detail-price__item detail-price__item-total">
                       <label className="detail-price__item-label">
-                        Thành tiền
+                      into money
                       </label>
                       <span className="detail-price__item-price">
                         {Number(

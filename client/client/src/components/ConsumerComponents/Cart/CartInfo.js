@@ -16,7 +16,7 @@ const CartInfo = () => {
   const [countTotalPrice, setCountTotalPrice] = useState();
 
   useEffect(() => {
-    document.title = 'Clinic Online | Thông tin đặt hàng';
+    document.title = 'Clinic Online | Order information';
     const fetchAPIs = () => {
       fetch(
         `https://localhost:7096/api/Cart/${
@@ -77,7 +77,7 @@ const CartInfo = () => {
         'cart-info__input-radio-describe--disabled',
       );
       listRadio[3].disabled = true;
-      setMethodReceive('Nhận tại cửa hàng');
+      setMethodReceive('Pick up in store');
     }
   };
 
@@ -94,7 +94,7 @@ const CartInfo = () => {
         'cart-info__input-radio-describe--disabled',
       );
       listRadio[3].disabled = false;
-      setMethodReceive('Nhận hàng tại nhà');
+      setMethodReceive('Receive goods at home');
     }
   };
 
@@ -130,7 +130,7 @@ const CartInfo = () => {
         window.location.href = '/cart/info/giftcode';
       }, 1000);
     } else {
-      alert('Vui lòng điền đầy đủ thông tin');
+      alert('Please complete all information');
     }
   };
 
@@ -164,7 +164,7 @@ const CartInfo = () => {
                     id="fullname"
                     name="fullname"
                     type="text"
-                    placeholder="Họ và tên của bạn ... (Không được bỏ trống)"
+                    placeholder="Your full name... (Cannot be left blank)"
                     onChange={(e) => setFullNameEdit(e.target.value)}
                     defaultValue={window.localStorage.getItem('fullnameCache')}
                     className="form-control cart-info__input"
@@ -175,7 +175,7 @@ const CartInfo = () => {
                     id="email"
                     name="email"
                     type="text"
-                    placeholder="Email ... (Không được bỏ trống)"
+                    placeholder="Email ... (Not be empty)"
                     onChange={(e) => setEmailEdit(e.target.value)}
                     defaultValue={window.localStorage.getItem('emailCache')}
                     className="form-control cart-info__input"
@@ -186,7 +186,7 @@ const CartInfo = () => {
                     id="phone"
                     name="phone"
                     type="number"
-                    placeholder="Nhập số điện thoại (Không được để trống)"
+                    placeholder="Enter phone number (Cannot be left blank)"
                     onChange={(e) => setPhoneEdit(e.target.value)}
                     defaultValue={window.localStorage.getItem('phoneCache')}
                     className="form-control cart-info__input"
@@ -240,7 +240,7 @@ const CartInfo = () => {
                     id="address"
                     name="address"
                     type="text"
-                    placeholder="Nhập địa chỉ nhận hàng (Bắt buộc)"
+                    placeholder="Enter delivery address (Required)"
                     onChange={(e) => setAddressEdit(e.target.value)}
                     defaultValue={window.localStorage.getItem('addressCache')}
                     className="form-control cart-info__input cart-info__input--disabled"
@@ -267,7 +267,7 @@ const CartInfo = () => {
                     id="note"
                     name="note"
                     type="text  "
-                    placeholder="Ghi chú (Option)"
+                    placeholder="Notes (Option)"
                     onChange={(e) => setNoteEdit(e.target.value)}
                     defaultValue={window.localStorage.getItem('noteCache')}
                     className="form-control cart-info__input"

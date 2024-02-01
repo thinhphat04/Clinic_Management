@@ -256,7 +256,7 @@ const Cart = () => {
                       }}
                     >
                       <i className="cart__item-remove-icon fa fa-trash"></i>
-                      Xóa
+                      Delete
                     </button>
                   </li>
                 ))

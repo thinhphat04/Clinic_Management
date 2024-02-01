@@ -13,7 +13,7 @@ const Payment = ({ socket }) => {
   const [timeOrder, setTimeOrder] = useState('');
 
   useEffect(() => {
-    document.title = 'Clinic Online | Thanh toán đơn hàng';
+    document.title = 'Clinic Online | PAYMENT ORDERS';
     const fetchAPIs = () => {
       fetch(
         `https://localhost:7096/api/Cart/${
@@ -37,18 +37,18 @@ const Payment = ({ socket }) => {
 
   const showSuccessMessage = () => {
     Toast({
-      title: 'ĐẶT HÀNG THÀNH CÔNG',
+      title: 'ORDER SUCCESS',
       message:
-        'Đơn hàng của bạn đã được xác nhận, vui lòng kiểm tra đơn hàng trong tài khoản của bạn nhé!',
+        'Your order has been confirmed, please check your order in your account!',
       type: 'success',
       duration: 3000,
     });
   };
   const showErrorMessage = () => {
     Toast({
-      title: 'ĐẶT HÀNG THẤT BẠI',
+      title: 'ORDER FAILED',
       message:
-        'Đơn hàng của bạn đã được xác nhận, Vui lòng tạo đơn hàng khác nhé!',
+        'Your order has been confirmed. Please create another order!',
       type: 'error',
       duration: 5000,
     });
@@ -118,10 +118,10 @@ const Payment = ({ socket }) => {
                     <div class="background"></div>
                     <div class="checkmark draw"></div>
                 </div>
-                <label class='payment-done__label'>Thanh toán đơn hàng thành công</label>
-                <p class='payment-done__describe'>Vui lòng đợi từ một chút để hệ thống xác nhận đơn hàng của bạn</p>
-                <p class='payment-done__thanks'>Cám ơn bạn đã mua hàng và sử dụng dịch vụ của Clinic Online</p>
-                <p class="payment-done__redirect"> Tự động chuyển hướng tới trang chủ sau <span class='payment-done__redirect-second'>${countSeconds} giây</span> ... </p>
+                <label class='payment-done__label'>Order payment successful</label>
+                <p class='payment-done__describe'>Please wait a moment for the system to confirm your order</p>
+                <p class='payment-done__thanks'>Thank you for purchasing and using Clinic Online's services</p>
+                <p class="payment-done__redirect"> Automatically redirect to the following homepage <span class='payment-done__redirect-second'>${countSeconds} giây</span> ... </p>
             </div>
         `;
     document.querySelector('.cart__control-container').style.display = 'none';
@@ -267,14 +267,14 @@ const Payment = ({ socket }) => {
                 <i className="cart__btn-cancel-icon fa fa-arrow-left"></i>Trở
                 lại trang trước
               </button>
-              <h1 className="cart__title">THANH TOÁN ĐƠN HÀNG</h1>
+              <h1 className="cart__title">PAYMENT ORDERS</h1>
 
               <ul className="cart-confirm__list-info">
                 <li className="cart-confirm__item">
                   <label className="cart-confirm__label">
-                    Mã đơn hàng của bạn:
+                  Your order code:
                     <span className="cart-confirm__label-span">
-                      (Hãy lưu lại mã đơn hàng nhé)
+                    (Please save your order code)
                     </span>
                   </label>
                   <p className="cart-confirm__data" style={{ color: 'green' }}>
@@ -283,7 +283,7 @@ const Payment = ({ socket }) => {
                 </li>
                 <li className="cart-confirm__item">
                   <label className="cart-confirm__label">
-                    Tổng số tiền thanh toán:
+                  Total payment amount:
                   </label>
                   <p className="cart-confirm__data" style={{ color: 'red' }}>
                     {Number(
@@ -296,7 +296,7 @@ const Payment = ({ socket }) => {
 
               <ul className="cart-confirm__list">
                 <label className="detail-price__header">
-                  Hình thức thanh toán
+                Payments
                 </label>
                 <ul className="payment__list">
                   <li
@@ -304,7 +304,7 @@ const Payment = ({ socket }) => {
                     onClick={handleSelectMethod}
                   >
                     <label className="payment__item-label">
-                      Thanh toán khi nhận hàng
+                    Payment on delivery
                     </label>
                     <img
                       className="payment__item-img"
@@ -315,7 +315,7 @@ const Payment = ({ socket }) => {
 
                   <li className="payment__item" onClick={handleSelectMethod}>
                     <label className="payment__item-label">
-                      Thanh toán qua ZaloPay
+                    Payment via ZaloPay
                     </label>
                     <img
                       className="payment__item-img"
@@ -326,7 +326,7 @@ const Payment = ({ socket }) => {
 
                   <li className="payment__item" onClick={handleSelectMethod}>
                     <label className="payment__item-label">
-                      Thanh toán qua VNPay
+                    Payment via VNPay
                     </label>
                     <img
                       className="payment__item-img"
@@ -346,7 +346,7 @@ const Payment = ({ socket }) => {
         >
           <li className="block-process__item block-process__item--active">
             <i className="block-process__item-icon block-process__item-icon--active fa fa-shopping-cart "></i>
-            <label className="block-process__item-label">Chọn sản phẩm</label>
+            <label className="block-process__item-label">Select product</label>
           </li>
           <i className="block-process__item-arrow block-process__item-arrow--active">
             -
@@ -355,7 +355,7 @@ const Payment = ({ socket }) => {
           <li className="block-process__item block-process__item--active">
             <i className="block-process__item-icon fa fa-user block-process__item-icon--active"></i>
             <label className="block-process__item-label">
-              Thông tin đơn hàng
+            Information line
             </label>
           </li>
           <i className="block-process__item-arrow block-process__item-arrow--active">
@@ -364,7 +364,7 @@ const Payment = ({ socket }) => {
 
           <li className="block-process__item block-process__item--active">
             <i className="block-process__item-icon fa fa-tag block-process__item-icon--active"></i>
-            <label className="block-process__item-label ">Mã khuyến mãi</label>
+            <label className="block-process__item-label ">Promotional code</label>
           </li>
           <i className="block-process__item-arrow block-process__item-arrow--active">
             -
@@ -373,7 +373,7 @@ const Payment = ({ socket }) => {
           <li className="block-process__item block-process__item--active">
             <i className="block-process__item-icon fa fa-check block-process__item-icon--active"></i>
             <label className="block-process__item-label">
-              Xác nhận đơn hàng
+            Order confirmation
             </label>
           </li>
           <i className="block-process__item-arrow block-process__item-arrow--active">
@@ -382,7 +382,7 @@ const Payment = ({ socket }) => {
 
           <li className="block-process__item block-process__item--active">
             <i className="block-process__item-icon fa fa-credit-card block-process__item-icon--active"></i>
-            <label className="block-process__item-label">Thanh toán</label>
+            <label className="block-process__item-label">Pay</label>
           </li>
         </ul>
 
@@ -429,7 +429,7 @@ const Payment = ({ socket }) => {
               className="cart__control-btn cart__control-btn--payment"
               onClick={handleComplePayment}
             >
-              Hoàn tất đặt hàng
+             Complete your order
             </button>
           </div>
         </div>

@@ -259,24 +259,24 @@ const InfoProductClient = () => {
 
   const showSuccessMessage = () => {
     Toast({
-      title: "Thêm thành công",
-      message: "Sản phẩm của bạn đã được thêm vào giỏ hàng, Xem ngay nào!",
+      title: "More success",
+      message: "Your product has been added to your cart. View now!",
       type: "success",
       duration: 3000,
     });
   };
   const showErrorMessage = () => {
     Toast({
-      title: "Không thể thêm sản phẩm vào giỏ hàng",
-      message: "Bạn vui lòng chọn đủ phiên bản và màu sắc của sản phẩm!",
+      title: "Unable to add product to cart",
+      message: "Please choose all versions and colors of the product!",
       type: "error",
       duration: 3000,
     });
   };
   const showErrorNotLoginMessage = () => {
     Toast({
-      title: "Bạn chưa đăng nhập vào Clinic Online",
-      message: "Vui lòng đăng nhập để sử dụng tính năng này!",
+      title: "You have not logged in to Clinic Online",
+      message: "Please log in to use this feature!",
       type: "error",
       duration: 4000,
     });
@@ -407,7 +407,7 @@ const InfoProductClient = () => {
                   </div>
                 </div>
                 <label className="info-product__image-label">
-                  Những hình ảnh của sản phẩm
+                Images of the product
                 </label>
                 <ul className="info-product__image-list">
                   <li
@@ -447,44 +447,44 @@ const InfoProductClient = () => {
                 </ul>
                 <div className="info-product__policy">
                   <label className="info-product__policy-header">
-                    CHÍNH SÁCH CỦA SẢN PHẨM
+                  PRODUCT POLICY
                   </label>
                   <div className="info-product__policy-item">
                     <i className="info-product__policy-item-icon fa fa-wrench"></i>
                     <p className="info-product__policy-item-content">
-                      Bảo hành chính hãng{" "}
-                      <span style={{ fontWeight: "bold" }}>12 tháng </span> tại
-                      trung tâm bảo hành ủy quyền của hệ thống cửa hàng của
-                      Clinic Online
+                    Warranty genuine{" "}
+                      <span style={{ fontWeight: "bold" }}>12 months </span> in
+                       Authorized warranty center of our store system
+                       Clinic Online
                       <button className="info-product__policy-item-btn">
-                        (Xem chi tiết)
+                        (See details)
                       </button>
                     </p>
                   </div>
                   <div className="info-product__policy-item">
                     <i className="info-product__policy-item-icon fa fa-refresh"></i>
                     <p className="info-product__policy-item-content">
-                      <span style={{ fontWeight: "bold" }}>1 ĐỔI 1 </span>trong
-                      vòng 30 ngày đầu sử dụng và{" "}
+                      <span style={{ fontWeight: "bold" }}>1 SWITCH 1 </span>in
+                       within the first 30 days of use and{" "}
                       <span style={{ fontWeight: "bold" }}>
-                        HỎNG GÌ ĐỔI NẤY{" "}
+                      WHAT IS BREAKED IS CHANGED{" "}
                       </span>{" "}
-                      trong 90 ngày
+                      within 90 days
                       <button className="info-product__policy-item-btn">
-                        (Xem chi tiết)
+                        (See details)
                       </button>
                     </p>
                   </div>
                   <div className="info-product__policy-item">
                     <i className="info-product__policy-item-icon fa fa-retweet"></i>
                     <p className="info-product__policy-item-content">
-                      Chính sách{" "}
+                    Policy{" "}
                       <span style={{ fontWeight: "bold" }}>
-                        Trade-in lên đời{" "}
+                      Trade-in is born{" "}
                       </span>{" "}
-                      luôn hỗ trợ cho mọi sản phẩm
+                      Always support for every product
                       <button className="info-product__policy-item-btn">
-                        (Xem chi tiết)
+                        (See details)
                       </button>
                     </p>
                   </div>
@@ -493,7 +493,7 @@ const InfoProductClient = () => {
 
               <div className="info-product__detail">
                 <label className="info-product__detail-label info-product__detail-label-price">
-                  Giá sản phẩm:
+                Product price:
                 </label>
                 <div className="info-product__detail-price">
                   <label className="info-product__detail-current-price">
@@ -511,7 +511,7 @@ const InfoProductClient = () => {
                 </div>
                 <label className="info-product__detail-installment">
                   <i className="info-product__detail-installment-icon fa fa-tag"></i>
-                  Trả góp 0%
+                  Installment 0%
                 </label>
                 <div className="info-product__detail-option">
                   <p
@@ -524,10 +524,10 @@ const InfoProductClient = () => {
                 <div className="info-product__detail-promote">
                   <label className="info-product__detail-promote-label">
                     <i className="info-product__detail-promote-label-icon fa fa-gift"></i>
-                    NHỮNG ƯU ĐÃI HẤP DẪN KHÁC
+                    OTHER ATTRACTIVE OFFERS
                   </label>
                   {loading ? (
-                    <p>Đang kết nối đến server ... </p>
+                    <p>Connecting to the server... </p>
                   ) : (
                     promotes.map((promote, i) => (
                       <div
@@ -540,7 +540,7 @@ const InfoProductClient = () => {
                         <label className="info-product__detail-promote-item-content">
                           {promote.name}
                           <button className="info-product__detail-promote-item-content-btn">
-                            (Xem chi tiết)
+                            (See details)
                           </button>
                         </label>
                       </div>
@@ -552,9 +552,9 @@ const InfoProductClient = () => {
                     className="info-product__detail-payment-btn"
                     onClick={handleClickBuyNow}
                   >
-                    MUA NGAY
+                    BUY NOW
                     <p className="info-product__detail-payment-describe">
-                      Nhận tại cửa hàng hoặc giao hàng tận nơi
+                    Pick up in store or deliver to your door
                     </p>
                   </button>
                   <button
@@ -562,16 +562,16 @@ const InfoProductClient = () => {
                     onClick={handleClickAddToCart}
                   >
                     <i className="info-product__detail-payment-btn-icon fa fa-cart-plus"></i>
-                    Thêm vào giỏ hàng
+                    Add to cart
                     <p className="info-product__detail-payment-describe">
-                      Thêm sản phẩm để mua sau
+                    Add products to buy later
                     </p>
                   </button>
                   <button className="info-product__detail-payment-btn-installment">
                     <i className="info-product__detail-payment-btn-icon fa fa-credit-card"></i>
-                    MUA TRẢ GÓP 0%
+                    BUY IN 0% INSTALLMENTS
                     <p className="info-product__detail-payment-describe">
-                      Xét duyệt online trong 5 phút
+                    Online review in 5 minutes
                     </p>
                   </button>
                 </div>
@@ -580,11 +580,11 @@ const InfoProductClient = () => {
 
             <div className="info-product__similar">
               <div className="info-product__similar-label">
-                SẢN PHẨM TƯƠNG TỰ
+              SIMILAR PRODUCT
               </div>
               <ul className="info-product__similar-list">
                 {loading ? (
-                  <p>Đang kết nối đến server ... </p>
+                  <p>Connecting to the server... </p>
                 ) : (
                   products.map((product, index) => (
                     <li
@@ -612,7 +612,7 @@ const InfoProductClient = () => {
                         đ
                       </span>
                       <label className="product__sell-item-sold">
-                        Đánh giá:
+                      Evaluate:
                         <span className="product__sell-item-star">
                           {handleFormatStarProduct(product.product_star)}
                         </span>
@@ -626,7 +626,7 @@ const InfoProductClient = () => {
             <div className="info-product__review-container">
               <div className="info-product__rating-box">
                 <label className="info-product__rating-label">
-                  ĐÁNH GIÁ SẢN PHẨM
+                PRODUCT REVIEWS
                 </label>
                 <p className="info-product__rating-star">
                   {Number(product.product_star).toFixed(1)}/5
@@ -640,7 +640,7 @@ const InfoProductClient = () => {
               </div>
 
               <ul className="info-product__review-list">
-                <label className="info-product__review-label">Nhận xét</label>
+                <label className="info-product__review-label">Comment</label>
                 {comments.map((comment, index) => (
                   <li className="info-product__review-item" key={index}>
                     <div className="info-product__review-item-title">
@@ -663,7 +663,7 @@ const InfoProductClient = () => {
 
                     <div className="info-product__review-item-vote">
                       <label className="info-product__review-item-vote-title">
-                        Đánh giá sản phẩm:
+                      Product reviews:
                         <span className="info-product__review-item-vote-start">
                           {handleFormatStarProduct(comment.rating)}
                         </span>
@@ -672,7 +672,7 @@ const InfoProductClient = () => {
 
                     <div className="info-product__review-item-feedback">
                       <label className="info-product__review-item-feedback-title">
-                        Nhận xét sản phẩm:
+                      Product reviews:
                       </label>
                       <div className="info-product__review-item-feedback-box">
                         <p className="info-product__review-item-feedback-content">

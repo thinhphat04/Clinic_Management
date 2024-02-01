@@ -12,7 +12,7 @@ const CartConfirm = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    document.title = 'Clinic Online | Xác nhận đơn hàng';
+    document.title = 'Clinic Online | Order confirmation';
     const fetchAPIs = () => {
       fetch(
         `https://localhost:7096/api/Cart/${
@@ -81,8 +81,8 @@ const CartConfirm = () => {
                   window.location.href = '/cart/info/giftcode';
                 }}
               >
-                <i className="cart__btn-cancel-icon fa fa-arrow-left"></i>Trở
-                lại trang trước
+                <i className="cart__btn-cancel-icon fa fa-arrow-left"></i>Return
+                 return to previous page
               </button>
               <h1 className="cart__title">ORDER CONFIRMATION</h1>
 
@@ -118,7 +118,7 @@ const CartConfirm = () => {
                 </li>
                 <li className="cart-confirm__item">
                   <label className="cart-confirm__label">
-                    Hình thức nhận hàng:
+                  Delivery method:
                   </label>
                   <p className="cart-confirm__data">
                     {window.localStorage.getItem('methodCache')}
@@ -126,7 +126,7 @@ const CartConfirm = () => {
                 </li>
                 <li className="cart-confirm__item">
                   <label className="cart-confirm__label">
-                    Địa chỉ nhận hàng:
+                  Delivery address:
                   </label>
                   <p className="cart-confirm__data">
                     {window.localStorage.getItem('addressCache') ||
@@ -134,7 +134,7 @@ const CartConfirm = () => {
                   </p>
                 </li>
                 <li className="cart-confirm__item">
-                  <label className="cart-confirm__label">Ghi chú:</label>
+                  <label className="cart-confirm__label">Note:</label>
                   <p
                     className="cart-confirm__data"
                     style={{
@@ -214,7 +214,7 @@ const CartConfirm = () => {
 
                 <li className="detail-price__item">
                   <label className="detail-price__item-label">
-                    Áp dụng mã giảm giá{' '}
+                  Apply discount code{' '}
                     <span style={{ color: 'red', fontWeight: '600' }}>
                       {window.localStorage.getItem('giftcodeApply')}
                     </span>
@@ -233,13 +233,13 @@ const CartConfirm = () => {
 
                 <li className="detail-price__item">
                   <label className="detail-price__item-label">
-                    Phí vận chuyển:
+                  Transport fee:
                   </label>
                   <span className="detail-price__item-price">29,000 đ</span>
                 </li>
                 <li className="detail-price__item">
                   <label className="detail-price__item-label">
-                    Giảm giá phí vận chuyển:
+                  Shipping fee discount:
                   </label>
                   <span className="detail-price__item-price">
                     - 100% =  29,000 đ
@@ -247,7 +247,7 @@ const CartConfirm = () => {
                 </li>
 
                 <li className="detail-price__item detail-price__item-total">
-                  <label className="detail-price__item-label">Thành tiền</label>
+                  <label className="detail-price__item-label">into money</label>
                   <span
                     className="detail-price__item-price"
                     style={{ color: 'red' }}
@@ -259,7 +259,7 @@ const CartConfirm = () => {
                   </span>
                 </li>
                 <p className="detail-price__item-describe">
-                  Vui lòng hoàn tất thanh toán đơn hàng với giá trị
+                Please complete order payment with value
                   <span style={{ color: 'red', margin: '0 4px' }}>
                     {Number(
                       Number(
@@ -268,7 +268,7 @@ const CartConfirm = () => {
                     ).toLocaleString()}{' '}
                     đ
                   </span>
-                  trước khi nhận hàng
+                  before receiving the goods
                 </p>
               </ul>
             </div>
