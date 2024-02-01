@@ -84,6 +84,9 @@ const AddProduct = () => {
     return Math.floor(Math.random() * (max - min + 1) + min);
   };
 
+  var product_img_a = 'Images/'+ product_img ;
+  console.log('product_img_a:: ', product_img_a);
+
   const handleAddProduct = async (e) => {
     e.preventDefault();
     try {
@@ -91,17 +94,30 @@ const AddProduct = () => {
         `https://localhost:7096/api/Products`,
         {
           product_name,
-          product_type,
           product_description, 
-          product_price,
+          product_type,
+          product_img: product_img_a,
           product_quantity,
-          product_percent,
-          product_img,
+          product_price,
+
+           product_percent,
+
           product_star,
         },
+
+      //   {
+      //     product_name: "Acetylcystein 200 Imexpharm",
+      //     product_description: "Ingredient: Acetylcysteine 200mg...",
+      //     product_type: "Medical",
+      //     product_img: "Images/Screenshot243731255.png",
+      //     product_quantity: 20,
+      //     product_price: 50,
+      //     // product_percent:20,
+      //     product_star: 5
+      // }
       );
 
-
+   
       console.log("resssProduct:: ", res);
       if (res && res.data !== null) {
         alert('Added product successfully');
@@ -118,6 +134,8 @@ const AddProduct = () => {
     }
   };
   console.log("aaaa", product_type);
+  console.log('product_percent',product_percent);
+  console.log('product_price',product_price);   console.log('product_star',product_star);   console.log('product_quantity',product_quantity);  
 
   return (
     <div className="add-product__container">
@@ -146,10 +164,19 @@ const AddProduct = () => {
 
               <label className="add__label">Image</label>
               <input
+                // type="file"
                 className="add__input"
                 onChange={(e) => {
                   setImg(e.target.value);
+                  // setImg(e.target.files[0]);
                 }}
+                // onChange={(e) => {
+                //   const file = e.target.files[0];
+                //   if (file) {
+                //     console.log(file.name); // In tên file vào console
+                //     setImg(file.name); 
+                //   }
+                // }}
               />
 
               <label className="add__label">Product type</label>
@@ -158,17 +185,6 @@ const AddProduct = () => {
                 className="add__input"
                 onChange={(e) => {
                   setEnType(e.target.value);
-                  // switch (e.target.value.toLowerCase()) {
-                  //   case 'Medical':
-                  //     setEnType('Medical');
-                  //     break;
-                  //   case 'Education':
-                  //     setEnType('Education');
-                  //     break;
-                  //   case 'Scientific':
-                  //     setEnType('Scientific');
-                  //     break;
-                  // }
                 }}
                 value={product_type}
               >
@@ -176,36 +192,7 @@ const AddProduct = () => {
                 <option value="Education">Education</option>
                 <option value="Medical">Medical</option>
                 <option value="Scientific">Scientific</option>
-                {/* <option value="Phụ kiện">Phụ kiện công nghệ</option> */}
               </select>
-
-              {/* <label className="add__label">Thương hiệu</label>
-              <input
-                className="add__input"
-                onChange={(e) => {
-                  setBrand(e.target.value);
-                }}
-              /> */}
-{/* 
-              <label className="add__label">Tùy chọn sản phẩm</label>
-              <div className="add__option">
-                <ul className="add__option-list"></ul>
-                <button className="add__option-btn" onClick={handleAddOption}>
-                  +
-                </button>
-              </div> */}
-
-              {/* <label className="add__label">Màu sắc</label>
-              <input
-                type="text"
-                className="add__input"
-                onChange={(e) => {
-                  var arrayColor = e.target.value.split(', ');
-                  setColor(arrayColor);
-                }}
-                placeholder="(Mỗi màu sắc được ngăn cách bằng dấu phẩy). Vd: Đỏ, Vàng, ..."
-              /> */}
-
               <label className="add__label">Product price</label>
               <input
                 type="number"

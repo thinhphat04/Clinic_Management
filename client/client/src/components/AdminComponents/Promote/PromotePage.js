@@ -23,7 +23,7 @@ const PromotePage = () => {
         });
     };
     fetchAPI();
-    handleLoadOptionSelected(3);
+    handleLoadOptionSelected(4);
   }, []);
 
   console.log("promotes::: ", promotes);

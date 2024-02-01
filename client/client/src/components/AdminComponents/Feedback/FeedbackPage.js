@@ -17,7 +17,7 @@ const FeedbackPage = () => {
 
   useEffect(() => {
     fetchAPIs();
-    handleLoadOptionSelected(4);
+    handleLoadOptionSelected(5);
   }, []);
 
   const handleFillterByType = (type) => {

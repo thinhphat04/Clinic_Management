@@ -103,7 +103,7 @@ const ProductPage = () => {
                     </label>
                     <p className="admin__item-info-content">
                       {' '}
-                      {product.status || 'Trống!'}
+                      {product.status || 'Available'}
                     </p>
                   </div>
                   <div className="admin__item-info--last">
