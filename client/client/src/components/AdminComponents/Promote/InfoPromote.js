@@ -50,7 +50,7 @@ const InfoPromote = () => {
     const inputElements = document.querySelectorAll('.info-promote__input');
     if (
       window.confirm(
-        'Bạn muốn cập nhật thông tin chương trình khuyến mãi này?',
+        'You want to update information about this promotion?',
       ) == true
     ) {
       try {
@@ -79,18 +79,18 @@ const InfoPromote = () => {
                 })
                 .then((res) => {
                   if (res && res.data.success) {
-                    window.alert('Cập nhật thông tin thành công!');
+                    window.alert('Successfully updated!');
                     handleLoadingPage(1);
                     window.setTimeout(() => {
                       navigate(`/admin/promote`);
                     }, 1000);
                   } else {
-                    alert('Cập nhật thông tin thất bại');
+                    alert('Update information failed');
                   }
                 });
             })
             .catch((error) => {
-              alert('Lỗi khi upload:', error);
+              alert('Error when uploading:', error);
             });
         } else {
           axios
@@ -104,13 +104,13 @@ const InfoPromote = () => {
             })
             .then((res) => {
               if (res && res.data.success) {
-                window.alert('Cập nhật thông tin thành công!');
+                window.alert('Successfully updated!');
                 handleLoadingPage(1);
                 window.setTimeout(() => {
                   navigate(`/admin/promote`);
                 }, 1000);
               } else {
-                alert('Cập nhật thông tin thất bại');
+                alert('Update information failed');
               }
             });
         }
@@ -124,7 +124,7 @@ const InfoPromote = () => {
     e.preventDefault();
     if (
       window.confirm(
-        'Bạn có chắc muốn xóa toàn bộ thông tin của sản phẩm này?',
+        'Are you sure you want to delete all information about this product??',
       ) == true
     ) {
       try {
@@ -132,13 +132,13 @@ const InfoPromote = () => {
           `${process.env.REACT_APP_API}/api/promotes/delete/${id}`,
         );
         if (res && res.data.success) {
-          window.alert('Xóa Thành công!');
+          window.alert('Delete Successfully!');
           handleLoadingPage(1);
           window.setTimeout(() => {
             window.location.href = '/admin/promote';
           }, 1000);
         } else {
-          alert('Xóa thất bại');
+          alert('Delete failed');
         }
       } catch (error) {
         alert(error);
@@ -162,7 +162,7 @@ const InfoPromote = () => {
 
         <div className="info-page__group">
           <div className="info-promote__header">
-            Chỉnh sửa thông tin chương trình khuyến mãi
+          Edit promotion information
           </div>
 
           <div className="info-promote__body">
@@ -184,7 +184,7 @@ const InfoPromote = () => {
                 htmlFor="image-change"
                 className="info-admin-product__image-btn"
               >
-                Thay đổi hình ảnh khuyến mãi
+                Change promotion image
               </label>
             </div>
 
@@ -192,7 +192,7 @@ const InfoPromote = () => {
               style={{ textAlign: 'center', fontWeight: '600' }}
               className="info-page__label"
             >
-              Tên chương trình khuyến mãi
+             Name of promotion program
             </label>
             <input
               style={{ fontWeight: 'bold', color: 'green' }}
@@ -202,14 +202,14 @@ const InfoPromote = () => {
 
             <div className="info-promote__box-info">
               <div className="info-promote__col-1">
-                <label className="info-promote__label">Thời gian bắt đầu</label>
+                <label className="info-promote__label">Start time</label>
                 <input
                   type="date"
                   className="info-promote__input"
                   defaultValue={promote.timeStart}
                 />
 
-                <label className="info-promote__label">Đến ngày</label>
+                <label className="info-promote__label">To date</label>
                 <input
                   type="date"
                   className="info-promote__input"
@@ -222,7 +222,7 @@ const InfoPromote = () => {
                   style={{ fontWeight: 'bold', color: 'red' }}
                   className="info-promote__label"
                 >
-                  Phần trăm (%) giảm
+                  Percentage (%) decrease
                 </label>
                 <input
                   type="number"
@@ -231,7 +231,7 @@ const InfoPromote = () => {
                 />
 
                 <label className="info-promote__label">
-                  Khuyến mãi áp dụng cho
+                Promotion applies to
                 </label>
                 <input
                   className="info-promote__input"
@@ -247,10 +247,10 @@ const InfoPromote = () => {
               style={{ backgroundColor: 'red' }}
               onClick={handleDelete}
             >
-              Xóa khuyến mãi<i className="ti-close"></i>
+              Delete promotion<i className="ti-close"></i>
             </button>
             <button className="info-page__btn" onClick={handleConfirmChange}>
-              Xác nhận<i className="ti-check"></i>
+            Confirm<i className="ti-check"></i>
             </button>
           </div>
         </div>
