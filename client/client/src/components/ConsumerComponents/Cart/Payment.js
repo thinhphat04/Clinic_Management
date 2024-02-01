@@ -160,15 +160,17 @@ const Payment = ({ socket }) => {
         {
            order_code:window.localStorage.getItem('orderIDCache'),
            user_id: JSON.parse(window.localStorage.getItem('auth')).id,
-           order_datetime: new Date().toISOString(),
+           order_datetime:"2024-01-24T04:18:39.828Z",
            order_status: "Pending",
            order_address: window.localStorage.getItem('addressCache'),
            order_phone:window.localStorage.getItem('phoneCache'),
-           order_total: window.localStorage.getItem('countTotalPriceCache'),
-           OrderDetails: cartUserUpdate,
-           order_note: window.localStorage.getItem('noteCache')
+           order_note: window.localStorage.getItem('noteCache'),
+           order_total: 
+           Number((window.localStorage.getItem('countTotalPriceCache')).toString()),
+           OrderDetails:     cartUserUpdate   
          }
       );
+      console.log('ress: ', res);
 
       if(res && res.data && res.status === 200){
         showSuccessMessage()
@@ -177,27 +179,7 @@ const Payment = ({ socket }) => {
         }, 4000);
       } else{
         showErrorMessage()
-      }
-
-
-      // {
-      //   "order_code":"",
-      //    "user_id": "2",
-      //    "order_datetime": "2024-01-24T04:18:39.828Z",
-      //    "order_status": "Pending",
-      //    "order_address": "123 Main St",
-      //    "order_phone": "0866692970",
-      //    "order_total": 35,
-      //    "OrderDetails": [
-      //      {
-      //        "product_id": 1,
-      //        "order_quantity": 1,
-      //        "order_price": 5
-      //      }
-      //    ]
-      //  }
-
-      
+      }    
     
     // console.log("Khaires::: ", res);
       
