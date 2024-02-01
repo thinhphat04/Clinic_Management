@@ -397,10 +397,10 @@ namespace PJ_SEM03.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "AvatarUrl", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Role", "SecurityStamp", "TwoFactorEnabled", "UserName", "user_address", "user_fullName" },
                 values: new object[,]
                 {
-                    { "1", 0, "https://robohash.org/mail@ashallendesign.co.uk", "4f0e4d4b-57ca-4e0d-8051-3fa6b26ed3c1", "admin@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEP1mnnwnshRM3FHlc82RRm8/XOAVqYUSFst3whMqItC25Xl7YVAUXjgEo9MdwWEhow==", null, false, "Admin", "572b3168-c856-4c37-a702-23a1141ec35f", false, "admin", "Ho Chi Minh", "admin" },
-                    { "2", 0, "https://api.dicebear.com/7.x/adventurer-neutral/svg?seed=mail@ashallendesign.co.uk", "a4c44ddd-bcc5-4d6f-988a-5acd3893fe46", "phat@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEGNebQElMmvUVK3WvJEAWO8hp9ZhDqZ3k32XZdlKBWbStKuC9VelBAfnuYYQS1XUyA==", null, false, "Member", "b91e8df3-ca20-49e4-bb4b-867644b80f2d", false, "phat", "Quan 2, HCM", "Ngo Thinh Phat" },
-                    { "3", 0, "https://api.dicebear.com/7.x/adventurer-neutral/svg?seed=mail@ashallendesign.co.uk", "0d050b53-4422-4ed5-b451-cb848d6ea969", "khai@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAELYuma++hXVRPOzgSPGRh+M5SVE0efXXFE7yZcLmndSMf4g0Lg/xWlcJfjibEq2D7Q==", null, false, "Member", "eca62191-2818-455e-8b95-f87633099519", false, "khai", "Tan Binh, HCM", "Bui Tuan Khai" },
-                    { "4", 0, "https://api.dicebear.com/7.x/adventurer-neutral/svg?seed=mail@ashallendesign.co.uk", "2d74c05b-1f12-4396-a24a-4fc35767cc9e", "tram@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEFbratJB50gVXvepy09O6oNcJ6qHyS+8rMPd/muLp6BeQPOOq0G+WVxqHP33ZH+2gg==", null, false, "Member", "d7229f81-ecb0-4eb6-afb5-3538a6deab21", false, "tram", "Thu Duc, HCM", "Tran Bao Huyen Tram" }
+                    { "1", 0, "https://robohash.org/mail@ashallendesign.co.uk", "f0abff92-83ea-409e-9a3d-a06d56df7737", "admin@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEA90qqzpvzqySKmRw7uCFvsxTGh8MN04q9iX55IPeRLd8Tq6mbqe62rhHHtejuRdpQ==", null, false, "Admin", "d1a4c737-cc75-4f3d-8057-a05da69e45b5", false, "admin", "Ho Chi Minh", "admin" },
+                    { "2", 0, "https://api.dicebear.com/7.x/adventurer-neutral/svg?seed=mail@ashallendesign.co.uk", "e530c0fe-c7d7-455d-a4fd-3492b61befa2", "phat@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEAFhYkphoeuTLiNw8aqSiudnBHzkM8DROxa45IAYtkbBZbD17rHzFTGTRIG3/R0sDw==", null, false, "Member", "7f4c0a5e-6a4e-4ea6-bec5-8a2793fa99e8", false, "phat", "Quan 2, HCM", "Ngo Thinh Phat" },
+                    { "3", 0, "https://api.dicebear.com/7.x/adventurer-neutral/svg?seed=mail@ashallendesign.co.uk", "a5fadb24-c97b-407c-a322-8604c1069f8c", "khai@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEPyBfZJ/eR1vdlnb7hXaT0R8ku8CKSWCEeTEIC3VPDGUvCyXOIVh+pdL7uHKgufCTg==", null, false, "Member", "4cbfc942-2f9c-4b82-b67d-e0ca18b64abe", false, "khai", "Tan Binh, HCM", "Bui Tuan Khai" },
+                    { "4", 0, "https://api.dicebear.com/7.x/adventurer-neutral/svg?seed=mail@ashallendesign.co.uk", "185d2913-f887-43b5-8fa7-de5956118fa4", "tram@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEDrOai+y08pNlR5TUf3qm9Xf+Hw+5Uu/4+zDbIh+nPfSgPRhN83ssX2BI1i7/JYg5A==", null, false, "Member", "b5caa277-d98a-4e73-9851-274f267ce4dc", false, "tram", "Thu Duc, HCM", "Tran Bao Huyen Tram" }
                 });
 
             migrationBuilder.InsertData(
@@ -450,8 +450,8 @@ namespace PJ_SEM03.Migrations
                 columns: new[] { "order_id", "AppliedGiftCodeId", "order_address", "order_code", "order_datetime", "order_note", "order_phone", "order_status", "order_total", "user_id" },
                 values: new object[,]
                 {
-                    { 1, null, "HCM", "ORD001", new DateTime(2024, 2, 1, 22, 30, 3, 25, DateTimeKind.Local).AddTicks(7197), "Note 1", "123", "Processing", 100, "1" },
-                    { 2, null, "Ca Mau", "ORD001", new DateTime(2024, 2, 1, 22, 30, 3, 25, DateTimeKind.Local).AddTicks(7220), "Note 2", "124", "Delivered", 200, "2" }
+                    { 1, null, "HCM", "ORD001", new DateTime(2024, 2, 2, 0, 14, 13, 628, DateTimeKind.Local).AddTicks(8850), "Note 1", "123", "Processing", 100, "1" },
+                    { 2, null, "Ca Mau", "ORD001", new DateTime(2024, 2, 2, 0, 14, 13, 628, DateTimeKind.Local).AddTicks(8865), "Note 2", "124", "Delivered", 200, "2" }
                 });
 
             migrationBuilder.InsertData(

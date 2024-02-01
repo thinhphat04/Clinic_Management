@@ -13,9 +13,11 @@ namespace PJ_SEM03.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserRepo userRepo;
-        public UserController(IUserRepo userRepo)
+        private readonly CloudinaryService cloudinaryService;
+        public UserController(IUserRepo userRepo, CloudinaryService _cloudinaryService)
         {
             this.userRepo = userRepo;
+            cloudinaryService = _cloudinaryService;
         }
 
         [HttpGet]
@@ -32,13 +34,13 @@ namespace PJ_SEM03.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateUser(UserDto user)
+        public async Task<IActionResult> UpdateUser([FromForm] UserWithImageDto user)
         {
             var (success, result) = await userRepo.UpdateUser(user);
 
             if (success)
             {
-                return Ok(result); 
+                return Ok(result);
             }
             else
             {
@@ -48,10 +50,11 @@ namespace PJ_SEM03.Controllers
                 }
                 else
                 {
-                    return NotFound(); 
+                    return NotFound();
                 }
             }
         }
+
 
 
 
