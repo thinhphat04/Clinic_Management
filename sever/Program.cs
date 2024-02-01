@@ -68,7 +68,7 @@ builder.Services.AddScoped<IUserRepo, UserService>();
 builder.Services.AddScoped<IProductRepo, ProductService>();
 builder.Services.AddScoped<IOrderRepo, OrderService>();
 builder.Services.AddScoped<ICartRepo, CartService>();
-// builder.Services.AddScoped<CloudinaryService>();
+builder.Services.AddScoped<CloudinaryService>();
 builder.Services.AddScoped<IAccountRepo, AccountService>();
 builder.Services.AddScoped<IGiftcode, GiftcodeService>();
 builder.Services.AddScoped<IFeedbackRepo, FeedbackService>();
