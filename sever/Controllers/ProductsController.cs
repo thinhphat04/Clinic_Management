@@ -53,17 +53,16 @@ namespace PJ_SEM03.Controllers
         
         
         [HttpPost]
-        public async Task<ActionResult<Product>> CreateProduct(Product product, string imagePath)
+        public async Task<ActionResult<Product>> CreateProduct(Product product)
         {
-            return await productRepo.createProduct(product, imagePath);
+            return await productRepo.createProduct(product);
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<Product>> UpdateProduct(int id, Product product, string imagePath)
+        public async Task<ActionResult<Product>> UpdateProduct(int id, Product product)
         {
-            return await productRepo.updateProduct(id, product, imagePath);
+            return await productRepo.updateProduct(id, product);
         }
-
         [HttpDelete("{id}")]
         public async Task<ActionResult<Product>> DeleteProduct(int id)
         {
