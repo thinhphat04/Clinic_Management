@@ -12,18 +12,13 @@ namespace PJ_SEM03.Services
     public class UserService : IUserRepo
     {
         private readonly DatabaseContext _dbContext;
-        private readonly Cloudinary _cloudinary;
+        CloudinaryService _cloudinaryService;
 
-        public UserService(DatabaseContext dbContext) 
+        public UserService(DatabaseContext dbContext, CloudinaryService cloudinaryService) 
         {
             _dbContext = dbContext;
-            var cloudinaryAccount = new Account(
-                  "djlpsqdp4",
-                  "981324586668599",
-                  "aYn6pp066rK0Y0EUxZp0oQ-ARhg"
-              );
-
-            _cloudinary = new Cloudinary(cloudinaryAccount);
+            _cloudinaryService = cloudinaryService;
+          
         }
 
         public async Task<PagedList<User>> getAll(int pageNumber, int pageSize)
@@ -45,7 +40,7 @@ namespace PJ_SEM03.Services
             return users;
         }
 
-        public async Task<(bool Success, object Result)> UpdateUser(UserDto user)
+        public async Task<(bool Success, object Result)> UpdateUser(UserWithImageDto user)
         {
             try
             {
@@ -56,28 +51,7 @@ namespace PJ_SEM03.Services
                 {
                     var query = await _dbContext.Users.SingleOrDefaultAsync(x => x.Id == user.Id);
 
-                    //if (query != null)
-                    //{
-                    //    // Check if a new avatar file is provided
-                    //    if (user.AvatarFile != null && user.AvatarFile.Length > 0)
-                    //    {
-                    //        // Upload the avatar to Cloudinary
-                    //        var uploadParams = new ImageUploadParams
-                    //        {
-                    //            File = new FileDescription(user.AvatarFile.FileName, user.AvatarFile.OpenReadStream()),
-                    //            Transformation = new Transformation().Width(150).Height(150).Crop("fill"), // Adjust transformation parameters
-                    //        };
-
-                    //        var uploadResult = _cloudinary.Upload(uploadParams);
-
-                    //        if (uploadResult.Error != null)
-                    //        {
-                    //            return (false, $"Error uploading avatar: {uploadResult.Error.Message}");
-                    //        }
-
-                    //        // Update the user's avatar URL with the Cloudinary URL
-                    //        query.AvatarUrl = uploadResult.SecureUrl.AbsoluteUri;
-                    //    }
+                    
 
                         // Update other user information
                         query.UserName = user.Username;
@@ -86,7 +60,15 @@ namespace PJ_SEM03.Services
                         query.user_address = user.Address;
                         query.PhoneNumber = user.PhoneNumber;
 
-                        _dbContext.Users.Update(query);
+                    // Update the user's avatar using Cloudinary
+                    if (user.Image != null)
+                    {
+                        CloudinaryService cloud = new CloudinaryService();
+                        string avatarUrl = cloud.UploadImage(user.Image);
+                        query.AvatarUrl = avatarUrl;
+                    }
+
+                    _dbContext.Users.Update(query);
                         await _dbContext.SaveChangesAsync();
 
                         return (true, query);

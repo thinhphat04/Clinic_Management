@@ -45,6 +45,7 @@ namespace PJ_SEM03.Services
                 PhoneNumber = user.PhoneNumber,
                 Email = user.Email,
                 Username = user.UserName,
+                AvatarUrl = user.AvatarUrl,
                 Token = GenerateToken(user)
             };
         }
@@ -90,7 +91,8 @@ namespace PJ_SEM03.Services
                 PhoneNumber = registerDto.phoneNumber,
                 Role = "Member",
                 user_address = registerDto.Address,
-                user_fullName = registerDto.fullname
+                user_fullName = registerDto.fullname,
+                AvatarUrl = "https://api.dicebear.com/7.x/adventurer-neutral/svg?seed=mail@ashallendesign.co.uk"
             };
 
             var result = await _userManager.CreateAsync(user, registerDto.Password);
@@ -104,7 +106,8 @@ namespace PJ_SEM03.Services
                     user.Email,
                     user.PhoneNumber,
                     user.user_address,
-                    user.user_fullName
+                    user.user_fullName,
+                    user.AvatarUrl                  
                 };
 
                 return (true, userDto);

@@ -23,7 +23,7 @@ namespace PJ_SEM03.Controllers
             try
             {
                 MailRequest mailRequest = new MailRequest();
-                mailRequest.ToEmail = "tbdp138@gmail.com";
+                mailRequest.ToEmail = "buituankhai2001@gmail.com";
                 mailRequest.Subject = "Order Information";
                 mailRequest.Body = getHtmlContent();
                 await mailService.SendEmailAsync(mailRequest);
