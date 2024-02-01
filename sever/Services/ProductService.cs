@@ -14,8 +14,9 @@ namespace PJ_SEM03.Services
     {
         private readonly DatabaseContext _dbContext;
         private readonly Cloudinary _cloudinary;
+       
 
-        public ProductService(DatabaseContext dbContext)
+        public ProductService(DatabaseContext dbContext )
         {
             _dbContext = dbContext;
         }
@@ -35,34 +36,23 @@ namespace PJ_SEM03.Services
             return await _dbContext.Products.Where(x => x.product_type == product_type).ToListAsync();
         }
         
-        public async Task<ActionResult<Product>> createProduct(Product product, string imagePath)
+        public async Task<ActionResult<Product>> createProduct(Product product)
         {
-            product.product_img = imagePath; // Set the image path
-
             _dbContext.Products.Add(product);
             await _dbContext.SaveChangesAsync();
-
             return product;
         }
-        public async Task<ActionResult<Product>> updateProduct(int id, Product product, string imagePath)
+        public async Task<ActionResult<Product>> updateProduct(int id, Product product)
         {
-            var existingProduct = await _dbContext.Products.FindAsync(id);
-            if (existingProduct == null)
+            if (id != product.product_id)
             {
                 return null;
             }
 
-            existingProduct.product_name = product.product_name;
-            existingProduct.product_description = product.product_description;
-            existingProduct.product_type = product.product_type;
-            existingProduct.product_img = imagePath;
-            existingProduct.product_quantity = product.product_quantity;
-            existingProduct.product_price = product.product_price;
-    
-            _dbContext.Products.Update(existingProduct);
+            _dbContext.Entry(product).State = EntityState.Modified;
             await _dbContext.SaveChangesAsync();
 
-            return existingProduct;
+            return product;
         }
 
         public async Task<ActionResult<Product>> deleteProduct(int id)
