@@ -20,13 +20,12 @@ namespace PJ_SEM03.Services
         //private readonly EmailService _emailService;
 
         public AccountService(UserManager<User> userManager, DatabaseContext context, IConfiguration config
-            //,EmailService emailService
             )
         {
             _userManager = userManager;
             _context = context;
             _config = config;
-            //_emailService = emailService;
+
         }
 
         public async Task<UserDto> Login(LoginDto loginDto)
@@ -119,5 +118,27 @@ namespace PJ_SEM03.Services
             }
         }
 
+        public async Task<(bool Success, object Result)> changePassword(string user_id, ChangePasswordDto changePasswordDto)
+        {
+            var user = await _userManager.FindByIdAsync(user_id);
+
+            if (user == null)
+            {
+                var error = "User not found.";
+                return (false, error);
+            }
+
+            var result = await _userManager.ChangePasswordAsync(user, changePasswordDto.oldPassword, changePasswordDto.newPassword);
+
+            if (result.Succeeded)
+            {
+                return (true, "Password changed successfully.");
+            }
+            else
+            {
+                var errors = result.Errors.Select(e => e.Description).ToList();
+                return (false, errors);
+            }
+        }
     }
 }
