@@ -89,6 +89,11 @@ namespace PJ_SEM03.Controllers
             return Ok(await productRepo.GetProductsByName(name));
         }
         
+        [HttpGet("sort/{isAscending}")]
+        public async Task<IActionResult> GetProducts(bool isAscending)
+        {
+            return Ok(await productRepo.getAll(isAscending));
+        }
         
         
     }

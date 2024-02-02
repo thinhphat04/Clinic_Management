@@ -16,5 +16,7 @@ namespace PJ_SEM03.Repository
        Task<List<Product>> getAll();
        Task<IEnumerable<Product>> getProductByType(string product_type);
        Task<ActionResult<Product>> DecreaseQuantity(int productId, int quantity);
+       Task<List<Product>> getAll(bool isAscending);
+
     }
 }

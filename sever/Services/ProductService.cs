@@ -151,5 +151,17 @@ namespace PJ_SEM03.Services
 
             return product;
         }
+        
+        public async Task<List<Product>> getAll(bool isAscending)
+        {
+            if (isAscending)
+            {
+                return await _dbContext.Products.OrderBy(p => p.product_price).ToListAsync();
+            }
+            else
+            {
+                return await _dbContext.Products.OrderByDescending(p => p.product_price).ToListAsync();
+            }
+        }
     }
 }
