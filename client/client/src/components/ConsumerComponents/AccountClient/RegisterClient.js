@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import Validator from '../../Common/Validator';
 import { Toast, handleLoadingPage } from '../../Common';
 import { Breadcrumbs, Nav } from '../Common';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const RegisterClient = () => {
   const [usernameRegister, setUsernameRegister] = useState('');

@@ -1,44 +1,40 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './product.css';
-import { handleLoadingPage } from '../../Common';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./product.css";
+import { handleLoadingPage } from "../../Common";
+import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AddProduct = () => {
   // const [name, setName] = useState('');
-   const [type, setType] = useState();
-  // const [enType, setEnType] = useState('');
-  // const [brand, setBrand] = useState('');
-  // const [price, setPrice] = useState(0);
-  // const [option, setOption] = useState([]);
-  // const [color, setColor] = useState([]);
-  // const [status, setStatus] = useState('');
-  const [product_name, setName] = useState('');
-  const [product_type, setEnType] = useState('');
-  const [product_description, setDes] = useState('');
+  const [type, setType] = useState();
+  const [product_name, setName] = useState("");
+  const [product_type, setEnType] = useState("");
+  const [product_description, setDes] = useState("");
   const [product_price, setPrice] = useState(0);
   const [product_percent, setPercent] = useState(0);
-  const [product_quantity,setQuantity ] =useState(0);
-  const [product_img, setImg] = useState('');
+  const [product_quantity, setQuantity] = useState(0);
+  const [product_img, setImg] = useState(null);
   const [product_star, setStar] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
-    document.title = 'Clinic Online | Add products';
+    document.title = "Clinic Online | Add products";
   }, []);
 
   const handleAddOption = () => {
-    const optionList = document.querySelector('.add__option-list');
+    const optionList = document.querySelector(".add__option-list");
     if (optionList) {
-      const item = document.createElement('div');
-      item.classList.add('add__option-item');
+      const item = document.createElement("div");
+      item.classList.add("add__option-item");
 
       item.onclick = function (e) {
-        if (e.target.closest('.add__option-item--remove')) {
+        if (e.target.closest(".add__option-item--remove")) {
           optionList.removeChild(item);
         }
 
-        if (e.target.closest('.add__option-item--done')) {
+        if (e.target.closest(".add__option-item--done")) {
           handleConfirmOption(item);
         }
       };
@@ -57,9 +53,9 @@ const AddProduct = () => {
   };
 
   const handleConfirmOption = (item) => {
-    item.querySelectorAll('.add__option-item-input');
-    const itemName = item.querySelectorAll('.add__option-item-input')[0].value;
-    const itemPrice = item.querySelectorAll('.add__option-item-input')[1].value;
+    item.querySelectorAll(".add__option-item-input");
+    const itemName = item.querySelectorAll(".add__option-item-input")[0].value;
+    const itemPrice = item.querySelectorAll(".add__option-item-input")[1].value;
     var objItem = {
       data: itemName,
       price: Number(itemPrice),
@@ -73,7 +69,7 @@ const AddProduct = () => {
         <div class="add__option-item--confirm">
             <label class="add__option-item-label">Giá:</label>
             <p style="font-weight: 600; color: red;">${Number(
-              itemPrice,
+              itemPrice
             ).toLocaleString()} đ</p>
         </div>
         `;
@@ -84,58 +80,50 @@ const AddProduct = () => {
     return Math.floor(Math.random() * (max - min + 1) + min);
   };
 
-  var product_img_a = 'Images/'+ product_img ;
-  console.log('product_img_a:: ', product_img_a);
 
   const handleAddProduct = async (e) => {
     e.preventDefault();
+    // Tạo một đối tượng FormData mới để gửi dữ liệu dạng multipart/form-data
+    const formData = new FormData();
+    // Thêm các trường dữ liệu vào FormData
+    formData.append("product_name", product_name);
+    formData.append("product_description", product_description);
+    formData.append("product_type", product_type);
+    formData.append("product_img", "");
+    formData.append("product_quantity", product_quantity);
+    formData.append("product_price", product_price);
+    formData.append("product_percent", product_percent);
+    formData.append("product_star", product_star);
+    formData.append("Image", product_img);
     try {
       const res = await axios.post(
         `https://localhost:7096/api/Products`,
+        formData,
         {
-          product_name,
-          product_description, 
-          product_type,
-          product_img: product_img_a,
-          product_quantity,
-          product_price,
-
-           product_percent,
-
-          product_star,
-        },
-
-      //   {
-      //     product_name: "Acetylcystein 200 Imexpharm",
-      //     product_description: "Ingredient: Acetylcysteine 200mg...",
-      //     product_type: "Medical",
-      //     product_img: "Images/Screenshot243731255.png",
-      //     product_quantity: 20,
-      //     product_price: 50,
-      //     // product_percent:20,
-      //     product_star: 5
-      // }
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
       );
 
-   
       console.log("resssProduct:: ", res);
-      if (res && res.data !== null) {
-        alert('Added product successfully');
-        handleLoadingPage(1);
+      if (res && res.data !== null && res.status === 200) {
+         alert("Added product successfully");
+      //  toast('teast')
+
+        handleLoadingPage(1); // Giả định rằng bạn đã định nghĩa hàm này ở nơi nào đó
         window.setTimeout(() => {
-          navigate('/admin/product');
+          navigate('/admin/product'); // Giả định rằng bạn đã định nghĩa hàm navigate ở nơi nào đó
         }, 1000);
       } else {
-        window.alert('An error occurred while creating! Please try again');    
+        window.alert("An error occurred while creating! Please try again");
       }
     } catch (error) {
       console.log(error);
       window.alert(error);
     }
   };
-  console.log("aaaa", product_type);
-  console.log('product_percent',product_percent);
-  console.log('product_price',product_price);   console.log('product_star',product_star);   console.log('product_quantity',product_quantity);  
+  console.log("product_img: ", product_img);
 
   return (
     <div className="add-product__container">
@@ -154,34 +142,29 @@ const AddProduct = () => {
                 }}
               />
 
-            <label className="add__label">Description</label>
+              <label className="add__label">Description</label>
               <input
                 className="add__input"
                 onChange={(e) => {
                   setDes(e.target.value);
                 }}
               />
-
               <label className="add__label">Image</label>
               <input
-                // type="file"
+                type="file"
                 className="add__input"
                 onChange={(e) => {
-                  setImg(e.target.value);
-                  // setImg(e.target.files[0]);
+                  // Đảm bảo rằng một file đã được chọn
+                  if (e.target.files.length > 0) {
+                    // Cập nhật state bằng file đầu tiên được chọn
+                    setImg(e.target.files[0]);
+                  }
                 }}
-                // onChange={(e) => {
-                //   const file = e.target.files[0];
-                //   if (file) {
-                //     console.log(file.name); // In tên file vào console
-                //     setImg(file.name); 
-                //   }
-                // }}
               />
 
               <label className="add__label">Product type</label>
               <select
-                style={{ fontWeight: '500' }}
+                style={{ fontWeight: "500" }}
                 className="add__input"
                 onChange={(e) => {
                   setEnType(e.target.value);
@@ -226,34 +209,19 @@ const AddProduct = () => {
                   setPercent(e.target.value);
                 }}
               />
-
-              {/* <label className="add__label">Trạng thái sản phẩm</label>
-              <select
-                className="add__input"
-                onChange={(e) => {
-                  setStatus(e.target.value);
-                }}
-                value={status}
-              >
-                <option value="" selected>
-                  Chọn giá trị...
-                </option>
-                <option value="Sẵn hàng">Sẵn hàng</option>
-                <option value="Cháy hàng">Cháy hàng</option>
-              </select> */}
             </div>
           </div>
 
           <div className="add__footer">
             <button className="add__btn-confirm" onClick={handleAddProduct}>
-            Confirm
+              Confirm
               <i className="add__btn-icon fa fa-check"></i>
             </button>
 
             <button
               onClick={(e) => {
                 e.preventDefault();
-                navigate('/admin/product');
+                navigate("/admin/product");
               }}
               className="add__btn-close"
             >
