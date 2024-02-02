@@ -13,7 +13,7 @@ public class Product
     
     public string product_type { get; set; }
     
-    public string product_img { get; set; }
+    public string? product_img { get; set; }
     
     public int product_quantity { get; set; } 
     

@@ -6,22 +6,14 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace PJ_SEM03.Migrations
 {
     /// <inheritdoc />
-    public partial class Initia : Migration
+    public partial class _2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<string>(
-                name: "user_fullName",
-                table: "AspNetUsers",
-                type: "nvarchar(max)",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldType: "nvarchar(max)");
-
-            migrationBuilder.AlterColumn<string>(
-                name: "user_address",
-                table: "AspNetUsers",
+                name: "product_img",
+                table: "Products",
                 type: "nvarchar(max)",
                 nullable: true,
                 oldClrType: typeof(string),
@@ -32,60 +24,50 @@ namespace PJ_SEM03.Migrations
                 keyColumn: "Id",
                 keyValue: "1",
                 columns: new[] { "ConcurrencyStamp", "PasswordHash", "SecurityStamp" },
-                values: new object[] { "bd4dc158-90f5-4547-808b-b2fb829a1307", "AQAAAAIAAYagAAAAEMCtmexDCZVVX3guScM+MJqA2t2G/CHo9XCYR/CW0uw65AlZu7w/jdTr5NcA4m3JpQ==", "1422094e-4046-490c-8eee-2c22a770e769" });
+                values: new object[] { "6d575024-173b-49e4-a0ee-20f811fffb23", "AQAAAAIAAYagAAAAEH+aP7xz59IE+1+pXfkGXuolxUaPTRcrv4MyQkB/McwH6s1Oq71GeFNfrJFNZ0M9Ug==", "106995de-ffa1-4b11-bdba-47ba34d893a7" });
 
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: "2",
                 columns: new[] { "ConcurrencyStamp", "PasswordHash", "SecurityStamp" },
-                values: new object[] { "0a4ae7a1-6399-480d-bb16-800dc72f3a44", "AQAAAAIAAYagAAAAEFM23vKyPNGWDWmF7l8of5hBfonuMbXSVD2pwNLE4fsk7NcsSFR09NNOqNxxx2ZoHQ==", "c333a66f-7e39-4398-9742-2365811d955e" });
+                values: new object[] { "6ac5adfa-538e-415b-81c8-340b49398ed6", "AQAAAAIAAYagAAAAEMhyD9xTMOWInHRJz2Sk4zHVyZDbWKKbPOLNvt2soGHvFPBPf3tm6AIweu89MogE3g==", "2bca7330-6d13-45d8-878d-3c4520707f2b" });
 
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: "3",
                 columns: new[] { "ConcurrencyStamp", "PasswordHash", "SecurityStamp" },
-                values: new object[] { "cf1c6d81-c57e-4f25-889d-1533a7abdae1", "AQAAAAIAAYagAAAAEHpwIskDtE+UZEZXkWS8FahS0+wq0a59+sNgd3X/Rzq9evIvqPF2j0HvhY/RZ2sd1A==", "64c6651f-8521-465e-9fb3-608d15b3a250" });
+                values: new object[] { "029dbfc1-9ed1-4a05-abf9-69a35762d012", "AQAAAAIAAYagAAAAELnIvd/MSnIUAhkO8ujXMdAaCPgxedy/nTSdcum74OrRmTkCGaHM6tDU7ceMjMWEwg==", "13744bc7-62c7-427b-88af-582ede7e7b0f" });
 
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: "4",
                 columns: new[] { "ConcurrencyStamp", "PasswordHash", "SecurityStamp" },
-                values: new object[] { "99097125-1c30-4d2c-880b-c20d30ae9b4c", "AQAAAAIAAYagAAAAEE3KXMsDzkdvj+OCEg1i9OosZtxGrxZut//l/Bpe/AKe9R2eqxC+VQ7aAqEej9ULLw==", "b89c842f-124e-46c2-91af-b275d5a6bb9f" });
+                values: new object[] { "9d451f7f-6252-4ac1-b85a-890105813de8", "AQAAAAIAAYagAAAAEJvZc9dQ0Afx7xI06CLWPLvwtbS8RSI21j1aadw7EKhNDZv6n8ifwGVl0ABiKalEoQ==", "d8a3a2e0-6264-43a2-9e77-a399f7515e08" });
 
             migrationBuilder.UpdateData(
                 table: "Orders",
                 keyColumn: "order_id",
                 keyValue: 1,
                 column: "order_datetime",
-                value: new DateTime(2024, 2, 2, 1, 0, 6, 648, DateTimeKind.Local).AddTicks(299));
+                value: new DateTime(2024, 2, 2, 2, 10, 54, 686, DateTimeKind.Local).AddTicks(4326));
 
             migrationBuilder.UpdateData(
                 table: "Orders",
                 keyColumn: "order_id",
                 keyValue: 2,
                 column: "order_datetime",
-                value: new DateTime(2024, 2, 2, 1, 0, 6, 648, DateTimeKind.Local).AddTicks(313));
+                value: new DateTime(2024, 2, 2, 2, 10, 54, 686, DateTimeKind.Local).AddTicks(4343));
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<string>(
-                name: "user_fullName",
-                table: "AspNetUsers",
-                type: "nvarchar(max)",
-                nullable: false,
-                defaultValue: "",
-                oldClrType: typeof(string),
-                oldType: "nvarchar(max)",
-                oldNullable: true);
-
-            migrationBuilder.AlterColumn<string>(
-                name: "user_address",
-                table: "AspNetUsers",
+                name: "product_img",
+                table: "Products",
                 type: "nvarchar(max)",
                 nullable: false,
                 defaultValue: "",
@@ -98,42 +80,42 @@ namespace PJ_SEM03.Migrations
                 keyColumn: "Id",
                 keyValue: "1",
                 columns: new[] { "ConcurrencyStamp", "PasswordHash", "SecurityStamp" },
-                values: new object[] { "f0abff92-83ea-409e-9a3d-a06d56df7737", "AQAAAAIAAYagAAAAEA90qqzpvzqySKmRw7uCFvsxTGh8MN04q9iX55IPeRLd8Tq6mbqe62rhHHtejuRdpQ==", "d1a4c737-cc75-4f3d-8057-a05da69e45b5" });
+                values: new object[] { "05f1c577-7ff5-4601-a044-9c1f1f7221da", "AQAAAAIAAYagAAAAEApEokN6Ep1vNJbylyQz66wiWtgT1j7xTUvnGbdccWviY4cWfTHRpkUjSQwVGPsnJw==", "2d38c3bb-968f-4845-a345-d0d01338b1ab" });
 
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: "2",
                 columns: new[] { "ConcurrencyStamp", "PasswordHash", "SecurityStamp" },
-                values: new object[] { "e530c0fe-c7d7-455d-a4fd-3492b61befa2", "AQAAAAIAAYagAAAAEAFhYkphoeuTLiNw8aqSiudnBHzkM8DROxa45IAYtkbBZbD17rHzFTGTRIG3/R0sDw==", "7f4c0a5e-6a4e-4ea6-bec5-8a2793fa99e8" });
+                values: new object[] { "d693a376-d240-4c14-8ca8-670f8bf86036", "AQAAAAIAAYagAAAAEJ1yy0z/1xWVVa5Py0D0adoK2wr3PlcZgs65bF76AsR2KKcbaI0wlPMnLiGmcbB1FQ==", "d642af45-f6f1-4b44-a818-4a5deace19dc" });
 
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: "3",
                 columns: new[] { "ConcurrencyStamp", "PasswordHash", "SecurityStamp" },
-                values: new object[] { "a5fadb24-c97b-407c-a322-8604c1069f8c", "AQAAAAIAAYagAAAAEPyBfZJ/eR1vdlnb7hXaT0R8ku8CKSWCEeTEIC3VPDGUvCyXOIVh+pdL7uHKgufCTg==", "4cbfc942-2f9c-4b82-b67d-e0ca18b64abe" });
+                values: new object[] { "6fb74556-7e9e-4a69-ba30-195fdfaa4021", "AQAAAAIAAYagAAAAEBYyERan/GYZxyLaHTQ2LrgSC5OfvNxg1IBud5e8fKEBv1P0KuoorPJtM5hE7dix6Q==", "69623a9e-90b3-4315-bb3b-df6eb22f672c" });
 
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: "4",
                 columns: new[] { "ConcurrencyStamp", "PasswordHash", "SecurityStamp" },
-                values: new object[] { "185d2913-f887-43b5-8fa7-de5956118fa4", "AQAAAAIAAYagAAAAEDrOai+y08pNlR5TUf3qm9Xf+Hw+5Uu/4+zDbIh+nPfSgPRhN83ssX2BI1i7/JYg5A==", "b5caa277-d98a-4e73-9851-274f267ce4dc" });
+                values: new object[] { "c754423f-575a-46fc-80a5-102b9eaeb8dd", "AQAAAAIAAYagAAAAEJsTr/Gn2L0ASNYj8OaMRR089d749eKub6hDsymCQRdRhFptyW7uIt/p+1FkKKYmSA==", "77286d2f-0344-455e-a14e-b69cf33b9407" });
 
             migrationBuilder.UpdateData(
                 table: "Orders",
                 keyColumn: "order_id",
                 keyValue: 1,
                 column: "order_datetime",
-                value: new DateTime(2024, 2, 2, 0, 14, 13, 628, DateTimeKind.Local).AddTicks(8850));
+                value: new DateTime(2024, 2, 2, 1, 51, 27, 808, DateTimeKind.Local).AddTicks(587));
 
             migrationBuilder.UpdateData(
                 table: "Orders",
                 keyColumn: "order_id",
                 keyValue: 2,
                 column: "order_datetime",
-                value: new DateTime(2024, 2, 2, 0, 14, 13, 628, DateTimeKind.Local).AddTicks(8865));
+                value: new DateTime(2024, 2, 2, 1, 51, 27, 808, DateTimeKind.Local).AddTicks(601));
         }
     }
 }

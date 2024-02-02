@@ -21,6 +21,7 @@ import {
   PromotePage,
 } from './components/AdminComponents/Promote';
 import FeedbackPage from './components/AdminComponents/Feedback/FeedbackPage';
+import OrderPage from './components/AdminComponents/Order/OrderPage';
 
 // Client components
 import Home from './components/ConsumerComponents/Home/Home';
@@ -85,6 +86,7 @@ function App() {
             <Route path="/admin/promote/info/:id" element={<InfoPromote />} />
 
             <Route path="/admin/feedback" element={<FeedbackPage />} />
+            <Route path="/admin/order" element={<OrderPage />} />
 
             {/* ----------------------------- Page not found ------------------------------ */}
             <Route path="/admin/*" element={<PageNotFound />} />

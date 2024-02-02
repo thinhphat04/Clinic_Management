@@ -17,7 +17,7 @@ const AccountClient = () => {
 
   useEffect(() => {
     document.title = 'Clinic Online | Tài khoản';
-    console.log("loginnn:: ", JSON.parse(window.localStorage.getItem('auth')).id);
+    // console.log("loginnn:: ", JSON.parse(window.localStorage.getItem('auth')).id);
     if (window.localStorage.getItem('auth')) {
       const fetchAPIs = () => {
         fetch(

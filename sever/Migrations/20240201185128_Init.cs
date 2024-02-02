@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace PJ_SEM03.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -32,8 +32,8 @@ namespace PJ_SEM03.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    user_fullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    user_address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    user_fullName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    user_address = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Role = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AvatarUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -397,10 +397,10 @@ namespace PJ_SEM03.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "AvatarUrl", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Role", "SecurityStamp", "TwoFactorEnabled", "UserName", "user_address", "user_fullName" },
                 values: new object[,]
                 {
-                    { "1", 0, "https://robohash.org/mail@ashallendesign.co.uk", "f0abff92-83ea-409e-9a3d-a06d56df7737", "admin@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEA90qqzpvzqySKmRw7uCFvsxTGh8MN04q9iX55IPeRLd8Tq6mbqe62rhHHtejuRdpQ==", null, false, "Admin", "d1a4c737-cc75-4f3d-8057-a05da69e45b5", false, "admin", "Ho Chi Minh", "admin" },
-                    { "2", 0, "https://api.dicebear.com/7.x/adventurer-neutral/svg?seed=mail@ashallendesign.co.uk", "e530c0fe-c7d7-455d-a4fd-3492b61befa2", "phat@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEAFhYkphoeuTLiNw8aqSiudnBHzkM8DROxa45IAYtkbBZbD17rHzFTGTRIG3/R0sDw==", null, false, "Member", "7f4c0a5e-6a4e-4ea6-bec5-8a2793fa99e8", false, "phat", "Quan 2, HCM", "Ngo Thinh Phat" },
-                    { "3", 0, "https://api.dicebear.com/7.x/adventurer-neutral/svg?seed=mail@ashallendesign.co.uk", "a5fadb24-c97b-407c-a322-8604c1069f8c", "khai@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEPyBfZJ/eR1vdlnb7hXaT0R8ku8CKSWCEeTEIC3VPDGUvCyXOIVh+pdL7uHKgufCTg==", null, false, "Member", "4cbfc942-2f9c-4b82-b67d-e0ca18b64abe", false, "khai", "Tan Binh, HCM", "Bui Tuan Khai" },
-                    { "4", 0, "https://api.dicebear.com/7.x/adventurer-neutral/svg?seed=mail@ashallendesign.co.uk", "185d2913-f887-43b5-8fa7-de5956118fa4", "tram@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEDrOai+y08pNlR5TUf3qm9Xf+Hw+5Uu/4+zDbIh+nPfSgPRhN83ssX2BI1i7/JYg5A==", null, false, "Member", "b5caa277-d98a-4e73-9851-274f267ce4dc", false, "tram", "Thu Duc, HCM", "Tran Bao Huyen Tram" }
+                    { "1", 0, "https://robohash.org/mail@ashallendesign.co.uk", "05f1c577-7ff5-4601-a044-9c1f1f7221da", "admin@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEApEokN6Ep1vNJbylyQz66wiWtgT1j7xTUvnGbdccWviY4cWfTHRpkUjSQwVGPsnJw==", null, false, "Admin", "2d38c3bb-968f-4845-a345-d0d01338b1ab", false, "admin", "Ho Chi Minh", "admin" },
+                    { "2", 0, "https://api.dicebear.com/7.x/adventurer-neutral/svg?seed=mail@ashallendesign.co.uk", "d693a376-d240-4c14-8ca8-670f8bf86036", "phat@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEJ1yy0z/1xWVVa5Py0D0adoK2wr3PlcZgs65bF76AsR2KKcbaI0wlPMnLiGmcbB1FQ==", null, false, "Member", "d642af45-f6f1-4b44-a818-4a5deace19dc", false, "phat", "Quan 2, HCM", "Ngo Thinh Phat" },
+                    { "3", 0, "https://api.dicebear.com/7.x/adventurer-neutral/svg?seed=mail@ashallendesign.co.uk", "6fb74556-7e9e-4a69-ba30-195fdfaa4021", "khai@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEBYyERan/GYZxyLaHTQ2LrgSC5OfvNxg1IBud5e8fKEBv1P0KuoorPJtM5hE7dix6Q==", null, false, "Member", "69623a9e-90b3-4315-bb3b-df6eb22f672c", false, "khai", "Tan Binh, HCM", "Bui Tuan Khai" },
+                    { "4", 0, "https://api.dicebear.com/7.x/adventurer-neutral/svg?seed=mail@ashallendesign.co.uk", "c754423f-575a-46fc-80a5-102b9eaeb8dd", "tram@test.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEJsTr/Gn2L0ASNYj8OaMRR089d749eKub6hDsymCQRdRhFptyW7uIt/p+1FkKKYmSA==", null, false, "Member", "77286d2f-0344-455e-a14e-b69cf33b9407", false, "tram", "Thu Duc, HCM", "Tran Bao Huyen Tram" }
                 });
 
             migrationBuilder.InsertData(
@@ -450,8 +450,8 @@ namespace PJ_SEM03.Migrations
                 columns: new[] { "order_id", "AppliedGiftCodeId", "order_address", "order_code", "order_datetime", "order_note", "order_phone", "order_status", "order_total", "user_id" },
                 values: new object[,]
                 {
-                    { 1, null, "HCM", "ORD001", new DateTime(2024, 2, 2, 0, 14, 13, 628, DateTimeKind.Local).AddTicks(8850), "Note 1", "123", "Processing", 100, "1" },
-                    { 2, null, "Ca Mau", "ORD001", new DateTime(2024, 2, 2, 0, 14, 13, 628, DateTimeKind.Local).AddTicks(8865), "Note 2", "124", "Delivered", 200, "2" }
+                    { 1, null, "HCM", "ORD001", new DateTime(2024, 2, 2, 1, 51, 27, 808, DateTimeKind.Local).AddTicks(587), "Note 1", "123", "Processing", 100, "1" },
+                    { 2, null, "Ca Mau", "ORD001", new DateTime(2024, 2, 2, 1, 51, 27, 808, DateTimeKind.Local).AddTicks(601), "Note 2", "124", "Delivered", 200, "2" }
                 });
 
             migrationBuilder.InsertData(
