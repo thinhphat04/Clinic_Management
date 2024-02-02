@@ -67,70 +67,27 @@ namespace PJ_SEM03.Controllers
                 return BadRequest(ex);
             }
         }
+        [HttpPut("ChangePassword/{userId}")]
+        public async Task<IActionResult> ChangePassword(string userId, [FromBody] ChangePasswordDto changePasswordDto)
+        {
+            try
+            {
+                var result = await repo.changePassword(userId, changePasswordDto);
 
-        //[HttpPost("forgotpassword")]
-        //public async Task<IActionResult> ForgotPassword([FromBody] string Email)
-        //{
-        //    try
-        //    {
-        //        if (ModelState.IsValid)
-        //        {
-        //            var user = await _userManager.FindByEmailAsync(Email);
+                if (result.Success)
+                {
+                    return Ok(result.Result);
+                }
+                else
+                {
+                    return BadRequest(result.Result);
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
 
-        //            if (user != null)
-        //            {
-        //                var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-
-        //                var resetPasswordLink = Url.Action(nameof(ResetPassword), "Account", new { userId = user.Email, token }, protocol: HttpContext.Request.Scheme);
-
-        //                var message = new Message(new string[] { user.Email! }, "ForgotPasswordLink", resetPasswordLink);
-        //                _emailService.SendEmail(message);
-
-        //                return Ok("Password reset link sent successfully.");
-        //            }
-        //            else
-        //            {
-        //                return BadRequest("User with the given email address not found.");
-        //            }
-        //        }
-        //        else
-        //        {
-        //            return BadRequest("Invalid data.");
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return BadRequest(ex.Message);
-        //    }
-        //}
-
-        //[HttpGet("reset-password")]
-        //public async Task<IActionResult> ResetPassword(string token, string email)
-        //{
-        //    var model = new ResetPassword { Token = token, Email = email };
-        //    return Ok(new { model });
-        //}
-
-        //[HttpPost("reset-password")]
-        //public async Task<IActionResult> ResetPassword(ResetPassword resetPassword)
-        //{
-        //    var user = await _userManager.FindByEmailAsync(resetPassword.Email);
-        //    if (user != null)
-        //    {
-        //        var resetPassResult = await _userManager.ResetPasswordAsync(user, resetPassword.Token, resetPassword.Password);
-        //        if (!resetPassResult.Succeeded)
-        //        {
-        //            foreach (var error in resetPassResult.Errors)
-        //            {
-        //                ModelState.AddModelError(error.Code, error.Description);
-        //            }
-        //            return Ok(ModelState);
-        //        }
-        //        return Ok("Password has been changed");
-        //    }
-        //    return BadRequest("Can not send email, please try again");
-        //}
-
-       
     }
 }
