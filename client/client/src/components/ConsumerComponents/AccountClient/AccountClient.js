@@ -21,20 +21,14 @@ const AccountClient = () => {
     if (window.localStorage.getItem('auth')) {
       const fetchAPIs = () => {
         fetch(
-          `https://localhost:7096/api/users/${
+          `https://localhost:7096/api/User/user/${
             JSON.parse(window.localStorage.getItem('auth')).id
           }`,
         )
-          // .then((res) => res.json())
+          .then((res) => res.json())
           .then((data) => {
             setUser(data);
           });
-
-        // fetch('https://localhost:7096/api/orders')
-        //   .then((res) => res.json())
-        //   .then((data) => {
-        //     setOrders(data);
-        //   });
       };
       fetchAPIs();
     } else {
@@ -42,6 +36,23 @@ const AccountClient = () => {
     }
     handleLoadOptionSidebar(0);
   }, []);
+
+  // useEffect(() => {
+  //   document.title = "Clinic Online | Personal information";
+  //   const fetchAPIs = () => {
+  //     fetch(
+  //       `https://localhost:7096/api/User/user/${
+  //         JSON.parse(window.localStorage.getItem("auth")).id
+  //       }`
+  //     )
+  //       .then((res) => res.json())
+  //       .then((data) => {
+  //         setUser(data);
+  //       });
+  //   };
+  //   fetchAPIs();
+  //   handleLoadOptionSidebar(1);
+  // }, []);
 
   useEffect(() => {
     // Show thông tin số đơn hàng đang giao
@@ -67,7 +78,7 @@ const AccountClient = () => {
       }
     });
   }, [orders]);
-
+console.log('datauser:  ', user);
   return (
     <>
       <Nav />
@@ -81,13 +92,13 @@ const AccountClient = () => {
                 <img
                   src={
                     user.avatarUrl ||
-                    `${process.env.REACT_APP_API}/public/img-avatar-empty.png`
+              ''
                   }
                   className="account__box-info-avatar"
                 ></img>
                 <label className="account__box-info-label">HELLO</label>
                 <label className="account__box-info-fullname">
-                  {user.fullname}
+                  {user.user_fullName}
                 </label>
                 <div className="account__box-info-list">
                   <div className="account__box-info-item">

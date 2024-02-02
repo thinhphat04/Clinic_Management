@@ -22,7 +22,6 @@ import {
 } from './components/AdminComponents/Promote';
 import FeedbackPage from './components/AdminComponents/Feedback/FeedbackPage';
 import OrderPage from './components/AdminComponents/Order/OrderPage';
-
 // Client components
 import Home from './components/ConsumerComponents/Home/Home';
 import {
@@ -92,7 +91,6 @@ function App() {
             <Route path="/admin/*" element={<PageNotFound />} />
           </Routes>
         </AuthAdminProvider>
-
         <AuthProvider>
           <Routes>
             {/* ------------------------------------- Route Client ------------------------------------- */}

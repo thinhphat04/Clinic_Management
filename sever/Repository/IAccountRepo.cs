@@ -9,5 +9,6 @@ namespace PJ_SEM03.Repository
     {
         Task<UserDto> Login(LoginDto loginDto);
         Task<(bool Success, object Result)> RegisterUser(RegisterDto registerDto);
+        Task<(bool Success, object Result)> changePassword(string user_id, ChangePasswordDto changePasswordDto);
     }
 }

@@ -8,7 +8,7 @@ const AuthProvider = ({ children }) => {
     const data = localStorage.getItem('auth');
     if (data) {
       const parseData = JSON.parse(data);
-      console.log("parseData:: ", parseData);
+      // console.log("parseData:: ", parseData);
       setAuth({
         email: parseData.email,
         token: parseData.token,

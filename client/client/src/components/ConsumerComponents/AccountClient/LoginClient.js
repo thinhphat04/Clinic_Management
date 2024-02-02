@@ -58,8 +58,6 @@ const LoginClient = () => {
           // userName: res.data.user.username,
           token: res.data.token,
         });
-        // console.log(res.data);
-        // alert('Đăng nhập thành công');
         showSuccessToast();
         //handleLoadingPage(1);
         window.setTimeout(() => {          

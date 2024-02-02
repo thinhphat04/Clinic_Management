@@ -58,7 +58,7 @@ const AdminHeader = () => {
             --
           </div>
 
-          <img src="https://i.pinimg.com/564x/40/98/2a/40982a8167f0a53dedce3731178f2ef5.jpg" className="admin__header-avatar"></img>
+          <img src={admin.avatarUrl} className="admin__header-avatar"></img>
 
           <div className="admin__header-option">
             <div
