@@ -3,10 +3,12 @@ using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PJ_SEM03.DTO;
 using PJ_SEM03.Models;
 using PJ_SEM03.Repository;
 using PJ_SEM03.RequestHelpers;
 using PJ_SEM03.Services;
+using Product = PJ_SEM03.Models.Product;
 
 namespace PJ_SEM03.Controllers
 {
@@ -50,18 +52,30 @@ namespace PJ_SEM03.Controllers
                 return BadRequest(ex);
             }
         }
-        
-        
         [HttpPost]
-        public async Task<ActionResult<Product>> CreateProduct(Product product)
+        public async Task<ActionResult<Product>> CreateProduct([FromForm]productDTO product)
         {
-            return await productRepo.createProduct(product);
-        }
+            try
+            {
+                return Ok(await productRepo.createProduct(product));
+            }
+            catch (Exception  ex)
+            {
+                return BadRequest(ex);
+            }
 
+        }
         [HttpPut("{id}")]
-        public async Task<ActionResult<Product>> UpdateProduct(int id, Product product)
+        public async Task<ActionResult<Product>> UpdateProduct(int id, [FromForm]productDTO product)
         {
-            return await productRepo.updateProduct(id, product);
+            try
+            {
+                return Ok(await productRepo.updateProduct(id, product));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
         [HttpDelete("{id}")]
         public async Task<ActionResult<Product>> DeleteProduct(int id)
