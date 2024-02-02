@@ -76,14 +76,13 @@ const InfoCustomer = () => {
                 <img
                   src={
                     user.avatarUrl ||
-                    `${process.env.REACT_APP_API}/public/img-avatar-empty.png`
+                    `/public/img-avatar-empty.png`
                   }
                   className="info-page__avatar-img"
                 ></img>
               </div>
-              <label className="info-page__user-id">{user.username}</label>
+              <label className="info-page__user-id">{user.user_fullName}</label>
             </div>
-
             <div className="info-page__col-2">
               <label className="info-page__title">Thông tin cá nhân</label>
 

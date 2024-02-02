@@ -51,6 +51,9 @@ const Nav = () => {
       window.location.href = "/login";
     }, 2000);
   };
+
+
+  // console.log('auth:: ', auth);
   return (
     <React.Fragment>
       <div className="nav-container">
