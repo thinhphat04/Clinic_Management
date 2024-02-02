@@ -95,6 +95,18 @@ namespace PJ_SEM03.Controllers
             return Ok(await productRepo.getAll(isAscending));
         }
         
+        [HttpPatch("updateProductImage/{id}")]
+        public async Task<ActionResult<Product>> UpdateProductImage(int id, IFormFile newImage)
+        {
+            var result = await productRepo.UpdateProductImage(id, newImage);
+
+            if (result.Value == null)
+            {
+                return NotFound();
+            }
+
+            return result.Value;
+        }
         
     }
 }

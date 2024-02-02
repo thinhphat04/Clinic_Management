@@ -73,7 +73,38 @@ namespace PJ_SEM03.Services
         //     await _dbContext.SaveChangesAsync();
         //     return product;
         // }
+        
         public async Task<ActionResult<Product>> updateProduct(int id, productDTO updatedProduct)
+                 {
+                     var existingProduct = await _dbContext.Products.FindAsync(id);
+         
+                     if (existingProduct == null)
+                     {
+                         return null;
+                     }
+         
+                     if (updatedProduct.Image != null)
+                     {
+                         CloudinaryService cloud = new CloudinaryService();
+                         string url = cloud.UploadImage(updatedProduct.Image);
+                         existingProduct.product_img = url;
+                     }
+         
+                     existingProduct.product_description = updatedProduct.product_description;
+                     existingProduct.product_name = updatedProduct.product_name;
+                     existingProduct.product_type = updatedProduct.product_type;
+                     existingProduct.product_price = updatedProduct.product_price;
+                     existingProduct.product_star = updatedProduct.product_star;
+                     existingProduct.product_percent = updatedProduct.product_percent;
+                     existingProduct.product_quantity = updatedProduct.product_quantity;
+         
+                     _dbContext.Products.Update(existingProduct);
+                     await _dbContext.SaveChangesAsync();
+         
+                     return existingProduct;
+                 }
+        
+        public async Task<ActionResult<Product>> UpdateProductImage(int id, IFormFile newImage)
         {
             var existingProduct = await _dbContext.Products.FindAsync(id);
 
@@ -82,27 +113,19 @@ namespace PJ_SEM03.Services
                 return null;
             }
 
-            if (updatedProduct.Image != null)
+            if (newImage != null)
             {
                 CloudinaryService cloud = new CloudinaryService();
-                string url = cloud.UploadImage(updatedProduct.Image);
+                string url = cloud.UploadImage(newImage);
                 existingProduct.product_img = url;
             }
-
-            existingProduct.product_description = updatedProduct.product_description;
-            existingProduct.product_name = updatedProduct.product_name;
-            existingProduct.product_type = updatedProduct.product_type;
-            existingProduct.product_price = updatedProduct.product_price;
-            existingProduct.product_star = updatedProduct.product_star;
-            existingProduct.product_percent = updatedProduct.product_percent;
-            existingProduct.product_quantity = updatedProduct.product_quantity;
 
             _dbContext.Products.Update(existingProduct);
             await _dbContext.SaveChangesAsync();
 
             return existingProduct;
         }
-
+        
         
 
         public async Task<ActionResult<Product>> deleteProduct(int id)
