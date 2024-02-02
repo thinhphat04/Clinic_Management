@@ -64,7 +64,7 @@ const CustomerPage = () => {
                   <td>Email</td>
                   <td>Phone number</td>
                   <td>Address</td>
-                  <td>Edit</td>
+                  {/* <td>Edit</td> */}
                 </tr>
               </thead>
               <tbody className="table__tbody-primary">
@@ -106,11 +106,11 @@ const CustomerPage = () => {
                       <td style={{ textAlign: 'left' }}>
                         {user.user_address || 'None'}
                       </td>
-                      <td>
+                      {/* <td>
                         <div className="table__edit-btn">
                           {<EditButtonCustomer user={user} />}
                         </div>
-                      </td>
+                      </td> */}
                     </tr>
                   ))
                 )}

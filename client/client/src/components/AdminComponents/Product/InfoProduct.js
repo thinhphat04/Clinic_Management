@@ -1,17 +1,17 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import './product.css';
-import AdminHeader from '../Common/AdminHeader';
-import AdminSidebar, { handleLoadOptionSelected } from '../Common/AdminSidebar';
-import { changeFilename, handleLoadingPage } from '../../Common';
-import axios from 'axios';
+import React from "react";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import "./product.css";
+import AdminHeader from "../Common/AdminHeader";
+import AdminSidebar, { handleLoadOptionSelected } from "../Common/AdminSidebar";
+import { changeFilename, handleLoadingPage } from "../../Common";
+import axios from "axios";
 
 const InfoProduct = () => {
   const [product, setProduct] = useState({});
   const { id } = useParams();
-  const [type, setType] = useState('');
-  const [enType, setEnType] = useState('');
+  const [type, setType] = useState(product.product_type);
+  const [enType, setEnType] = useState("");
   const [colorProductEdit, setColorProductEdit] = useState([]);
   const [boolHotDeal, setBoolHotDeal] = useState(false);
   const [boolFeatured, setBoolFeatured] = useState(false);
@@ -23,53 +23,51 @@ const InfoProduct = () => {
 
   useEffect(() => {
     const fetchAPIs = () => {
-      document.title = 'Clinic Online | Thông tin sản phẩm';
-      fetch('https://localhost:7096/api/products/' + id)  
+      document.title = "Clinic Online | Thông tin sản phẩm";
+      fetch("https://localhost:7096/api/Products/search/" + id)
         .then((res) => res.json())
         .then((data) => {
-          setProduct(data);
-          setCountImageInList(data.imageList.length);
-          setLoading(false);
-          setBoolHotDeal(data.hotDeal);
-          setBoolFeatured(data.featured);
-          setType(data.type);
+          setProduct(data[0]);
+          // setCountImageInList(data.imageList.length);
+          // setLoading(false);
+          // setBoolHotDeal(data.hotDeal);
+          // setBoolFeatured(data.featured);
+          // setType(data.type);
         });
     };
     fetchAPIs();
     handleLoadOptionSelected(2);
   }, []);
+  console.log("KHAIproduct::", product);
 
-  useEffect(() => {
-    switch (type.toLowerCase()) {
-      case 'điện thoại':
-        setEnType('smartphone');
-        break;
-      case 'máy tính bảng':
-        setEnType('tablet');
-        break;
-      case 'máy tính xách tay':
-        setEnType('laptop');
-        break;
-      case 'phụ kiện':
-        setEnType('accessories');
-        break;
-    }
-  }, [type]);
+  // useEffect(() => {
+  //   switch (type.toLowerCase()) {
+  //     case "điện thoại":
+  //       setEnType("smartphone");
+  //       break;
+  //     case "máy tính bảng":
+  //       setEnType("tablet");
+  //       break;
+  //     case "máy tính xách tay":
+  //       setEnType("laptop");
+  //       break;
+  //   }
+  // }, [type]);
 
   // Thay đổi ảnh chính
   const changeImageLink = () => {
     const preview = document.querySelector(
-      '.info-admin-product__image-primary-img',
+      ".info-admin-product__image-primary-img"
     );
-    const imageProductLink = document.querySelector('#image-primary').files[0];
+    const imageProductLink = document.querySelector("#image-primary").files[0];
 
     const reader = new FileReader();
     reader.addEventListener(
-      'load',
+      "load",
       () => {
         preview.src = reader.result;
       },
-      false,
+      false
     );
 
     if (imageProductLink) {
@@ -77,46 +75,44 @@ const InfoProduct = () => {
       setImageLinkFile(imageProductLink);
     }
   };
+  // console.log('type:: ', type);
 
   const handleConfirmChangeImageLink = async (e) => {
     e.preventDefault();
-    if (window.confirm('Bạn muốn cập nhật ảnh sản phẩm?') == true) {
+    if (window.confirm("Bạn muốn cập nhật ảnh sản phẩm?") == true) {
       try {
         if (imageLinkFile) {
           const formData = new FormData();
           formData.append(
-            'image-primary',
+            "image-primary",
             imageLinkFile,
-            changeFilename(imageLinkFile.name, 'imageLink-' + product._id),
+            changeFilename(imageLinkFile.name, "imageLink-" + product._id)
           );
 
           axios
-            .post(
-              'https://localhost:7096/api/products/upload-image',
-              formData,
-            )
+            .post("https://localhost:7096/api/products/upload-image", formData)
             .then((response) => {
               axios
                 .put(
                   `${process.env.REACT_APP_API}/api/products/update/image-link=${id}`,
                   {
                     imageLink: response.data.path,
-                  },
+                  }
                 )
                 .then((res) => {
                   if (res && res.data.success) {
-                    window.alert('Thành công!');
+                    window.alert("Thành công!");
                     handleLoadingPage(1);
                     window.setTimeout(() => {
                       window.location.reload();
                     }, 1000);
                   } else {
-                    alert('Cập nhật ảnh thất bại');
+                    alert("Cập nhật ảnh thất bại");
                   }
                 });
             })
             .catch((error) => {
-              alert('Lỗi khi upload:', error);
+              alert("Lỗi khi upload:", error);
             });
         } else {
           axios
@@ -124,17 +120,17 @@ const InfoProduct = () => {
               `${process.env.REACT_APP_API}/api/products/update/image-link=${id}`,
               {
                 imageLink: product.product_img,
-              },
+              }
             )
             .then((res) => {
               if (res && res.data.success) {
-                window.alert('Thành công!');
+                window.alert("Thành công!");
                 handleLoadingPage(1);
                 window.setTimeout(() => {
                   window.location.reload();
                 }, 1000);
               } else {
-                alert('Cập nhật ảnh thất bại');
+                alert("Cập nhật ảnh thất bại");
               }
             });
         }
@@ -147,17 +143,17 @@ const InfoProduct = () => {
   // Thay đổi ảnh banner
   const changeImageBanner = () => {
     const preview = document.querySelector(
-      '.info-admin-product__image-banner-img',
+      ".info-admin-product__image-banner-img"
     );
-    const imageProductLink = document.querySelector('#image-banner').files[0];
+    const imageProductLink = document.querySelector("#image-banner").files[0];
 
     const reader = new FileReader();
     reader.addEventListener(
-      'load',
+      "load",
       () => {
         preview.src = reader.result;
       },
-      false,
+      false
     );
 
     if (imageProductLink) {
@@ -168,30 +164,27 @@ const InfoProduct = () => {
 
   const handleConfirmChangeImageBanner = async (e) => {
     e.preventDefault();
-    var imagePrimaryProduct = '';
+    var imagePrimaryProduct = "";
     if (imagePrimaryFile) {
       imagePrimaryProduct = `/public/uploads/products/${changeFilename(
         imagePrimaryFile.name,
-        'imagePrimary-' + product._id,
+        "imagePrimary-" + product._id
       )}`;
     }
-    if (window.confirm('Bạn muốn cập nhật thông tin sản phẩm?') == true) {
+    if (window.confirm("Bạn muốn cập nhật thông tin sản phẩm?") == true) {
       try {
         if (imagePrimaryFile) {
           const formData = new FormData();
           formData.append(
-            'image-banner',
+            "image-banner",
             imagePrimaryFile,
-            changeFilename(
-              imagePrimaryFile.name,
-              'imagePrimary-' + product._id,
-            ),
+            changeFilename(imagePrimaryFile.name, "imagePrimary-" + product._id)
           );
 
           axios
             .post(
-              'https://localhost:7096/api/products/upload-image-primary',
-              formData,
+              "https://localhost:7096/api/products/upload-image-primary",
+              formData
             )
             .then((response) => {
               axios
@@ -199,38 +192,38 @@ const InfoProduct = () => {
                   `${process.env.REACT_APP_API}/api/products/update/image-banner=${id}`,
                   {
                     imagePrimary: response.data.path,
-                  },
+                  }
                 )
                 .then((res) => {
                   if (res && res.data.success) {
-                    window.alert('Thành công!');
+                    window.alert("Thành công!");
                     handleLoadingPage(1);
                     window.setTimeout(() => {
                       window.location.reload();
                     }, 1000);
                   } else {
-                    alert('Cập nhật thông tin thất bại');
+                    alert("Cập nhật thông tin thất bại");
                   }
                 });
             })
             .catch((error) => {
-              alert('Lỗi khi upload:', error);
+              alert("Lỗi khi upload:", error);
             });
         } else {
           const res = await axios.put(
             `${process.env.REACT_APP_API}/api/products/update/image-banner=${id}`,
             {
               imagePrimary: product.imagePrimary,
-            },
+            }
           );
           if (res && res.data.success) {
-            window.alert('Thành công!');
+            window.alert("Thành công!");
             handleLoadingPage(1);
             window.setTimeout(() => {
               window.location.reload();
             }, 1000);
           } else {
-            alert('Cập nhật thông tin thất bại');
+            alert("Cập nhật thông tin thất bại");
           }
         }
       } catch (error) {
@@ -241,21 +234,21 @@ const InfoProduct = () => {
 
   // Thay đổi ảnh trong list ảnh
   const changeImageInList = () => {
-    const preview = document.querySelector('.img-new');
+    const preview = document.querySelector(".img-new");
     const elementWapper = document.querySelector(
-      '.info-admin-product__image-item--disable',
+      ".info-admin-product__image-item--disable"
     );
     console.log(preview);
-    const imageProductFile = document.querySelector('#image-list').files[0];
+    const imageProductFile = document.querySelector("#image-list").files[0];
 
     const reader = new FileReader();
     reader.addEventListener(
-      'load',
+      "load",
       () => {
-        elementWapper.style.display = 'block';
+        elementWapper.style.display = "block";
         preview.src = reader.result;
       },
-      false,
+      false
     );
 
     if (imageProductFile) {
@@ -272,18 +265,18 @@ const InfoProduct = () => {
       if (imageFileInList) {
         const formData = new FormData();
         formData.append(
-          'image-list',
+          "image-list",
           imageFileInList,
           changeFilename(
             imageFileInList.name,
-            'imageList-' + product._id + '-' + countImageInList,
-          ),
+            "imageList-" + product._id + "-" + countImageInList
+          )
         );
 
         axios
           .post(
-            'https://localhost:7096/api/products/upload-image-list',
-            formData,
+            "https://localhost:7096/api/products/upload-image-list",
+            formData
           )
           .then((response) => {
             arrayImageList = [...product.imageList, response.data.path];
@@ -292,22 +285,22 @@ const InfoProduct = () => {
                 `${process.env.REACT_APP_API}/api/products/update/image-list=${id}`,
                 {
                   imageList: arrayImageList,
-                },
+                }
               )
               .then((res) => {
                 if (res && res.data.success) {
-                  window.alert('Success!');
+                  window.alert("Success!");
                   handleLoadingPage(1);
                   window.setTimeout(() => {
                     window.location.reload();
                   }, 1000);
                 } else {
-                  alert('Update information failed');
+                  alert("Update information failed");
                 }
               });
           })
           .catch((error) => {
-            alert('Lỗi khi upload:', error);
+            alert("Lỗi khi upload:", error);
           });
       } else {
         arrayImageList = [...product.imageList];
@@ -316,17 +309,17 @@ const InfoProduct = () => {
             `${process.env.REACT_APP_API}/api/products/update/image-list=${id}`,
             {
               imageList: arrayImageList,
-            },
+            }
           )
           .then((res) => {
             if (res && res.data.success) {
-              window.alert('Thành công!');
+              window.alert("Thành công!");
               handleLoadingPage(10);
               window.setTimeout(() => {
                 window.location.reload();
               }, 1000);
             } else {
-              alert('Update information failed');
+              alert("Update information failed");
             }
           });
       }
@@ -336,12 +329,12 @@ const InfoProduct = () => {
   };
 
   const handleSelectFeatured = (event) => {
-    const newValue = event.target.value === 'true';
+    const newValue = event.target.value === "true";
     setBoolFeatured(newValue);
   };
 
   const handleSelectHotDeal = (event) => {
-    const newValue = event.target.value === 'true';
+    const newValue = event.target.value === "true";
     setBoolHotDeal(newValue);
   };
 
@@ -350,9 +343,9 @@ const InfoProduct = () => {
     e.preventDefault();
 
     const inputElements = document.querySelectorAll(
-      '.info-admin-product__input',
+      ".info-admin-product__input"
     );
-    if (window.confirm('You want to update product information?') == true) {
+    if (window.confirm("You want to update product information?") == true) {
       try {
         const res = await axios.put(
           `${process.env.REACT_APP_API}/api/products/update=${id}`,
@@ -366,16 +359,16 @@ const InfoProduct = () => {
             hotDeal: boolHotDeal,
             featured: boolFeatured,
             status: inputElements[7].value,
-          },
+          }
         );
         if (res && res.data.success) {
-          window.alert('Success!');
+          window.alert("Success!");
           handleLoadingPage(1);
           window.setTimeout(() => {
             window.location.reload();
           }, 1000);
         } else {
-          alert('Update information failed');
+          alert("Update information failed");
         }
       } catch (error) {
         alert(error);
@@ -388,21 +381,21 @@ const InfoProduct = () => {
     e.preventDefault();
     if (
       window.confirm(
-        'Are you sure you want to delete all information about this product??',
+        "Are you sure you want to delete all information about this product??"
       ) == true
     ) {
       try {
         const res = await axios.delete(
-          `${process.env.REACT_APP_API}/api/products/delete/${id}`,
+          `${process.env.REACT_APP_API}/api/products/delete/${id}`
         );
         if (res && res.data.success) {
-          window.alert('Delete Successfully!');
+          window.alert("Delete Successfully!");
           handleLoadingPage(1);
           window.setTimeout(() => {
-            window.location.href = '/admin/product';
+            window.location.href = "/admin/product";
           }, 1000);
         } else {
-          alert('Delete failed');
+          alert("Delete failed");
         }
       } catch (error) {
         alert(error);
@@ -416,17 +409,15 @@ const InfoProduct = () => {
       <div id="admin-box">
         <AdminHeader />
         <div className="admin__title">
-          <label className="admin__tilte-label">
-          Have a nice day, admin!
-          </label>
+          <label className="admin__tilte-label">Have a nice day, admin!</label>
           <label className="admin__tilte-describe">
-          Customer management page
+            Customer management page
           </label>
         </div>
 
         <div className="info-admin-product__group">
           <div className="info-admin-product__header">
-          EDIT PRODUCT INFORMATION
+            EDIT PRODUCT INFORMATION
           </div>
 
           <div className="info-admin-product__body">
@@ -436,7 +427,7 @@ const InfoProduct = () => {
                   className="info-admin-product__image-primary-img"
                   src={
                     product.product_img ||
-                    'https://localhost:7096/public/img-product-empty.png'
+                    "https://localhost:7096/public/img-product-empty.png"
                   }
                 ></img>
                 <input
@@ -455,200 +446,79 @@ const InfoProduct = () => {
                   </label>
                   <button
                     className="info-admin-product__image-btn"
-                    style={{ backgroundColor: '#df8129', color: '#fff' }}
+                    style={{ backgroundColor: "#df8129", color: "#fff" }}
                     onClick={handleConfirmChangeImageLink}
                   >
                     Confirm
                   </button>
                 </div>
               </div>
-
-              <div className="info-admin-product__image-box">
-                <div className="info-admin-product__image-banner">
-                  <img
-                    className="info-admin-product__image-banner-img"
-                    src={
-                      product.imagePrimary ||
-                      'https://localhost:7096/public/img-product-empty.png'
-                    }
-                  ></img>
-                  <input
-                    type="file"
-                    id="image-banner"
-                    value=""
-                    onChange={changeImageBanner}
-                    hidden
-                  ></input>
-                  <div className="info-admin-product__image-controll">
-                    <label
-                      htmlFor="image-banner"
-                      className="info-admin-product__image-btn"
-                    >
-                      Edit
-                    </label>
-                    <button
-                      className="info-admin-product__image-btn"
-                      style={{ backgroundColor: '#df8129', color: '#fff' }}
-                      onClick={handleConfirmChangeImageBanner}
-                    >
-                      Confirm
-                    </button>
-                  </div>
-                </div>
-
-                <ul className="info-admin-product__image-list">
-                  <label
-                    for="image-list"
-                    class="info-admin-product__image-btn"
-                    style={{
-                      margin: '0px 6px 0 0',
-                      width: 'cacl(25% - 10px)',
-                      height: '56px',
-                      minWidth: '56px',
-                      padding: '0',
-                      lineHeight: '56px',
-                      fontSize: '4rem',
-                    }}
-                  >
-                    +
-                  </label>
-                  <input
-                    type="file"
-                    name="image-list"
-                    class="image-list"
-                    id="image-list"
-                    hidden
-                    onChange={changeImageInList}
-                  />
-                  <div
-                    className="info-admin-product__image-item info-admin-product__image-item--disable"
-                    style={{ display: 'none' }}
-                  >
-                    <img
-                      className="info-admin-product__image-item-img--existed img-new"
-                      src="https://localhost:7096/public/img-product-empty.png"
-                    />
-                  </div>
-
-                  {loading ? (
-                    <p>Connecting to the server...</p>
-                  ) : (
-                    product.imageList.map((item, index) => (
-                      <div
-                        className="info-admin-product__image-item"
-                        key={index}
-                      >
-                        <img
-                          className="info-admin-product__image-item-img--existed"
-                          src={product.imageList[index]}
-                        />
-                      </div>
-                    ))
-                  )}
-                </ul>
-                <button
-                  className="info-admin-product__image-btn"
-                  style={{
-                    backgroundColor: '#df8129',
-                    color: '#fff',
-                    fontSize: '1.4rem',
-                    minWidth: '90px',
-                  }}
-                  onClick={handleConfirmEditList}
-                >
-                  Confirm
-                </button>
-              </div>
             </div>
 
             <div className="info-admin-product__col-2">
               <div className="info-admin-product__box-info">
                 <label className="info-admin-product__label">
-                Product's name
+                  Product's name
                 </label>
                 <input
-                  style={{ fontWeight: 'bold' }}
+                  style={{ fontWeight: "bold" }}
                   className="info-admin-product__input"
                   defaultValue={product.product_name}
                 />
 
-                <label className="info-admin-product__label">
-                Product type
-                </label>
-                <select
-                  style={{ fontWeight: '500' }}
-                  className="info-admin-product__input"
-                  value={type}
-                  onChange={(e) => {
-                    setType(e.target.value);
-                  }}
-                >
-                  <option value="Điện thoại">Điện thoại di động</option>
-                  <option value="Máy tính xách tay">Máy tính xách tay</option>
-                  <option value="Máy tính bảng">Máy tính bảng</option>
-                  <option value="Phụ kiện">Phụ kiện công nghệ</option>
-                </select>
-
-                <label className="info-admin-product__label">Thương hiệu</label>
-                <input
-                  className="info-admin-product__input"
-                  defaultValue={product.brand}
-                />
-
-                <label className="info-admin-product__label">Màu sắc</label>
+                <label className="info-admin-product__label">Description</label>
                 <input
                   type="text"
                   className="info-admin-product__input"
-                  onChange={(e) => {
-                    var arrayColor = e.target.value.split(', ' || ',');
-                    setColorProductEdit(arrayColor);
-                  }}
-                  placeholder="(Mỗi màu sắc được ngăn cách bằng dấu phẩy). Vd: Đỏ, Vàng, ..."
-                  defaultValue={product.color}
+                  defaultValue={product.product_description}
                 />
 
                 <label className="info-admin-product__label">
-                  Giá sản phẩm
+                  Product type
                 </label>
+                <select
+                  style={{ fontWeight: "500" }}
+                  className="info-admin-product__input"
+                  onChange={(e) => {
+                    setType(e.target.value);
+                  }}
+                  value={type}
+                >
+                  {/* <option value="">Select product type...</option> */}
+                  <option value="Education">Education</option>
+                  <option value="Medical">Medical</option>
+                  <option value="Scientific">Scientific</option>
+                </select>
+
+                <label className="info-admin-product__label">
+                  Product price
+                </label>
+                <input
+                  className="info-admin-product__input"
+                  defaultValue={product.product_price}
+                  style={{ fontWeight: "bold", color: "red" }}
+                />
+
+                <label className="info-admin-product__label">Quantity</label>
                 <input
                   type="number"
                   className="info-admin-product__input"
-                  defaultValue={product.product_price}
-                  style={{ fontWeight: 'bold', color: 'red' }}
+                  defaultValue={product.product_quantity}
                 />
 
-                <label className="info-admin-product__label">
-                  Thêm vào sản phẩm nổi bật
-                </label>
-                <select
+                <label className="info-admin-product__label">Star</label>
+                <input
+                  type="number"
                   className="info-admin-product__input"
-                  value={boolFeatured.toString()}
-                  onChange={handleSelectFeatured}
-                >
-                  <option value="true">Có</option>
-                  <option value="false">Không</option>
-                </select>
+                  defaultValue={product.product_star}
+                />
 
-                <label className="info-admin-product__label">
-                  Thêm vào sản phẩm khuyến mãi khung giờ vàng
-                </label>
-                <select
+                <label className="info-admin-product__label">Percent</label>
+                <input
+                  type="number"
                   className="info-admin-product__input"
-                  value={boolHotDeal.toString()}
-                  onChange={handleSelectHotDeal}
-                  style={{ fontWeight: 'bold', color: 'green' }}
-                >
-                  <option value="true">Có</option>
-                  <option value="false">Không</option>
-                </select>
-
-                <label className="info-admin-product__label">
-                  Trạng thái sản phẩm
-                </label>
-                <select className="info-admin-product__input" value={product}>
-                  <option value="Sẵn hàng">Sẵn hàng</option>
-                  <option value="Cháy hàng">Cháy hàng</option>
-                </select>
+                  defaultValue={product.product_star}
+                />
               </div>
             </div>
           </div>
@@ -656,7 +526,7 @@ const InfoProduct = () => {
           <div className="info-admin-product__footer">
             <button
               className="info-admin-product__btn"
-              style={{ backgroundColor: 'red' }}
+              style={{ backgroundColor: "red" }}
               onClick={handleDeleteProduct}
             >
               Xóa sản phẩm<i className="ti-check"></i>
