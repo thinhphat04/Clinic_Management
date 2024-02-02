@@ -11,6 +11,10 @@ namespace PJ_SEM03.Repository
        // Task<ActionResult<Product>> createProduct(Product product);
        Task<ActionResult<Product>> createProduct(productDTO product);
        Task<ActionResult<Product>> updateProduct(int id, productDTO product);
+       
+       Task<ActionResult<Product>> UpdateProductImage(int id, IFormFile newImage);
+
+       
        Task<ActionResult<Product>> deleteProduct(int id);
        Task<IEnumerable<Product>> GetProductsByName(string name);
        Task<List<Product>> getAll();
