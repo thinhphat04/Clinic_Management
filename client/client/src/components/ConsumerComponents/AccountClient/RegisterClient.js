@@ -63,7 +63,7 @@ const RegisterClient = () => {
     });
   };
 
-
+const [registrationErrors, setRegistrationErrors] = useState(null);
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -76,29 +76,39 @@ const RegisterClient = () => {
           email: emailRegister,
           phoneNumber: phoneRegister,
           address: addressRegister,
-          fullname:fullnameRegister,
-        },
+          fullname: fullnameRegister,
+        }
       );
 
-      console.log('RESSS: ', res);
-      if (res && res.data&& res.status === 200) {
-        if (res.data.message === 'This account has been registered by someone else!') {
+      console.log("RESSS: ", res);
+      if (res && res.status === 200) {
+        if (
+          res.data.message ===
+          "This account has been registered by someone else!"
+        ) {
           window.alert(res.data.message);
         } else {
-          window.alert('Sign Up Success! Returning to the login page');
-          //showSuccessToast();
+          window.alert("Sign Up Success! Returning to the login page");
+          // showSuccessToast();
           handleLoadingPage(1);
-         
+
           window.setTimeout(() => {
-            window.location.href = '/login';
+            window.location.href = "/login";
           }, 2000);
         }
       } else {
-        window.alert('An error occurred while registering! Please try again');   
+        window.alert("An error occurred while registering! Please try again 1");
       }
     } catch (error) {
-      console.log(error);
-     // window.alert(error);
+      console.error("Error during registration:", error);
+
+      if (error.response && error.response.data && error.response.data.errors) {
+        // Set specific errors for display
+        setRegistrationErrors(error.response.data.errors);
+      } else {
+        // General error handling
+        window.alert("An error occurred while registering! Please try again 2");
+      }
     }
   };
 
@@ -113,14 +123,26 @@ const RegisterClient = () => {
               <div className="login-client__container">
                 <form className="form" id="form-1" onSubmit={handleSubmit}>
                   <label className="login-client__label-login">
-                  REGISTER A NEW ACCOUNT
+                    REGISTER A NEW ACCOUNT
                   </label>
-
+                  {/* Display registration errors if any */}
+                  {registrationErrors && (
+                    <div>
+                      <p>Registration failed due to the following errors:</p>
+                      <ul>
+                        {Object.keys(registrationErrors).map((field, index) => (
+                          <li key={index}>
+                            {field}: {registrationErrors[field].join(", ")}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                   <div className="spacer"></div>
 
                   <div className="form-group">
                     <label htmlFor="username" className="form-label">
-                    User name
+                      User name
                     </label>
                     <input
                       id="username"
@@ -136,7 +158,7 @@ const RegisterClient = () => {
 
                   <div
                     className="form-group form-group-2-col"
-                    style={{ paddingRight: '4px' }}
+                    style={{ paddingRight: "4px" }}
                   >
                     <label htmlFor="password" className="form-label">
                       Password
@@ -155,7 +177,7 @@ const RegisterClient = () => {
 
                   <div
                     className="form-group form-group-2-col"
-                    style={{ paddingLeft: '4px' }}
+                    style={{ paddingLeft: "4px" }}
                   >
                     <label
                       htmlFor="password_confirmation"
@@ -191,10 +213,10 @@ const RegisterClient = () => {
 
                   <div
                     className="form-group form-group-2-col"
-                    style={{ paddingRight: '4px' }}
+                    style={{ paddingRight: "4px" }}
                   >
                     <label htmlFor="email" className="form-label">
-                    Email address
+                      Email address
                     </label>
                     <input
                       id="email"
@@ -210,10 +232,10 @@ const RegisterClient = () => {
 
                   <div
                     className="form-group form-group-2-col"
-                    style={{ paddingLeft: '4px' }}
+                    style={{ paddingLeft: "4px" }}
                   >
                     <label htmlFor="phone" className="form-label">
-                    Phone number
+                      Phone number
                     </label>
                     <input
                       id="phone"
@@ -230,7 +252,7 @@ const RegisterClient = () => {
 
                   <div className="form-group">
                     <label htmlFor="address" className="form-label">
-                    Address:
+                      Address:
                     </label>
                     <input
                       id="address"
@@ -249,13 +271,13 @@ const RegisterClient = () => {
                 <div className="login-client__direct">
                   <div>
                     <label className="login-client__question">
-                    Already a member of Clinic Online?
+                      Already a member of Clinic Online?
                     </label>
                     <a
                       className="login-client__register"
                       onClick={(e) => {
                         e.preventDefault();
-                        navigate('/login');
+                        navigate("/login");
                       }}
                     >
                       Return to the Login page
@@ -269,11 +291,11 @@ const RegisterClient = () => {
               <div className="login-client__panel">
                 <div className="login-client__panel-img"></div>
                 <label className="login-client__panel-title">
-                Become a member
+                  Become a member
                 </label>
                 <p className="login-client__panel-desb">
-                Enjoy great experiences and incentives when you become a member
-                member of the Clinic Online family!!!
+                  Enjoy great experiences and incentives when you become a
+                  member member of the Clinic Online family!!!
                 </p>
               </div>
               <div className="login-client__panel-controll">

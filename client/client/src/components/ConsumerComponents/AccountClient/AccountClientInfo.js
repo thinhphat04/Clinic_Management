@@ -135,11 +135,11 @@ const AccountClientInfo = () => {
     const formData = new FormData();
     // Thêm các trường dữ liệu vào FormData
     formData.append("Id", JSON.parse(window.localStorage.getItem("auth")).id);
-    formData.append("Username", JSON.parse(window.localStorage.getItem("auth")).username);
-    formData.append("Fullname", inputElements[0].value);
-    formData.append("Address", inputElements[3].value);
-    formData.append("PhoneNumber", inputElements[2].value);
-    formData.append("Email", inputElements[1].value);
+    formData.append("Username", inputElements[0].value);
+    formData.append("Fullname", inputElements[1].value);
+    formData.append("Address", inputElements[4].value);
+    formData.append("PhoneNumber", inputElements[3].value);
+    formData.append("Email", inputElements[2].value);
     formData.append("Image", product_img);
     formData.append("AvatarUrl", "");
 
@@ -153,7 +153,7 @@ const AccountClientInfo = () => {
       console.log("resssProduct:: ", res);
       if (res && res.data !== null && res.status === 200) {
         alert("Update profile successfully");
-        handleLoadingPage(1); 
+        handleLoadingPage(1);
         window.setTimeout(() => {
           window.location.reload();
         }, 1000);
@@ -162,7 +162,37 @@ const AccountClientInfo = () => {
       }
     } catch (error) {
       console.log(error);
-      window.alert(error);
+
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        console.log(
+          "Server responded with error status:",
+          error.response.status
+        );
+
+        if (error.response.status === 400) {
+          // Handle specific error for duplicate email
+          const errorMessage = error.response.data
+            ? error.response.data
+            : "Bad Request";
+
+          // Show the error message to the user
+          window.alert(`Error: ${errorMessage}`);
+        } else {
+          // For other 4xx or 5xx errors
+          window.alert(
+            `Error: ${error.response.data.message || "Bad Request"}`
+          );
+        }
+      } else if (error.request) {
+        // The request was made but no response was received
+        console.log("No response received from the server");
+        window.alert("No response received from the server");
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.log("Error during request setup:", error.message);
+        window.alert("Error during request setup");
+      }
     }
   };
 
@@ -208,11 +238,18 @@ const AccountClientInfo = () => {
 
                 <label className="account__box-info-label">HELLO</label>
                 <label className="account__box-info-fullname">
-                  {user.user_fullName}
+                  {user.userName}
                 </label>
                 <label className="account__box-info-header">
                   PERSONAL INFORMATION
                 </label>
+
+                <label className="account__box-info-title">Username:</label>
+                <input
+                  className="account__box-info-input"
+                  defaultValue={user.userName}
+                  name="username"
+                />
 
                 <label className="account__box-info-title">Full name:</label>
                 <input
@@ -225,7 +262,7 @@ const AccountClientInfo = () => {
                 <input
                   className="account__box-info-input"
                   defaultValue={user.email}
-                  name="emai"
+                  name="email"
                 />
 
                 <label className="account__box-info-title">Phone number:</label>
