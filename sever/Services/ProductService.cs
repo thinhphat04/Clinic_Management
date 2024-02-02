@@ -1,27 +1,27 @@
 ﻿using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
-﻿using Azure;
+using Azure;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using PJ_SEM03.DTO;
 using PJ_SEM03.Models;
 using PJ_SEM03.Repository;
 using PJ_SEM03.RequestHelpers;
-using PJ_SEM03.DTO;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using Product = PJ_SEM03.Models.Product;
 
 namespace PJ_SEM03.Services
 {
     public class ProductService : IProductRepo
     {
         private readonly DatabaseContext _dbContext;
-        private readonly CloudinaryService _cloudinaryService;
-
+        private readonly CloudinaryService _CloudinaryService;
+       
 
         public ProductService(DatabaseContext dbContext, CloudinaryService cloudinaryService)
         {
             _dbContext = dbContext;
-            _cloudinaryService = cloudinaryService;
+            _CloudinaryService = cloudinaryService;
         }
 
         public async Task<List<Product>> getAll()
@@ -38,6 +38,8 @@ namespace PJ_SEM03.Services
         {
             return await _dbContext.Products.Where(x => x.product_type == product_type).ToListAsync();
         }
+        
+        
         
         public async Task<ActionResult<Product>> createProduct(productDTO product)
         {
@@ -63,18 +65,45 @@ namespace PJ_SEM03.Services
             await _dbContext.SaveChangesAsync();
             return newProdut;
         }
-        public async Task<ActionResult<Product>> updateProduct(int id, Product product)
+        
+        
+        // public async Task<ActionResult<Product>> createProduct(Product product)
+        // {
+        //     _dbContext.Products.Add(product);
+        //     await _dbContext.SaveChangesAsync();
+        //     return product;
+        // }
+        public async Task<ActionResult<Product>> updateProduct(int id, productDTO updatedProduct)
         {
-            if (id != product.product_id)
+            var existingProduct = await _dbContext.Products.FindAsync(id);
+
+            if (existingProduct == null)
             {
                 return null;
             }
 
-            _dbContext.Entry(product).State = EntityState.Modified;
+            if (updatedProduct.Image != null)
+            {
+                CloudinaryService cloud = new CloudinaryService();
+                string url = cloud.UploadImage(updatedProduct.Image);
+                existingProduct.product_img = url;
+            }
+
+            existingProduct.product_description = updatedProduct.product_description;
+            existingProduct.product_name = updatedProduct.product_name;
+            existingProduct.product_type = updatedProduct.product_type;
+            existingProduct.product_price = updatedProduct.product_price;
+            existingProduct.product_star = updatedProduct.product_star;
+            existingProduct.product_percent = updatedProduct.product_percent;
+            existingProduct.product_quantity = updatedProduct.product_quantity;
+
+            _dbContext.Products.Update(existingProduct);
             await _dbContext.SaveChangesAsync();
 
-            return product;
+            return existingProduct;
         }
+
+        
 
         public async Task<ActionResult<Product>> deleteProduct(int id)
         {
@@ -121,6 +150,18 @@ namespace PJ_SEM03.Services
             }
 
             return product;
+        }
+        
+        public async Task<List<Product>> getAll(bool isAscending)
+        {
+            if (isAscending)
+            {
+                return await _dbContext.Products.OrderBy(p => p.product_price).ToListAsync();
+            }
+            else
+            {
+                return await _dbContext.Products.OrderByDescending(p => p.product_price).ToListAsync();
+            }
         }
     }
 }

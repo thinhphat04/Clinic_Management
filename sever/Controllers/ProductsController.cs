@@ -8,6 +8,7 @@ using PJ_SEM03.Models;
 using PJ_SEM03.Repository;
 using PJ_SEM03.RequestHelpers;
 using PJ_SEM03.Services;
+using Product = PJ_SEM03.Models.Product;
 
 namespace PJ_SEM03.Controllers
 {
@@ -16,14 +17,14 @@ namespace PJ_SEM03.Controllers
     public class ProductsController : ControllerBase
     {
         private readonly IProductRepo productRepo;
-        private readonly CloudinaryService _cloudinaryService;
+        // private readonly CloudinaryService _cloudinaryService;
         //         private readonly IWebHostEnvironment HostEnvironment;
 
 
-        public ProductsController(IProductRepo productRepo, CloudinaryService cloudinaryService)
+        public ProductsController(IProductRepo productRepo)
         {
             this.productRepo = productRepo;
-             this._cloudinaryService = cloudinaryService;
+            // this._cloudinaryService = _cloudinaryService;
         }
 
         [HttpGet]
@@ -51,8 +52,6 @@ namespace PJ_SEM03.Controllers
                 return BadRequest(ex);
             }
         }
-
-
         [HttpPost]
         public async Task<ActionResult<Product>> CreateProduct([FromForm]productDTO product)
         {
@@ -64,13 +63,19 @@ namespace PJ_SEM03.Controllers
             {
                 return BadRequest(ex);
             }
-            
-        }
 
+        }
         [HttpPut("{id}")]
-        public async Task<ActionResult<Product>> UpdateProduct(int id, Product product)
+        public async Task<ActionResult<Product>> UpdateProduct(int id, [FromForm]productDTO product)
         {
-            return await productRepo.updateProduct(id, product);
+            try
+            {
+                return Ok(await productRepo.updateProduct(id, product));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
         [HttpDelete("{id}")]
         public async Task<ActionResult<Product>> DeleteProduct(int id)
@@ -84,6 +89,11 @@ namespace PJ_SEM03.Controllers
             return Ok(await productRepo.GetProductsByName(name));
         }
         
+        [HttpGet("sort/{isAscending}")]
+        public async Task<IActionResult> GetProducts(bool isAscending)
+        {
+            return Ok(await productRepo.getAll(isAscending));
+        }
         
         
     }
