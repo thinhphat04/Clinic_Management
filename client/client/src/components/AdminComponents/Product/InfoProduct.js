@@ -19,7 +19,9 @@ const InfoProduct = () => {
   const [imagePrimaryFile, setImagePrimaryFile] = useState(null);
   const [countImageInList, setCountImageInList] = useState(0);
   const [imageFileInList, setImageFileInList] = useState(null);
+  const [product_img, setImg] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [imageFile, setImageFile] = useState(null);
 
   useEffect(() => {
     const fetchAPIs = () => {
@@ -328,16 +330,6 @@ const InfoProduct = () => {
     }
   };
 
-  const handleSelectFeatured = (event) => {
-    const newValue = event.target.value === "true";
-    setBoolFeatured(newValue);
-  };
-
-  const handleSelectHotDeal = (event) => {
-    const newValue = event.target.value === "true";
-    setBoolHotDeal(newValue);
-  };
-
   // Cập nhật thông tin sản phẩm
   const handleConfirmChangeInfo = async (e) => {
     e.preventDefault();
@@ -345,7 +337,7 @@ const InfoProduct = () => {
     const inputElements = document.querySelectorAll(
       ".info-admin-product__input"
     );
-    if (window.confirm("You want to update product information?") == true) {
+    if (window.confirm("You want to update product information?") ===  true) {
       try {
         const res = await axios.put(
           `${process.env.REACT_APP_API}/api/products/update=${id}`,
@@ -373,6 +365,25 @@ const InfoProduct = () => {
       } catch (error) {
         alert(error);
       }
+    }
+  };
+
+  const changeImageUser = () => {
+    const preview = document.querySelector(".info-admin-product__image-primary-img");
+    const imageUser = document.querySelector("#image-primary").files[0];
+
+    const reader = new FileReader();
+    reader.addEventListener(
+      "load",
+      () => {
+        preview.src = reader.result;
+      },
+      false
+    );
+
+    if (imageUser) {
+      reader.readAsDataURL(imageUser);
+      setImageFile(imageUser);
     }
   };
 
@@ -433,10 +444,23 @@ const InfoProduct = () => {
                 <input
                   type="file"
                   id="image-primary"
-                  value=""
-                  onChange={changeImageLink}
+                  onChange={(e) => {
+                    // Đảm bảo rằng một file đã được chọn
+                    if (e.target.files.length > 0) {
+                      // Cập nhật state bằng file đầu tiên được chọn
+                      changeImageUser(product.product_id);
+                      setImg(e.target.files[0]);
+                    }
+                  }}
                   hidden
                 ></input>
+                <label
+                  className="info-page__avatar-btn"
+                  htmlFor="avatar-change-input"
+                >
+                  Change Avatar
+                </label>
+
                 <div className="info-admin-product__image-controll">
                   <label
                     htmlFor="image-primary"
@@ -444,6 +468,7 @@ const InfoProduct = () => {
                   >
                     Edit
                   </label>
+
                   <button
                     className="info-admin-product__image-btn"
                     style={{ backgroundColor: "#df8129", color: "#fff" }}

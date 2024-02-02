@@ -57,11 +57,11 @@ const PromotePage = () => {
             </label>
           </div>
 
-          <div className="promote__btn-container">
+          {/* <div className="promote__btn-container">
             <button className="promote__btn-add" onClick={handleAddPromote}>
             Add promotions
             </button>
-          </div>
+          </div> */}
 
           <table className="table">
             <thead>
@@ -72,7 +72,7 @@ const PromotePage = () => {
                 <td>Describe</td> 
                 <td>% reduce</td>
                 <td>Apply for</td>
-                <td>Edit</td>
+                {/* <td>Edit</td> */}
               </tr>
             </thead>
             <tbody className="table__tbody-primary">
@@ -120,11 +120,11 @@ const PromotePage = () => {
                     <td style={{ backgroundColor: '#fff2c1' }}>
                       {promote.applyFor}
                     </td>
-                    <td>
+                    {/* <td>
                       <div className="table__edit-btn">
                         {<EditButtonPromote promote={promote} />}
                       </div>
-                    </td>
+                    </td> */}
                   </tr>
                 ))
               )}

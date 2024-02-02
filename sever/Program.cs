@@ -63,8 +63,7 @@ builder.Services.AddScoped<IMailRepo, MailService>();
 builder.Services.AddControllers();
 //khai báo các service
 builder.Services.AddScoped<IUserRepo, UserService>();
-
-// builder.Services.AddScoped<IContactRepo, ContactService>();
+builder.Services.AddScoped<IContactRepo, ContactService>();
 builder.Services.AddScoped<IProductRepo, ProductService>();
 builder.Services.AddScoped<IOrderRepo, OrderService>();
 builder.Services.AddScoped<ICartRepo, CartService>();

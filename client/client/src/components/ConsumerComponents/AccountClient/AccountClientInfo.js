@@ -135,7 +135,7 @@ const AccountClientInfo = () => {
     const formData = new FormData();
     // Thêm các trường dữ liệu vào FormData
     formData.append("Id", JSON.parse(window.localStorage.getItem("auth")).id);
-    formData.append("Username", "");
+    formData.append("Username", JSON.parse(window.localStorage.getItem("auth")).username);
     formData.append("Fullname", inputElements[0].value);
     formData.append("Address", inputElements[3].value);
     formData.append("PhoneNumber", inputElements[2].value);

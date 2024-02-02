@@ -9,7 +9,9 @@ const Payment = ({ socket }) => {
   const [userID, setUserID] = useState('');
   const [cartUser, setCartUser] = useState([]);
 
-  const [orders, setOrders] = useState([]);
+  // const [orderK, setOrderK] = useState(null);
+
+  // const [orders, setOrders] = useState([]);
   const [timeOrder, setTimeOrder] = useState('');
 
   useEffect(() => {
@@ -143,37 +145,68 @@ const Payment = ({ socket }) => {
   };
 
   const handleComplePayment = async (e) => {
-    var today = new Date();
-    var date =
-      today.getFullYear() +
-      '-' +
-      (today.getMonth() + 1) +
-      '-' +
-      today.getDate();
-    var time =
-      today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
-    var dateTime = date + ' ' + time;
-    setTimeOrder(dateTime);
+    // var today = new Date();
+    // var date =
+    //   today.getFullYear() +
+    //   '-' +
+    //   (today.getMonth() + 1) +
+    //   '-' +
+    //   today.getDate();
+    // var time =
+    //   today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    // var dateTime = date + ' ' + time;
+    // setTimeOrder(dateTime);
     try {
       const res = await axios.post(
         `https://localhost:7096/api/Order`,
         {
            order_code:window.localStorage.getItem('orderIDCache'),
            user_id: JSON.parse(window.localStorage.getItem('auth')).id,
-           order_datetime:"2024-01-24T04:18:39.828Z",
+           order_datetime:"2024-02-02T13:32:27.0775771",
            order_status: "Pending",
            order_address: window.localStorage.getItem('addressCache'),
            order_phone:window.localStorage.getItem('phoneCache'),
            order_note: window.localStorage.getItem('noteCache'),
            order_total: 
            Number((window.localStorage.getItem('countTotalPriceCache')).toString()),
-           OrderDetails:     cartUserUpdate   
+           OrderDetails: cartUserUpdate   
          }
       );
-      console.log('ress: ', res);
+      // console.log('ress: ', res.data.user.user_email);
 
       if(res && res.data && res.status === 200){
-        showSuccessMessage()
+        showSuccessMessage();
+
+        
+
+        const resKK = await axios.get(
+          `https://localhost:7096/api/Order/search/${window.localStorage.getItem('phoneCache')}/${window.localStorage.getItem('orderIDCache')}`,
+        );
+        if(resKK.status === 200){
+        //  await setOrderK(resKK.data);
+         
+
+          const orderK = resKK.data;
+          console.log('resKK: ', orderK);
+
+          const resKHAI = await axios.post(
+            `https://localhost:7096/api/Mail/SendMailOrder`,
+            
+              {
+                toEmail: orderK.user.email,
+                subject: "Congratulations on your successful order",
+                phoneNumber: orderK.order_phone,
+                orderCode: orderK.order_code,
+                totalPrice: Number(orderK.order_total)
+              } 
+             
+          );
+           console.log('resKHAI:: ', resKHAI);
+        };
+       
+
+        
+
         window.setTimeout(() => {
           window.location.href = '/order';
         }, 4000);
@@ -369,7 +402,7 @@ const Payment = ({ socket }) => {
         </ul>
 
         {/* Gửi thông tin đơn hàng qua email */}
-        <form className="form-confirm" style={{ display: 'none' }}>
+        {/* <form className="form-confirm" style={{ display: 'none' }}>
           <input
             name="order_id"
             readOnly
@@ -403,7 +436,7 @@ const Payment = ({ socket }) => {
             ).toLocaleString()}
           />
           <input name="order_time" readOnly value={timeOrder} />
-        </form>
+        </form> */}
 
         <div className="cart__control-container">
           <div className="cart__control-box" style={{ paddingTop: '10px' }}>
