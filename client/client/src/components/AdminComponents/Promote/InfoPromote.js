@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
-import './styles/promote-style.css';
-import AdminHeader from '../Common/AdminHeader';
-import AdminSidebar, { handleLoadOptionSelected } from '../Common/AdminSidebar';
-import { changeFilename, handleLoadingPage } from '../../Common';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import "./styles/promote-style.css";
+import AdminHeader from "../Common/AdminHeader";
+import AdminSidebar, { handleLoadOptionSelected } from "../Common/AdminSidebar";
+import { changeFilename, handleLoadingPage } from "../../Common";
+import axios from "axios";
 
 const InfoPromote = () => {
   const [promote, setPromote] = useState({});
@@ -14,137 +14,48 @@ const InfoPromote = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    document.title = 'Clinic Online | Thông tin khuyến mãi';
-    const fetchAPI = () => {
-      fetch('https://localhost:7096/api/promotes/' + id)
-        .then((res) => res.json())
-        .then((data) => {
-          setPromote(data);
-        });
-    };
-    fetchAPI();
-    handleLoadOptionSelected(3);
+    document.title = "Clinic Online | Thông tin khuyến mãi";
+    // const fetchAPI = () => {
+    //   fetch('https://localhost:7096/api/promotes/' + id)
+    //     .then((res) => res.json())
+    //     .then((data) => {
+    //       setPromote(data);
+    //     });
+    // };
+    // fetchAPI();
+    handleLoadOptionSelected(5);
   }, []);
 
-  const changeImage = () => {
-    const preview = document.querySelector('.info-promote__avatar-img');
-    const image = document.querySelector('#image-change').files[0];
-    const reader = new FileReader();
-    reader.addEventListener(
-      'load',
-      () => {
-        preview.src = reader.result;
-      },
-      false,
-    );
 
-    if (image) {
-      reader.readAsDataURL(image);
-      setImageFile(image);
-    }
-  };
 
   const handleConfirmChange = async (e) => {
     e.preventDefault();
-    const inputName = document.querySelector('.info-promote__input-name');
-    const inputElements = document.querySelectorAll('.info-promote__input');
+    // const inputName = document.querySelector(".info-promote__input-name");
+    const inputElements = document.querySelectorAll(".info-promote__input");
     if (
-      window.confirm(
-        'You want to update information about this promotion?',
-      ) == true
+      window.confirm("You want to reply feedback?") ==
+      true
     ) {
       try {
-        if (imageFile) {
-          const formData = new FormData();
-          formData.append(
-            'image-change',
-            imageFile,
-            changeFilename(imageFile.name, promote._id),
-          );
+        const res = await axios.post(
+          `https://localhost:7096/api/Mail/Reply`,
 
-          axios
-            .post(
-              'https://localhost:7096/api/promotes/upload-image',
-              formData,
-            )
-            .then((response) => {
-              axios
-                .put(`${process.env.REACT_APP_API}/api/promotes/update=${id}`, {
-                  imageLink: response.data.path,
-                  name: inputName.value,
-                  timeStart: inputElements[0].value,
-                  timeEnd: inputElements[1].value,
-                  percent: Number(inputElements[2].value),
-                  apply: inputElements[3].value,
-                })
-                .then((res) => {
-                  if (res && res.data.success) {
-                    window.alert('Successfully updated!');
-                    handleLoadingPage(1);
-                    window.setTimeout(() => {
-                      navigate(`/admin/promote`);
-                    }, 1000);
-                  } else {
-                    alert('Update information failed');
-                  }
-                });
-            })
-            .catch((error) => {
-              alert('Error when uploading:', error);
-            });
-        } else {
-          axios
-            .put(`${process.env.REACT_APP_API}/api/promotes/update=${id}`, {
-              imageLink: promote.imageLink,
-              name: inputName.value,
-              timeStart: inputElements[0].value,
-              timeEnd: inputElements[1].value,
-              percent: Number(inputElements[2].value),
-              apply: inputElements[3].value,
-            })
-            .then((res) => {
-              if (res && res.data.success) {
-                window.alert('Successfully updated!');
-                handleLoadingPage(1);
-                window.setTimeout(() => {
-                  navigate(`/admin/promote`);
-                }, 1000);
-              } else {
-                alert('Update information failed');
-              }
-            });
-        }
-      } catch (error) {
-        alert(error);
-      }
-    }
-  };
-
-  const handleDelete = async (e) => {
-    e.preventDefault();
-    if (
-      window.confirm(
-        'Are you sure you want to delete all information about this product??',
-      ) == true
-    ) {
-      try {
-        const res = await axios.delete(
-          `${process.env.REACT_APP_API}/api/promotes/delete/${id}`,
+          {
+            toEmail: id,
+            subject: inputElements[0].value,
+            body: inputElements[1].value,
+          }
         );
-        if (res && res.data.success) {
-          window.alert('Delete Successfully!');
-          handleLoadingPage(1);
-          window.setTimeout(() => {
-            window.location.href = '/admin/promote';
-          }, 1000);
-        } else {
-          alert('Delete failed');
+
+        if (res.data != null) {
+          alert("Reply success");
         }
       } catch (error) {
         alert(error);
       }
     }
   };
+
 
   return (
     <React.Fragment>
@@ -152,73 +63,42 @@ const InfoPromote = () => {
       <div id="admin-box">
         <AdminHeader />
         <div className="admin__title">
-          <label className="admin__tilte-label">
-          Have a nice day, admin!
-          </label>
+          <label className="admin__tilte-label">Have a nice day, admin!</label>
           <label className="admin__tilte-describe">
-          Customer management page
+            Customer management page
           </label>
         </div>
 
         <div className="info-page__group">
-          <div className="info-promote__header">
-          Edit promotion information
-          </div>
+          <div className="info-promote__header">REPLY FEEDBACK</div>
 
           <div className="info-promote__body">
-            <div className="add__avatar">
-              <img
-                src={
-                  promote.imageLink ||
-                  `${process.env.REACT_APP_API}/public/img-product-empty.png`
-                }
-                className="info-promote__avatar-img"
-              ></img>
-              <input
-                type="file"
-                id="image-change"
-                onChange={changeImage}
-                hidden
-              ></input>
-              <label
-                htmlFor="image-change"
-                className="info-admin-product__image-btn"
-              >
-                Change promotion image
-              </label>
-            </div>
-
-            <label
+            {/* <label
               style={{ textAlign: 'center', fontWeight: '600' }}
               className="info-page__label"
             >
-             Name of promotion program
-            </label>
-            <input
-              style={{ fontWeight: 'bold', color: 'green' }}
-              className="info-promote__input-name"
-              defaultValue={promote.name}
-            />
+             REPLY FEEDBACK
+            </label> */}
 
             <div className="info-promote__box-info">
               <div className="info-promote__col-1">
-                <label className="info-promote__label">Start time</label>
+                <label className="info-promote__label">Subject</label>
                 <input
-                  type="date"
+                  type="text"
                   className="info-promote__input"
-                  defaultValue={promote.timeStart}
+                  // defaultValue={promote.timeStart}
                 />
 
-                <label className="info-promote__label">To date</label>
+                <label className="info-promote__label">Reply feedback</label>
                 <input
-                  type="date"
+                  type="text"
                   className="info-promote__input"
-                  defaultValue={promote.timeEnd}
+                  // defaultValue={promote.timeEnd}
                 />
               </div>
 
               <div className="info-promote__col-2">
-                <label
+                {/* <label
                   style={{ fontWeight: 'bold', color: 'red' }}
                   className="info-promote__label"
                 >
@@ -228,29 +108,24 @@ const InfoPromote = () => {
                   type="number"
                   className="info-promote__input"
                   defaultValue={promote.percent}
-                />
+                /> */}
 
-                <label className="info-promote__label">
-                Promotion applies to
-                </label>
-                <input
-                  className="info-promote__input"
-                  defaultValue={promote.apply}
-                />
+                <label className="info-promote__label">To email:</label>
+                <input className="info-promote__input" defaultValue={id} />
               </div>
             </div>
           </div>
 
           <div className="info-page__footer">
-            <button
+            {/* <button
               className="info-page__btn"
               style={{ backgroundColor: 'red' }}
-              onClick={handleDelete}
+            //  onClick={handleDelete}
             >
               Delete promotion<i className="ti-close"></i>
-            </button>
+            </button> */}
             <button className="info-page__btn" onClick={handleConfirmChange}>
-            Confirm<i className="ti-check"></i>
+              Confirm<i className="ti-check"></i>
             </button>
           </div>
         </div>

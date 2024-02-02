@@ -12,15 +12,10 @@ const InfoProduct = () => {
   const { id } = useParams();
   const [type, setType] = useState(product.product_type);
   const [enType, setEnType] = useState("");
-  const [colorProductEdit, setColorProductEdit] = useState([]);
-  const [boolHotDeal, setBoolHotDeal] = useState(false);
-  const [boolFeatured, setBoolFeatured] = useState(false);
-  const [imageLinkFile, setImageLinkFile] = useState(null);
   const [imagePrimaryFile, setImagePrimaryFile] = useState(null);
   const [countImageInList, setCountImageInList] = useState(0);
   const [imageFileInList, setImageFileInList] = useState(null);
   const [product_img, setImg] = useState(null);
-  const [loading, setLoading] = useState(true);
   const [imageFile, setImageFile] = useState(null);
 
   useEffect(() => {
@@ -30,115 +25,45 @@ const InfoProduct = () => {
         .then((res) => res.json())
         .then((data) => {
           setProduct(data[0]);
-          // setCountImageInList(data.imageList.length);
-          // setLoading(false);
-          // setBoolHotDeal(data.hotDeal);
-          // setBoolFeatured(data.featured);
-          // setType(data.type);
         });
     };
     fetchAPIs();
     handleLoadOptionSelected(2);
   }, []);
-  console.log("KHAIproduct::", product);
 
-  // useEffect(() => {
-  //   switch (type.toLowerCase()) {
-  //     case "điện thoại":
-  //       setEnType("smartphone");
-  //       break;
-  //     case "máy tính bảng":
-  //       setEnType("tablet");
-  //       break;
-  //     case "máy tính xách tay":
-  //       setEnType("laptop");
-  //       break;
-  //   }
-  // }, [type]);
 
-  // Thay đổi ảnh chính
-  const changeImageLink = () => {
-    const preview = document.querySelector(
-      ".info-admin-product__image-primary-img"
-    );
-    const imageProductLink = document.querySelector("#image-primary").files[0];
-
-    const reader = new FileReader();
-    reader.addEventListener(
-      "load",
-      () => {
-        preview.src = reader.result;
-      },
-      false
-    );
-
-    if (imageProductLink) {
-      reader.readAsDataURL(imageProductLink);
-      setImageLinkFile(imageProductLink);
-    }
-  };
-  // console.log('type:: ', type);
+  // var type = product.product_type
+  console.log("KHAIproduct::", product.product_type);
+  // setType(product.product_type)
 
   const handleConfirmChangeImageLink = async (e) => {
     e.preventDefault();
-    if (window.confirm("Bạn muốn cập nhật ảnh sản phẩm?") == true) {
-      try {
-        if (imageLinkFile) {
-          const formData = new FormData();
-          formData.append(
-            "image-primary",
-            imageLinkFile,
-            changeFilename(imageLinkFile.name, "imageLink-" + product._id)
-          );
 
-          axios
-            .post("https://localhost:7096/api/products/upload-image", formData)
-            .then((response) => {
-              axios
-                .put(
-                  `${process.env.REACT_APP_API}/api/products/update/image-link=${id}`,
-                  {
-                    imageLink: response.data.path,
-                  }
-                )
-                .then((res) => {
-                  if (res && res.data.success) {
-                    window.alert("Thành công!");
-                    handleLoadingPage(1);
-                    window.setTimeout(() => {
-                      window.location.reload();
-                    }, 1000);
-                  } else {
-                    alert("Cập nhật ảnh thất bại");
-                  }
-                });
-            })
-            .catch((error) => {
-              alert("Lỗi khi upload:", error);
-            });
-        } else {
-          axios
-            .put(
-              `${process.env.REACT_APP_API}/api/products/update/image-link=${id}`,
-              {
-                imageLink: product.product_img,
-              }
-            )
-            .then((res) => {
-              if (res && res.data.success) {
-                window.alert("Thành công!");
-                handleLoadingPage(1);
-                window.setTimeout(() => {
-                  window.location.reload();
-                }, 1000);
-              } else {
-                alert("Cập nhật ảnh thất bại");
-              }
-            });
-        }
-      } catch (error) {
-        alert(error);
+    const formData = new FormData();
+
+    formData.append("newImage", product_img);
+    
+
+    try {
+      const res = await axios.patch(`https://localhost:7096/api/Products/updateProductImage/${product.product_id}`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      console.log("resssProduct:: ", res);
+      if (res && res.data !== null ) {
+        alert("Update image successfully");
+        handleLoadingPage(1); 
+        window.setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+      } else {
+        window.alert("An error occurred while creating! Please try again");
       }
+    } catch (error) {
+      console.log(error);
+      window.alert(error);
     }
   };
 
@@ -330,43 +255,50 @@ const InfoProduct = () => {
     }
   };
 
-  // Cập nhật thông tin sản phẩm
+
+
+
   const handleConfirmChangeInfo = async (e) => {
     e.preventDefault();
+    const inputElements = document.querySelectorAll(".info-admin-product__input");
+    // Tạo một đối tượng FormData mới để gửi dữ liệu dạng multipart/form-data
+    const formData = new FormData();
+    // Thêm các trường dữ liệu vào FormData
+    formData.append("product_name", inputElements[0].value);
+    formData.append("product_description",inputElements[1].value);
+    formData.append("product_type", inputElements[2].value);
+    formData.append("product_img", "A");
+    formData.append("product_quantity",inputElements[4].value);
+    formData.append("product_price",inputElements[6].value);
+    formData.append("product_percent",inputElements[6].value);
+    formData.append("product_star", inputElements[5].value);
+    formData.append("Image", product_img);
 
-    const inputElements = document.querySelectorAll(
-      ".info-admin-product__input"
-    );
-    if (window.confirm("You want to update product information?") ===  true) {
-      try {
-        const res = await axios.put(
-          `${process.env.REACT_APP_API}/api/products/update=${id}`,
-          {
-            name: inputElements[0].value,
-            type,
-            enType: enType || product.enType,
-            brand: inputElements[2].value,
-            price: inputElements[4].value,
-            color: colorProductEdit,
-            hotDeal: boolHotDeal,
-            featured: boolFeatured,
-            status: inputElements[7].value,
-          }
-        );
-        if (res && res.data.success) {
-          window.alert("Success!");
-          handleLoadingPage(1);
-          window.setTimeout(() => {
-            window.location.reload();
-          }, 1000);
-        } else {
-          alert("Update information failed");
-        }
-      } catch (error) {
-        alert(error);
+    try {
+      const res = await axios.put(`https://localhost:7096/api/Products/${product.product_id}`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      // console.log("resssProduct:: ", res);
+      if (res && res.data !== null && res.status === 200) {
+        alert("Update product successfully");
+        handleLoadingPage(1); 
+        window.setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+      } else {
+        window.alert("An error occurred while creating! Please try again");
       }
+    } catch (error) {
+      console.log(error);
+      window.alert(error);
     }
   };
+
+
+
 
   const changeImageUser = () => {
     const preview = document.querySelector(".info-admin-product__image-primary-img");
@@ -454,12 +386,6 @@ const InfoProduct = () => {
                   }}
                   hidden
                 ></input>
-                <label
-                  className="info-page__avatar-btn"
-                  htmlFor="avatar-change-input"
-                >
-                  Change Avatar
-                </label>
 
                 <div className="info-admin-product__image-controll">
                   <label
@@ -508,8 +434,8 @@ const InfoProduct = () => {
                     setType(e.target.value);
                   }}
                   value={type}
+                  // defaultValue={product.product_type}
                 >
-                  {/* <option value="">Select product type...</option> */}
                   <option value="Education">Education</option>
                   <option value="Medical">Medical</option>
                   <option value="Scientific">Scientific</option>
@@ -542,7 +468,7 @@ const InfoProduct = () => {
                 <input
                   type="number"
                   className="info-admin-product__input"
-                  defaultValue={product.product_star}
+                  defaultValue={product.product_percent}
                 />
               </div>
             </div>

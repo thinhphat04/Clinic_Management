@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import AdminHeader from '../Common/AdminHeader';
 import AdminSidebar, { handleLoadOptionSelected } from '../Common/AdminSidebar';
 import { handleLoadingPage } from '../../Common';
+import EditButtonCustomer from '../../EditButton/EditButtonCustomer';
+import EditButtonReply from '../../EditButton/EditButtonReply';
 
 const FeedbackPage = () => {
   const [feedbacks, setFeedbacks] = useState([]);
@@ -134,6 +136,7 @@ const FeedbackPage = () => {
                   <td>Email</td>
                   <td>Type of comments</td>
                   <td>Nội dung</td>
+                  <td>Reply</td>
                 </tr>
               </thead>
               <tbody className="table__tbody-primary">
@@ -171,6 +174,22 @@ const FeedbackPage = () => {
                     >
                       "{feedback.content || 'None'}"
                     </td>
+                      <td>
+                      <div className="admin__item-eidt">
+                      <div
+                        style={{
+                          fontSize: '2rem',
+                          fontWeight: 'bold',
+                          color: 'red',
+                          textAlign: 'right',
+                          width: '100%',
+                        }}
+                        className="admin__item-info-content"
+                      >
+                        <EditButtonReply product={feedback.email} />
+                      </div>
+                    </div>
+                      </td> 
                   </tr>
                 ))}
               </tbody>
