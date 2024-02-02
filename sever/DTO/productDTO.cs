@@ -4,7 +4,7 @@ namespace PJ_SEM03.DTO;
 
 public class productDTO
 {
-
+   
     public string product_name { get; set; }
 
     public string product_description { get; set; }

@@ -121,7 +121,7 @@ const OrderLookup = () => {
                         className="cart-confirm__data"
                         style={{ color: 'green' }}
                       >
-                        {order.fullname}
+                        {order.user.user_fullName}
                       </p>
                     </li>
                     <li className="cart-confirm__item">
@@ -130,7 +130,7 @@ const OrderLookup = () => {
                         className="cart-confirm__data"
                         style={{ fontWeight: 400 }}
                       >
-                        {order.email}
+                        {order.user.email}
                       </p>
                     </li>
                     <li className="cart-confirm__item">
@@ -141,10 +141,10 @@ const OrderLookup = () => {
                         className="cart-confirm__data"
                         style={{ fontWeight: 600 }}
                       >
-                        {order.phone}
+                        {order.order_phone}
                       </p>
                     </li>
-                    <li className="cart-confirm__item">
+                    {/* <li className="cart-confirm__item">
                       <label className="cart-confirm__label">
                       Delivery method:
                       </label>
@@ -154,7 +154,7 @@ const OrderLookup = () => {
                       >
                         {order.method}
                       </p>
-                    </li>
+                    </li> */}
                     <li className="cart-confirm__item">
                       <label className="cart-confirm__label">
                       Delivery address:
