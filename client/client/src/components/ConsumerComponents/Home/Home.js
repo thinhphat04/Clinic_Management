@@ -260,53 +260,53 @@ const Home = () => {
 
                 <div>
                   <img
-                    src="https://cdn.nhathuoclongchau.com.vn/unsafe/1440x0/filters:quality(90)/https://cms-prod.s3-sgn09.fptcloud.com/1196x352_aed681f792.jpg"
+                    src="https://www.nahdionline.com/media/wysiwyg/blocks/promotions/14jan/vitaminsoffer1DeskEn.jpg"
                     className="home-promote__item"
                     alt="Promotion Image 1"
                   />
 
                   <img
-                    src="https://data-service.pharmacity.io/pmc-ecm-webapp-config-api/production/banner/tuivai_913x280x1.5-1703672872315.jpg"
+                    src="https://www.nahdionline.com/media/wysiwyg/blocks/promotions/24jan/diapersofferDeskEn.jpg"
                     className="home-promote__item"
                     alt="Promotion Image 2"
                   />
                   <img
-                    src="https://cdn.nhathuoclongchau.com.vn/unsafe/1440x0/filters:quality(90)/https://cms-prod.s3-sgn09.fptcloud.com/1196x352_aed681f792.jpg"
+                    src="https://www.nahdionline.com/media/wysiwyg/blocks/promotions/24jan/bodylotionDeskEn.jpg"
                     className="home-promote__item"
                     alt="Promotion Image 3"
                   />
                   <img
-                    src="https://cdn.nhathuoclongchau.com.vn/unsafe/828x0/filters:quality(90)/https://cms-prod.s3-sgn09.fptcloud.com/web_pc_1610x492_00b3003e3e.jpg"
+                    src="https://www.nahdionline.com/media/wysiwyg/blocks/promotions/24jan/foodpreprationDeskEn.jpg"
                     className="home-promote__item"
                     alt="Promotion Image 4"
                   />
                   <img
-                    src="https://data-service.pharmacity.io/pmc-ecm-webapp-config-api/production/banner/tuivai_913x280x1.5-1703672872315.jpg"
+                    src="https://mercury.akamaized.net/i/2fb8ed79003ad236b5ad0481f40885c6_55448_0.jpg"
                     className="home-promote__item"
                     alt="Promotion Image 5"
                   />
                   <img
-                    src="https://data-service.pharmacity.io/pmc-upload-media/production/pmc-ecm-core/collection-images/1703735550_GIASOCCUOITUAN_1376X333_1.jpg"
+                    src="https://mercury.akamaized.net/i/e59b1dc6c30b3fec61a5fc99d18e65f2_232029_0.jpg"
                     className="home-promote__item"
                     alt="Promotion Image 6"
                   />
                   <img
-                    src="https://data-service.pharmacity.io/pmc-ecm-webapp-config-api/production/banner/TET_913x280%20(x1.5)%20opt2%20(2)-1704944470001.jpg"
+                    src="https://images.apollo247.in/images/banners/healthwise-banner.png?tr=w-1276,q-60,f-webp,dpr-1,c-at_max"
                     className="home-promote__item"
                     alt="Promotion Image 7"
                   />
                   <img
-                    src="https://data-service.pharmacity.io/pmc-ecm-webapp-config-api/production/banner/tuivai_913x280x1.5-1703672872315.jpg"
+                    src="https://images.apollo247.in/pd-cms/cms/2023-08/Group%201171279307.png?tr=w-1276,q-80,f-webp,dpr-1,c-at_max"
                     className="home-promote__item"
                     alt="Promotion Image 8"
                   /> 
                   <img
-                    src="https://data-service.pharmacity.io/pmc-upload-media/production/pmc-ecm-core/collection-images/1703735550_GIASOCCUOITUAN_1376X333_1.jpg"
+                    src="https://images.apollo247.in/pd-cms/cms/2023-08/on%20time_1.png?tr=w-1276,q-80,f-webp,dpr-1,c-at_max"
                     className="home-promote__item"
                     alt="Promotion Image 9"
                   />
                   <img
-                    src="https://data-service.pharmacity.io/pmc-ecm-webapp-config-api/production/banner/tuivai_913x280x1.5-1703672872315.jpg"
+                    src="https://mercury.akamaized.net/i/f4a8fba4fb508d23265120ce4b1712a8_58400_0.jpg"
                     className="home-promote__item"
                     alt="Promotion Image 10"
                   />
@@ -420,13 +420,13 @@ const Home = () => {
             <div
               className="home__featured-banner-phone"
               onClick={(e) => {
-                handleLoadingPage(1, `/product/smartphone`);
+                handleLoadingPage(1, `/product/medical`);
               }}
             ></div>
             <div
               className="home__featured-type"
               onClick={(e) => {
-                handleLoadingPage(1, `/product/smartphone`);
+                handleLoadingPage(1, `/product/medical`);
               }}
             >
               MEIDCAL
@@ -574,13 +574,13 @@ const Home = () => {
             <div
               className="home__featured-banner-laptop"
               onClick={(e) => {
-                handleLoadingPage(1, `/product/laptop`);
+                handleLoadingPage(1, `/product/scientific`);
               }}
             ></div>
             <div
               className="home__featured-type"
               onClick={(e) => {
-                handleLoadingPage(1, `/product/laptop`);
+                handleLoadingPage(1, `/product/scientific`);
               }}
             >
               EDUCATION

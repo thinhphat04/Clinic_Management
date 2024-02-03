@@ -19,7 +19,7 @@ const HomeList = () => {
         <li
           className="home__list-product-item"
           onClick={(e) => {
-            handLoadingPage(1.5, '/product/smartphone');
+            handLoadingPage(1.5, '/product/medical');
           }}
         >
           <div className="home__list-product-img-1"></div>
@@ -28,7 +28,7 @@ const HomeList = () => {
         <li
           className="home__list-product-item"
           onClick={(e) => {
-            handLoadingPage(1.5, '/product/laptop');
+            handLoadingPage(1.5, '/product/scientific');
           }}
         >
           <div className="home__list-product-img-2"></div>

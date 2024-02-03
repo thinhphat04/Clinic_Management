@@ -142,7 +142,7 @@ console.log('datauser:  ', user);
                     1
                   </div>
                   <label className="account__box-option-item-title">
-                  Shopping cart information
+                  Shopping cart
                   </label>
                   <button
                     className="account__box-option-item-btn"
@@ -193,7 +193,7 @@ console.log('datauser:  ', user);
                   >
                     See details
                   </button>
-                </div>
+                </div> 
               </div>
             </div>
           </div>

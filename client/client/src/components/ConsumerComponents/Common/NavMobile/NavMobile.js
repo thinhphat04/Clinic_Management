@@ -98,7 +98,7 @@ const NavMobile = () => {
           className="nav__option-item"
           onClick={() => {
             handleLoadingPage(1);
-            window.location.href = '/product/smartphone';
+            window.location.href = '/product/medical';
           }}
         >
           Điện thoại
@@ -107,7 +107,7 @@ const NavMobile = () => {
           className="nav__option-item"
           onClick={() => {
             handleLoadingPage(1);
-            window.location.href = '/product/laptop';
+            window.location.href = '/product/scientific';
           }}
         >
           Máy tính xách tay

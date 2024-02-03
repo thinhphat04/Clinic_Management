@@ -11,7 +11,7 @@ const Laptop = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    document.title = 'Clinic Online | Laptop thời thượng';
+    document.title = 'Clinic Online | Scientific';
     const fetchAPIs = () => {
       fetch('https://localhost:7096/api/products')
         .then((res) => res.json())
@@ -146,11 +146,11 @@ console.log("productsAAAA:: ", products);
             <div className="product-client__event-list">
               <div className="product-client__event-col-left">
                 <img
-                  src="https://cdn.nhathuoclongchau.com.vn/unsafe/828x0/filters:quality(90)/https://cms-prod.s3-sgn09.fptcloud.com/web_pc_1610x492_00b3003e3e.jpg"
+                  src="https://www.nahdionline.com/media/wysiwyg/blocks/promotions/flashsale/feb2DeskEn.jpg"
                   className="product-client__event-col-left-item"
                 ></img>
                 <img
-                  src="https://cdn.nhathuoclongchau.com.vn/unsafe/828x0/filters:quality(90)/https://cms-prod.s3-sgn09.fptcloud.com/Banner_Web_PC_1610x492_38657748b1.png"
+                  src="https://mercury.akamaized.net/i/2fb8ed79003ad236b5ad0481f40885c6_55448_0.jpg"
                   className="product-client__event-col-left-item"
                 ></img>
               </div>

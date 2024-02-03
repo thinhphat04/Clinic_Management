@@ -41,7 +41,7 @@ const Payment = ({ socket }) => {
     Toast({
       title: 'ORDER SUCCESS',
       message:
-        'Your order has been confirmed, please check your order in your account!',
+        'Your order has been confirmed, please check email and your order in your account!',
       type: 'success',
       duration: 3000,
     });

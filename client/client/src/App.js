@@ -104,8 +104,8 @@ function App() {
             <Route path="/product" element={<Home />} />
 
             {/* Product */}
-            <Route path="/product/smartphone" element={<SmartPhone />} />
-            <Route path="/product/laptop" element={<Laptop />} />
+            <Route path="/product/medical" element={<SmartPhone />} />
+            <Route path="/product/scientific" element={<Laptop />} />
             <Route path="/product/tablet" element={<Tablet />} />
             <Route path="/product/accessories" element={<Accessories />} />
             <Route

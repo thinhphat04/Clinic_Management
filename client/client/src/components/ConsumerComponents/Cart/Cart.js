@@ -87,29 +87,31 @@ const Cart = () => {
   };
 
 
-  const handleClickMinusQuantity = (productName) => {
+  const handleClickMinusQuantity = (productId) => {
     cartUser.map((p, i) => {
-      if (p.productName === productName && Number(p.quantity) > 1) {
+      if (p.product_id === productId && Number(p.product_quantity) > 1) {
         axios
           .put(
-            'https://localhost:7096/api/users/decrease-quantity-product-in-cart/' +
-              JSON.parse(window.localStorage.getItem('auth')).id,
-            { productName },
+            `https://localhost:7096/api/Cart/decrease?userId=${JSON.parse(window.localStorage.getItem("auth"))?.id}&productId=${productId}` 
           )
           .then((response) => {
             handleLoadingPage(1);
             window.setTimeout(() => {
               window.location.reload();
-            }, 1000);
+            }, 500);
           })
           .catch((error) => {
             console.error(error);
           });
       }
+      if(Number(p.product_quantity) == 1){
+        alert('No decrease product');
+      }
+      // console.log("p.product_quantity", p.product_quantity);
 
-      if (i >= cartUser.length) return;
+
     });
-    window.alert('Không thể giảm số lượng sản phẩm = 0');
+    // window.alert('Không thể giảm số lượng sản phẩm = 0');
   };
 
   const handleClickRemoveProduct = (productId) => {
@@ -121,7 +123,7 @@ const Cart = () => {
         handleLoadingPage(1);
         window.setTimeout(() => {
           window.location.reload();
-        }, 1000);
+        }, 500);
       })
       .catch((error) => {
         console.error(error);
@@ -130,11 +132,11 @@ const Cart = () => {
 
   const handleClickRemoveAll = () => {
     if (
-      window.confirm('Bạn có chắc muốn xóa toàn bộ sản phẩm trong giỏ hàng')
+      window.confirm('Are you delete all product in cart?')
     ) {
       axios
         .delete(
-          'https://localhost:7096/api/users/remove-all-in-cart/' +
+          'https://localhost:7096/api/Cart/' +
             JSON.parse(window.localStorage.getItem('auth')).id,
         )
         .then(() => {
@@ -228,8 +230,9 @@ const Cart = () => {
                       <div className="cart__item-quantity">
                         <button
                           className="cart__item-quantity-edit"
+                          defaultValue={p.product_quantity}
                           onClick={(e) => {
-                            handleClickMinusQuantity(p.product.product_name);
+                            handleClickMinusQuantity(p.product_id);
                           }}
                         >
                           -

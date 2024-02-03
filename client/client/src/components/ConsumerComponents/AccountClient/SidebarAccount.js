@@ -75,7 +75,7 @@ const SidebarAccount = () => {
           <i className="account__sidebar-item-icon fa fa-shopping-cart"></i>
           <label className="account__sidebar-label">Cart</label>
         </li>
-        <li
+        {/* <li
           className="account__sidebar-item"
           onClick={(e) => {
             handleLoadingPage(1);
@@ -86,7 +86,7 @@ const SidebarAccount = () => {
         >
           <i className="account__sidebar-item-icon fa fa-history"></i>
           <label className="account__sidebar-label">Purchase history</label>
-        </li>
+        </li> */}
         <li
           className="account__sidebar-item"
           onClick={(e) => {

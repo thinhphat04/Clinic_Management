@@ -55,6 +55,7 @@ const OrderLookup = () => {
       console.error(error);
     }
   };
+  console.log("res::", order);
 
   return (
     <>
@@ -232,11 +233,11 @@ const OrderLookup = () => {
                       Total order value:{' '}
                       </label>
                       <span className="detail-price__item-price">
-                        {Number(totalPriceOld).toLocaleString()} đ
+                        {Number(countTotalPrice).toLocaleString()} đ
                       </span>
                     </li>
 
-                    {lists &&
+                    {/* {lists &&
                       lists.map((item, i) => (
                         <li className="detail-price__item" key="${i}">
                           <label className="detail-price__item-label">
@@ -250,16 +251,16 @@ const OrderLookup = () => {
                             đ
                           </span>
                         </li>
-                      ))}
+                      ))} */}
 
                     <li className="detail-price__item">
                       <label className="detail-price__item-label">
                       Apply discount code:
                       </label>
                       <span className="detail-price__item-price">
-                        - {Number(order.giftcodeApply)}% ={' '}
+                        - {Number(5)}% ={' '}
                         {Number(
-                          (Number(order.giftcodeApply) / 100) *
+                          (Number(5) / 100) *
                             Number(countTotalPrice),
                         ).toLocaleString()}{' '}
                         đ
@@ -288,7 +289,7 @@ const OrderLookup = () => {
                       <span className="detail-price__item-price">
                         {Number(
                           countTotalPrice *
-                            Number((100 - Number(order.giftcodeApply)) / 100),
+                            Number((100 - Number(5)) / 100),
                         ).toLocaleString()}{' '}
                         đ
                       </span>
