@@ -3,11 +3,35 @@ import axios from "axios";
 import SidebarAccount, { handleLoadOptionSidebar } from "./SidebarAccount";
 import { Breadcrumbs, Nav } from "../Common";
 import { changeFilename, handleLoadingPage } from "../../Common";
-
+import Validator from "../../Common/Validator";
 const AccountClientInfo = () => {
   const [user, setUser] = useState({});
+  const [errorMessage, setErrorMessage] = useState(null);
   const [imageFile, setImageFile] = useState(null);
   const [product_img, setImg] = useState(null);
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPAss, setConfirmPass] = useState("");
+  useEffect(() => {
+    Validator({
+      form: "#form-1",
+      error: ".form-message",
+      rules: [
+        Validator.isRequired("#oldpasword"),
+        // Validator.isPassword("#oldpassword"),
+        Validator.isMinLength("#oldpassword", 8),
+
+        Validator.isRequired("#newpassword"),
+        Validator.newPassword("#newpassword"),
+        Validator.isMinLength("#newpassword", 8),
+
+        Validator.isRequired("#confirmnewpassword"),
+        Validator.isConfirmed("#confirmnewpassword", () => {
+          return document.getElementById("newpassword").value;
+        }),
+      ],
+    });
+  }, []);
 
   useEffect(() => {
     document.title = "Clinic Online | Personal information";
@@ -45,88 +69,6 @@ const AccountClientInfo = () => {
       setImageFile(imageUser);
     }
   };
-
-  // const handleEditInfo = async (e) => {
-
-  //   e.preventDefault();
-  //   const inputElements = document.querySelectorAll('.account__box-info-input');
-  //   if (window.confirm('You want to modify personal information!') == true) {
-  //     try {
-  //       if (imageFile) {
-  //         const formData = new FormData();
-  //         formData.append(
-  //           'avatar-change',
-  //           imageFile,
-  //           changeFilename(imageFile.name, user.id),
-  //         );
-
-  //         axios
-  //           .post(
-  //             'https://localhost:7096/api/users/upload-image',
-  //             formData,
-  //           )
-  //           .then((response) => {
-  //             console.log(response);
-  //             axios
-  //               .put(
-  //                 `${process.env.REACT_APP_API}/api/users/update/${
-  //                   JSON.parse(window.localStorage.getItem('auth')).user._id
-  //                 }`,
-  //                 {
-  //                   avatarUrl: response.data.path,
-  //                   fullname: inputElements[0].value,
-  //                   email: inputElements[1].value,
-  //                   phone: inputElements[2].value,
-  //                   address: inputElements[3].value,
-  //                 },
-  //               )
-  //               .then((res) => {
-  //                 if (res && res.data.success) {
-  //                   alert('Successfully updated!');
-  //                   handleLoadingPage(1);
-  //                   window.setTimeout(() => {
-  //                     window.location.reload();
-  //                   }, 1000);
-  //                 } else {
-  //                   alert('Update information failed');
-  //                 }
-  //               });
-  //           })
-  //           .catch((error) => {
-  //             alert('Lỗi khi upload:' + error);
-  //             console.error(error);
-  //           });
-  //       } else {
-  //         axios
-  //           .put(
-  //             `${process.env.REACT_APP_API}/api/users/update/${
-  //               JSON.parse(window.localStorage.getItem('auth')).user._id
-  //             }`,
-  //             {
-  //               avatarUrl: user.avatarUrl,
-  //               fullname: inputElements[0].value,
-  //               email: inputElements[1].value,
-  //               phone: inputElements[2].value,
-  //               address: inputElements[3].value,
-  //             },
-  //           )
-  //           .then((res) => {
-  //             if (res && res.data.success) {
-  //               alert('Successfully updated!');
-  //               handleLoadingPage(1);
-  //               window.setTimeout(() => {
-  //                 window.location.reload();
-  //               }, 1000);
-  //             } else {
-  //               alert('Update information failed');
-  //             }
-  //           });
-  //       }
-  //     } catch (error) {
-  //       alert(error);
-  //     }
-  //   }
-  // };
 
   const handleEditInfo = async (e) => {
     e.preventDefault();
@@ -195,7 +137,48 @@ const AccountClientInfo = () => {
       }
     }
   };
+  const handleChangePassword = async (e) => {
+    e.preventDefault();
 
+    const inputElements = document.querySelectorAll(".account__box-info-input");
+    try {
+      const aaa = String(JSON.parse(window.localStorage.getItem("auth")).id);
+      const res = await axios.put(
+        "https://localhost:7096/api/Account/ChangePassword/" + aaa,
+        // Tạo một đối tượng FormData mới để gửi dữ liệu dạng multipart/form-data
+        {
+          // Id: JSON.parse(window.localStorage.getItem("auth")).id,
+          oldPassword: inputElements[5].value,
+          newPassword: inputElements[6].value,
+          confirmNewPassword: inputElements[7].value,
+        }
+        // console.log(inputElements[5].value);
+      );
+
+      console.log("resssProduct:: ", res);
+      if (res && res.data !== null && res.status === 200) {
+        alert("Update pass successfully");
+        handleLoadingPage(1);
+        window.setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+      } else {
+        window.alert("An error occurred while creating! Please try again");
+      }
+    } catch (error) {
+      console.error("Error during registration:", error);
+
+      if (error.response && error.response.data && error.response.data.errors) {
+        // Set specific errors for display
+        setErrorMessage(error.response.data.errors);
+      } else {
+        // General error handling
+        window.alert("An error occurred while registering! Please try again 2");
+      }
+    }
+  };
+
+  console.log(JSON.parse(window.localStorage.getItem("auth")).id);
   return (
     <>
       <Nav />
@@ -285,6 +268,91 @@ const AccountClientInfo = () => {
                   onClick={handleEditInfo}
                 >
                   Update information
+                </button>
+
+                <label className="account__box-info-header">
+                  CHANGE PASSWORD
+                </label>
+                <div>
+                  {/* Display registration errors if any */}
+                  {errorMessage && (
+                    <div>
+                      <p>You can not change your password because:</p>
+                      <ul>
+                        {Object.keys(errorMessage).map((field, index) => (
+                          <li key={index}>
+                            {field}: {errorMessage[field].join(", ")}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+
+                <form
+                  className="form"
+                  id="form-1"
+                  onSubmit={handleChangePassword}
+                >
+                  <div className="form-group">
+                    <label className="account__box-info-title">
+                      Old Password:
+                    </label>
+
+                    <input
+                      id="oldpassword"
+                      name="oldpassword"
+                      type="password"
+                      placeholder="Enter password"
+                      onChange={(e) => setOldPassword(e.target.value)}
+                      value={oldPassword}
+                      className="form-control account__box-info-input"
+                    ></input>
+
+                    <span className="form-message"></span>
+                  </div>
+
+                  <div className="form-group">
+                    <label className="account__box-info-title">
+                      New Password:
+                    </label>
+
+                    <input
+                      id="newpassword"
+                      name="newpassword"
+                      type="password"
+                      placeholder="Enter password"
+                      onChange={(e) => setNewPassword(e.target.value)}
+                      value={newPassword}
+                      className="form-control account__box-info-input"
+                    ></input>
+
+                    <span className="form-message"></span>
+                  </div>
+
+                  <div className="form-group">
+                    <label className="account__box-info-title">
+                      Confirm New Password:
+                    </label>
+
+                    <input
+                      id="confirmnewpassword"
+                      name="confirmnewpassword"
+                      type="password"
+                      placeholder="Enter password"
+                      onChange={(e) => setConfirmPass(e.target.value)}
+                      value={confirmPAss}
+                      className="form-control account__box-info-input"
+                    ></input>
+
+                    <span className="form-message"></span>
+                  </div>
+                </form>
+                <button
+                  className="account__box-info-btn"
+                  onClick={handleChangePassword}
+                >
+                  Change Password
                 </button>
               </div>
             </div>

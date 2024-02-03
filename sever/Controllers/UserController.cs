@@ -21,11 +21,11 @@ namespace PJ_SEM03.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<PagedList<User>>> GetAll([FromQuery] PaginationParams paginationParams)
+        public async Task<ActionResult<IEnumerable<User>>> GetAll()
         {
             try
             {
-                return Ok(await userRepo.getAll(paginationParams.PageNumber, paginationParams.PageSize));
+                return Ok(await userRepo.getAll());
             }
             catch (Exception ex)
             {
