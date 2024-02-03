@@ -6,17 +6,21 @@ import AdminHeader from "../Common/AdminHeader";
 import AdminSidebar, { handleLoadOptionSelected } from "../Common/AdminSidebar";
 import { changeFilename, handleLoadingPage } from "../../Common";
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
 const InfoProduct = () => {
   const [product, setProduct] = useState({});
+  
   const { id } = useParams();
-  const [type, setType] = useState(product.product_type);
+  const [type, setType] = useState("");
   const [enType, setEnType] = useState("");
   const [imagePrimaryFile, setImagePrimaryFile] = useState(null);
   const [countImageInList, setCountImageInList] = useState(0);
   const [imageFileInList, setImageFileInList] = useState(null);
   const [product_img, setImg] = useState(null);
   const [imageFile, setImageFile] = useState(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchAPIs = () => {
@@ -288,7 +292,8 @@ const InfoProduct = () => {
         alert("Update product successfully");
         handleLoadingPage(1); 
         window.setTimeout(() => {
-          window.location.reload();
+          // window.location.reload();
+          navigate('/admin/product')
         }, 1000);
       } else {
         window.alert("An error occurred while creating! Please try again");
