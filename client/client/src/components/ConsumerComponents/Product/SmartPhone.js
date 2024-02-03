@@ -11,7 +11,7 @@ const SmartPhone = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    document.title = 'Clinic Online | Điện thoại - Sale ngập tràn';
+    document.title = 'Clinic Online | Medical';
     const fetchAPIs = () => {
       fetch('https://localhost:7096/api/products')
         .then((res) => res.json())
@@ -42,9 +42,9 @@ const SmartPhone = () => {
   const handleChangeBanner = () => {
     const arrayBanner = [
       'https://data-service.pharmacity.io/pmc-upload-media/production/pmc-ecm-core/collection-images/1703735550_GIASOCCUOITUAN_1376X333_1.jpg',
-      'https://data-service.pharmacity.io/pmc-upload-media/production/pmc-ecm-core/collection-images/1703735550_GIASOCCUOITUAN_1376X333_1.jpg',
-      'https://data-service.pharmacity.io/pmc-upload-media/production/pmc-ecm-core/collection-images/1703735550_GIASOCCUOITUAN_1376X333_1.jpg',
-      'https://data-service.pharmacity.io/pmc-upload-media/production/pmc-ecm-core/collection-images/1703735550_GIASOCCUOITUAN_1376X333_1.jpg',
+      'https://www.nahdionline.com/media/wysiwyg/blocks/promotions/24jan/babymagic1DeskEn.jpg ',
+      'https://www.nahdionline.com/media/wysiwyg/blocks/promotions/14jan/vitaminsoffer1DeskEn.jpg',
+      'https://www.nahdionline.com/media/wysiwyg/blocks/promotions/24jan/bodylotionDeskEn.jpg',
     ];
     var index = 0;
     setInterval(function () {
@@ -54,12 +54,12 @@ const SmartPhone = () => {
       document.querySelector('.product-client__event-primary').src =
         arrayBanner[index];
       index++;
-    }, 3000);
+    }, 1500);
   };
 
   const arrayPromote = [
-    'https://data-service.pharmacity.io/pmc-upload-media/production/pmc-ecm-core/collection-images/1703991118_1376x333_6.png',
-    'https://data-service.pharmacity.io/pmc-ecm-webapp-config-api/production/banner/TET_913x280%20(x1.5)%20opt2%20(2)-1704944470001.jpg',
+    'https://images.apollo247.in/pd-cms/cms/2023-08/Group%201171279307.png?tr=w-1276,q-80,f-webp,dpr-1,c-at_max',
+    'https://images.apollo247.in/images/banners/healthwise-banner.png?tr=w-1276,q-60,f-webp,dpr-1,c-at_max',
     'https://data-service.pharmacity.io/pmc-ecm-webapp-config-api/production/banner/392x134px-1691463642426.png',
   ];
   var indexPromote = 0;
@@ -139,11 +139,11 @@ const SmartPhone = () => {
             <div className="product-client__event-list">
               <div className="product-client__event-col-left">
                 <img
-                  src="https://data-service.pharmacity.io/pmc-upload-media/production/pmc-ecm-core/collection-images/1703735550_GIASOCCUOITUAN_1376X333_1.jpg"
+                  src="https://mercury.akamaized.net/i/e59b1dc6c30b3fec61a5fc99d18e65f2_232029_0.jpg"
                   className="product-client__event-col-left-item"
                 ></img>
                 <img
-                  src="https://data-service.pharmacity.io/pmc-ecm-webapp-config-api/production/banner/tuivai_913x280x1.5-1703672872315.jpg"
+                  src="https://www.nahdionline.com/media/wysiwyg/blocks/promotions/24jan/babymagic1DeskEn.jpg"
                   className="product-client__event-col-left-item"
                 ></img>
               </div>

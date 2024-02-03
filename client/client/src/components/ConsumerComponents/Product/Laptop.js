@@ -11,7 +11,7 @@ const Laptop = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    document.title = 'Clinic Online | Laptop thời thượng';
+    document.title = 'Clinic Online | Scientific';
     const fetchAPIs = () => {
       fetch('https://localhost:7096/api/products')
         .then((res) => res.json())

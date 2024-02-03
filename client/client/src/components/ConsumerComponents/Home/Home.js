@@ -420,13 +420,13 @@ const Home = () => {
             <div
               className="home__featured-banner-phone"
               onClick={(e) => {
-                handleLoadingPage(1, `/product/smartphone`);
+                handleLoadingPage(1, `/product/medical`);
               }}
             ></div>
             <div
               className="home__featured-type"
               onClick={(e) => {
-                handleLoadingPage(1, `/product/smartphone`);
+                handleLoadingPage(1, `/product/medical`);
               }}
             >
               MEIDCAL
@@ -574,13 +574,13 @@ const Home = () => {
             <div
               className="home__featured-banner-laptop"
               onClick={(e) => {
-                handleLoadingPage(1, `/product/laptop`);
+                handleLoadingPage(1, `/product/scientific`);
               }}
             ></div>
             <div
               className="home__featured-type"
               onClick={(e) => {
-                handleLoadingPage(1, `/product/laptop`);
+                handleLoadingPage(1, `/product/scientific`);
               }}
             >
               EDUCATION

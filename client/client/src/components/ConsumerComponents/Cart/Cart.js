@@ -132,7 +132,7 @@ const Cart = () => {
 
   const handleClickRemoveAll = () => {
     if (
-      window.confirm('Bạn có chắc muốn xóa toàn bộ sản phẩm trong giỏ hàng')
+      window.confirm('Are you delete all product in cart?')
     ) {
       axios
         .delete(
