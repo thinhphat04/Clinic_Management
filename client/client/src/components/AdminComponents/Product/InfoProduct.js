@@ -25,11 +25,13 @@ const InfoProduct = () => {
         .then((res) => res.json())
         .then((data) => {
           setProduct(data[0]);
+          // setProduct(data[0]); // Cập nhật sản phẩm
+          setType(data[0].product_type);
         });
     };
     fetchAPIs();
     handleLoadOptionSelected(2);
-  }, []);
+  }, [id]);
 
 
   // var type = product.product_type
@@ -298,7 +300,7 @@ const InfoProduct = () => {
   };
 
 
-
+console.log("product.product_type:: ", type);
 
   const changeImageUser = () => {
     const preview = document.querySelector(".info-admin-product__image-primary-img");
@@ -325,13 +327,13 @@ const InfoProduct = () => {
     if (
       window.confirm(
         "Are you sure you want to delete all information about this product??"
-      ) == true
+      ) === true
     ) {
       try {
         const res = await axios.delete(
-          `${process.env.REACT_APP_API}/api/products/delete/${id}`
+          `https://localhost:7096/api/Products/${product.product_id}`
         );
-        if (res && res.data.success) {
+        if (res && res.data) {
           window.alert("Delete Successfully!");
           handleLoadingPage(1);
           window.setTimeout(() => {
@@ -379,7 +381,6 @@ const InfoProduct = () => {
                   onChange={(e) => {
                     // Đảm bảo rằng một file đã được chọn
                     if (e.target.files.length > 0) {
-                      // Cập nhật state bằng file đầu tiên được chọn
                       changeImageUser(product.product_id);
                       setImg(e.target.files[0]);
                     }
@@ -480,13 +481,13 @@ const InfoProduct = () => {
               style={{ backgroundColor: "red" }}
               onClick={handleDeleteProduct}
             >
-              Xóa sản phẩm<i className="ti-check"></i>
+              Delete Product<i className="ti-check"></i>
             </button>
             <button
               className="info-admin-product__btn"
               onClick={handleConfirmChangeInfo}
             >
-              Xác nhận<i className="ti-check"></i>
+              Confirm<i className="ti-check"></i>
             </button>
           </div>
         </div>

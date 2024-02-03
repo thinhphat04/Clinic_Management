@@ -63,6 +63,50 @@ const AccountOrderDetail = () => {
       }
     });
   };
+  const handleAscending =async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.get(
+        `https://localhost:7096/api/Products/sort/true`,
+      );
+      // if (res && res.data.success) {
+      //   alert('Confirm successful receipt of goods!');
+      //   handleLoadingPage(1);
+      //   setTimeout(() => {
+      //     window.location.reload();
+      //   });
+      // } else {
+      //   alert('Update information failed');
+      // }
+    } catch (error) {
+      alert(error);
+    }
+
+
+  }
+  const handleDecre =async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.get(
+        `https://localhost:7096/api/Products/sort/false`,
+      );
+      // if (res && res.data.success) {
+      //   alert('Confirm successful receipt of goods!');
+      //   handleLoadingPage(1);
+      //   setTimeout(() => {
+      //     window.location.reload();
+      //   });
+      // } else {
+      //   alert('Update information failed');
+      // }
+    } catch (error) {
+      alert(error);
+    }
+
+
+  }
+
+  // https://localhost:7096/api/Products/sort/true
 
   const checkVote = (itemVoted, itemName) => {
     if (itemVoted)
@@ -188,6 +232,9 @@ const AccountOrderDetail = () => {
                 <label className="order-detail__title">
                 List of products
                 </label>
+                {/* <button onClick={handleAscending} >Ascending</button>
+                <button onClick={handleDecre} >Decrease</button> */}
+                {/* handleDecre */}
                 <ul className="order-detail__list">
                   {loading ? (
                     <p>Loading...</p>

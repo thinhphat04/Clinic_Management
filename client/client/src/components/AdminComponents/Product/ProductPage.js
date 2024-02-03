@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './product.css';
+import axios from 'axios';
 import AdminHeader from '../Common/AdminHeader';
 import AdminSidebar, { handleLoadOptionSelected } from '../Common/AdminSidebar';
 import { handleLoadingPage } from '../../Common';
@@ -30,6 +31,53 @@ const ProductPage = () => {
 
   const navigate = useNavigate();
 
+  const handleAscending =async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.get(
+        `https://localhost:7096/api/Products/sort/true`,
+      );
+      // if (res && res.data.success) {
+      //   alert('Confirm successful receipt of goods!');
+      //   handleLoadingPage(1);
+      //   setTimeout(() => {
+      //     window.location.reload();
+      //   });
+      // } else {
+      //   alert('Update information failed');
+      // }
+      setProducts(res.data)
+      console.log("resss:  ", res);
+    } catch (error) {
+      alert(error);
+    }
+
+
+  }
+  const handleDecre =async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.get(
+        `https://localhost:7096/api/Products/sort/false`,
+      );
+      // if (res && res.data.success) {
+      //   alert('Confirm successful receipt of goods!');
+      //   handleLoadingPage(1);
+      //   setTimeout(() => {
+      //     window.location.reload();
+      //   });
+      // } else {
+      //   alert('Update information failed');
+      // }
+      setProducts(res.data)
+    } catch (error) {
+      alert(error);
+    }
+
+
+  }
+
+
   const handleClickBtnAdd = (e) => {
     handleLoadingPage(1);
     window.setTimeout(() => {
@@ -54,6 +102,8 @@ const ProductPage = () => {
         <div className="product__group">
           <div className="product__header">
             <label className="product__header-title">List of products</label>
+            <button onClick={handleAscending} className="product__btn-add" >Ascending</button>
+                <button onClick={handleDecre} className="product__btn-add" >Decrease</button>
             <div className="product__header-counting">
               {' '}
               Total product quantity:
