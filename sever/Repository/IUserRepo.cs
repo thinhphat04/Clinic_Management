@@ -10,7 +10,7 @@ public interface IUserRepo
 
     //edit user info
     Task<(bool Success, object Result)> UpdateUser(UserWithImageDto user);
-        Task<PagedList<User>> getAll(int pageNumber, int pageSize);
+        Task<IEnumerable<User>> getAll();
     Task<User> getUserById(string user_id);
     Task<PagedList<User>> getUserByRole(string user_Role, int pageNumber, int pageSize);
 }

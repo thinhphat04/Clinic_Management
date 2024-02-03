@@ -21,10 +21,10 @@ namespace PJ_SEM03.Services
           
         }
 
-        public async Task<PagedList<User>> getAll(int pageNumber, int pageSize)
+        public async Task<IEnumerable<User>> getAll()
         {
-            var query = _dbContext.Users.AsQueryable();
-            var users = await PagedList<User>.ToPagedList(query, pageNumber, pageSize);
+
+            var users = await _dbContext.Users.ToArrayAsync();
             return users;
         }
 
